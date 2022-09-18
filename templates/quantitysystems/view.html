@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% block title %} Quantity System {% endblock %}
+{% block header %} Quantity System {% endblock %}
+{% block content %}
+<div class="row" style="margin-top: 10px;">
+	<div class="col-10 offset-1">
+        <div class="card card-success">
+            <div class="card-header">
+                <a type="button" href="/quantitysystems" class="btn btn-lightgrn btn-sm float-end">Back to the Index</a>
+                <h4 class="card-title mb-0">Quantity System: {{ qsys.name }}</h4>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-8 justify">
+                        <b>Description</b>: {{ qsys.description }}<br/>
+                        <b>Abbreviation</b>: {{ qsys.abbrev }}<br/>
+                        <b>Source</b>: <a href="{{ qsys.url }}" target="_blank">{{ qsys.url }}</a><br/>
+                    </div>
+                    <div class="col-4">
+                        <table class="table table-sm table-striped">
+                            <tr>
+                                <th class="col-md-6">Dimension</th>
+                                <th class="col-md-6">Symbol</th>
+                            </tr>
+                            {% for dim in dims %}
+                                <tr class="fs-7">
+                                    <td>{{ dim.type|capfirst }}</td>
+                                    <td>{{ dim.symbol }}</td>
+                                </tr>
+                            {% endfor %}
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+	</div>
+</div>
+{% endblock %}

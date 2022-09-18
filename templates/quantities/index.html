@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% block title %} Quantities {% endblock %}
+{% block header %} Quantities {% endblock %}
+{% block content %}
+<h2>Quantities</h2>
+<div class="row">
+    {% for quant in quants %}
+	<div class="col-4">
+		<div class="card card-success mb-2">
+			<div class="card-header bg-lightgrn">
+                <h6 class="card-title"><a href="/quantities/view/{{ quant.id }}">{{ quant.name }}</a></h6>
+			</div>
+			<div class="card-body justify fs-7">{{ quant.description|truncatewords:32 }}</div>
+		</div>
+	</div>
+    {% endfor %}
+</div>
+{% endblock %}

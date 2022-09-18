@@ -1,0 +1,85 @@
+<!doctype html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://unpkg.com/bootstrap-table@1.21.0/dist/bootstrap-table.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="{% static 'css/umis.css' %}">
+    <link rel="shortcut icon" href="{% static 'img/favicon.ico' %}">
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg sticky-top bg-light">
+            <div class="container">
+                <b><a class="navbar-brand" href="/">NIST UMIS</a></b>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse">
+                    <ul class="navbar-nav">
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Browse the System</a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="/units">Units</a></li>
+                                <li><a class="dropdown-item" href="/unitsystems">Unit Systems</a></li>
+                                <li><a class="dropdown-item" href="/repsystems">Unit Representation Systems</a></li>
+                                <li><a class="dropdown-item" href="/representations">Unit Representations</a></li>
+                                <li><a class="dropdown-item" href="/quantitysystems">Quantity Systems</a></li>
+                                <li><a class="dropdown-item" href="/quantitykinds">Quantity Kinds</a></li>
+                                <li><a class="dropdown-item" href="/quantities">Quantities</a></li>
+                                <li><a class="dropdown-item" href="/vectors">Dimension Vectors</a></li>
+                                <li><a class="dropdown-item" href="/constants">Fundamental Constants</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <ul class="navbar-nav">
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Services<span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="/units/crosswalk">Unit Crosswalks</a></li>
+                                <li><a class="dropdown-item" href="/api/index">REST API</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+                <form class="form">
+                    <input id="search" type="text" class="form-control" placeholder="Search...">
+                </form>
+            </div>
+        </nav>
+    </header>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <div id="content" class="container" role="main">
+        <div class="row">
+            <div class="col col-12 pt-2 pb-4">
+                {% block content %}
+                {% endblock %}
+            </div>
+        </div>
+    </div>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first (above) then Bootstrap JS (and popper) -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.5/dist/umd/popper.min.js" integrity="sha384-Xe+8cL9oJa6tN/veChSP7q+mnSPaj5Bcu9mPX5F5xIGE0DVittaqT5lorf0EI7Vk" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.min.js" integrity="sha384-ODmDIVzN+pFdexxHEHFBQH3/9/vQ9uori45z4JjnFsRydbmQbmL5t1tQ0culUzyK" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/bootstrap-table@1.21.0/dist/bootstrap-table.min.js"></script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script>
+    MathJax = {
+        tex: {
+            inlineMath: [['$', '$'], ['\\(', '\\)']]
+        },
+        svg: {
+            fontCache: 'global'
+        }
+    };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.js"></script>
+    <script src="{% static 'js/umis.js' %}"></script>
+</body>
+</html>

@@ -1,0 +1,54 @@
+.bg-lightgrn, .btn-lightgrn {
+    background-color: rgb(214,233,198);
+}
+
+.redtext {
+    color: red;
+}
+
+.hover {
+    cursor: pointer;
+}
+
+.underline a{
+    text-decoration: none !important;
+}
+
+a:link {text-decoration:none}
+a:visited {text-decoration:none}
+a:hover {text-decoration:none}
+a:active {text-decoration:none}
+
+.fs-7 {
+    font-size: 0.9rem !important;
+}
+
+.fs-8 {
+    font-size: 0.8rem !important;
+}
+
+.justify {
+    text-align: justify;
+}
+
+.table-responsive {
+    max-height: calc(100vh - 410px);
+    -webkit-overflow-scrolling: touch;
+    overflow-y: auto;
+}
+
+.card-responsive {
+    max-height: calc(100vh - 200px);
+    -webkit-overflow-scrolling: touch;
+    overflow-y: auto;
+}
+
+.btn-xs {
+    padding: 2px 4px;
+    line-height: 20px;
+    font-weight: bold;
+}
+
+.nistbc {
+    background-color: #cce2f3 !important;
+}

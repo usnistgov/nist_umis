@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% block title %} Quantity Kinds {% endblock %}
+{% block header %} Quantity Kinds {% endblock %}
+{% block content %}
+<h2>Quantity Kinds</h2>
+<div class="row">
+    {% for qkind in qkinds %}
+	<div class="col-4">
+		<div class="card card-success mb-2">
+			<div class="card-header bg-lightgrn">
+                <h6 class="card-title"><a href="/quantitykinds/view/{{ qkind.id }}">{{ qkind.name }}</a></h6>
+			</div>
+			<div class="card-body justify fs-7">{{ qkind.description|truncatewords:32 }}</div>
+		</div>
+	</div>
+    {% endfor %}
+</div>
+{% endblock %}

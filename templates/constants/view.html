@@ -1,0 +1,100 @@
+{% extends 'base.html' %}
+{% block title %} Fundamental Constant {% endblock %}
+{% block header %} Fundamental Constant {% endblock %}
+{% block content %}
+    <script>
+    let config = {
+        type: 'line',
+        data: {{ alldata|safe }},
+        options: {
+            responsive: true,
+            locale: 'en-EN',
+            scales: {
+                x: {
+                    type: 'linear',
+                    display: 'true',
+                    offset: 'true',
+                    position: 'bottom',
+                    title: { display: true, text: 'Year' },
+                    grid: { display: false },
+                    time: { unit: 'year' },
+                    ticks: { callback: (value) => { return value; }}  // removes ',' from year values
+                },
+                y: {
+                    min: {{ ymin }},
+                    max: {{ ymax }},
+                    title: { display: true, text: 'Value' }
+                }
+            },
+            plugins: {
+                title: {
+                    display: true,
+                    text: 'Change of {{ constant.name }} over time'
+                },
+                legend: {
+                    display: false
+                }
+            }
+        }
+    };
+
+    window.onload = function() {
+        let ctx = document.getElementById('chart').getContext('2d');
+        window.myChart = new Chart(ctx, config);
+    };
+    </script>
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header text-bg-light">
+                <a type="button" href="/constants/json/{{ constant.id }}" class="btn btn-xs btn-info text-white float-end">JSON</a>
+                <h5 class="card-title mb-0">Constant: {{ constant.name }} ({{ constant.symbol }})</h5>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-12 col-md-6">
+                    {% for value in values %}
+                        <div class="card mb-2">
+                            <div class="card-header text-bg-light">
+                                <h6 class="card-title mb-0">{{ value.year }} value
+                                    {% if forloop.first %} (current) {% endif %}
+                                </h6>
+                            </div>
+                            <div class="card-body p-0">
+                                <table class="table table-sm table-borderless mb-0">
+                                    <tbody>
+                                        <tr>
+                                            <td class="text-end nistbc">Numerical value</td>
+                                            <td class="nistbc"><code>{{ value.orig_value|safe }}&nbsp;{{ value.orig_unit|safe }}</code></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="text-end nistbc">Standard uncertainty</td>
+                                            <td class="nistbc"><code>{{ value.orig_uncert|safe|default:"(exact)" }}&nbsp;{{ value.orig_unit|safe }}</code></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="text-end nistbc">Relative uncertainty</td>
+                                            {% if not value.reluncert_man %}
+                                                <td class="nistbc"><code>(exact)</code></td>
+                                            {% else %}
+                                                <td class="nistbc"><code>{{ value.reluncert_man }} x 10<sup>{{ value.reluncert_exp }}</sup></code></td>
+                                            {% endif %}
+                                        </tr>
+                                        <tr>
+                                            <td class="text-end nistbc">Concise form</td>
+                                            <td class="nistbc"><code>{{ value.comments|safe }}&nbsp;{{ value.orig_unit|safe }}</code></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    {% endfor %}
+                    </div>
+                    <div class="col-12 col-md-6">
+                        <canvas id="chart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

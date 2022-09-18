@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% block title %} Unit Systems {% endblock %}
+{% block header %} Units Systems {% endblock %}
+{% block content %}
+<h2>Unit Representation Systems</h2>
+<div class="row">
+    {% for rsys in rsyss %}
+	<div class="col-4">
+		<div class="card card-success mb-2">
+			<div class="card-header bg-lightgrn">
+                <h6 class="card-title"><a href="/repsystems/view/{{ rsys.id }}">{{ rsys.name }}&nbsp;({{ rsys.abbrev }})</a></h6>
+			</div>
+			<div class="card-body justify fs-7">{{ rsys.description|truncatewords:32 }}</div>
+		</div>
+	</div>
+    {% endfor %}
+</div>
+{% endblock %}

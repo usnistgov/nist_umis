@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% block title %} Quantity {% endblock %}
+{% block header %} Quantity {% endblock %}
+{% block content %}
+<div class="row" style="margin-top: 10px;">
+	<div class="col-10 offset-1">
+        <div class="card card-success">
+            <div class="card-header">
+                <h4 class="card-title mb-0">Quantity: {{ quant.name }}</h4>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-6 justify">
+                        <b>Description</b>: {{ quant.description }}<br/>
+                        <b>Quantity Kind</b>: {{ quant.quantitykind.name }}<br/>
+                        <b>Quantity System</b>: {{ quant.quantitysystem.name }}<br/>
+                        <b>Symbol</b>: {{ quant.symbol }}<br/>
+                        <b>Source</b>: <a href="{{ quant.url }}" target="_blank">{{ quant.url }}</a><br/>
+                    </div>
+                    <div class="col-6">
+                        {% if units|length > 0 %}
+                            <b><em>Units derived from this quantity</em></b><br/>
+                            {% for unit in units %}
+                                <a href="/units/view/{{ unit.id }}" class="btn btn-sm btn-warning">{{ unit.name }}</a>
+                            {% endfor %}
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+	</div>
+</div>
+{% endblock %}
