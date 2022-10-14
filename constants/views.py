@@ -22,41 +22,40 @@ def view(request, cnid):
     for i, value in enumerate(values):
         # reformat field value to display correctly
         values[i].orig_value = values[i].orig_value.replace('e', 'x 10<sup>') + '</sup>'
-        values[i].orig_uncert = values[i].orig_uncert.replace('e', 'x 10<sup>') + '</sup>'
-        man = values[i].uncert_man.replace('.', '')
-        if values[i].orig_value.find(' x 10') != -1:
-            values[i].comments = values[i].orig_value.replace(' x 10', '(' + man + ') x 10')  # for concise form
+        if values[i].orig_uncert is not None:
+            values[i].orig_uncert = values[i].orig_uncert.replace('e', 'x 10<sup>') + '</sup>'
+            man = values[i].uncert_man.replace('.', '')
         else:
+            man = None
+        if values[i].orig_value.find(' x 10') != -1 and values[i].orig_uncert is not None:
+            values[i].comments = values[i].orig_value.replace(' x 10', '(' + man + ') x 10')  # for concise form
+        elif values[i].orig_uncert is not None:
             values[i].comments = values[i].orig_value + '(' + man + ')'
+
         if value.orig_unit == "1":
             values[i].orig_unit = ""
         allvals.append(float(value.value_num))
         allaccs.append(value.value_acc)
         allexps.append(value.value_exp)
-    dps = min(allaccs) + 27
+    acc = min(allaccs) - 1
     miny = min(allvals)
     maxy = max(allvals)
-    ymin = round(miny, dps)
-    ymax = round(maxy, dps)
+    ymin = '{:.9e}'.format(miny)
+    ymax = '{:.9e}'.format(maxy)
     jsdata = alldata(request, cnid)
     # TODO: https://www.youtube.com/watch?v=czt31ENbr2I  work out how to format the y axis values
 
     return render(request, "../templates/constants/view.html",
-                  {'constant': constant, 'values': values, 'ymin': ymin, 'ymax': ymax, 'dps': dps, 'alldata': jsdata})
+                  {'constant': constant, 'values': values, 'ymin': ymin, 'ymax': ymax, 'acc': acc, 'alldata': jsdata})
 
 
 def jsonout(request, cnid):
-    constant = Constants.objects.values('name', 'description', 'version', 'symbol', 'validfrom', 'mantissa',
-                                        'exponent', 'stduncertainty', 'relstduncertainty', 'unitstr', 'unitstrsi',
-                                        'unit__shortcode').get(id=cnid)
-    if constant['stduncertainty'] is None:
-        constant['stduncertainty'] = "exact"
-    if constant['relstduncertainty'] is None:
-        constant['relstduncertainty'] = "exact"
-    tmp = Constants.objects.get(id=cnid)
-    dv = tmp.quantity.quantitykind.dimensionvector.shortcode
-    constant.update({'dimensionvectorCode': dv})
-
+    constant = dict(Constants.objects.values('identifier', 'name', 'units_si', 'nistpage','symbol').get(id=cnid))
+    values = Constantvalues.objects.filter(constant_id=cnid).\
+        values('year', 'value_num', 'uncert_num', 'orig_unit', 'reluncert_man', 'reluncert_exp')
+    constant.update({'values': []})
+    for value in values:
+        constant['values'].append(dict(value))
     jfile = json.dumps(constant, default=str)
     return HttpResponse(jfile, content_type="application/json")
 

@@ -27,7 +27,7 @@ for rep in data:
     encs = tmp1.count()
     tmp2 = {'id': sys.id, 'name': sys.name, 'abbrev': sys.abbrev, 'repo': sys.repository, 'encs': encs}
     reps[sg]['systems'].append(tmp2)
-print(equ)
+print(reps)
 
 
 # data = Units.objects.all().order_by('quantitykind__shortname', 'name')

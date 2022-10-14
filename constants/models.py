@@ -33,6 +33,10 @@ class Constants(models.Model):
     class Meta:
         managed = False
         db_table = 'constants'
+        verbose_name_plural = "constants"
+
+    def __str__(self):
+        return f'{self.name}'
 
 
 class Constantvalues(models.Model):

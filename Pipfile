@@ -4,7 +4,7 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
-django = "==4.1.1"
+django = "==4.1.2"
 mysqlclient = "*"
 setuptools = "*"
 GTC = "*"
@@ -12,6 +12,11 @@ bs4 = "*"
 requests = "*"
 pnglatex = "*"
 pdflatex = "*"
+pytz = "*"
+qwikidata = "*"
+rdflib = "*"
+html5 = "*"
+html5lib = "*"
 
 [dev-packages]
 

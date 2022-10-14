@@ -89,6 +89,10 @@ class Units(models.Model):
         managed = False
         db_table = 'units'
         app_label = 'units'
+        verbose_name_plural = "units"
+
+    def __str__(self):
+        return f'{self.name}'
 
 
 class Domains(models.Model):
@@ -100,6 +104,10 @@ class Domains(models.Model):
     class Meta:
         managed = False
         db_table = 'domains'
+        verbose_name_plural = "domains"
+
+    def __str__(self):
+        return f'{self.title}'
 
 
 class Quantities(models.Model):
@@ -130,11 +138,19 @@ class Repsystems(models.Model):
     url = models.CharField(max_length=256, blank=True, null=True)
     repository = models.CharField(max_length=256, blank=True, null=True)
     domain = models.ForeignKey(Domains, on_delete=models.PROTECT, db_column='domain_id')
+    fileupdated = models.DateField()
+    fileformat = models.CharField(max_length=8, blank=True, null=True)
+    checked = models.DateTimeField()
+    jsondata = models.TextField(blank=True, null=True)
     updated = models.DateTimeField()
 
     class Meta:
         managed = False
         db_table = 'repsystems'
+        verbose_name_plural = "repsystems"
+
+    def __str__(self):
+        return f'{self.name}'
 
 
 class Strngs(models.Model):
@@ -245,3 +261,21 @@ class Dimensions(models.Model):
     class Meta:
         managed = False
         db_table = 'dimensions'
+
+
+class Entities(models.Model):
+    repsys = models.CharField(max_length=16)
+    repsystem = models.ForeignKey(Repsystems, on_delete=models.PROTECT, db_column='repsystem_id')
+    name = models.CharField(max_length=64, blank=True, null=True)
+    lang = models.CharField(max_length=16, blank=True, null=True)
+    symbol = models.CharField(max_length=128, blank=True, null=True)
+    quantity = models.CharField(max_length=64, blank=True, null=True)
+    value = models.CharField(max_length=128, blank=True, null=True)
+    source = models.CharField(max_length=32, blank=True, null=True)
+    comment = models.CharField(max_length=256, blank=True, null=True)
+    lastupdate = models.DateField(blank=True, null=True)
+    updated = models.DateTimeField()
+
+    class Meta:
+        managed = False
+        db_table = 'entities'
