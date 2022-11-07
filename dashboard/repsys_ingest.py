@@ -63,6 +63,7 @@ def getiecdata(rsfile):
         unit.update({'shortname': data['Short name']})
         unit.update({'definition': data['Definition']})
         unit.update({'unece': data['Remark'].replace('UN/ECE code: ', '')})
+
         quants = data['Applicable list of units'].replace('0112/', ',0112/').strip(",").split(",")
         unit.update({'quantities': quants})
         ulist[key] = unit

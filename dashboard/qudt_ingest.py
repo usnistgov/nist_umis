@@ -20,7 +20,13 @@ def qudtingest():
     repsys = Repsystems.objects.values('id', 'url', 'fileformat').get(id=10)
     # TODO: add file exists check and download
     ext = repsys['fileformat']
-    with open(os.path.join(BASE_DIR, STATIC_URL, f'repsys_10_data{ext}'), 'r') as f:
+
+    with open(os.path.join(BASE_DIR, STATIC_URL, f'repsys_10_data.json'), 'r') as f:
         tmp = f.read()
         f.close()
+
+    print(tmp)
+
+
+qudtingest()
 

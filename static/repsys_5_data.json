@@ -1,0 +1,2516 @@
+{
+	"@graph": [
+		{
+			"@id": "_:b0",
+			"@type": "owl:Restriction",
+			"allValuesFrom": "sorep:LogarithmicScale",
+			"onProperty": "sorelm:hasScale"
+		},
+		{
+			"@id": "dcterms:contributor",
+			"@type": "owl:AnnotationProperty"
+		},
+		{
+			"@id": "dcterms:license",
+			"@type": "owl:AnnotationProperty"
+		},
+		{
+			"@id": "dcterms:modified",
+			"@type": "owl:AnnotationProperty"
+		},
+		{
+			"@id": "qudt:UCUMcs",
+			"@type": "rdfs:Datatype"
+		},
+		{
+			"@id": "sorelm:hasOperand",
+			"@type": "owl:ObjectProperty"
+		},
+		{
+			"@id": "sorelm:hasScale",
+			"@type": "owl:ObjectProperty"
+		},
+		{
+			"@id": "sorelm:hasScalingNumber",
+			"@type": "owl:DatatypeProperty"
+		},
+		{
+			"@id": "sorelm:hasShiftingNumber",
+			"@type": "owl:DatatypeProperty"
+		},
+		{
+			"@id": "sorelm:toThePower",
+			"@type": "owl:DatatypeProperty"
+		},
+		{
+			"@id": "sorelsc:hasBaseUnit",
+			"@type": "owl:ObjectProperty"
+		},
+		{
+			"@id": "sorelsc:hasNumericValue",
+			"@type": "owl:DatatypeProperty"
+		},
+		{
+			"@id": "sorelsc:hasPrefix",
+			"@type": "owl:ObjectProperty"
+		},
+		{
+			"@id": "sorelsc:hasSymbol",
+			"@type": "owl:DatatypeProperty"
+		},
+		{
+			"@id": "sorep:LogarithmicScale",
+			"@type": "owl:Class"
+		},
+		{
+			"@id": "sorep:Measurement",
+			"@type": "owl:Class"
+		},
+		{
+			"@id": "sorepmo:Product",
+			"@type": "owl:Class"
+		},
+		{
+			"@id": "./",
+			"@type": "owl:Ontology",
+			"contributor": "https://orcid.org/0000-0002-3884-3420",
+			"license": "https://creativecommons.org/publicdomain/zero/1.0/",
+			"modified": "2021-02-23",
+			"label": "SWEET Ontology Representation Scientific Units",
+			"imports": [
+				"reprMathOperation",
+				"repr",
+				"relaSci",
+				"relaMath"
+			],
+			"versionInfo": "3.6.0"
+		},
+		{
+			"@id": "sorepsu:BaseUnit",
+			"@type": "owl:Class",
+			"label": {
+				"@language": "en",
+				"@value": "base unit"
+			},
+			"subClassOf": "sorepsu:Unit",
+			"disjointWith": "sorepsu:ComplexUnit"
+		},
+		{
+			"@id": "sorepsu:ComplexUnit",
+			"@type": "owl:Class",
+			"label": {
+				"@language": "en",
+				"@value": "complex unit"
+			},
+			"subClassOf": "sorepsu:Unit"
+		},
+		{
+			"@id": "sorepsu:FNU",
+			"@type": [
+				"owl:NamedIndividual",
+				"sorepsu:Unit"
+			],
+			"label": {
+				"@language": "en",
+				"@value": "fnu"
+			},
+			"sameAs": "sorepsu:FTU"
+		},
+		{
+			"@id": "sorepsu:FTU",
+			"@type": [
+				"owl:NamedIndividual",
+				"sorepsu:Unit"
+			],
+			"label": {
+				"@language": "en",
+				"@value": "ftu"
+			},
+			"sameAs": "sorepsu:FormazinTurbidityUnit"
+		},
+		{
+			"@id": "sorepsu:FormazinTurbidityUnit",
+			"@type": [
+				"owl:NamedIndividual",
+				"sorepsu:Unit"
+			],
+			"label": {
+				"@language": "en",
+				"@value": "formazin turbidity unit"
+			},
+			"notation": ["FTU","FNU"]
+		},
+		{
+			"@id": "sorepsu:LogarithmicUnit",
+			"@type": "owl:Class",
+			"label": {
+				"@language": "en",
+				"@value": "logarithmic unit"
+			},
+			"subClassOf": [
+				"sorepsu:Unit",
+				"_:b0"
+			]
+		},
+		{
+			"@id": "sorepsu:MHz",
+			"@type": [
+				"owl:NamedIndividual",
+				"sorepsu:UnitDerivedByScaling"
+			],
+			"label": {
+				"@language": "en",
+				"@value": "mhz"
+			},
+			"sameAs": "sorepsu:megahertz",
+			"notation": "MHz"
+		},
+		{
+			"@id": "sorepsu:MYA",
+			"@type": [
+				"owl:NamedIndividual",
+				"sorepsu:UnitDerivedByScaling"
+			],
+			"sorelm:hasScalingNumber": 1000.0,
+			"hasBaseUnit": "sorepsu:year",
+			"label": {
+				"@language": "en",
+				"@value": "mya"
+			},
+			"notation": "Ma"
+		},
+		{
+			"@id": "sorepsu:Prefix",
+			"@type": "owl:Class",
+			"label": {
+				"@language": "en",
+				"@value": "prefix"
+			},
+			"subClassOf": "sorep:Measurement"
+		},
+		{
+			"@id": "sorepsu:Unit",
+			"@type": "owl:Class",
+			"label": {
+				"@language": "en",
+				"@value": "unit"
+			},
+			"subClassOf": "sorep:Measurement"
+		},
+		{
+			"@id": "sorepsu:UnitDefinedByProduct",
+			"@type": "owl:Class",
+			"label": {
+				"@language": "en",
+				"@value": "unit defined by product"
+			},
+			"subClassOf": [
+				"sorepmo:Product",
+				"sorepsu:ComplexUnit"
+			]
+		},
+		{
+			"@id": "sorepsu:UnitDerivedByRaisingToPower",
+			"@type": "owl:Class",
+			"label": {
+				"@language": "en",
+				"@value": "unit derived by raising to power"
+			},
+			"subClassOf": "sorepsu:ComplexUnit"
+		},
+		{
+			"@id": "sorepsu:UnitDerivedByScaling",
+			"@type": "owl:Class",
+			"label": {
+				"@language": "en",
+				"@value": "unit derived by scaling"
+			},
+			"subClassOf": "sorepsu:ComplexUnit"
+		},
+		{
+			"@id": "sorepsu:UnitDerivedByShifting",
+			"@type": "owl:Class",
+			"label": {
+				"@language": "en",
+				"@value": "unit derived by shifting"
+			},
+			"subClassOf": "sorepsu:ComplexUnit"
+		},
+		{
+			"@id": "sorepsu:ampere",
+			"@type": [
+				"owl:NamedIndividual",
+				"sorepsu:BaseUnit"
+			],
+			"hasSymbol": "a",
+			"label": {
+				"@language": "en",
+				"@value": "ampere"
+			},
+			"notation": "A"
+		},
+		{
+			"@id": "sorepsu:amperePerMeter",
+			"@type": [
+				"owl:NamedIndividual",
+				"sorepsu:UnitDefinedByProduct"
+			],
+			"hasOperand": [
+				"sorepsu:ampere",
+				"sorepsu:perMeter"
+			],
+			"label": {
+				"@language": "en",
+				"@value": "ampere per meter"
+			},
+			"notation": "A/m"
+		},
+		{
+			"@id": "sorepsu:amperePerMeterSquared",
+			"@type": [
+				"owl:NamedIndividual",
+				"sorepsu:UnitDefinedByProduct"
+			],
+			"hasOperand": [
+				"sorepsu:ampere",
+				"sorepsu:perMeterSquared"
+			],
+			"label": {
+				"@language": "en",
+				"@value": "ampere per meter squared"
+			},
+			"notation": "A/m2"
+		},
+		{
+			"@id": "sorepsu:ampereSquared",
+			"@type": [
+				"owl:NamedIndividual",
+				"sorepsu:UnitDerivedByRaisingToPower"
+			],
+			"sorelm:toThePower": 2.0,
+			"hasBaseUnit": "sorepsu:ampere",
+			"label": {
+				"@language": "en",
+				"@value": "ampere squared"
+			},
+			"notation": "A2"
+		},
+		{
+			"@id": "sorepsu:arcminute",
+			"@type": [
+				"owl:NamedIndividual",
+				"sorepsu:UnitDerivedByScaling"
+			],
+			"sorelm:hasScalingNumber": 2.909E-4,
+			"hasBaseUnit": "sorepsu:radian",
+			"label": {
+				"@language": "en",
+				"@value": "arcminute"
+			},
+			"notation": "'"
+		},
+		{
+			"@id": "sorepsu:arcsecond",
+			"@type": [
+				"owl:NamedIndividual",
+				"sorepsu:UnitDerivedByScaling"
+			],
+			"sorelm:hasScalingNumber": 4.848E-6,
+			"hasBaseUnit": "sorepsu:radian",
+			"label": {
+				"@language": "en",
+				"@value": "arcsecond"
+			},
+			"notation": "''"
+		},
+		{
+			"@id": "sorepsu:candela",
+			"@type": [
+				"owl:NamedIndividual",
+				"sorepsu:BaseUnit"
+			],
+			"hasSymbol": "cd",
+			"label": {
+				"@language": "en",
+				"@value": "candela"
+			},
+			"notation": "cd"
+		},
+		{
+			"@id": "sorepsu:candelaPerMeterSquared",
+			"@type": [
+				"owl:NamedIndividual",
+				"sorepsu:UnitDefinedByProduct"
+			],
+			"hasOperand": [
+				"sorepsu:candela",
+				"sorepsu:perMeterSquared"
+			],
+			"label": {
+				"@language": "en",
+				"@value": "candela per meter squared"
+			},
+			"notation": "cd/m2"
+		},
+		{
+			"@id": "sorepsu:centi",
+			"@type": [
+				"owl:NamedIndividual",
+				"sorepsu:Prefix"
+			],
+			"sorelsc:hasNumericValue": 0.01,
+			"hasSymbol": "c",
+			"label": {
+				"@language": "en",
+				"@value": "centi"
+			},
+			"notation": "c"
+		},
+		{
+			"@id": "sorepsu:centimeter",
+			"@type": [
+				"owl:NamedIndividual",
+				"sorepsu:UnitDerivedByScaling"
+			],
+			"sorelm:hasScalingNumber": 0.01,
+			"hasBaseUnit": "sorepsu:meter",
+			"hasPrefix": "sorepsu:centi",
+			"label": {
+				"@language": "en",
+				"@value": "centimeter"
+			},
+			"notation": "cm"
+		},
+		{
+			"@id": "sorepsu:century",
+			"@type": [
+				"owl:NamedIndividual",
+				"sorepsu:UnitDerivedByScaling"
+			],
+			"sorelm:hasScalingNumber": 3.1556926E9,
+			"hasBaseUnit": "sorepsu:second",
+			"label": {
+				"@language": "en",
+				"@value": "century"
+			},
+			"notation": "100.a"
+		},
+		{
+			"@id": "sorepsu:coulomb",
+			"@type": [
+				"owl:NamedIndividual",
+				"sorepsu:UnitDefinedByProduct"
+			],
+			"hasOperand": [
+				"sorepsu:ampere",
+				"sorepsu:second"
+			],
+			"hasSymbol": "C",
+			"label": {
+				"@language": "en",
+				"@value": "coulomb"
+			},
+			"notation": "C"
+		},
+		{
+			"@id": "sorepsu:coulombMeter",
+			"@type": [
+				"owl:NamedIndividual",
+				"sorepsu:UnitDefinedByProduct"
+			],
+			"hasOperand": [
+				"sorepsu:coulomb",
+				"sorepsu:meter"
+			],
+			"label": {
+				"@language": "en",
+				"@value": "coulomb meter"
+			},
+			"notation": "C.m"
+		},
+		{
+			"@id": "sorepsu:coulombPerMeterCubed",
+			"@type": [
+				"owl:NamedIndividual",
+				"sorepsu:UnitDefinedByProduct"
+			],
+			"hasOperand": [
+				"sorepsu:coulomb",
+				"sorepsu:perMeterCubed"
+			],
+			"label": {
+				"@language": "en",
+				"@value": "coulomb per meter cubed"
+			},
+			"notation": "C/m3"
+		},
+		{
+			"@id": "sorepsu:coulombPerMeterSquared",
+			"@type": [
+				"owl:NamedIndividual",
+				"sorepsu:UnitDefinedByProduct"
+			],
+			"hasOperand": [
+				"sorepsu:coulomb",
+				"sorepsu:perMeterSquared"
+			],
+			"label": {
+				"@language": "en",
+				"@value": "coulomb per meter squared"
+			},
+			"notation": "C/m2"
+		},
+		{
+			"@id": "sorepsu:day",
+			"@type": [
+				"owl:NamedIndividual",
+				"sorepsu:UnitDerivedByScaling"
+			],
+			"sorelm:hasScalingNumber": 86400.0,
+			"hasBaseUnit": "sorepsu:second",
+			"label": {
+				"@language": "en",
+				"@value": "day"
+			},
+			"notation": "d"
+		},
+		{
+			"@id": "sorepsu:db",
+			"@type": [
+				"owl:NamedIndividual",
+				"sorepsu:LogarithmicUnit"
+			],
+			"label": {
+				"@language": "en",
+				"@value": "db"
+			},
+			"notation": "dB"
+		},
+		{
+			"@id": "sorepsu:deca",
+			"@type": [
+				"owl:NamedIndividual",
+				"sorepsu:Prefix"
+			],
+			"sorelsc:hasNumericValue": 10.0,
+			"hasSymbol": "da",
+			"label": {
+				"@language": "en",
+				"@value": "deca"
+			},
+			"notation": "da"
+		},
+		{
+			"@id": "sorepsu:decade",
+			"@type": [
+				"owl:NamedIndividual",
+				"sorepsu:UnitDerivedByScaling"
+			],
+			"sorelm:hasScalingNumber": 3.1556926E8,
+			"hasBaseUnit": "sorepsu:second",
+			"label": {
+				"@language": "en",
+				"@value": "decade"
+			},
+			"notation": "10.a"
+		},
+		{
+			"@id": "sorepsu:degreeC",
+			"@type": [
+				"owl:NamedIndividual",
+				"sorepsu:UnitDerivedByShifting"
+			],
+			"sorelm:hasShiftingNumber": -273.0,
+			"hasBaseUnit": "sorepsu:kelvin",
+			"hasSymbol": "C",
+			"label": {
+				"@language": "en",
+				"@value": "degree c"
+			},
+			"notation": "Cel"
+		},
+		{
+			"@id": "sorepsu:degreeF",
+			"@type": [
+				"owl:NamedIndividual",
+				"sorepsu:UnitDerivedByShifting"
+			],
+			"sorelm:hasScalingNumber": 1.8,
+			"sorelm:hasShiftingNumber": 32.0,
+			"hasBaseUnit": "sorepsu:degreeC",
+			"label": {
+				"@language": "en",
+				"@value": "degree f"
+			},
+			"notation": "[degF]"
+		},
+		{
+			"@id": "sorepsu:degrees",
+			"@type": [
+				"owl:NamedIndividual",
+				"sorepsu:UnitDerivedByScaling"
+			],
+			"sorelm:hasScalingNumber": 57.2957795,
+			"hasBaseUnit": "sorepsu:radian",
+			"label": {
+				"@language": "en",
+				"@value": "degrees"
+			},
+			"notation": "deg"
+		},
+		{
+			"@id": "sorepsu:dimensionlessUnit",
+			"@type": [
+				"owl:NamedIndividual",
+				"sorepsu:BaseUnit"
+			],
+			"label": {
+				"@language": "en",
+				"@value": "dimensionless unit"
+			},
+			"notation": "1"
+		},
+		{
+			"@id": "sorepsu:exa",
+			"@type": [
+				"owl:NamedIndividual",
+				"sorepsu:Prefix"
+			],
+			"sorelsc:hasNumericValue": 1.0E18,
+			"hasSymbol": "E",
+			"label": {
+				"@language": "en",
+				"@value": "exa"
+			},
+			"notation": "E"
+		},
+		{
+			"@id": "sorepsu:farad",
+			"@type": [
+				"owl:NamedIndividual",
+				"sorepsu:UnitDefinedByProduct"
+			],
+			"hasOperand": [
+				"sorepsu:coulomb",
+				"sorepsu:perVolt"
+			],
+			"hasSymbol": "F",
+			"label": {
+				"@language": "en",
+				"@value": "farad"
+			},
+			"notation": "F"
+		},
+		{
+			"@id": "sorepsu:faradPerMeter",
+			"@type": [
+				"owl:NamedIndividual",
+				"sorepsu:UnitDefinedByProduct"
+			],
+			"hasOperand": [
+				"sorepsu:farad",
+				"sorepsu:perMeter"
+			],
+			"label": {
+				"@language": "en",
+				"@value": "farad per meter"
+			},
+			"notation": "F/m"
+		},
+		{
+			"@id": "sorepsu:giga",
+			"@type": [
+				"owl:NamedIndividual",
+				"sorepsu:Prefix"
+			],
+			"sorelsc:hasNumericValue": 1.0E9,
+			"hasSymbol": "G",
+			"label": {
+				"@language": "en",
+				"@value": "giga"
+			},
+			"notation": "G"
+		},
+		{
+			"@id": "sorepsu:gigahertz",
+			"@type": [
+				"owl:NamedIndividual",
+				"sorepsu:UnitDerivedByScaling"
+			],
+			"sorelm:hasScalingNumber": 1.0E9,
+			"hasBaseUnit": "sorepsu:hertz",
+			"hasPrefix": "sorepsu:giga",
+			"label": {
+				"@language": "en",
+				"@value": "gigahertz"
+			},
+			"notation": "GHz"
+		},
+		{
+			"@id": "sorepsu:hecto",
+			"@type": [
+				"owl:NamedIndividual",
+				"sorepsu:Prefix"
+			],
+			"sorelsc:hasNumericValue": 100.0,
+			"hasSymbol": "h",
+			"label": {
+				"@language": "en",
+				"@value": "hecto"
+			},
+			"notation": "h"
+		},
+		{
+			"@id": "sorepsu:henry",
+			"@type": [
+				"owl:NamedIndividual",
+				"sorepsu:UnitDefinedByProduct"
+			],
+			"hasOperand": [
+				"sorepsu:kilogram",
+				"sorepsu:meterSquared",
+				"sorepsu:perAmpereSquared",
+				"sorepsu:perSecondSquared"
+			],
+			"label": {
+				"@language": "en",
+				"@value": "henry"
+			},
+			"notation": "H"
+		},
+		{
+			"@id": "sorepsu:henryPerMeter",
+			"@type": [
+				"owl:NamedIndividual",
+				"sorepsu:UnitDefinedByProduct"
+			],
+			"hasOperand": [
+				"sorepsu:henry",
+				"sorepsu:perMeter"
+			],
+			"label": {
+				"@language": "en",
+				"@value": "henry per meter"
+			},
+			"notation": "H/m"
+		},
+		{
+			"@id": "sorepsu:hertz",
+			"@type": [
+				"owl:NamedIndividual",
+				"sorepsu:UnitDerivedByRaisingToPower"
+			],
+			"label": {
+				"@language": "en",
+				"@value": "hertz"
+			},
+			"sameAs": "sorepsu:perSecond",
+			"notation": "Hz"
+		},
+		{
+			"@id": "sorepsu:hour",
+			"@type": [
+				"owl:NamedIndividual",
+				"sorepsu:UnitDerivedByScaling"
+			],
+			"sorelm:hasScalingNumber": 3600.0,
+			"hasBaseUnit": "sorepsu:second",
+			"label": {
+				"@language": "en",
+				"@value": "hour"
+			},
+			"notation": "h"
+		},
+		{
+			"@id": "sorepsu:joule",
+			"@type": [
+				"owl:NamedIndividual",
+				"sorepsu:UnitDefinedByProduct"
+			],
+			"hasOperand": [
+				"sorepsu:kilogram",
+				"sorepsu:perSecondSquared"
+			],
+			"hasSymbol": "J",
+			"label": {
+				"@language": "en",
+				"@value": "joule"
+			},
+			"notation": "J"
+		},
+		{
+			"@id": "sorepsu:joulePerKelvin",
+			"@type": [
+				"owl:NamedIndividual",
+				"sorepsu:UnitDefinedByProduct"
+			],
+			"hasOperand": [
+				"sorepsu:joule",
+				"sorepsu:perKelvin"
+			],
+			"label": {
+				"@language": "en",
+				"@value": "joule per kelvin"
+			},
+			"notation": "J/K"
+		},
+		{
+			"@id": "sorepsu:joulePerKilogram",
+			"@type": [
+				"owl:NamedIndividual",
+				"sorepsu:UnitDefinedByProduct"
+			],
+			"hasOperand": [
+				"sorepsu:joule",
+				"sorepsu:perKilogram"
+			],
+			"label": {
+				"@language": "en",
+				"@value": "joule per kilogram"
+			},
+			"notation": "J/kg"
+		},
+		{
+			"@id": "sorepsu:joulePerKilogramPerKelvin",
+			"@type": [
+				"owl:NamedIndividual",
+				"sorepsu:UnitDefinedByProduct"
+			],
+			"hasOperand": [
+				"sorepsu:joule",
+				"sorepsu:perKelvin",
+				"sorepsu:perKilogram"
+			],
+			"label": {
+				"@language": "en",
+				"@value": "joule per kilogram per kelvin"
+			},
+			"notation": "J/kg/K"
+		},
+		{
+			"@id": "sorepsu:joulePerMeterCubedPerKelvin",
+			"@type": [
+				"owl:NamedIndividual",
+				"sorepsu:UnitDefinedByProduct"
+			],
+			"hasOperand": [
+				"sorepsu:joule",
+				"sorepsu:perKelvin",
+				"sorepsu:perMeterCubed"
+			],
+			"label": {
+				"@language": "en",
+				"@value": "joule per meter cubed per kelvin"
+			},
+			"notation": "J/m3/K"
+		},
+		{
+			"@id": "sorepsu:joulePerMeterSquared",
+			"@type": [
+				"owl:NamedIndividual",
+				"sorepsu:UnitDefinedByProduct"
+			],
+			"hasOperand": [
+				"sorepsu:joule",
+				"sorepsu:perMeterSquared"
+			],
+			"label": {
+				"@language": "en",
+				"@value": "joule per meter squared"
+			},
+			"notation": "J/m2"
+		},
+		{
+			"@id": "sorepsu:joulePerMolePerKelvin",
+			"@type": [
+				"owl:NamedIndividual",
+				"sorepsu:UnitDefinedByProduct"
+			],
+			"hasOperand": [
+				"sorepsu:joule",
+				"sorepsu:perKelvin",
+				"sorepsu:perMole"
+			],
+			"label": {
+				"@language": "en",
+				"@value": "joule per mole per kelvin"
+			},
+			"notation": "J/mol/K"
+		},
+		{
+			"@id": "sorepsu:joulePerTesla",
+			"@type": [
+				"owl:NamedIndividual",
+				"sorepsu:UnitDefinedByProduct"
+			],
+			"hasOperand": [
+				"sorepsu:joule",
+				"sorepsu:perTesla"
+			],
+			"label": {
+				"@language": "en",
+				"@value": "joule per tesla"
+			},
+			"notation": "J/T"
+		},
+		{
+			"@id": "sorepsu:jouleSecond",
+			"@type": [
+				"owl:NamedIndividual",
+				"sorepsu:UnitDefinedByProduct"
+			],
+			"hasOperand": [
+				"sorepsu:joule",
+				"sorepsu:second"
+			],
+			"label": {
+				"@language": "en",
+				"@value": "joule second"
+			},
+			"notation": "J.s"
+		},
+		{
+			"@id": "sorepsu:kelvin",
+			"@type": [
+				"owl:NamedIndividual",
+				"sorepsu:BaseUnit"
+			],
+			"hasSymbol": "K",
+			"label": {
+				"@language": "en",
+				"@value": "kelvin"
+			},
+			"notation": "K"
+		},
+		{
+			"@id": "sorepsu:kelvinPerMeter",
+			"@type": [
+				"owl:NamedIndividual",
+				"sorepsu:UnitDefinedByProduct"
+			],
+			"hasOperand": [
+				"sorepsu:kelvin",
+				"sorepsu:perMeter"
+			],
+			"label": {
+				"@language": "en",
+				"@value": "kelvin per meter"
+			},
+			"notation": "K/m"
+		},
+		{
+			"@id": "sorepsu:kilo",
+			"@type": [
+				"owl:NamedIndividual",
+				"sorepsu:Prefix"
+			],
+			"sorelsc:hasNumericValue": 1000.0,
+			"hasSymbol": "k",
+			"label": {
+				"@language": "en",
+				"@value": "kilo"
+			},
+			"notation": "k"
+		},
+		{
+			"@id": "sorepsu:kilogram",
+			"@type": [
+				"owl:NamedIndividual",
+				"sorepsu:BaseUnit"
+			],
+			"hasSymbol": "kg",
+			"label": {
+				"@language": "en",
+				"@value": "kilogram"
+			},
+			"notation": "kg"
+		},
+		{
+			"@id": "sorepsu:kilogramMeterPerSecond",
+			"@type": [
+				"owl:NamedIndividual",
+				"sorepsu:UnitDefinedByProduct"
+			],
+			"hasOperand": [
+				"sorepsu:kilogram",
+				"sorepsu:meter",
+				"sorepsu:perSecond"
+			],
+			"label": {
+				"@language": "en",
+				"@value": "kilogram meter per second"
+			},
+			"notation": "kg.m/s"
+		},
+		{
+			"@id": "sorepsu:kilogramPerMeterCubed",
+			"@type": [
+				"owl:NamedIndividual",
+				"sorepsu:UnitDefinedByProduct"
+			],
+			"hasOperand": [
+				"sorepsu:kilogram",
+				"sorepsu:perMeterCubed"
+			],
+			"label": {
+				"@language": "en",
+				"@value": "kilogram per meter cubed"
+			},
+			"notation": "kg/m3"
+		},
+		{
+			"@id": "sorepsu:kilogramPerMeterSquared",
+			"@type": [
+				"owl:NamedIndividual",
+				"sorepsu:UnitDefinedByProduct"
+			],
+			"hasOperand": [
+				"sorepsu:kilogram",
+				"sorepsu:perMeterSquared"
+			],
+			"label": {
+				"@language": "en",
+				"@value": "kilogram per meter squared"
+			},
+			"notation": "kg/m2"
+		},
+		{
+			"@id": "sorepsu:kilogramRadianPerSecond",
+			"@type": [
+				"owl:NamedIndividual",
+				"sorepsu:UnitDefinedByProduct"
+			],
+			"hasOperand": [
+				"sorepsu:kilogram",
+				"sorepsu:perSecond",
+				"sorepsu:radian"
+			],
+			"label": {
+				"@language": "en",
+				"@value": "kilogram radian per second"
+			},
+			"notation": "kg.rad/s"
+		},
+		{
+			"@id": "sorepsu:kilohertz",
+			"@type": [
+				"owl:NamedIndividual",
+				"sorepsu:UnitDerivedByScaling"
+			],
+			"sorelm:hasScalingNumber": 1000.0,
+			"hasBaseUnit": "sorepsu:hertz",
+			"hasPrefix": "sorepsu:kilo",
+			"label": {
+				"@language": "en",
+				"@value": "kilohertz"
+			},
+			"notation": "kHz"
+		},
+		{
+			"@id": "sorepsu:kilometer",
+			"@type": [
+				"owl:NamedIndividual",
+				"sorepsu:UnitDerivedByScaling"
+			],
+			"sorelm:hasScalingNumber": 1000.0,
+			"hasBaseUnit": "sorepsu:meter",
+			"hasPrefix": "sorepsu:kilo",
+			"label": {
+				"@language": "en",
+				"@value": "kilometer"
+			},
+			"notation": "km"
+		},
+		{
+			"@id": "sorepsu:kilometerPerHour",
+			"@type": [
+				"owl:NamedIndividual",
+				"sorepsu:UnitDerivedByScaling"
+			],
+			"sorelm:hasScalingNumber": 0.27777777,
+			"hasBaseUnit": "sorepsu:meterPerSecond",
+			"label": {
+				"@language": "en",
+				"@value": "kilometer per hour"
+			},
+			"notation": "km/h"
+		},
+		{
+			"@id": "sorepsu:lumen",
+			"@type": [
+				"owl:NamedIndividual",
+				"sorepsu:UnitDefinedByProduct"
+			],
+			"hasOperand": [
+				"sorepsu:candela",
+				"sorepsu:steradian"
+			],
+			"label": {
+				"@language": "en",
+				"@value": "lumen"
+			},
+			"notation": "lm"
+		},
+		{
+			"@id": "sorepsu:lux",
+			"@type": [
+				"owl:NamedIndividual",
+				"sorepsu:UnitDefinedByProduct"
+			],
+			"hasOperand": [
+				"sorepsu:candela",
+				"sorepsu:lumen",
+				"sorepsu:perMeterSquared"
+			],
+			"hasSymbol": "Lx",
+			"label": {
+				"@language": "en",
+				"@value": "lux"
+			},
+			"notation": "lx"
+		},
+		{
+			"@id": "sorepsu:mega",
+			"@type": [
+				"owl:NamedIndividual",
+				"sorepsu:Prefix"
+			],
+			"sorelsc:hasNumericValue": 1000000.0,
+			"hasSymbol": "M",
+			"label": {
+				"@language": "en",
+				"@value": "mega"
+			},
+			"notation": "M"
+		},
+		{
+			"@id": "sorepsu:megahertz",
+			"@type": [
+				"owl:NamedIndividual",
+				"sorepsu:UnitDerivedByScaling"
+			],
+			"sorelm:hasScalingNumber": 1000000.0,
+			"hasBaseUnit": "sorepsu:hertz",
+			"hasPrefix": "sorepsu:mega",
+			"label": {
+				"@language": "en",
+				"@value": "megahertz"
+			},
+			"notation": "MHz"
+		},
+		{
+			"@id": "sorepsu:meter",
+			"@type": [
+				"owl:NamedIndividual",
+				"sorepsu:BaseUnit"
+			],
+			"hasSymbol": "m",
+			"label": {
+				"@language": "en",
+				"@value": "meter"
+			},
+			"sameAs": "sorepsu:metre",
+			"notation": "m"
+		},
+		{
+			"@id": "sorepsu:meterCubed",
+			"@type": [
+				"owl:NamedIndividual",
+				"sorepsu:UnitDerivedByRaisingToPower"
+			],
+			"sorelm:toThePower": 3.0,
+			"hasBaseUnit": "sorepsu:meter",
+			"label": {
+				"@language": "en",
+				"@value": "meter cubed"
+			},
+			"notation": "m3"
+		},
+		{
+			"@id": "sorepsu:meterCubedPerKelvin",
+			"@type": [
+				"owl:NamedIndividual",
+				"sorepsu:UnitDefinedByProduct"
+			],
+			"hasOperand": [
+				"sorepsu:meterCubed",
+				"sorepsu:perKelvin"
+			],
+			"label": {
+				"@language": "en",
+				"@value": "meter cubed per kelvin"
+			},
+			"notation": "m3/K"
+		},
+		{
+			"@id": "sorepsu:meterCubedPerKilogram",
+			"@type": [
+				"owl:NamedIndividual",
+				"sorepsu:UnitDefinedByProduct"
+			],
+			"hasOperand": [
+				"sorepsu:meterCubed",
+				"sorepsu:perKilogram"
+			],
+			"label": {
+				"@language": "en",
+				"@value": "meter cubed per kilogram"
+			},
+			"notation": "m3/kg"
+		},
+		{
+			"@id": "sorepsu:meterCubedPerSecond",
+			"@type": [
+				"owl:NamedIndividual",
+				"sorepsu:UnitDefinedByProduct"
+			],
+			"hasOperand": [
+				"sorepsu:meterCubed",
+				"sorepsu:perSecond"
+			],
+			"label": {
+				"@language": "en",
+				"@value": "meter cubed per second"
+			},
+			"notation": "m3/s"
+		},
+		{
+			"@id": "sorepsu:meterPerKelvin",
+			"@type": [
+				"owl:NamedIndividual",
+				"sorepsu:UnitDefinedByProduct"
+			],
+			"hasOperand": [
+				"sorepsu:meter",
+				"sorepsu:perKelvin"
+			],
+			"label": {
+				"@language": "en",
+				"@value": "meter per kelvin"
+			},
+			"notation": "m/K"
+		},
+		{
+			"@id": "sorepsu:meterPerSecond",
+			"@type": [
+				"owl:NamedIndividual",
+				"sorepsu:UnitDefinedByProduct"
+			],
+			"hasOperand": [
+				"sorepsu:meter",
+				"sorepsu:perSecond"
+			],
+			"label": {
+				"@language": "en",
+				"@value": "meter per second"
+			},
+			"notation": "m/s"
+		},
+		{
+			"@id": "sorepsu:meterPerSecondSquared",
+			"@type": [
+				"owl:NamedIndividual",
+				"sorepsu:UnitDefinedByProduct"
+			],
+			"hasOperand": [
+				"sorepsu:meter",
+				"sorepsu:perSecondSquared"
+			],
+			"label": {
+				"@language": "en",
+				"@value": "meter per second squared"
+			},
+			"notation": "m/s2"
+		},
+		{
+			"@id": "sorepsu:meterSquared",
+			"@type": [
+				"owl:NamedIndividual",
+				"sorepsu:UnitDerivedByRaisingToPower"
+			],
+			"sorelm:toThePower": 2.0,
+			"hasBaseUnit": "sorepsu:meter",
+			"label": {
+				"@language": "en",
+				"@value": "meter squared"
+			},
+			"notation": "m2"
+		},
+		{
+			"@id": "sorepsu:meterSquaredPerKilogram",
+			"@type": [
+				"owl:NamedIndividual",
+				"sorepsu:UnitDefinedByProduct"
+			],
+			"hasOperand": [
+				"sorepsu:meterSquared",
+				"sorepsu:perKilogram"
+			],
+			"label": {
+				"@language": "en",
+				"@value": "meter squared per kilogram"
+			},
+			"notation": "m2/kg"
+		},
+		{
+			"@id": "sorepsu:meterSquaredPerSecond",
+			"@type": [
+				"owl:NamedIndividual",
+				"sorepsu:UnitDefinedByProduct"
+			],
+			"hasOperand": [
+				"sorepsu:meterSquared",
+				"sorepsu:perSecond"
+			],
+			"label": {
+				"@language": "en",
+				"@value": "meter squared per second"
+			},
+			"notation": "m2/s"
+		},
+		{
+			"@id": "sorepsu:meterSquaredPerSecondSquared",
+			"@type": [
+				"owl:NamedIndividual",
+				"sorepsu:UnitDefinedByProduct"
+			],
+			"hasOperand": [
+				"sorepsu:meterSquared",
+				"sorepsu:perSecondSquared"
+			],
+			"label": {
+				"@language": "en",
+				"@value": "meter squared per second squared"
+			},
+			"notation": "m2/s2"
+		},
+		{
+			"@id": "sorepsu:metre",
+			"@type": [
+				"owl:NamedIndividual",
+				"sorepsu:BaseUnit"
+			],
+			"label": {
+				"@language": "en",
+				"@value": "metre"
+			},
+			"notation": "m"
+		},
+		{
+			"@id": "sorepsu:micro",
+			"@type": [
+				"owl:NamedIndividual",
+				"sorepsu:Prefix"
+			],
+			"sorelsc:hasNumericValue": 1.0E-6,
+			"label": {
+				"@language": "en",
+				"@value": "micro"
+			},
+			"notation": "u"
+		},
+		{
+			"@id": "sorepsu:micrometer",
+			"@type": [
+				"owl:NamedIndividual",
+				"sorepsu:UnitDerivedByScaling"
+			],
+			"sorelm:hasScalingNumber": 1.0E-6,
+			"hasBaseUnit": "sorepsu:meter",
+			"hasPrefix": "sorepsu:micro",
+			"label": {
+				"@language": "en",
+				"@value": "micrometer"
+			},
+			"sameAs": "sorepsu:micron",
+			"notation": "um"
+		},
+		{
+			"@id": "sorepsu:micron",
+			"@type": [
+				"owl:NamedIndividual",
+				"sorepsu:UnitDerivedByScaling"
+			],
+			"label": {
+				"@language": "en",
+				"@value": "micron"
+			},
+			"notation": "um"
+		},
+		{
+			"@id": "sorepsu:millenium",
+			"@type": [
+				"owl:NamedIndividual",
+				"sorepsu:UnitDerivedByScaling"
+			],
+			"sorelm:hasScalingNumber": 1000.0,
+			"hasBaseUnit": "sorepsu:year",
+			"label": {
+				"@language": "en",
+				"@value": "millenium"
+			},
+			"notation": "ka"
+		},
+		{
+			"@id": "sorepsu:milli",
+			"@type": [
+				"owl:NamedIndividual",
+				"sorepsu:Prefix"
+			],
+			"sorelsc:hasNumericValue": 0.001,
+			"hasSymbol": "m",
+			"label": {
+				"@language": "en",
+				"@value": "milli"
+			},
+			"notation": "m"
+		},
+		{
+			"@id": "sorepsu:millimeter",
+			"@type": [
+				"owl:NamedIndividual",
+				"sorepsu:UnitDerivedByScaling"
+			],
+			"sorelm:hasScalingNumber": 0.001,
+			"hasBaseUnit": "sorepsu:meter",
+			"hasPrefix": "sorepsu:milli",
+			"label": {
+				"@language": "en",
+				"@value": "millimeter"
+			},
+			"notation": "mm"
+		},
+		{
+			"@id": "sorepsu:million_km2",
+			"@type": [
+				"owl:NamedIndividual",
+				"sorepsu:UnitDerivedByScaling"
+			],
+			"sorelm:hasScalingNumber": 1.0E-12,
+			"hasBaseUnit": "sorepsu:meterSquared",
+			"label": {
+				"@language": "en",
+				"@value": "million km2"
+			},
+			"notation": "1000000.km2"
+		},
+		{
+			"@id": "sorepsu:million_km3",
+			"@type": [
+				"owl:NamedIndividual",
+				"sorepsu:UnitDerivedByScaling"
+			],
+			"sorelm:hasScalingNumber": 1.0E-15,
+			"hasBaseUnit": "sorepsu:meterCubed",
+			"label": {
+				"@language": "en",
+				"@value": "million km3"
+			},
+			"notation": "1000000.km3"
+		},
+		{
+			"@id": "sorepsu:minute",
+			"@type": [
+				"owl:NamedIndividual",
+				"sorepsu:UnitDerivedByScaling"
+			],
+			"sorelm:hasScalingNumber": 60.0,
+			"hasBaseUnit": "sorepsu:second",
+			"label": {
+				"@language": "en",
+				"@value": "minute"
+			},
+			"notation": "min"
+		},
+		{
+			"@id": "sorepsu:mole",
+			"@type": [
+				"owl:NamedIndividual",
+				"sorepsu:BaseUnit"
+			],
+			"hasSymbol": "mol",
+			"label": {
+				"@language": "en",
+				"@value": "mole"
+			},
+			"notation": "mol"
+		},
+		{
+			"@id": "sorepsu:month",
+			"@type": [
+				"owl:NamedIndividual",
+				"sorepsu:UnitDerivedByScaling"
+			],
+			"sorelm:hasScalingNumber": 2629744.0,
+			"hasBaseUnit": "sorepsu:second",
+			"label": {
+				"@language": "en",
+				"@value": "month"
+			},
+			"notation": "mo"
+		},
+		{
+			"@id": "sorepsu:nano",
+			"@type": [
+				"owl:NamedIndividual",
+				"sorepsu:Prefix"
+			],
+			"sorelsc:hasNumericValue": 1.0E-9,
+			"hasSymbol": "n",
+			"label": {
+				"@language": "en",
+				"@value": "nano"
+			},
+			"notation": "n"
+		},
+		{
+			"@id": "sorepsu:nanometer",
+			"@type": [
+				"owl:NamedIndividual",
+				"sorepsu:UnitDerivedByScaling"
+			],
+			"sorelm:hasScalingNumber": 1.0E-9,
+			"hasBaseUnit": "sorepsu:meter",
+			"hasPrefix": "sorepsu:nano",
+			"label": {
+				"@language": "en",
+				"@value": "nanometer"
+			},
+			"notation": "nm"
+		},
+		{
+			"@id": "sorepsu:newton",
+			"@type": [
+				"owl:NamedIndividual",
+				"sorepsu:UnitDefinedByProduct"
+			],
+			"hasOperand": [
+				"sorepsu:kilogram",
+				"sorepsu:meter",
+				"sorepsu:perSecondSquared"
+			],
+			"hasSymbol": "N",
+			"label": {
+				"@language": "en",
+				"@value": "newton"
+			},
+			"notation": "N"
+		},
+		{
+			"@id": "sorepsu:newtonMeter",
+			"@type": [
+				"owl:NamedIndividual",
+				"sorepsu:UnitDefinedByProduct"
+			],
+			"hasOperand": [
+				"sorepsu:meter",
+				"sorepsu:newton"
+			],
+			"label": {
+				"@language": "en",
+				"@value": "newton meter"
+			},
+			"notation": "N.m"
+		},
+		{
+			"@id": "sorepsu:newtonPerMeter",
+			"@type": [
+				"owl:NamedIndividual",
+				"sorepsu:UnitDefinedByProduct"
+			],
+			"hasOperand": [
+				"sorepsu:newton",
+				"sorepsu:perMeter"
+			],
+			"label": {
+				"@language": "en",
+				"@value": "newton per meter"
+			},
+			"notation": "N/m"
+		},
+		{
+			"@id": "sorepsu:normalizedUnit",
+			"@type": [
+				"owl:NamedIndividual",
+				"sorepsu:BaseUnit"
+			],
+			"label": {
+				"@language": "en",
+				"@value": "normalized unit"
+			}
+		},
+		{
+			"@id": "sorepsu:ohm",
+			"@type": [
+				"owl:NamedIndividual",
+				"sorepsu:UnitDefinedByProduct"
+			],
+			"hasOperand": [
+				"sorepsu:kilogram",
+				"sorepsu:meterSquared",
+				"sorepsu:perAmpereSquared",
+				"sorepsu:perSecondCubed"
+			],
+			"label": {
+				"@language": "en",
+				"@value": "ohm"
+			},
+			"notation": "Ohm"
+		},
+		{
+			"@id": "sorepsu:ohmMeter",
+			"@type": [
+				"owl:NamedIndividual",
+				"sorepsu:UnitDefinedByProduct"
+			],
+			"hasOperand": [
+				"sorepsu:meter",
+				"sorepsu:ohm"
+			],
+			"label": {
+				"@language": "en",
+				"@value": "ohm meter"
+			},
+			"notation": "Ohm.m"
+		},
+		{
+			"@id": "sorepsu:pascal",
+			"@type": [
+				"owl:NamedIndividual",
+				"sorepsu:UnitDefinedByProduct"
+			],
+			"hasOperand": [
+				"sorepsu:newton",
+				"sorepsu:perMeterSquared"
+			],
+			"hasSymbol": "Pa",
+			"label": {
+				"@language": "en",
+				"@value": "pascal"
+			},
+			"notation": "Pa"
+		},
+		{
+			"@id": "sorepsu:pascalPerSecond",
+			"@type": [
+				"owl:NamedIndividual",
+				"sorepsu:UnitDefinedByProduct"
+			],
+			"hasOperand": [
+				"sorepsu:pascal",
+				"sorepsu:perSecond"
+			],
+			"hasSymbol": "pa/s",
+			"label": {
+				"@language": "en",
+				"@value": "pascal per second"
+			},
+			"notation": "Pa/s"
+		},
+		{
+			"@id": "sorepsu:pascalSecond",
+			"@type": [
+				"owl:NamedIndividual",
+				"sorepsu:UnitDefinedByProduct"
+			],
+			"hasOperand": [
+				"sorepsu:pascal",
+				"sorepsu:second"
+			],
+			"label": {
+				"@language": "en",
+				"@value": "pascal second"
+			},
+			"notation": "Pa.s"
+		},
+		{
+			"@id": "sorepsu:perAmpere",
+			"@type": [
+				"owl:NamedIndividual",
+				"sorepsu:UnitDerivedByRaisingToPower"
+			],
+			"sorelm:toThePower": -1.0,
+			"hasBaseUnit": "sorepsu:ampere",
+			"label": {
+				"@language": "en",
+				"@value": "per ampere"
+			},
+			"notation": "/A"
+		},
+		{
+			"@id": "sorepsu:perAmpereSquared",
+			"@type": [
+				"owl:NamedIndividual",
+				"sorepsu:UnitDerivedByRaisingToPower"
+			],
+			"sorelm:toThePower": -2.0,
+			"hasBaseUnit": "sorepsu:ampere",
+			"label": {
+				"@language": "en",
+				"@value": "per ampere squared"
+			},
+			"notation": "/A2"
+		},
+		{
+			"@id": "sorepsu:perCandela",
+			"@type": [
+				"owl:NamedIndividual",
+				"sorepsu:UnitDerivedByRaisingToPower"
+			],
+			"sorelm:toThePower": -1.0,
+			"hasBaseUnit": "sorepsu:candela",
+			"label": {
+				"@language": "en",
+				"@value": "per candela"
+			},
+			"notation": "/cd"
+		},
+		{
+			"@id": "sorepsu:perKelvin",
+			"@type": [
+				"owl:NamedIndividual",
+				"sorepsu:UnitDerivedByRaisingToPower"
+			],
+			"sorelm:toThePower": -1.0,
+			"hasBaseUnit": "sorepsu:kelvin",
+			"label": {
+				"@language": "en",
+				"@value": "per kelvin"
+			},
+			"notation": "/K"
+		},
+		{
+			"@id": "sorepsu:perKilogram",
+			"@type": [
+				"owl:NamedIndividual",
+				"sorepsu:UnitDerivedByRaisingToPower"
+			],
+			"sorelm:toThePower": -1.0,
+			"hasBaseUnit": "sorepsu:kilogram",
+			"label": {
+				"@language": "en",
+				"@value": "per kilogram"
+			},
+			"notation": "/kg"
+		},
+		{
+			"@id": "sorepsu:perKilogramMeterSquaredPerSecondKelvin",
+			"@type": [
+				"owl:NamedIndividual",
+				"sorepsu:UnitDefinedByProduct"
+			],
+			"hasOperand": [
+				"sorepsu:kelvin",
+				"sorepsu:meterSquared",
+				"sorepsu:perKilogram",
+				"sorepsu:perSecond"
+			],
+			"label": {
+				"@language": "en",
+				"@value": "per kilogram meter squared per second kelvin"
+			},
+			"notation": "/kg/m2/s/K"
+		},
+		{
+			"@id": "sorepsu:perKilogramMole",
+			"@type": [
+				"owl:NamedIndividual",
+				"sorepsu:UnitDefinedByProduct"
+			],
+			"hasOperand": [
+				"sorepsu:mole",
+				"sorepsu:perKilogram"
+			],
+			"label": {
+				"@language": "en",
+				"@value": "per kilogram mole"
+			},
+			"notation": "/kg/mol"
+		},
+		{
+			"@id": "sorepsu:perMeter",
+			"@type": [
+				"owl:NamedIndividual",
+				"sorepsu:UnitDerivedByRaisingToPower"
+			],
+			"sorelm:toThePower": -1.0,
+			"hasBaseUnit": "sorepsu:meter",
+			"label": {
+				"@language": "en",
+				"@value": "per meter"
+			},
+			"notation": "/m"
+		},
+		{
+			"@id": "sorepsu:perMeterCubed",
+			"@type": [
+				"owl:NamedIndividual",
+				"sorepsu:UnitDerivedByRaisingToPower"
+			],
+			"sorelm:toThePower": -3.0,
+			"hasBaseUnit": "sorepsu:meter",
+			"label": {
+				"@language": "en",
+				"@value": "per meter cubed"
+			},
+			"notation": "/m3"
+		},
+		{
+			"@id": "sorepsu:perMeterSquared",
+			"@type": [
+				"owl:NamedIndividual",
+				"sorepsu:UnitDerivedByRaisingToPower"
+			],
+			"sorelm:toThePower": -2.0,
+			"hasBaseUnit": "sorepsu:meter",
+			"label": {
+				"@language": "en",
+				"@value": "per meter squared"
+			},
+			"notation": "/m2"
+		},
+		{
+			"@id": "sorepsu:perMil",
+			"@type": [
+				"owl:NamedIndividual",
+				"sorepsu:UnitDerivedByScaling"
+			],
+			"sorelm:hasScalingNumber": 0.001,
+			"hasBaseUnit": "sorepsu:ratio",
+			"label": {
+				"@language": "en",
+				"@value": "per mil"
+			},
+			"notation": "[ppth]"
+		},
+		{
+			"@id": "sorepsu:perMole",
+			"@type": [
+				"owl:NamedIndividual",
+				"sorepsu:UnitDerivedByRaisingToPower"
+			],
+			"sorelm:toThePower": -1.0,
+			"hasBaseUnit": "sorepsu:mole",
+			"label": {
+				"@language": "en",
+				"@value": "per mole"
+			},
+			"notation": "/mol"
+		},
+		{
+			"@id": "sorepsu:perPascal",
+			"@type": [
+				"owl:NamedIndividual",
+				"sorepsu:UnitDerivedByRaisingToPower"
+			],
+			"sorelm:toThePower": -1.0,
+			"hasBaseUnit": "sorepsu:pascal",
+			"label": {
+				"@language": "en",
+				"@value": "per pascal"
+			},
+			"notation": "/Pa"
+		},
+		{
+			"@id": "sorepsu:perRadian",
+			"@type": [
+				"owl:NamedIndividual",
+				"sorepsu:UnitDerivedByRaisingToPower"
+			],
+			"sorelm:toThePower": -1.0,
+			"hasBaseUnit": "sorepsu:radian",
+			"label": {
+				"@language": "en",
+				"@value": "per radian"
+			},
+			"notation": "/rad"
+		},
+		{
+			"@id": "sorepsu:perSecond",
+			"@type": [
+				"owl:NamedIndividual",
+				"sorepsu:UnitDerivedByRaisingToPower"
+			],
+			"sorelm:toThePower": -1.0,
+			"hasBaseUnit": "sorepsu:second",
+			"hasSymbol": "Hz",
+			"label": {
+				"@language": "en",
+				"@value": "per second"
+			},
+			"notation": "/s"
+		},
+		{
+			"@id": "sorepsu:perSecondCubed",
+			"@type": [
+				"owl:NamedIndividual",
+				"sorepsu:UnitDerivedByRaisingToPower"
+			],
+			"sorelm:toThePower": -3.0,
+			"hasBaseUnit": "sorepsu:second",
+			"label": {
+				"@language": "en",
+				"@value": "per second cubed"
+			},
+			"notation": "/s3"
+		},
+		{
+			"@id": "sorepsu:perSecondSquared",
+			"@type": [
+				"owl:NamedIndividual",
+				"sorepsu:UnitDerivedByRaisingToPower"
+			],
+			"sorelm:toThePower": -2.0,
+			"hasBaseUnit": "sorepsu:second",
+			"label": {
+				"@language": "en",
+				"@value": "per second squared"
+			},
+			"notation": "/s2"
+		},
+		{
+			"@id": "sorepsu:perSteradian",
+			"@type": [
+				"owl:NamedIndividual",
+				"sorepsu:UnitDerivedByRaisingToPower"
+			],
+			"sorelm:toThePower": -1.0,
+			"hasBaseUnit": "sorepsu:steradian",
+			"label": {
+				"@language": "en",
+				"@value": "per steradian"
+			},
+			"notation": "/sr"
+		},
+		{
+			"@id": "sorepsu:perTesla",
+			"@type": [
+				"owl:NamedIndividual",
+				"sorepsu:UnitDerivedByRaisingToPower"
+			],
+			"sorelm:toThePower": -1.0,
+			"hasBaseUnit": "sorepsu:tesla",
+			"label": {
+				"@language": "en",
+				"@value": "per tesla"
+			},
+			"notation": "/T"
+		},
+		{
+			"@id": "sorepsu:perVolt",
+			"@type": [
+				"owl:NamedIndividual",
+				"sorepsu:UnitDerivedByRaisingToPower"
+			],
+			"sorelm:toThePower": -1.0,
+			"hasBaseUnit": "sorepsu:volt",
+			"label": {
+				"@language": "en",
+				"@value": "per volt"
+			},
+			"notation": "/V"
+		},
+		{
+			"@id": "sorepsu:percent",
+			"@type": [
+				"owl:NamedIndividual",
+				"sorepsu:UnitDerivedByScaling"
+			],
+			"sorelm:hasScalingNumber": 0.01,
+			"hasBaseUnit": "sorepsu:ratio",
+			"label": {
+				"@language": "en",
+				"@value": "percent"
+			},
+			"notation": "%"
+		},
+		{
+			"@id": "sorepsu:permil",
+			"@type": [
+				"owl:NamedIndividual",
+				"sorepsu:UnitDerivedByScaling"
+			],
+			"sorelm:hasScalingNumber": 0.001,
+			"hasBaseUnit": "sorepsu:ratio",
+			"label": {
+				"@language": "en",
+				"@value": "permil"
+			},
+			"notation": "[ppth]"
+		},
+		{
+			"@id": "sorepsu:peta",
+			"@type": [
+				"owl:NamedIndividual",
+				"sorepsu:Prefix"
+			],
+			"sorelsc:hasNumericValue": 1.0E15,
+			"hasSymbol": "P",
+			"label": {
+				"@language": "en",
+				"@value": "peta"
+			},
+			"notation": "P"
+		},
+		{
+			"@id": "sorepsu:ppb",
+			"@type": [
+				"owl:NamedIndividual",
+				"sorepsu:UnitDerivedByScaling"
+			],
+			"sorelm:hasScalingNumber": 1.0E-9,
+			"hasBaseUnit": "sorepsu:ratio",
+			"label": {
+				"@language": "en",
+				"@value": "ppb"
+			},
+			"notation": "[ppb]"
+		},
+		{
+			"@id": "sorepsu:ppbv",
+			"@type": [
+				"owl:NamedIndividual",
+				"sorepsu:UnitDerivedByScaling"
+			],
+			"sorelm:hasScalingNumber": 1.0E-9,
+			"hasBaseUnit": "sorepsu:volumeRatio",
+			"label": {
+				"@language": "en",
+				"@value": "ppbv"
+			},
+			"notation": "[ppb]{vol}"
+		},
+		{
+			"@id": "sorepsu:ppm",
+			"@type": [
+				"owl:NamedIndividual",
+				"sorepsu:UnitDerivedByScaling"
+			],
+			"sorelm:hasScalingNumber": 1.0E-6,
+			"hasBaseUnit": "sorepsu:ratio",
+			"label": {
+				"@language": "en",
+				"@value": "ppm"
+			},
+			"notation": "[ppm]"
+		},
+		{
+			"@id": "sorepsu:ppmv",
+			"@type": [
+				"owl:NamedIndividual",
+				"sorepsu:UnitDerivedByScaling"
+			],
+			"sorelm:hasScalingNumber": 1.0E-6,
+			"hasBaseUnit": "sorepsu:volumeRatio",
+			"label": {
+				"@language": "en",
+				"@value": "ppmv"
+			},
+			"notation": "[ppm]{vol}"
+		},
+		{
+			"@id": "sorepsu:ppt",
+			"@type": [
+				"owl:NamedIndividual",
+				"sorepsu:UnitDerivedByScaling"
+			],
+			"sorelm:hasScalingNumber": 1.0E-12,
+			"hasBaseUnit": "sorepsu:ratio",
+			"label": {
+				"@language": "en",
+				"@value": "ppt"
+			},
+			"notation": "[pptr]"
+		},
+		{
+			"@id": "sorepsu:pptv",
+			"@type": [
+				"owl:NamedIndividual",
+				"sorepsu:UnitDerivedByScaling"
+			],
+			"sorelm:hasScalingNumber": 1.0E-12,
+			"hasBaseUnit": "sorepsu:volumeRatio",
+			"label": {
+				"@language": "en",
+				"@value": "pptv"
+			},
+			"notation": "[pptr]{vol}"
+		},
+		{
+			"@id": "sorepsu:radian",
+			"@type": [
+				"owl:NamedIndividual",
+				"sorepsu:BaseUnit"
+			],
+			"hasSymbol": "rad",
+			"label": {
+				"@language": "en",
+				"@value": "radian"
+			},
+			"notation": "rad"
+		},
+		{
+			"@id": "sorepsu:radianPerSecond",
+			"@type": [
+				"owl:NamedIndividual",
+				"sorepsu:UnitDefinedByProduct"
+			],
+			"hasOperand": [
+				"sorepsu:perSecond",
+				"sorepsu:radian"
+			],
+			"label": {
+				"@language": "en",
+				"@value": "radian per second"
+			},
+			"notation": "rad/s"
+		},
+		{
+			"@id": "sorepsu:radianPerSecondSquared",
+			"@type": [
+				"owl:NamedIndividual",
+				"sorepsu:UnitDefinedByProduct"
+			],
+			"hasOperand": [
+				"sorepsu:perSecondSquared",
+				"sorepsu:radian"
+			],
+			"label": {
+				"@language": "en",
+				"@value": "radian per second squared"
+			},
+			"notation": "rad/s2"
+		},
+		{
+			"@id": "sorepsu:ratio",
+			"@type": [
+				"owl:NamedIndividual",
+				"sorepsu:BaseUnit"
+			],
+			"label": {
+				"@language": "en",
+				"@value": "ratio"
+			}
+		},
+		{
+			"@id": "sorepsu:season",
+			"@type": [
+				"owl:NamedIndividual",
+				"sorepsu:UnitDerivedByScaling"
+			],
+			"sorelm:hasScalingNumber": 7889232.0,
+			"hasBaseUnit": "sorepsu:second",
+			"label": {
+				"@language": "en",
+				"@value": "season"
+			}
+		},
+		{
+			"@id": "sorepsu:second",
+			"@type": [
+				"owl:NamedIndividual",
+				"sorepsu:BaseUnit"
+			],
+			"hasSymbol": "s",
+			"label": {
+				"@language": "en",
+				"@value": "second"
+			},
+			"notation": "s"
+		},
+		{
+			"@id": "sorepsu:secondSquared",
+			"@type": [
+				"owl:NamedIndividual",
+				"sorepsu:UnitDerivedByRaisingToPower"
+			],
+			"sorelm:toThePower": 2.0,
+			"hasBaseUnit": "sorepsu:second",
+			"label": {
+				"@language": "en",
+				"@value": "second squared"
+			},
+			"notation": "s2"
+		},
+		{
+			"@id": "sorepsu:siemens",
+			"@type": [
+				"owl:NamedIndividual",
+				"sorepsu:UnitDerivedByRaisingToPower"
+			],
+			"sorelm:toThePower": -1.0,
+			"hasBaseUnit": "sorepsu:ohm",
+			"hasSymbol": "G",
+			"label": {
+				"@language": "en",
+				"@value": "siemens"
+			},
+			"notation": "S"
+		},
+		{
+			"@id": "sorepsu:siemensPerKilogram",
+			"@type": [
+				"owl:NamedIndividual",
+				"sorepsu:UnitDefinedByProduct"
+			],
+			"hasOperand": [
+				"sorepsu:perKilogram",
+				"sorepsu:siemens"
+			],
+			"label": {
+				"@language": "en",
+				"@value": "siemens per kilogram"
+			},
+			"notation": "S/kg"
+		},
+		{
+			"@id": "sorepsu:siemensPerMeter",
+			"@type": [
+				"owl:NamedIndividual",
+				"sorepsu:UnitDefinedByProduct"
+			],
+			"hasOperand": [
+				"sorepsu:perMeter",
+				"sorepsu:siemens"
+			],
+			"label": {
+				"@language": "en",
+				"@value": "siemens per meter"
+			},
+			"notation": "S/m"
+		},
+		{
+			"@id": "sorepsu:steradian",
+			"@type": [
+				"owl:NamedIndividual",
+				"sorepsu:BaseUnit"
+			],
+			"hasSymbol": "sr",
+			"label": {
+				"@language": "en",
+				"@value": "steradian"
+			},
+			"notation": "sr"
+		},
+		{
+			"@id": "sorepsu:tera",
+			"@type": [
+				"owl:NamedIndividual",
+				"sorepsu:Prefix"
+			],
+			"sorelsc:hasNumericValue": 1.0E12,
+			"hasSymbol": "T",
+			"label": {
+				"@language": "en",
+				"@value": "tera"
+			},
+			"notation": "T"
+		},
+		{
+			"@id": "sorepsu:terahertz",
+			"@type": [
+				"owl:NamedIndividual",
+				"sorepsu:UnitDerivedByScaling"
+			],
+			"sorelm:hasScalingNumber": 1.0E12,
+			"hasBaseUnit": "sorepsu:hertz",
+			"hasPrefix": "sorepsu:tera",
+			"label": {
+				"@language": "en",
+				"@value": "terahertz"
+			},
+			"notation": "THz"
+		},
+		{
+			"@id": "sorepsu:tesla",
+			"@type": [
+				"owl:NamedIndividual",
+				"sorepsu:UnitDefinedByProduct"
+			],
+			"hasOperand": [
+				"sorepsu:perMeterSquared",
+				"sorepsu:weber"
+			],
+			"label": {
+				"@language": "en",
+				"@value": "tesla"
+			},
+			"notation": "T"
+		},
+		{
+			"@id": "sorepsu:volt",
+			"@type": [
+				"owl:NamedIndividual",
+				"sorepsu:UnitDefinedByProduct"
+			],
+			"hasOperand": [
+				"sorepsu:kilogram",
+				"sorepsu:meterSquared",
+				"sorepsu:perAmpere",
+				"sorepsu:perSecondCubed"
+			],
+			"hasSymbol": "V",
+			"label": {
+				"@language": "en",
+				"@value": "volt"
+			},
+			"notation": "V"
+		},
+		{
+			"@id": "sorepsu:voltPerMeter",
+			"@type": [
+				"owl:NamedIndividual",
+				"sorepsu:UnitDefinedByProduct"
+			],
+			"hasOperand": [
+				"sorepsu:perMeter",
+				"sorepsu:volt"
+			],
+			"label": {
+				"@language": "en",
+				"@value": "volt per meter"
+			},
+			"notation": "V/m"
+		},
+		{
+			"@id": "sorepsu:volumeRatio",
+			"@type": [
+				"owl:NamedIndividual",
+				"sorepsu:BaseUnit"
+			],
+			"label": {
+				"@language": "en",
+				"@value": "volume ratio"
+			}
+		},
+		{
+			"@id": "sorepsu:watt",
+			"@type": [
+				"owl:NamedIndividual",
+				"sorepsu:UnitDefinedByProduct"
+			],
+			"hasOperand": [
+				"sorepsu:joule",
+				"sorepsu:perSecond"
+			],
+			"label": {
+				"@language": "en",
+				"@value": "watt"
+			},
+			"notation": "W"
+		},
+		{
+			"@id": "sorepsu:wattPerMeterPerKelvin",
+			"@type": [
+				"owl:NamedIndividual",
+				"sorepsu:UnitDefinedByProduct"
+			],
+			"hasOperand": [
+				"sorepsu:perKelvin",
+				"sorepsu:perMeter",
+				"sorepsu:watt"
+			],
+			"label": {
+				"@language": "en",
+				"@value": "watt per meter per kelvin"
+			},
+			"notation": "W/m/K"
+		},
+		{
+			"@id": "sorepsu:wattPerMeterSquared",
+			"@type": [
+				"owl:NamedIndividual",
+				"sorepsu:UnitDefinedByProduct"
+			],
+			"hasOperand": [
+				"sorepsu:perMeterSquared",
+				"sorepsu:watt"
+			],
+			"label": {
+				"@language": "en",
+				"@value": "watt per meter squared"
+			},
+			"notation": "W/m2"
+		},
+		{
+			"@id": "sorepsu:wattPerMeterSquaredPerKelvin",
+			"@type": [
+				"owl:NamedIndividual",
+				"sorepsu:UnitDefinedByProduct"
+			],
+			"hasOperand": [
+				"sorepsu:perKelvin",
+				"sorepsu:wattPerMeterSquared"
+			],
+			"label": {
+				"@language": "en",
+				"@value": "watt per meter squared per kelvin"
+			},
+			"notation": "W/m2/K"
+		},
+		{
+			"@id": "sorepsu:wattPerMeterSquaredPerSteradian",
+			"@type": [
+				"owl:NamedIndividual",
+				"sorepsu:UnitDefinedByProduct"
+			],
+			"hasOperand": [
+				"sorepsu:perSteradian",
+				"sorepsu:wattPerMeterSquared"
+			],
+			"label": {
+				"@language": "en",
+				"@value": "watt per meter squared per steradian"
+			},
+			"notation": "W/m2/sr"
+		},
+		{
+			"@id": "sorepsu:wattPerMeterSquaredPerSteradianPerWavelength",
+			"@type": [
+				"owl:NamedIndividual",
+				"sorepsu:UnitDefinedByProduct"
+			],
+			"hasOperand": [
+				"sorepsu:perMeter",
+				"sorepsu:perSteradian",
+				"sorepsu:wattPerMeterSquared"
+			],
+			"label": {
+				"@language": "en",
+				"@value": "watt per meter squared per steradian per wavelength"
+			}
+		},
+		{
+			"@id": "sorepsu:weber",
+			"@type": [
+				"owl:NamedIndividual",
+				"sorepsu:UnitDefinedByProduct"
+			],
+			"hasOperand": [
+				"sorepsu:kilogram",
+				"sorepsu:meterSquared",
+				"sorepsu:perAmpere",
+				"sorepsu:perSecondSquared"
+			],
+			"label": {
+				"@language": "en",
+				"@value": "weber"
+			},
+			"notation": "Wb"
+		},
+		{
+			"@id": "sorepsu:week",
+			"@type": [
+				"owl:NamedIndividual",
+				"sorepsu:UnitDerivedByScaling"
+			],
+			"sorelm:hasScalingNumber": 604800.0,
+			"hasBaseUnit": "sorepsu:second",
+			"label": {
+				"@language": "en",
+				"@value": "week"
+			},
+			"notation": "wk"
+		},
+		{
+			"@id": "sorepsu:year",
+			"@type": [
+				"owl:NamedIndividual",
+				"sorepsu:UnitDerivedByScaling"
+			],
+			"sorelm:hasScalingNumber": 3.1556926E7,
+			"hasBaseUnit": "sorepsu:second",
+			"label": {
+				"@language": "en",
+				"@value": "year"
+			},
+			"notation": "a"
+		},
+		{
+			"@id": "skos:notation",
+			"@type": "owl:AnnotationProperty"
+		}
+	],
+	"@context": {
+		"hasBaseUnit": {
+			"@id": "http://sweetontology.net/relaSci/hasBaseUnit",
+			"@type": "@id"
+		},
+		"hasScalingNumber": {
+			"@id": "http://sweetontology.net/relaMath/hasScalingNumber",
+			"@type": "http://www.w3.org/2001/XMLSchema#double"
+		},
+		"label": {"@id": "http://www.w3.org/2000/01/rdf-schema#label"},
+		"notation": {
+			"@id": "http://www.w3.org/2004/02/skos/core#notation",
+			"@type": "http://qudt.org/schema/qudt/UCUMcs"
+		},
+		"hasSymbol": {"@id": "http://sweetontology.net/relaSci/hasSymbol"},
+		"subClassOf": {
+			"@id": "http://www.w3.org/2000/01/rdf-schema#subClassOf",
+			"@type": "@id"
+		},
+		"hasOperand": {
+			"@id": "http://sweetontology.net/relaMath/hasOperand",
+			"@type": "@id"
+		},
+		"toThePower": {
+			"@id": "http://sweetontology.net/relaMath/toThePower",
+			"@type": "http://www.w3.org/2001/XMLSchema#double"
+		},
+		"hasPrefix": {
+			"@id": "http://sweetontology.net/relaSci/hasPrefix",
+			"@type": "@id"
+		},
+		"hasNumericValue": {
+			"@id": "http://sweetontology.net/relaSci/hasNumericValue",
+			"@type": "http://www.w3.org/2001/XMLSchema#double"
+		},
+		"sameAs": {
+			"@id": "http://www.w3.org/2002/07/owl#sameAs",
+			"@type": "@id"
+		},
+		"onProperty": {
+			"@id": "http://www.w3.org/2002/07/owl#onProperty",
+			"@type": "@id"
+		},
+		"allValuesFrom": {
+			"@id": "http://www.w3.org/2002/07/owl#allValuesFrom",
+			"@type": "@id"
+		},
+		"hasShiftingNumber": {
+			"@id": "http://sweetontology.net/relaMath/hasShiftingNumber",
+			"@type": "http://www.w3.org/2001/XMLSchema#double"
+		},
+		"imports": {
+			"@id": "http://www.w3.org/2002/07/owl#imports",
+			"@type": "@id"
+		},
+		"contributor": {
+			"@id": "http://purl.org/dc/terms/contributor",
+			"@type": "@id"
+		},
+		"modified": {"@id": "http://purl.org/dc/terms/modified"},
+		"license": {
+			"@id": "http://purl.org/dc/terms/license",
+			"@type": "@id"
+		},
+		"versionInfo": {"@id": "http://www.w3.org/2002/07/owl#versionInfo"},
+		"disjointWith": {
+			"@id": "http://www.w3.org/2002/07/owl#disjointWith",
+			"@type": "@id"
+		},
+		"qudt": "http://qudt.org/schema/qudt/",
+		"sorelsc": "http://sweetontology.net/relaSci/",
+		"owl": "http://www.w3.org/2002/07/owl#",
+		"rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
+		"xsd": "http://www.w3.org/2001/XMLSchema#",
+		"skos": "http://www.w3.org/2004/02/skos/core#",
+		"sorep": "http://sweetontology.net/repr/",
+		"dcterms": "http://purl.org/dc/terms/",
+		"rdfs": "http://www.w3.org/2000/01/rdf-schema#",
+		"sorelm": "http://sweetontology.net/relaMath/",
+		"sorepsu": "http://sweetontology.net/reprSciUnits/",
+		"sorepmo": "http://sweetontology.net/reprMathOperation/"
+	}
+}

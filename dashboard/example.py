@@ -16,7 +16,29 @@ from dashboard.repsys_ingest import *
 from datetime import date
 
 
-choice = 'runwd'
+choice = 'getiecquants'
+
+if choice == 'getiecquants':
+    rsid = 15
+    # starting with the list of units file go out to all the quantities and record the units they point too
+    url = 'https://cdd.iec.ch/cdd/iec61360/iec61360.nsf/ListsOfUnits/'
+    html = requests.get(url)
+    data = BeautifulSoup(html.content, "html.parser")
+    quants = data.select("a[href*=OpenDocument]")
+    qout = {}
+    for quant in quants:
+        code = quant.text
+        if 'UAD' not in code:  # UAD entries are quantities
+            continue
+        qurl = quant['href']
+        qout.update({'code': code, 'url': qurl})
+        # go to the quant page to get the units...
+        qhtml = requests.get('https://cdd.iec.ch' + qurl)
+        qdata = BeautifulSoup(qhtml.content, "html.parser")
+
+        print(code)
+        print(url)
+        exit()
 
 if choice == 'runiec':
     rsid = 15
@@ -59,7 +81,6 @@ if choice == 'runwd':
     data = json.loads(tmp)
     for hit in data['results']['bindings']:
         if "http://www.wikidata.org/entity/Q" not in hit['unit']['value']:
-            # russian entries
             continue
         wdid = hit['unit']['value'].replace("http://www.wikidata.org/entity/", "")
         # disabled so we capture this data that is mostly ucum codes...
@@ -120,6 +141,8 @@ if choice == 'runwd':
 if choice == 'runqudt':
     rsid = 10
     repsys = Repsystems.objects.values('id', 'url', 'fileupdated').get(id=rsid)
+    # getrepsystemdata(rsid)  # converts the ttl file into jsonld (when .ttl file updated)
+    # TODO: run update when todays date of ttl file is more recent than that of the json file
     with open(os.path.join(BASE_DIR, STATIC_URL, f'repsys_{rsid}_data.json'), 'r') as f:
         tmp = f.read()
         f.close()
@@ -192,3 +215,162 @@ if choice == 'runqudt':
             print("added '" + ent.value + "' (" + str(ent.id) + ")")
         else:
             print("found '" + ent.value + "' (" + str(ent.id) + ")")
+
+if choice == 'runnerc':
+    rsid = 16
+    repsys = Repsystems.objects.values('id', 'url', 'fileupdated').get(id=rsid)
+    with open(os.path.join(BASE_DIR, STATIC_URL, f'repsys_{rsid}_data.json'), 'r') as f:
+        tmp = f.read()
+        f.close()
+    terms = json.loads(tmp)
+    for term in terms["@graph"]:
+        if term["@type"] == "skos:Concept":
+            quant = None
+            if 'broader' in term:
+                down = None
+                if isinstance(term['broader'], list):
+                    for entry in term['broader']:
+                        if 'nerc' in entry:
+                            down = requests.get(entry + '?_profile=nvs&_mediatype=application/ld+json')
+                elif isinstance(term['broader'], str):
+                    if 'nerc' in term['broader']:
+                        down = requests.get(term['broader'] + '?_profile=nvs&_mediatype=application/ld+json')
+                if down:
+                    broader = json.loads(down.content)
+                    quant = broader['prefLabel']['@value']
+            ent, created = Entities.objects.get_or_create(
+                repsys='nerc',
+                repsystem_id=rsid,
+                name=term['prefLabel']['@value'],
+                lang=term['prefLabel']['@language'],
+                symbol=term['altLabel'],
+                quantity=quant,
+                value=term['@id'].replace('http://vocab.nerc.ac.uk/collection/P06/current/', '').replace('/', ''),
+                source='nerc'
+            )
+            ent.save()
+            if created:
+                print("added '" + ent.value + "' (" + str(ent.id) + ")")
+            else:
+                print("found '" + ent.value + "' (" + str(ent.id) + ")")
+            # find related representations
+            if 'sameAs' in term:
+                rep = None
+                repsys = None
+                rsid2 = None
+                if isinstance(term['sameAs'], list):
+                    for entry in term['sameAs']:
+                        if 'qudt' in entry:
+                            rep = entry.replace('http://qudt.org/vocab/unit/', '')
+                            repsys = 'qudt'
+                            rsid2 = 10
+                        elif 'dbpedia' in entry:
+                            rep = entry.replace('http://dbpedia.org/resource/', '')
+                            repsys = 'dbpedia'
+                            rsid2 = 17
+                        if rep:
+                            ent, created = Entities.objects.get_or_create(
+                                repsys=repsys,
+                                repsystem_id=rsid2,
+                                name=term['prefLabel']['@value'],
+                                lang=term['prefLabel']['@language'],
+                                symbol=term['altLabel'],
+                                quantity=quant,
+                                value=rep,
+                                source='nerc'
+                            )
+                            if created:
+                                print("added '" + ent.value + "' (" + str(ent.id) + ")")
+                            else:
+                                print("found '" + ent.value + "' (" + str(ent.id) + ")")
+                elif isinstance(term['sameAs'], str):
+                    if 'qudt' in term['sameAs']:
+                        repsys = 'qudt'
+                        rsid2 = 10
+                        rep = term['sameAs'].replace('http://qudt.org/vocab/unit/', '')
+                    elif 'dbpedia' in term['sameAs']:
+                        repsys = 'dbpedia'
+                        rsid2 = 17
+                        rep = term['sameAs'].replace('http://dbpedia.org/resource/', '')
+                    if rep:
+                        ent, created = Entities.objects.get_or_create(
+                            repsys=repsys,
+                            repsystem_id=rsid2,
+                            name=term['prefLabel']['@value'],
+                            lang=term['prefLabel']['@language'],
+                            symbol=term['altLabel'],
+                            quantity=quant,
+                            value=rep,
+                            source='nerc'
+                        )
+                        if created:
+                            print("added '" + ent.value + "' (" + str(ent.id) + ")")
+                        else:
+                            print("found '" + ent.value + "' (" + str(ent.id) + ")")
+
+if choice == 'rununece':
+    rsid = 6
+    repsys = Repsystems.objects.values('id', 'url', 'fileupdated').get(id=rsid)
+    with open(os.path.join(BASE_DIR, STATIC_URL, f'repsys_{rsid}_data.json'), 'r') as f:
+        tmp = f.read()
+        f.close()
+    units = json.loads(tmp)
+    for unit in units["@graph"]:
+        symbol = None
+        if unit['uncefact:symbol'] != "":
+            symbol = unit['uncefact:symbol']
+        cmmt = {}
+        cmmt.update({"category": unit['uncefact:levelCategory']})
+        cmmt.update({"factor": unit['uncefact:conversionFactor']})
+        cmmt.update({"status": unit['uncefact:status']})
+        cmmt.update({"comment": unit['rdfs:comment']})
+        ent, created = Entities.objects.get_or_create(
+            repsys='unece',
+            repsystem_id=rsid,
+            name=unit['@id'].replace('rec20:', ''),
+            lang='en',
+            symbol=symbol,
+            value=unit['rdf:value'],
+            source='unece',
+            comment=json.dumps(cmmt)
+        )
+        ent.save()
+        if created:
+            print("added '" + ent.value + "' (" + str(ent.id) + ")")
+        else:
+            print("found '" + ent.value + "' (" + str(ent.id) + ")")
+        print(unit)
+
+if choice == 'runsweet':
+    rsid = 5
+    repsys = Repsystems.objects.values('id', 'url', 'fileupdated').get(id=rsid)
+    with open(os.path.join(BASE_DIR, STATIC_URL, f'repsys_{rsid}_data.json'), 'r') as f:
+        tmp = f.read()
+        f.close()
+    units = json.loads(tmp)
+    for unit in units["@graph"]:
+        if 'sameAs' in unit or 'notation' not in unit:
+            continue
+        if isinstance(unit['@type'], list):
+            types = ' '.join(unit['@type'])
+            if 'Unit' not in types:
+                continue
+            cmmt = {}
+            if 'hasBaseUnit' in unit:
+                cmmt.update({"baseunit": unit['hasBaseUnit']})
+            if 'sorelm:hasScalingNumber' in unit:
+                cmmt.update({"factor": unit['sorelm:hasScalingNumber']})
+            ent, created = Entities.objects.get_or_create(
+                repsys='sweet',
+                repsystem_id=rsid,
+                name=unit['label']['@value'],
+                lang=unit['label']['@language'],
+                value=unit['notation'],
+                source='sweet',
+                comment=json.dumps(cmmt)
+            )
+            ent.save()
+            if created:
+                print("added '" + str(ent.value) + "' (" + str(ent.id) + ")")
+            else:
+                print("found '" + str(ent.value) + "' (" + str(ent.id) + ")")
