@@ -3,14 +3,14 @@ WHERE
 {
   ?subclass wdt:P279 wd:Q47574.
   ?unit wdt:P31 ?subclass.
-  OPTIONAL { ?s wdt:P2968 ?qudt }
-  OPTIONAL { ?s wdt:P1748 ?ncit }
-  OPTIONAL { ?s wdt:P7825 ?ucum }
-  OPTIONAL { ?s wdt:P6512 ?unece }
-  OPTIONAL { ?s wdt:P8769 ?uom2 }
-  OPTIONAL { ?s wdt:P8855 ?iec }
-  OPTIONAL { ?s wdt:P7007 ?wolf }
-  OPTIONAL { ?s wdt:P8855 ?iev }
+  OPTIONAL { ?unit wdt:P2968 ?qudt }
+  OPTIONAL { ?unit wdt:P1748 ?ncit }
+  OPTIONAL { ?unit wdt:P7825 ?ucum }
+  OPTIONAL { ?unit wdt:P6512 ?unece }
+  OPTIONAL { ?unit wdt:P8769 ?uom2 }
+  OPTIONAL { ?unit wdt:P8855 ?iec }
+  OPTIONAL { ?unit wdt:P7007 ?wolf }
+  OPTIONAL { ?unit wdt:P8855 ?iev }
   FILTER(?subclass != wd:Q8142)
   SERVICE wikibase:label { bd:serviceParam wikibase:language "[AUTO_LANGUAGE],en". }
 }

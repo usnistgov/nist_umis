@@ -1,0 +1,2326 @@
+[
+	{
+		"name": "NDC UN (Unit)",
+		"description": "A recognized billing qualifier that may be used to identify a unit as the NDC unit of measure. This is often used when describing a powder for injection (needs to be reconstituted), pellet, kit, patch, tablet or device.",
+		"value": "C155839",
+		"symbol": "UN",
+		"quantity": "national drug code measure"
+	},
+	{
+		"name": "NDC ME (Milligram)",
+		"description": "A recognized billing qualifier that may be used to identify milligrams as the NDC unit of measure.",
+		"value": "C155838",
+		"symbol": "ME",
+		"quantity": "national drug code measure"
+	},
+	{
+		"name": "NDC GR (Gram)",
+		"description": "A recognized billing qualifier that may be used to identify a unit as the NDC unit of measure. This is often used when describing ointments, creams, inhalers or bulk powder in a jar.",
+		"value": "C155841",
+		"symbol": "GR",
+		"quantity": "national drug code measure"
+	},
+	{
+		"name": "NDC ML (Milliliter)",
+		"description": "A recognized billing qualifier that may be used to identify a milliliter as the NDC unit of measure. This is often used when describing a liquid, solution, or suspension.",
+		"value": "C155840",
+		"symbol": "ML",
+		"quantity": "national drug code measure"
+	},
+	{
+		"name": "NDC F2 (International Unit)",
+		"description": "A recognized billing qualifier that may be used to identify International Units as the NDC unit of measure. This is often used when describing IU/vial or micrograms.",
+		"value": "C155851",
+		"symbol": "F2",
+		"quantity": "national drug code measure"
+	},
+	{
+		"name": "Dose Length Product",
+		"description": "The product of the number of computed tomography (CT) scans multiplied by the scan width (i.e., total scan length). This value is an indicator of the integrated radiation dose of a specific CT scan. This is expressed in the SI units milligray x centimeters (mGy x cm). DLP is CTDIvol x slice thickness x # of slices.",
+		"value": "C101137",
+		"symbol": "DLP",
+		"quantity": "derived international system of units"
+	},
+	{
+		"name": "CT Imaging Acquisition Protocol Element CTDI VOL",
+		"description": null,
+		"value": "C164735",
+		"symbol": "CTImagingAcquisitionProtocolElement.ctdiVol",
+		"quantity": "computed tomography dose index volume"
+	},
+	{
+		"name": "Microgram per Milliliter",
+		"description": "A metric unit of mass concentration defined as the concentration of one gram of a substance per unit volume of the mixture equal to one cubic meter. The concept also refers to the metric unit of mass density (volumic mass) defined as the density of a substance which mass equal to one gram occupies the volume of one cubic meter.",
+		"value": "C64572",
+		"symbol": "mg/L",
+		"quantity": "derived international system of units"
+	},
+	{
+		"name": "Megavolt",
+		"description": "A SI derived unit of electric potential and electromotive force that is equal to one million volts.",
+		"value": "C152056",
+		"symbol": "MV",
+		"quantity": "derived international system of units"
+	},
+	{
+		"name": "Meter per Second Squared",
+		"description": "Meter per second squared is a SI unit of acceleration.",
+		"value": "C42572",
+		"symbol": "m/s2",
+		"quantity": "derived international system of units"
+	},
+	{
+		"name": "Reciprocal Meter",
+		"description": "The SI unit of wave number, the spatial analogue of frequency; closely related to the concept of the wave vector.",
+		"value": "C42573",
+		"symbol": "Reciprocal Metre",
+		"quantity": "derived international system of units"
+	},
+	{
+		"name": "Cubic Meter",
+		"description": "A SI unit of volume or capacity equal to the volume of a cube with edges one meter in length. It is equal to 1,000 liters; 1,000 cubic decimeters; 10(e+6) cubic centimeters; 25.3 cubic feet; 6.29 barrels.",
+		"value": "C42570",
+		"symbol": "m3",
+		"quantity": "derived international system of units"
+	},
+	{
+		"name": "Meter per Second",
+		"description": "A SI derived unit of both speed (scalar) and velocity (vector), defined as the distance of one meter travelled per unit time equal to one second.",
+		"value": "C42571",
+		"symbol": "m/s",
+		"quantity": "derived international system of units"
+	},
+	{
+		"name": "Square Meter",
+		"description": "A SI unit of area measurement equal to a square whose sides are one meter long. Square meter is equal to 10,000 square centimeters; 0.01 are; 1.196 square yards; 10.76 square feet; 1550 square inches.",
+		"value": "C42569",
+		"symbol": "m2",
+		"quantity": "derived international system of units"
+	},
+	{
+		"name": "Katal",
+		"description": "A unit for measuring catalytic (e.g. enzymatic) activity, the ability of the compound to accelerate the chemical reaction by providing a lower energy pathway between the reactants and the products. One katal is that catalytic activity which will raise the rate of reaction by one mole per second in a specified assay system. When the katal is used, the measurand should be specified by reference to the measurement procedure; the measurement procedure must identify the indicator reaction. The katal is not used to express a rate of reaction itself, which should be expressed in moles per second. Katal is coherent with the SI.",
+		"value": "C42566",
+		"symbol": "kat",
+		"quantity": "derived international system of units"
+	},
+	{
+		"name": "Kilogram per Cubic Meter",
+		"description": "A SI derived unit of mass concentration defined as the concentration of one kilogram of a substance per unit volume of the mixture equal to one cubic meter, or the concentration of one milligram of a substance per unit volume of the mixture equal to one milliliter, or one gram of a substance per one liter of the mixture. It is also a unit of mass density (volumic mass) defined as the density of substance which mass equal to one milligram occupies the volume one milliliter.",
+		"value": "C42576",
+		"symbol": "g/l",
+		"quantity": "derived international system of units"
+	},
+	{
+		"name": "Cubic Meter per Kilogram",
+		"description": "A SI derived unit of specific volume, a property of materials defined as the number of cubic meters occupied by one kilogram of a particular substance. Specific volume is inversely proportional to density.",
+		"value": "C42577",
+		"symbol": "L/g",
+		"quantity": "derived international system of units"
+	},
+	{
+		"name": "Coulomb",
+		"description": "A SI derived unit of quantity of electricity, equal to the quantity of charge transferred in one second across a conductor in which there is a constant current of one ampere.",
+		"value": "C42550",
+		"symbol": "C",
+		"quantity": "derived international system of units"
+	},
+	{
+		"name": "Volt",
+		"description": "A SI derived unit of electric potential and electromotive force, equal to the difference of electric potential between two points on a conducting wire carrying a constant current of one ampere when the power dissipated between the points is one watt, equivalent to the potential difference across a resistance of one ohm when one ampere of current flows through it.",
+		"value": "C42551",
+		"symbol": "V",
+		"quantity": "derived international system of units"
+	},
+	{
+		"name": "Pascal",
+		"description": "A SI derived unit of pressure equivalent to one newton per square meter or 10 bars or to 1.45x10E-4 pounds per square inch.",
+		"value": "C42547",
+		"symbol": "P",
+		"quantity": "derived international system of units"
+	},
+	{
+		"name": "Joule",
+		"description": "A unit of electrical, mechanical, and thermal energy (as well as work and quantity of heat) in the SI system, equal to the work done when the point of application of a force of one newton is displaced through a distance of one meter in the direction of the force or the work done when a current of one ampere passes through a resistance of one ohm for one second. Joule is equal to 0.23889 gram-calorie (mean).",
+		"value": "C42548",
+		"symbol": "J",
+		"quantity": "derived international system of units"
+	},
+	{
+		"name": "Hertz",
+		"description": "A SI derived unit of frequency; equal to one oscillation (one cycle) per second.",
+		"value": "C42545",
+		"symbol": "Hz",
+		"quantity": "derived international system of units"
+	},
+	{
+		"name": "Newton",
+		"description": "A SI derived unit of force. The force which, when applied in a vacuum to a body having a mass of one kilogram, causes an acceleration of one meter per second squared. It is equal to 10E5 dynes.",
+		"value": "C42546",
+		"symbol": "N",
+		"quantity": "derived international system of units"
+	},
+	{
+		"name": "Radian",
+		"description": "A SI-derived unit of plane angle measurement defined and named by James Thomson in 1873. One radian is the plane angle between two radii of a circle that cuts off on the circumference an arc equal in length to the radius. There are 2pi radians in a complete circle. SI units: m/m = 1.",
+		"value": "C42543",
+		"symbol": "rad",
+		"quantity": "derived international system of units"
+	},
+	{
+		"name": "Steradian",
+		"description": "A SI derived unit of solid angle measurement. One steradian is the solid angle that, having its vertex in the center of a sphere, cuts off an area on the surface of the sphere equal to that of a square with sides of length equal to the radius of the sphere. It is equal to 0.25 of the solid angle around a point, 0.079 58 sphere, 0.159 16 hemisphere, 0.636 6 spherical right angle, 3,282.8 square degrees. The solid angle corresponding to all of space being subtended is 4pi steradians.",
+		"value": "C42544",
+		"symbol": "str",
+		"quantity": "derived international system of units"
+	},
+	{
+		"name": "Meter",
+		"description": "A unit of linear measure in the metric system, one of the seven base units of the International System of Units (Systeme International d'Unites, SI). A meter is defined as the length of the path traveled by light in a vacuum during a time interval of 1/299 792 458 of a second and is equal to 1.093 61 yards.",
+		"value": "C41139",
+		"symbol": "m",
+		"quantity": "length"
+	},
+	{
+		"name": "Ampere",
+		"description": "A unit of electric current, one of the seven base units of the International System of Units (Systeme International d'Unites, SI). It is that constant current which, if maintained in two straight parallel conductors of infinite length and zero diameter separated by one meter in a vacuum, would produce between these conductors a force equal to 2x10E7 newton per meter of length. This is dependent upon the definitions of the meter, kilogram, and second. One ampere represents 6.24 x 10E18 unit electric charge carriers, such as electrons, passing a specified fixed point in one second.",
+		"value": "C42536",
+		"symbol": "A",
+		"quantity": "base international system of units"
+	},
+	{
+		"name": "Kelvin",
+		"description": "A basic unit of thermodynamic temperature, one of the seven base units of the International System of Units (Systeme International d'Unites, SI). It is 1/273.16th of the thermodynamic temperature of the triple point of water. This sets the size of the kelvin unit for temperature differences and defines the thermodynamic temperature of an equilibrium mixture of waters ice-liquid-vapor as 273.16 K, where 0 K is the lowest possible temperature (\"absolute zero\").",
+		"value": "C42537",
+		"symbol": "K",
+		"quantity": "base international system of units"
+	},
+	{
+		"name": "Second",
+		"description": "A unit of time, one of the seven base units of the International System of Units (Systeme International d'Unites, SI). The second is the duration of 919 263 177 0 periods of the specified light radiation corresponding to the transition between the two hyperfine levels of the caesium 133 atom in its ground state at 0 K. According to the convention, 60 seconds constitute one minute; 3,600 seconds constitute one hour.",
+		"value": "C42535",
+		"symbol": "s",
+		"quantity": "base international system of units"
+	},
+	{
+		"name": "Candela",
+		"description": "A unit of luminous intensity, one of the seven base units of the International System of Units (Systeme International d'Unites, SI). It is the luminous intensity in a given direction of a small monochromatic light source at 540 terahertz emitting 1/683 watt per steradian in that direction. This is dependent upon the definitions of the meter, kilogram, and second.",
+		"value": "C42538",
+		"symbol": "cd",
+		"quantity": "base international system of units"
+	},
+	{
+		"name": "Mole",
+		"description": "A unit of amount of substance, one of the seven base units of the International System of Units (Systeme International d'Unites, SI). It is the amount of substance that contains as many elementary units as there are atoms in 0.012 kg of carbon-12. When the mole is used, the elementary entities must be specified and may be atoms, molecules, ions, electrons, other particles, or specified groups of such particles.",
+		"value": "C42539",
+		"symbol": "M",
+		"quantity": "base international system of units"
+	},
+	{
+		"name": "Kilogram",
+		"description": "A basic SI unit of mass. It is defined as the mass of an international prototype in the form of a platinum-iridium cylinder kept at Sevres in France. A kilogram is equal to 1,000 grams and 2.204 622 6 pounds.",
+		"value": "C28252",
+		"symbol": "kg",
+		"quantity": "mass"
+	},
+	{
+		"name": "Unit of Relative Amount of Substance Content",
+		"description": null,
+		"value": "C70579",
+		"symbol": "Unit of Relative Amount of Substance Content",
+		"quantity": "content"
+	},
+	{
+		"name": "Unit of Catalytic Activity Content",
+		"description": "A unit used to express catalytic activity of the catalytic component per mass of the system that contains this component.",
+		"value": "C70564",
+		"symbol": "Unit of Catalytic Content",
+		"quantity": "content"
+	},
+	{
+		"name": "Nanomole per Milligram of Protein",
+		"description": "A unit of concentration of amount of substance of a component measured in nanomoles of the component per milligram of protein of the mixture.",
+		"value": "C67433",
+		"symbol": "nmol/mg{protein}",
+		"quantity": "molinity unit"
+	},
+	{
+		"name": "Nanomole per Kilogram",
+		"description": "Nanomoles per kilogram.",
+		"value": "C85754",
+		"symbol": "pmol/g",
+		"quantity": "molality unit"
+	},
+	{
+		"name": "Nanomole per Gram",
+		"description": "Nanomoles per gram.",
+		"value": "C85752",
+		"symbol": "nmol/g",
+		"quantity": "molality unit"
+	},
+	{
+		"name": "Micromole per Mole",
+		"description": "A unit of fraction expressed as the ratio of the amount of a substance in solution, in micromoles, to the amount of a different substance in the mixture, in moles.",
+		"value": "C122231",
+		"symbol": "umol/mol",
+		"quantity": "molality unit"
+	},
+	{
+		"name": "Picomole per Billion Cells",
+		"description": "A unit of concentration (molarity unit) equal to one picomole of substance per ten to the ninth power cells.",
+		"value": "C122224",
+		"symbol": "pmol/10^9 cells",
+		"quantity": "molality unit"
+	},
+	{
+		"name": "Picomole per Ten Billion Cells",
+		"description": "A unit of concentration (molarity unit) equal to one picomole of substance per ten to the tenth power cells.",
+		"value": "C122223",
+		"symbol": "pmol/10^10 cells",
+		"quantity": "molality unit"
+	},
+	{
+		"name": "Nanomole per Mole",
+		"description": "A unit of fraction expressed as the ratio of the amount of a substance in solution, in nanomoles, to the amount of a different substance in the mixture, in moles.",
+		"value": "C122220",
+		"symbol": "nmol/mol",
+		"quantity": "molality unit"
+	},
+	{
+		"name": "Picomole per Deciliter",
+		"description": "A unit of concentration (molarity unit) equal to one picomole of solute per deciliter of solution.",
+		"value": "C122226",
+		"symbol": "pmol/dL",
+		"quantity": "molality unit"
+	},
+	{
+		"name": "Picomole per Day",
+		"description": "A unit of amount of substance flow rate equivalent to the rate at which one picomole of substance travels to a given object or space over a period of time equal to 24 hours.",
+		"value": "C122225",
+		"symbol": "pmol/d",
+		"quantity": "molality unit"
+	},
+	{
+		"name": "Picomole per Liter per Hour",
+		"description": "A rate unit expressed in picomole(s) per liter of solution per period of time equal to sixty minutes.",
+		"value": "C122227",
+		"symbol": "pmol/L/h",
+		"quantity": "molality unit"
+	},
+	{
+		"name": "Nanomole per Liter per Hour",
+		"description": "A rate unit expressed in nanomole(s) per liter of solution per period of time equal to sixty minutes.",
+		"value": "C122218",
+		"symbol": "nmol/L/h",
+		"quantity": "molality unit"
+	},
+	{
+		"name": "Femtomole per Gram",
+		"description": "A molality unit that describes the amount of substance, expressed in femtomole(s) per gram.",
+		"value": "C73711",
+		"symbol": "fmol/g",
+		"quantity": "molality unit"
+	},
+	{
+		"name": "Mole per Milligram",
+		"description": "A unit of amount of substance content (molality unit) defined as one mole of solute per one milligram of solvent.",
+		"value": "C68894",
+		"symbol": "mol/mg",
+		"quantity": "molality unit"
+	},
+	{
+		"name": "Mole per Gram",
+		"description": "A unit of amount of substance content (molality unit) defined as one mole of solute per one gram of solvent.",
+		"value": "C68893",
+		"symbol": "mol/g",
+		"quantity": "molality unit"
+	},
+	{
+		"name": "Millimole per Kilogram",
+		"description": "A unit of amount of substance content (molality unit) defined as one thousandth of mole (10E-3 mole) of solute per one kilogram of solvent.",
+		"value": "C68892",
+		"symbol": "umol/g",
+		"quantity": "molality unit"
+	},
+	{
+		"name": "Mole per Kilogram",
+		"description": "A unit amount of substance content (molality unit) defined as one mole of solute per one kilogram of solvent.",
+		"value": "C68740",
+		"symbol": "mmol/g",
+		"quantity": "molality unit"
+	},
+	{
+		"name": "Micromole per Kilogram per Minute",
+		"description": "A unit of concentration (molarity unit) equal to one millionth of a mole (10E-6 mole) per kilogram of a substance per period of time equal to sixty seconds.",
+		"value": "C126082",
+		"symbol": "umol/kg/min",
+		"quantity": "molality unit"
+	},
+	{
+		"name": "Million Units",
+		"description": "A quantity equivalent to one million units (10E6 units).",
+		"value": "C67310",
+		"symbol": "10^6U",
+		"quantity": "arbitrary substance content"
+	},
+	{
+		"name": "Kilounit",
+		"description": "A quantity equivalent to one thousand units (10E3 units).",
+		"value": "C67309",
+		"symbol": "kU",
+		"quantity": "arbitrary substance content"
+	},
+	{
+		"name": "Milliunit",
+		"description": "A quantity equivalent to the one thousandth unit (10E-3 unit).",
+		"value": "C67315",
+		"symbol": "mU",
+		"quantity": "arbitrary substance content"
+	},
+	{
+		"name": "Joule per Kilogram-Kelvin",
+		"description": "A SI unit of specific entropy.",
+		"value": "C70451",
+		"symbol": "J/kgK",
+		"quantity": "specific entropy"
+	},
+	{
+		"name": "Joule per Kelvin",
+		"description": "A SI unit of entropy used also as a unit of heat capacity.",
+		"value": "C70447",
+		"symbol": "J/K",
+		"quantity": "entropy"
+	},
+	{
+		"name": "Joule per Mole-Kelvin",
+		"description": "A SI unit of molar entropy used also as a unit of molar heat capacity.",
+		"value": "C70449",
+		"symbol": "J/molK",
+		"quantity": "molar entropy"
+	},
+	{
+		"name": "Joule per Cubic Meter",
+		"description": "A SI derived unit of energy density defined as the energy equal to one joule stored in the volume equal to one cubic meter.",
+		"value": "C70443",
+		"symbol": "J/m3",
+		"quantity": "energy density"
+	},
+	{
+		"name": "Watt per Meter-Kelvin",
+		"description": "A SI derived unit of thermal conductivity defined as heat flow rate of one watt in a direction normal to a surface of material, in thickness one meter, due to a temperature difference equal to one degree Kelvin.",
+		"value": "C70441",
+		"symbol": "W/mK",
+		"quantity": "thermal conductivity"
+	},
+	{
+		"name": "Bel",
+		"description": "A logarithmic ratio unit (base-10 logarithms) used to express relative magnitude of a physical quantity (usually power or intensity) in comparison with a specified or implied reference level. Particularly, Bel is used as a unit of relative sound intensity. In the latter context it is equal to ten decibels or to approximately 1.151293 nepers.",
+		"value": "C71200",
+		"symbol": "B",
+		"quantity": "sound intensity"
+	},
+	{
+		"name": "Decibel",
+		"description": "A unit of measure representing the intensity of an electrical signal or sound which is equal to ten times the logarithm of the ratio of two signals.",
+		"value": "C102407",
+		"symbol": "dB",
+		"quantity": "sound intensity"
+	},
+	{
+		"name": "Phosphatidylserine IgA Antibody Unit per Milliliter",
+		"description": "Unit of measure of potency of allergenic product expressed as a number of immunoglobin A phosphatidylserine units per one milliliter of formulation.",
+		"value": "C186219",
+		"symbol": "APS U/mL",
+		"quantity": "allergy unit per milliliter"
+	},
+	{
+		"name": "Phosphatidylserine IgM Antibody Unit per Milliliter",
+		"description": "Unit of measure of potency of allergenic product expressed as a number of immunoglobin M phosphatidylserine units per one milliliter of formulation.",
+		"value": "C186223",
+		"symbol": "MPS U/mL",
+		"quantity": "allergy unit per milliliter"
+	},
+	{
+		"name": "Phosphatidylserine IgG Antibody Unit per Milliliter",
+		"description": "Unit of measure of potency of allergenic product expressed as a number of immunoglobin G phosphatidylserine units per one milliliter of formulation.",
+		"value": "C186221",
+		"symbol": "GPS U/mL",
+		"quantity": "allergy unit per milliliter"
+	},
+	{
+		"name": "Tuberculin Unit per Milliliter",
+		"description": "A unit of biologic activity of tuberculin expressed as a number of arbitrary units of tuberculin in one milliliter of preparation.",
+		"value": "C70506",
+		"symbol": "[tb'U]/ml",
+		"quantity": "dose calculation"
+	},
+	{
+		"name": "Liter Divided by Microgram per Day",
+		"description": "A unit of concentration equal to one liter divided by the derived denominator microgram per day.",
+		"value": "C123563",
+		"symbol": "l/(ug/d)",
+		"quantity": "dose calculation"
+	},
+	{
+		"name": "Liter Divided by Milligram Per Day",
+		"description": "A unit of concentration equal to liter per milligram per day.",
+		"value": "C123561",
+		"symbol": "l/(mg/d)",
+		"quantity": "dose calculation"
+	},
+	{
+		"name": "Liter Divided by Milligram per Meter Squared",
+		"description": "A unit of concentration equal to one liter divided by the derived denominator milligram per square meter.",
+		"value": "C123562",
+		"symbol": "L/(mg/m2)",
+		"quantity": "dose calculation"
+	},
+	{
+		"name": "Per Milliliter",
+		"description": "A volume unit equal to one milliliter used as a denominator to build a derived unit expressed as a ratio. (NCI)",
+		"value": "C103452",
+		"symbol": "/mL",
+		"quantity": "dose calculation"
+	},
+	{
+		"name": "Nanomole per Milliliter per Hour",
+		"description": "Nanomoles per milliliter per hour.",
+		"value": "C85757",
+		"symbol": "umol/L/h",
+		"quantity": "dose calculation"
+	},
+	{
+		"name": "Nanogram per Second",
+		"description": "Nanograms per second.",
+		"value": "C85750",
+		"symbol": "ng/s",
+		"quantity": "dose calculation"
+	},
+	{
+		"name": "Nanounit per Milliliter",
+		"description": "Nanounits per milliliter.",
+		"value": "C85760",
+		"symbol": "uU/L",
+		"quantity": "dose calculation"
+	},
+	{
+		"name": "Picogram per Hour",
+		"description": "Picograms per hour.",
+		"value": "C85779",
+		"symbol": "pg/h",
+		"quantity": "dose calculation"
+	},
+	{
+		"name": "Picogram per Day",
+		"description": "Picograms per day.",
+		"value": "C85778",
+		"symbol": "pg/d",
+		"quantity": "dose calculation"
+	},
+	{
+		"name": "Picogram per Minute",
+		"description": "Picograms per minute.",
+		"value": "C85782",
+		"symbol": "pg/min",
+		"quantity": "dose calculation"
+	},
+	{
+		"name": "Picogram per Second",
+		"description": "Picograms per second.",
+		"value": "C85783",
+		"symbol": "pg/s",
+		"quantity": "dose calculation"
+	},
+	{
+		"name": "Milliliter per Mole per Hour",
+		"description": "Milliliters per mole per hour.",
+		"value": "C85717",
+		"symbol": "mL/h/mol",
+		"quantity": "dose calculation"
+	},
+	{
+		"name": "Milliliter per Mole per Minute",
+		"description": "Milliliters per mole per minute.",
+		"value": "C85718",
+		"symbol": "mL/mol/min",
+		"quantity": "dose calculation"
+	},
+	{
+		"name": "Milliliter per Mole per Second",
+		"description": "Milliliters per mole per second.",
+		"value": "C85719",
+		"symbol": "mL/s/mol",
+		"quantity": "dose calculation"
+	},
+	{
+		"name": "Milliliter per Kilogram per Second",
+		"description": "Milliliters per kilogram per second.",
+		"value": "C85715",
+		"symbol": "mL/s/kg",
+		"quantity": "dose calculation"
+	},
+	{
+		"name": "Milliliter per Mole per Day",
+		"description": "Milliliters per mole per day.",
+		"value": "C85716",
+		"symbol": "ml/mol/d",
+		"quantity": "dose calculation"
+	},
+	{
+		"name": "Milligram per Milliliter per Hour",
+		"description": "Milligrams per milliliter per hour.",
+		"value": "C85711",
+		"symbol": "g/h/L",
+		"quantity": "dose calculation"
+	},
+	{
+		"name": "Milligram per Second",
+		"description": "Milligrams per second.",
+		"value": "C85712",
+		"symbol": "mg/s",
+		"quantity": "dose calculation"
+	},
+	{
+		"name": "Environmental Temperature Units",
+		"description": "The units of measure that are used to express the temperature of the surroundings.",
+		"value": "C90381",
+		"symbol": "ENVTEMPU",
+		"quantity": "temperature"
+	},
+	{
+		"name": "Degree Fahrenheit",
+		"description": "A unit of temperature of the temperature scale designed so that the freezing point of water is 32 degrees and the boiling point is 212 degrees, placing the boiling and melting points of water 180 degrees apart. One degree Fahrenheit is 5/9ths of a kelvin (or of a degree Celsius), and minus 40 degrees Fahrenheit is equal to minus 40 degrees Celsius.",
+		"value": "C44277",
+		"symbol": "F",
+		"quantity": "temperature"
+	},
+	{
+		"name": "Degree Celsius",
+		"description": "A unit of temperature of the temperature scale designed so that the freezing point of water is 0 degrees and the boiling point is 100 degrees at standard atmospheric pressure. The current official definition of the Celsius sets 0.01 C to be at the triple point of water and a degree to be 1/273.16 of the difference in temperature between the triple point of water and absolute zero. One degree Celsius represents the same temperature difference as one Kelvin.",
+		"value": "C42559",
+		"symbol": "C",
+		"quantity": "derived international system of units"
+	},
+	{
+		"name": "Kelvin",
+		"description": "A basic unit of thermodynamic temperature, one of the seven base units of the International System of Units (Systeme International d'Unites, SI). It is 1/273.16th of the thermodynamic temperature of the triple point of water. This sets the size of the kelvin unit for temperature differences and defines the thermodynamic temperature of an equilibrium mixture of waters ice-liquid-vapor as 273.16 K, where 0 K is the lowest possible temperature (\"absolute zero\").",
+		"value": "C42537",
+		"symbol": "K",
+		"quantity": "base international system of units"
+	},
+	{
+		"name": "Milliliter of Water",
+		"description": "A unit of volume of water equal to one millionth (10E-6) of a cubic meter of water, one thousandth of a liter of water, one cubic centimeter of water, or 0.061023 7 cubic inch of water.",
+		"value": "C79479",
+		"symbol": "cc of Water",
+		"quantity": "volume"
+	},
+	{
+		"name": "Drug Vehicle Unit of Volume",
+		"description": "A unit used to express a volume of a carrier or inert medium in which a medicinally active agent is formulated and/or administered.",
+		"value": "C70976",
+		"symbol": "Drug Vehicle Unit of Volume",
+		"quantity": "volume"
+	},
+	{
+		"name": "Fluid Dram British",
+		"description": "A volume equal to 1/8 Brisith fluid ounce, 0.216 734 cubic inches or 3.551 633 milliliters.",
+		"value": "C79610",
+		"symbol": "fl dr British",
+		"quantity": "volume"
+	},
+	{
+		"name": "Femtoliter",
+		"description": "The non-SI unit of volume accepted for use with the SI equal to one quadrillionth of a liter (10E-15 liter).",
+		"value": "C64780",
+		"symbol": "fL",
+		"quantity": "volume"
+	},
+	{
+		"name": "Deciliter",
+		"description": "The unit of volume equal to one tenth of a liter. Accepted for use with the SI.",
+		"value": "C64697",
+		"symbol": "dL",
+		"quantity": "volume"
+	},
+	{
+		"name": "Drop British",
+		"description": "A unit of volume in British Imperial system equal to 1/36 fluid dram or approximately 99 microliters.",
+		"value": "C69443",
+		"symbol": "Drop",
+		"quantity": "drop"
+	},
+	{
+		"name": "Medical Drop",
+		"description": "A unit of volume equal to approximately 0.08333 milliliter (1 mL = 12 medical drops).",
+		"value": "C69442",
+		"symbol": "gtt",
+		"quantity": "drop"
+	},
+	{
+		"name": "Metric Drop",
+		"description": "A unit of volume used in pharmacy and equal to 0.05 milliliter (20 drops/ml).",
+		"value": "C48491",
+		"symbol": "X4",
+		"quantity": "potency unit"
+	},
+	{
+		"name": "Cubic Meter",
+		"description": "A SI unit of volume or capacity equal to the volume of a cube with edges one meter in length. It is equal to 1,000 liters; 1,000 cubic decimeters; 10(e+6) cubic centimeters; 25.3 cubic feet; 6.29 barrels.",
+		"value": "C42570",
+		"symbol": "m3",
+		"quantity": "derived international system of units"
+	},
+	{
+		"name": "Attoliter",
+		"description": "A unit of volume equal to one quintillionth of a liter (10E-18 liter) or one cubic micrometer.",
+		"value": "C67565",
+		"symbol": "aL",
+		"quantity": "volume"
+	},
+	{
+		"name": "Milliliter",
+		"description": "A unit of volume equal to one millionth (10E-6) of a cubic meter, one thousandth of a liter, one cubic centimeter, or 0.061023 7 cubic inch. A cubic centimeter is the CGS unit of volume.",
+		"value": "C28254",
+		"symbol": "ml",
+		"quantity": "volume"
+	},
+	{
+		"name": "Microliter",
+		"description": "A unit of volume accepted for use with the SI and equal to one millionth of a liter (10E-6 liter).",
+		"value": "C48153",
+		"symbol": "uL",
+		"quantity": "volume"
+	},
+	{
+		"name": "Fluid Ounce British",
+		"description": "A traditional unit of liquid volume equal in the British Imperial system to 1/20 pint, or 1.733 871 cubic inches or 28.413 063 milliliters.",
+		"value": "C48577",
+		"symbol": "foz_br",
+		"quantity": "volume"
+	},
+	{
+		"name": "Gallon British",
+		"description": "A traditional unit of volume designed to contain 10 pounds of distilled water under precisely defined conditions and equal to 4.546 091 liters, 277.4194 cubic inches, or 1.20095 US liquid gallons, or 1.03206 US dry gallons.",
+		"value": "C48582",
+		"symbol": "gal",
+		"quantity": "volume"
+	},
+	{
+		"name": "Gallon Scotland",
+		"description": "A traditional unit of volume equal to 4 Scots quarts, or approximately three British Imperial gallons, or 3.6 US liquid gallons, or 13.63 liters.",
+		"value": "C48581",
+		"symbol": "Gallon Scots",
+		"quantity": "volume"
+	},
+	{
+		"name": "Gallon US",
+		"description": "The US unit of liquid volume legally defined as 3785.411784 milliliters (3.785 411 784 liters), or 231 cubic inches. The US gallon holds 4 liquid quarts; the gallon of water gallon weighs approximately 8.33 pounds.",
+		"value": "C48580",
+		"symbol": "gal",
+		"quantity": "volume"
+	},
+	{
+		"name": "Gallon Historical",
+		"description": "A historical British unit of dry volume equal to 4 dry quarts, or 1/8 of a US bushel (Winchester bushel), or 268.8025 cubic inches, or 4404.88377086 milliliters.",
+		"value": "C48583",
+		"symbol": "Dry Gallon US",
+		"quantity": "volume"
+	},
+	{
+		"name": "Quart",
+		"description": "A United States liquid unit equal to 32 fluid ounces; four quarts equal one gallon.",
+		"value": "C48534",
+		"symbol": "qt",
+		"quantity": "volume"
+	},
+	{
+		"name": "Pint",
+		"description": "A United States liquid unit equal to 16 fluid ounces; two pints equal one quart.",
+		"value": "C48529",
+		"symbol": "PT",
+		"quantity": "volume"
+	},
+	{
+		"name": "Tablespoon Dosing Unit",
+		"description": "A unit of volume informally used in pharmacy. Under the metric system the tablespoon has been standardized at 15 milliliters in the US, Britain, Canada, and New Zealand, and at 20 milliliters in Australia and some European countries.",
+		"value": "C48541",
+		"symbol": "T",
+		"quantity": "volume"
+	},
+	{
+		"name": "Teaspoon Dosing Unit",
+		"description": "A unit of volume used in pharmacy and equal to 5 milliliters.",
+		"value": "C48544",
+		"symbol": "t",
+		"quantity": "volume"
+	},
+	{
+		"name": "Liter",
+		"description": "The non-SI unit of volume accepted for use with the SI. One liter is equal to cubic decimeter, or one thousandth of cubic meter, or 1000 cubic centimeters, or approximately 61.023 744 cubic inches.",
+		"value": "C48505",
+		"symbol": "L",
+		"quantity": "volume"
+	},
+	{
+		"name": "Billion Organisms",
+		"description": "A unit of measure of quantity of organisms expressed in billions.",
+		"value": "C71189",
+		"symbol": "10^9 organisms",
+		"quantity": "organism-based unit"
+	},
+	{
+		"name": "Thousand Organisms",
+		"description": "A unit of measure of quantity of organisms expressed in thousands.",
+		"value": "C71187",
+		"symbol": "10^3 Organisms",
+		"quantity": "organism-based unit"
+	},
+	{
+		"name": "Million Organisms",
+		"description": "A unit of measure of quantity of organisms expressed in millions.",
+		"value": "C71188",
+		"symbol": "10^6 Organisms",
+		"quantity": "organism-based unit"
+	},
+	{
+		"name": "Focus Forming Unit",
+		"description": "A quantitative unit of measure of cell clusters of a specific interest.",
+		"value": "C75303",
+		"symbol": "FFU",
+		"quantity": "potency unit"
+	},
+	{
+		"name": "Million Viral Particles",
+		"description": "A unit for virus amount measurement that represents a number of viral particles (live and dead combined) expressed in millions.",
+		"value": "C67351",
+		"symbol": "10E6 VP",
+		"quantity": "viral particle unit"
+	},
+	{
+		"name": "Million Plaque Forming Units",
+		"description": "A measure of viable infectious entities expressed in millions in the specimen or product defined as the smallest quantity that can produce a cytopathic effect in the host cell culture challenged with the defined inoculum, visible under the microscope or/and to the naked eye as a plaque.",
+		"value": "C67268",
+		"symbol": "10^6 PFU",
+		"quantity": "plaque forming unit"
+	},
+	{
+		"name": "Billion Plaque Forming Units",
+		"description": "A measure of viable infectious entities expressed in billions in the specimen or product defined as the smallest quantity that can produce a cytopathic effect in the host cell culture challenged with the defined inoculum, visible under the microscope or/and to the naked eye as a plaque.",
+		"value": "C67267",
+		"symbol": "10^9 PFU",
+		"quantity": "plaque forming unit"
+	},
+	{
+		"name": "Hundred Million Plaque Forming Units",
+		"description": "A measure of viable infectious entities expressed in hundreds of millions in the specimen or product defined as the smallest quantity that can produce a cytopathic effect in the host cell culture challenged with the defined inoculum, visible under the microscope or/and to the naked eye as a plaque.",
+		"value": "C67266",
+		"symbol": "10^8 PFU",
+		"quantity": "plaque forming unit"
+	},
+	{
+		"name": "Ten Million Plaque Forming Units",
+		"description": "A measure of viable infectious entities expressed in tens of millions in the specimen or product defined as the smallest quantity that can produce a cytopathic effect in the host cell culture challenged with the defined inoculum, visible under the microscope or/and to the naked eye as a plaque.",
+		"value": "C67265",
+		"symbol": "10^7 PFU",
+		"quantity": "plaque forming unit"
+	},
+	{
+		"name": "Log10 Plaque Forming Unit",
+		"description": "A logarithmic-scale (base 10) potency unit for measuring the quantity of individual infectious particles (usually viral particles) based on the number of plaques formed in a cell culture infected with the virus.",
+		"value": "C73568",
+		"symbol": "log10 PFU",
+		"quantity": "plaque forming unit"
+	},
+	{
+		"name": "Lactose Unit",
+		"description": "A unit of measurement for the activity of lactase enzyme which is expressed as the amount of enzyme that hydrolyzes one microequivalent (uEq) of galactosidic linkage per one minute at a pH of 4.5 and at 37 degrees Celsius.",
+		"value": "C73565",
+		"symbol": "LacU",
+		"quantity": "biological entity"
+	},
+	{
+		"name": "Pock Forming Unit",
+		"description": "A measure of viable infectious entities (e.g. viral particles or group of particles) in the specimen or product defined as the smallest quantity of a viral suspension that can produce a cytopathic effect in the host chick chorio-allantoic membrane challenged with the defined inoculum, visible under the microscope and/or to the naked eye as a pock.",
+		"value": "C73576",
+		"symbol": "Pock Forming Unit",
+		"quantity": "biological entity"
+	},
+	{
+		"name": "Ten Thousand Colony Forming Units",
+		"description": "A unit of measurement of viable bacterial numbers equal to 10 to the fourth power colony forming units.",
+		"value": "C158293",
+		"symbol": "10^4 CFU",
+		"quantity": "colony forming unit"
+	},
+	{
+		"name": "Ten Million Colony Forming Units",
+		"description": "A unit of measurement of viable bacterial numbers equal to 10 to the seventh power colony forming units.",
+		"value": "C158294",
+		"symbol": "10^7 CFU",
+		"quantity": "colony forming unit"
+	},
+	{
+		"name": "Erythroid Colony Forming Unit",
+		"description": "A unit of viable cell concentration defined as the minimum number of hematopoietic stem cells able to produce a detectable colony of erythroid lineage cells that are past the burst forming stage.",
+		"value": "C121533",
+		"symbol": "CFU-E",
+		"quantity": "colony forming unit"
+	},
+	{
+		"name": "Granulocyte-Macrophage Colony Forming Unit",
+		"description": "A unit of viable cell concentration defined as the minimum number of hematopoietic stem cells able to produce a detectable colony of granulocyte-macrophage lineage cells.",
+		"value": "C121475",
+		"symbol": "GM-CFU",
+		"quantity": "colony forming unit"
+	},
+	{
+		"name": "Megakaryocyte Colony Forming Unit",
+		"description": "A unit of viable cell concentration defined as the minimum number of hematopoietic stem cells able to produce a detectable colony of megakaryocyte lineage cells.",
+		"value": "C121478",
+		"symbol": "CFU-Meg",
+		"quantity": "colony forming unit"
+	},
+	{
+		"name": "Erythroid Burst Forming Unit",
+		"description": "A unit of viable cell concentration defined as the minimum number of hematopoietic stem cells able to produce a detectable colony of erythroid burst forming cells.",
+		"value": "C121480",
+		"symbol": "BFU-E",
+		"quantity": "colony forming unit"
+	},
+	{
+		"name": "Colony Forming Unit-Endothelial Cells",
+		"description": "A population of adherent cells in fibronectin-coated culture that resemble endothelial cells.",
+		"value": "C129679",
+		"symbol": "CFU-EC",
+		"quantity": "colony forming unit"
+	},
+	{
+		"name": "Billion Colony Forming Units",
+		"description": "A unit of viable cell quantity equal to 10E9 colony forming units (10E9 CFU).",
+		"value": "C68897",
+		"symbol": "10^9 CFU",
+		"quantity": "colony forming unit"
+	},
+	{
+		"name": "Million Colony Forming Units",
+		"description": "A unit of measurement of viable cell quantity equal to 10E6 colony forming units (10E6 CFU).",
+		"value": "C68896",
+		"symbol": "10^6 CFU",
+		"quantity": "colony forming unit"
+	},
+	{
+		"name": "Thousand Colony Forming Units",
+		"description": "A unit of viable cell quantity equal to 10E3 colony forming units (10E3 CFU).",
+		"value": "C68895",
+		"symbol": "10E3CFU",
+		"quantity": "colony forming unit"
+	},
+	{
+		"name": "Business Day",
+		"description": "Any day a government or commercial enterprise is open and actively engaged in the work of that enterprise.",
+		"value": "C52592",
+		"symbol": "Business Day",
+		"quantity": "day"
+	},
+	{
+		"name": "Weekday",
+		"description": "Any day other than Saturday and Sunday.",
+		"value": "C86936",
+		"symbol": "Weekday",
+		"quantity": "day"
+	},
+	{
+		"name": "Study Day of Cardiovascular System Findings",
+		"description": "The study day that a cardiovascular system assessment is performed.",
+		"value": "C123950",
+		"symbol": "CVDY",
+		"quantity": "study day"
+	},
+	{
+		"name": "Planned Study Day of Clinical Encounter",
+		"description": "The planned study day of a clinical encounter relative to the sponsor-defined reference start date.",
+		"value": "C171011",
+		"symbol": "Planned Study Day of Clinical Encounter",
+		"quantity": "study day of healthcare encounters"
+	},
+	{
+		"name": "Study Day of Respiratory System Findings",
+		"description": "The study day that a respiratory system assessment is performed.",
+		"value": "C123952",
+		"symbol": "REDY",
+		"quantity": "study day"
+	},
+	{
+		"name": "Study Day of Skin Response Assessment",
+		"description": "The day that a skin response assessment is performed.",
+		"value": "C117693",
+		"symbol": "SRDY",
+		"quantity": "study day"
+	},
+	{
+		"name": "Study Day of Morphology Assessment",
+		"description": "The day that a morphology assessment is performed.",
+		"value": "C117630",
+		"symbol": "MODY",
+		"quantity": "study day"
+	},
+	{
+		"name": "Study Day of Microscopic Findings",
+		"description": "The day that a microscopic findings assessment is performed.",
+		"value": "C117600",
+		"symbol": "MIDY",
+		"quantity": "study day"
+	},
+	{
+		"name": "Study Day of Subject Status",
+		"description": "The day that a subject status assessment is performed.",
+		"value": "C117669",
+		"symbol": "SSDY",
+		"quantity": "study day"
+	},
+	{
+		"name": "Study Day of Reproductive System Findings",
+		"description": "The day that a reproductive system findings assessment is performed.",
+		"value": "C117654",
+		"symbol": "RPDY",
+		"quantity": "study day"
+	},
+	{
+		"name": "Study Day of Immunogenicity Specimen Assessment",
+		"description": "The study day that an immunogenicity specimen assessment is performed.",
+		"value": "C117572",
+		"symbol": "ISDY",
+		"quantity": "study day"
+	},
+	{
+		"name": "Study Day of Death Diagnosis",
+		"description": "The study day that a death diagnosis assessment is performed.",
+		"value": "C117550",
+		"symbol": "DDDY",
+		"quantity": "study day"
+	},
+	{
+		"name": "Study Day of Comment",
+		"description": "The study day that the comment pertains.",
+		"value": "C119819",
+		"symbol": "CODY",
+		"quantity": "study day"
+	},
+	{
+		"name": "Study Day of Macroscopic Findings",
+		"description": "The study day that a macroscopic findings assessment is performed.",
+		"value": "C119858",
+		"symbol": "MADY",
+		"quantity": "study day"
+	},
+	{
+		"name": "Study Day of Food and Water Consumption",
+		"description": "The study day that the food and water consumption data is captured.",
+		"value": "C119828",
+		"symbol": "FWDY",
+		"quantity": "study day"
+	},
+	{
+		"name": "Study Day of Body Weight Gain",
+		"description": "The study day that a body weight gain assessment is performed.",
+		"value": "C119762",
+		"symbol": "BGDY",
+		"quantity": "study day"
+	},
+	{
+		"name": "Study Day of Body Weight",
+		"description": "The study day that a body weight assessment is performed.",
+		"value": "C119782",
+		"symbol": "BWDY",
+		"quantity": "study day"
+	},
+	{
+		"name": "Study Day of Clinical Observations",
+		"description": "The study day that a clinical observation is made.",
+		"value": "C119799",
+		"symbol": "CLDY",
+		"quantity": "study day"
+	},
+	{
+		"name": "Study Day of Tumor Findings",
+		"description": "The study day that a tumor findings assessment is performed.",
+		"value": "C119928",
+		"symbol": "TFDY",
+		"quantity": "study day"
+	},
+	{
+		"name": "Study Day of Palpable Masses",
+		"description": "The study day that a palpable masses assessment is performed.",
+		"value": "C119907",
+		"symbol": "PMDY",
+		"quantity": "study day"
+	},
+	{
+		"name": "Study Day of Organ Measurements",
+		"description": "The study day that an organ measurements assessment is performed.",
+		"value": "C119951",
+		"symbol": "OMDY",
+		"quantity": "study day"
+	},
+	{
+		"name": "Cardiovascular System Findings End Day",
+		"description": "The final day of the cardiovascular system assessment.",
+		"value": "C123958",
+		"symbol": "CVENDY",
+		"quantity": "observation end day"
+	},
+	{
+		"name": "Healthcare Encounters End Day",
+		"description": "The final day of the healthcare encounter assessment.",
+		"value": "C123959",
+		"symbol": "HOENDY",
+		"quantity": "observation end day"
+	},
+	{
+		"name": "Respiratory System Findings End Day",
+		"description": "The final day of the respiratory system assessment.",
+		"value": "C123960",
+		"symbol": "REENDY",
+		"quantity": "observation end day"
+	},
+	{
+		"name": "Procedure End Day",
+		"description": "The final day of the procedure.",
+		"value": "C117532",
+		"symbol": "PRENDY",
+		"quantity": "observation end day"
+	},
+	{
+		"name": "Laboratory Test Results End Day",
+		"description": "The final day of the laboratory test.",
+		"value": "C119846",
+		"symbol": "LBENDY",
+		"quantity": "observation end day"
+	},
+	{
+		"name": "ECG Test Results End Day",
+		"description": "The final day of the electrocardiographic test.",
+		"value": "C119822",
+		"symbol": "EGENDY",
+		"quantity": "observation end day"
+	},
+	{
+		"name": "Food and Water Consumption End Day",
+		"description": "The final day of the food and water consumption assessment.",
+		"value": "C119830",
+		"symbol": "FWENDY",
+		"quantity": "observation end day"
+	},
+	{
+		"name": "Body Weight Gain End Day",
+		"description": "The final day of the body weight gain assessment.",
+		"value": "C119765",
+		"symbol": "BGENDY",
+		"quantity": "observation end day"
+	},
+	{
+		"name": "Pharmacokinetic Concentration End Day",
+		"description": "The final day of the pharmacokinetic concentration assessment.",
+		"value": "C119903",
+		"symbol": "PCENDY",
+		"quantity": "observation end day"
+	},
+	{
+		"name": "Vital Signs End Day",
+		"description": "The final day of the vital signs assessment.",
+		"value": "C119948",
+		"symbol": "VSENDY",
+		"quantity": "observation end day"
+	},
+	{
+		"name": "Substance Use End Day",
+		"description": "The day of the week substance usage concluded.",
+		"value": "C83420",
+		"symbol": "SUENDY",
+		"quantity": "observation end day"
+	},
+	{
+		"name": "Concomitant Medication Use End Day",
+		"description": "The day of the week that concomitant medication usage ended.",
+		"value": "C83226",
+		"symbol": "CMENDY",
+		"quantity": "observation end day"
+	},
+	{
+		"name": "Adverse Event End Day",
+		"description": "The day of the week that an adverse event concluded.",
+		"value": "C83202",
+		"symbol": "AEENDY",
+		"quantity": "observation end day"
+	},
+	{
+		"name": "Exposure End Day",
+		"description": "The day of the week an exposure concluded.",
+		"value": "C83283",
+		"symbol": "EXENDY",
+		"quantity": "observation end day"
+	},
+	{
+		"name": "Exposure as Collected End Day",
+		"description": "The final day of the exposure collection period.",
+		"value": "C117499",
+		"symbol": "ECENDY",
+		"quantity": "observation end day"
+	},
+	{
+		"name": "Subject Visit End Day",
+		"description": "The day of the week a subject visit has concluded.",
+		"value": "C88000",
+		"symbol": "SVENDY",
+		"quantity": "observation end day"
+	},
+	{
+		"name": "Birth Day",
+		"description": "The day of the week on which a person was born.",
+		"value": "C83033",
+		"symbol": "BRTHDY",
+		"quantity": "day"
+	},
+	{
+		"name": "Visit Day",
+		"description": "The day of the week of a visit.",
+		"value": "C83450",
+		"symbol": "Visit Day",
+		"quantity": "day"
+	},
+	{
+		"name": "Tumor Findings Dosing Days to Detection",
+		"description": "The number of days from the start of dosing to the earliest detection of cancer.",
+		"value": "C119924",
+		"symbol": "TFDETECT",
+		"quantity": "dosing days to detection"
+	},
+	{
+		"name": "Actual Reproductive Phase Day of Observation Start",
+		"description": "The day within the reproductive phase on which the test or observation began.",
+		"value": "C170509",
+		"symbol": "Actual Reproductive Phase Day of Observation Start",
+		"quantity": "day"
+	},
+	{
+		"name": "Planned Reproductive Phase Day of Observation Start",
+		"description": "The day within the reproductive phase on which the test or observation was scheduled to begin.",
+		"value": "C170508",
+		"symbol": "Planned Reproductive Phase Day of Observation Start",
+		"quantity": "day"
+	},
+	{
+		"name": "Planned Reproductive Phase Day of Observation End",
+		"description": "The day within the reproductive phase on which the test or observation was scheduled to end.",
+		"value": "C170507",
+		"symbol": "Planned Reproductive Phase Day of Observation End",
+		"quantity": "day"
+	},
+	{
+		"name": "Planned Reproductive Phase Day of Observation",
+		"description": "The day within the reproductive phase on which the test or observation was scheduled to occur.",
+		"value": "C170506",
+		"symbol": "Planned Reproductive Phase Day of Observation",
+		"quantity": "day"
+	},
+	{
+		"name": "Actual Reproductive Phase Day of Observation End",
+		"description": "The day within the reproductive phase on which the test or observation ended.",
+		"value": "C170505",
+		"symbol": "Actual Reproductive Phase Day of Observation End",
+		"quantity": "day"
+	},
+	{
+		"name": "Actual Reproductive Phase Day of Observation",
+		"description": "The day within the reproductive phase on which the test or observation occurred.",
+		"value": "C170504",
+		"symbol": "Actual Reproductive Phase Day of Observation",
+		"quantity": "day"
+	},
+	{
+		"name": "Mortality Cut-off Year, National Death Index",
+		"description": "The last year of data used in the National Death Index.",
+		"value": "C159714",
+		"symbol": "Mortality Cut-off Year, National Death Index",
+		"quantity": "year"
+	},
+	{
+		"name": "Birth Month",
+		"description": "The month in which a person was born.",
+		"value": "C83090",
+		"symbol": "BRTHMO",
+		"quantity": "month"
+	},
+	{
+		"name": "Month-Day-Year",
+		"description": "A format of a date in time, with the month followed by the date followed by the year.",
+		"value": "C156816",
+		"symbol": "MM/DD/YYYY",
+		"quantity": "month"
+	},
+	{
+		"name": "Week",
+		"description": "Any period of seven consecutive days.",
+		"value": "C29844",
+		"symbol": "wk",
+		"quantity": "time"
+	},
+	{
+		"name": "Geometric Mean Fluorescence Intensity Unit",
+		"description": "A unit of measure for the geometric mean fluorescence intensity.",
+		"value": "C163563",
+		"symbol": "gMFI",
+		"quantity": "mean fluorescence intensity unit"
+	},
+	{
+		"name": "Arithmetic Mean Fluorescence Intensity Unit",
+		"description": "A unit of measure for the arithmetic mean fluorescence intensity.",
+		"value": "C163562",
+		"symbol": "aMFI",
+		"quantity": "mean fluorescence intensity unit"
+	},
+	{
+		"name": "Relative Fluorescence Intensity Unit",
+		"description": "A unit of measurement that estimates the size or amount of material in a sample by normalizing its luminescence to that of a reference standard.",
+		"value": "C77535",
+		"symbol": "RIU",
+		"quantity": "fluorescence intensity unit"
+	},
+	{
+		"name": "Normalized Fluorescence Intensity Unit",
+		"description": "A relative fluorescence intensity unit that is adjusted to a reference standard.",
+		"value": "C154680",
+		"symbol": "NIU",
+		"quantity": "fluorescence intensity unit"
+	},
+	{
+		"name": "Median Fluorescence Intensity Unit",
+		"description": "A unit of measure equal to the median fluorescence intensity of a log-normal distribution of fluorescence signals.",
+		"value": "C96687",
+		"symbol": "MFI",
+		"quantity": "fluorescence intensity unit"
+	},
+	{
+		"name": "Arbitrary Fluorescence Units",
+		"description": "Arbitrary unit(s) of fluorescent luminescence.",
+		"value": "C77534",
+		"symbol": "AFU",
+		"quantity": "fluorescence units"
+	},
+	{
+		"name": "Molecule of Equivalent Soluble Fluorochrome",
+		"description": "A unit of measure of the fluorescence intensity of a fluorochrome-labeled sample, which is equivalent to the fluorescence intensity of a solution containing an equivalent number of molecules of free fluorochrome in solution, under identical experimental conditions.",
+		"value": "C96691",
+		"symbol": "MESF",
+		"quantity": "fluorescence units"
+	},
+	{
+		"name": "Average Fluorescence Units",
+		"description": null,
+		"value": "C74917",
+		"symbol": "Average Fluorescence Units",
+		"quantity": "fluorescence units"
+	},
+	{
+		"name": "Candela per Square Meter",
+		"description": "A unit of luminous intensity expressed as one candela per square meter of area.",
+		"value": "C122204",
+		"symbol": "cd/m2",
+		"quantity": "luminous flux"
+	},
+	{
+		"name": "Candela Second per Square Meter",
+		"description": "A unit of luminous intensity expressed as one candela in one second of light emittance per square meter of area.",
+		"value": "C122203",
+		"symbol": "cd*s/m2",
+		"quantity": "luminous flux"
+	},
+	{
+		"name": "Lumen",
+		"description": "A SI derived unit of luminous flux. It is the amount of light that falls on a unit area at unit distance from a source of one candela.",
+		"value": "C42560",
+		"symbol": "lm",
+		"quantity": "derived international system of units"
+	},
+	{
+		"name": "Lux",
+		"description": "A SI derived unit of illuminance equal to the direct illumination on a surface that is everywhere one meter from a uniform point source of one candela; a unit of illuminance that is equal to one lumen per square meter.",
+		"value": "C42561",
+		"symbol": "lx",
+		"quantity": "derived international system of units"
+	},
+	{
+		"name": "Relative Luminescence Unit",
+		"description": "An arbitrary unit used to measure the intensity of the emitted light from a sample; it is dependent on instrument and measurement parameters.",
+		"value": "C184722",
+		"symbol": "LU",
+		"quantity": "illuminance"
+	},
+	{
+		"name": "Watt",
+		"description": "A SI unit of power equal to the power which in one second produces or transfers the energy of one joule. The unit is used in measurements of power emitted, transferred or received as radiation, sound waves, heat flow rate, and rate of energy transfer.",
+		"value": "C42549",
+		"symbol": "W",
+		"quantity": "derived international system of units"
+	},
+	{
+		"name": "Cubic Meter per Kilogram",
+		"description": "A SI derived unit of specific volume, a property of materials defined as the number of cubic meters occupied by one kilogram of a particular substance. Specific volume is inversely proportional to density.",
+		"value": "C42577",
+		"symbol": "L/g",
+		"quantity": "derived international system of units"
+	},
+	{
+		"name": "Cup Equivalent",
+		"description": "A unit of relative amount of a substance equal to one cup.",
+		"value": "C172604",
+		"symbol": "cup eq",
+		"quantity": "equivalent volume"
+	},
+	{
+		"name": "Ounce Equivalent",
+		"description": "A unit of relative amount of a substance equal to one ounce.",
+		"value": "C172605",
+		"symbol": "oz-eq",
+		"quantity": "equivalent volume"
+	},
+	{
+		"name": "Teaspoon Equivalent",
+		"description": "A unit of relative amount of a substance equal to one teaspoon.",
+		"value": "C172603",
+		"symbol": "tsp eq",
+		"quantity": "equivalent volume"
+	},
+	{
+		"name": "Unit of Height",
+		"description": "An indication of the type of unit of measure being used to express a height.",
+		"value": "C168688",
+		"symbol": "Unit of Height",
+		"quantity": "unit by category"
+	},
+	{
+		"name": "Survey Foot",
+		"description": "A unit of length defined by the U.S. Metric Act of 1866 as 1200/3937 meter, or approximately 30.48006096 centimeters. This unit is used for geodetic purposes by the United States Public Land Survey System.",
+		"value": "C71179",
+		"symbol": "foot",
+		"quantity": "foot length"
+	},
+	{
+		"name": "Foot British",
+		"description": "A traditional unit of length equal to 30.479976 centimeters, used before 1959 when the unified international definitions for units of British Imperial system were established.",
+		"value": "C71180",
+		"symbol": "foot",
+		"quantity": "foot length"
+	},
+	{
+		"name": "International Foot",
+		"description": "A traditional unit of length defined by the U.S. National Bureau of Standards as 30.48 centimeters. It is equal to 0.3048 meter, 12 inches, or to approximately 0.999998 survey foot.",
+		"value": "C71253",
+		"symbol": "ft",
+		"quantity": "foot length"
+	},
+	{
+		"name": "Kilometer",
+		"description": "A metric unit of distance equal to 1000 meters, 0.621 miles, 1094 yards, or 3281 feet.",
+		"value": "C71177",
+		"symbol": "km",
+		"quantity": "length"
+	},
+	{
+		"name": "Mile British",
+		"description": "A traditional unit of distance equal to 5280 feet of Old British Imperial System, used before 1959 when the unified international definitions for units of British Imperial system were established.",
+		"value": "C71182",
+		"symbol": "mile",
+		"quantity": "mile distance"
+	},
+	{
+		"name": "Mile",
+		"description": "A traditional unit of distance equal to 5280 international feet, 1760 international yards, or 1609.344 meters.",
+		"value": "C71183",
+		"symbol": "Mile",
+		"quantity": "mile distance"
+	},
+	{
+		"name": "Survey Mile",
+		"description": "A traditional unit of distance equal to 5280 survey feet or to approximately 1609.347 meters. This unit is used for geodetic purposes by the United States Public Land Survey System.",
+		"value": "C71184",
+		"symbol": "mile",
+		"quantity": "mile distance"
+	},
+	{
+		"name": "Nautical Mile British",
+		"description": null,
+		"value": "C71227",
+		"symbol": "[nmi_br]",
+		"quantity": "mile distance"
+	},
+	{
+		"name": "Nautical Mile",
+		"description": null,
+		"value": "C71228",
+		"symbol": "[nmi_i]",
+		"quantity": "mile distance"
+	},
+	{
+		"name": "Fathom US",
+		"description": null,
+		"value": "C71248",
+		"symbol": "fathom",
+		"quantity": "length"
+	},
+	{
+		"name": "Furlong",
+		"description": null,
+		"value": "C71249",
+		"symbol": "furlong",
+		"quantity": "length"
+	},
+	{
+		"name": "Survey Yard",
+		"description": null,
+		"value": "C71245",
+		"symbol": "yard",
+		"quantity": "length"
+	},
+	{
+		"name": "Femtometer",
+		"description": "A metric unit of length equal to one quadrillionth of a meter (10E-15 meter).",
+		"value": "C69147",
+		"symbol": "fm",
+		"quantity": "length"
+	},
+	{
+		"name": "Picometer",
+		"description": "A metric unit of length equal to one trillionth of a meter (10E-12 meter).",
+		"value": "C69148",
+		"symbol": "pm",
+		"quantity": "length"
+	},
+	{
+		"name": "Centimeter",
+		"description": "A basic unit of length in the former CGS version of metric system, equal to one hundredth of a meter or approximately 0.393 700 787 inch.",
+		"value": "C49668",
+		"symbol": "cm",
+		"quantity": "length"
+	},
+	{
+		"name": "Micron",
+		"description": "A unit of length in metric system equal to 10E-6 meter, or micrometer.",
+		"value": "C48510",
+		"symbol": "um",
+		"quantity": "length"
+	},
+	{
+		"name": "Step Unit of Distance",
+		"description": "A unit of measure to quantify the number of strides taken during a normal walking gait.",
+		"value": "C111318",
+		"symbol": "STEPS",
+		"quantity": "length"
+	},
+	{
+		"name": "Block Unit of Distance",
+		"description": "A unit of measure to quantify the number of rectangular areas in a city surrounded by streets that the patient has traveled.",
+		"value": "C111140",
+		"symbol": "BLOCKS",
+		"quantity": "length"
+	},
+	{
+		"name": "Millimeter",
+		"description": "A metric unit of length equal to one thousandth of a meter (10E-3 meter) or approximately 0.03937 inch.",
+		"value": "C28251",
+		"symbol": "mm",
+		"quantity": "length"
+	},
+	{
+		"name": "Nanometer",
+		"description": "A metric unit of length equal to one billionth of a meter (10E-9 meter). Nanometer is used as a unit for light wavelength measurement.",
+		"value": "C67328",
+		"symbol": "nm",
+		"quantity": "length"
+	},
+	{
+		"name": "Meter",
+		"description": "A unit of linear measure in the metric system, one of the seven base units of the International System of Units (Systeme International d'Unites, SI). A meter is defined as the length of the path traveled by light in a vacuum during a time interval of 1/299 792 458 of a second and is equal to 1.093 61 yards.",
+		"value": "C41139",
+		"symbol": "m",
+		"quantity": "length"
+	},
+	{
+		"name": "Inch British",
+		"description": "A traditional unit of length equal to 2.539998 centimeters, used before 1959 when the unified international definitions for units of British Imperial system were established and inch was defined as 2.54 centimeters.",
+		"value": "C69446",
+		"symbol": "inch",
+		"quantity": "inch length"
+	},
+	{
+		"name": "Survey Inch",
+		"description": "A unit of length equal to international inch/0.999998 or approximately to 2.54000508001016002032004 centimeters.",
+		"value": "C67566",
+		"symbol": "inch",
+		"quantity": "inch length"
+	},
+	{
+		"name": "Inch",
+		"description": "A traditional unit of length equal to 1/12 of a foot or 2.54 centimeters.",
+		"value": "C48500",
+		"symbol": "in",
+		"quantity": "potency unit"
+	},
+	{
+		"name": "Decimeter",
+		"description": "The metric unit of length equal to one tenth of a meter.",
+		"value": "C64698",
+		"symbol": "dm",
+		"quantity": "length"
+	},
+	{
+		"name": "Lap",
+		"description": "One circuit around a track or course.",
+		"value": "C122027",
+		"symbol": "Lap",
+		"quantity": "length"
+	},
+	{
+		"name": "Microinch",
+		"description": "A traditional unit of linear measurement equal to one-millionth of an inch.",
+		"value": "C78770",
+		"symbol": "uin",
+		"quantity": "length"
+	},
+	{
+		"name": "Milli-Inch",
+		"description": "A traditional unit of linear measurement equal to one-thousandth of an inch.",
+		"value": "C78788",
+		"symbol": "Milli-Inch",
+		"quantity": "length"
+	},
+	{
+		"name": "Picogram Per Cell",
+		"description": "A unit of mass concentration for the number of picograms of substance per cell.",
+		"value": "C176377",
+		"symbol": "pg/cell",
+		"quantity": "mass"
+	},
+	{
+		"name": "Pen Gram Protein",
+		"description": "A measure of the amount (in grams) of amino acids prescribed for parenteral and enteral therapy.",
+		"value": "C78786",
+		"symbol": "Pen Gram Protein",
+		"quantity": "mass"
+	},
+	{
+		"name": "Troy Pound",
+		"description": "The non-SI unit of mass equal to 0.3732417216 kg.There are 12 apothecaries ounces, or 240 pennyweight, or 5760 grains in the Troy pound.",
+		"value": "C64560",
+		"symbol": "Troy",
+		"quantity": "mass"
+	},
+	{
+		"name": "Pennyweight",
+		"description": "The non-SI unit of mass equal to 24 grains, 1/20 Troy ounce or approximately 1.5552 gram.",
+		"value": "C64562",
+		"symbol": "pwt",
+		"quantity": "mass"
+	},
+	{
+		"name": "Kilopound",
+		"description": "The non-SI unit of mass equal to 453,592 37 kg.",
+		"value": "C64561",
+		"symbol": "kp",
+		"quantity": "mass"
+	},
+	{
+		"name": "Attogram",
+		"description": "The metric unit of mass equal to one a quintillionth of a gram (10E-18 gram).",
+		"value": "C64553",
+		"symbol": "ag",
+		"quantity": "mass"
+	},
+	{
+		"name": "Femtogram",
+		"description": "The metric unit of mass equal to one quadrillionth of a gram (10E-15 gram).",
+		"value": "C64552",
+		"symbol": "fg",
+		"quantity": "mass"
+	},
+	{
+		"name": "Decigram",
+		"description": "The metric unit of mass equal to one-tenth of a gram.",
+		"value": "C64555",
+		"symbol": "dg",
+		"quantity": "mass"
+	},
+	{
+		"name": "Centigram",
+		"description": "The metric unit of mass equal to one hundredth of a gram.",
+		"value": "C64554",
+		"symbol": "cg",
+		"quantity": "mass"
+	},
+	{
+		"name": "Yoctogram",
+		"description": "The metric unit of mass equal to one a septillionth of a gram (10E-24 gram).",
+		"value": "C64557",
+		"symbol": "yg",
+		"quantity": "mass"
+	},
+	{
+		"name": "Zeptogram",
+		"description": "The metric unit of mass equal to one a sextillionth of a gram (10E-21 gram).",
+		"value": "C64556",
+		"symbol": "zg",
+		"quantity": "mass"
+	},
+	{
+		"name": "Kilodalton",
+		"description": "A unit of atomic mass equal to one thousand daltons.",
+		"value": "C105491",
+		"symbol": "ku",
+		"quantity": "atomic mass unit"
+	},
+	{
+		"name": "Unified Atomic Mass Unit",
+		"description": "The non-SI unit of mass in terms of which the masses of individual atoms and molecules are expressed. Unified atomic mass unit is defined as one twelfth of the mass of an unbound atom of the carbon-12 nuclide, the predominant isotope of carbon, at rest and in its ground state. It is equal to 1.6606x10(E-27) kg (approximately).",
+		"value": "C41127",
+		"symbol": "D",
+		"quantity": "atomic mass unit"
+	},
+	{
+		"name": "Troy Ounce",
+		"description": "The non-SI unit of mass equal to 31.103 grams, 20 pennyweight, or 480 grains, or 0.083 pound.",
+		"value": "C64558",
+		"symbol": "oz t",
+		"quantity": "mass"
+	},
+	{
+		"name": "Picogram",
+		"description": "The metric unit of mass equal to one trillionth of a gram (10E-12 gram).",
+		"value": "C64551",
+		"symbol": "pg",
+		"quantity": "mass"
+	},
+	{
+		"name": "Dram Mass Unit",
+		"description": "The non-SI unit of mass equal to 1/16 Avoirdupois ounce or 1/256 Avoirdupois pound. One dram equals approximately 1.7718451953125 grams.",
+		"value": "C64564",
+		"symbol": "Dram",
+		"quantity": "mass"
+	},
+	{
+		"name": "Apothecaries Scruple",
+		"description": "The non-SI unit of mass equal to 20 grains or 1.295 978 2 grams.",
+		"value": "C64563",
+		"symbol": "20 [gr]",
+		"quantity": "mass"
+	},
+	{
+		"name": "Apothecaries Dram Mass Unit",
+		"description": "The non-SI unit of mass equal to 60 grains, 3 scruples, 1/8 troy ounce, or approximately 3.8879 grams.",
+		"value": "C64565",
+		"symbol": "Dram",
+		"quantity": "mass"
+	},
+	{
+		"name": "Milligram",
+		"description": "A metric unit of mass equal to one thousandth of a gram or 1000 micrograms. One milligram equals approximately 0.015 432 grain or 35.274 x 10E-6 ounce.",
+		"value": "C28253",
+		"symbol": "mg",
+		"quantity": "mass"
+	},
+	{
+		"name": "Kilogram",
+		"description": "A basic SI unit of mass. It is defined as the mass of an international prototype in the form of a platinum-iridium cylinder kept at Sevres in France. A kilogram is equal to 1,000 grams and 2.204 622 6 pounds.",
+		"value": "C28252",
+		"symbol": "kg",
+		"quantity": "mass"
+	},
+	{
+		"name": "Microgram",
+		"description": "A metric unit of mass equal to one millionth of a gram or one thousandth of a milligram.",
+		"value": "C48152",
+		"symbol": "ug",
+		"quantity": "mass"
+	},
+	{
+		"name": "Hour per Day",
+		"description": "A unit of measurement equal to the number of hours within a period of time equal to one day.",
+		"value": "C176380",
+		"symbol": "h/d",
+		"quantity": "time"
+	},
+	{
+		"name": "Minute per Day",
+		"description": "A unit of measurement equal to the number of minutes within a period of time equal to one day.",
+		"value": "C176381",
+		"symbol": "min/d",
+		"quantity": "time"
+	},
+	{
+		"name": "Centisecond",
+		"description": "A unit of time equal to one hundredth of a second (10E-2 seconds).",
+		"value": "C105482",
+		"symbol": "cs",
+		"quantity": "time"
+	},
+	{
+		"name": "Kilosecond",
+		"description": "A unit of time equal to one thousand seconds (10E3 seconds).",
+		"value": "C105493",
+		"symbol": "ks",
+		"quantity": "time"
+	},
+	{
+		"name": "Business Day",
+		"description": "Any day a government or commercial enterprise is open and actively engaged in the work of that enterprise.",
+		"value": "C52592",
+		"symbol": "Business Day",
+		"quantity": "day"
+	},
+	{
+		"name": "Weekday",
+		"description": "Any day other than Saturday and Sunday.",
+		"value": "C86936",
+		"symbol": "Weekday",
+		"quantity": "day"
+	},
+	{
+		"name": "Study Day of Cardiovascular System Findings",
+		"description": "The study day that a cardiovascular system assessment is performed.",
+		"value": "C123950",
+		"symbol": "CVDY",
+		"quantity": "study day"
+	},
+	{
+		"name": "Planned Study Day of Clinical Encounter",
+		"description": "The planned study day of a clinical encounter relative to the sponsor-defined reference start date.",
+		"value": "C171011",
+		"symbol": "Planned Study Day of Clinical Encounter",
+		"quantity": "study day of healthcare encounters"
+	},
+	{
+		"name": "Study Day of Respiratory System Findings",
+		"description": "The study day that a respiratory system assessment is performed.",
+		"value": "C123952",
+		"symbol": "REDY",
+		"quantity": "study day"
+	},
+	{
+		"name": "Study Day of Skin Response Assessment",
+		"description": "The day that a skin response assessment is performed.",
+		"value": "C117693",
+		"symbol": "SRDY",
+		"quantity": "study day"
+	},
+	{
+		"name": "Study Day of Morphology Assessment",
+		"description": "The day that a morphology assessment is performed.",
+		"value": "C117630",
+		"symbol": "MODY",
+		"quantity": "study day"
+	},
+	{
+		"name": "Study Day of Microscopic Findings",
+		"description": "The day that a microscopic findings assessment is performed.",
+		"value": "C117600",
+		"symbol": "MIDY",
+		"quantity": "study day"
+	},
+	{
+		"name": "Study Day of Subject Status",
+		"description": "The day that a subject status assessment is performed.",
+		"value": "C117669",
+		"symbol": "SSDY",
+		"quantity": "study day"
+	},
+	{
+		"name": "Study Day of Reproductive System Findings",
+		"description": "The day that a reproductive system findings assessment is performed.",
+		"value": "C117654",
+		"symbol": "RPDY",
+		"quantity": "study day"
+	},
+	{
+		"name": "Study Day of Immunogenicity Specimen Assessment",
+		"description": "The study day that an immunogenicity specimen assessment is performed.",
+		"value": "C117572",
+		"symbol": "ISDY",
+		"quantity": "study day"
+	},
+	{
+		"name": "Study Day of Death Diagnosis",
+		"description": "The study day that a death diagnosis assessment is performed.",
+		"value": "C117550",
+		"symbol": "DDDY",
+		"quantity": "study day"
+	},
+	{
+		"name": "Study Day of Comment",
+		"description": "The study day that the comment pertains.",
+		"value": "C119819",
+		"symbol": "CODY",
+		"quantity": "study day"
+	},
+	{
+		"name": "Study Day of Macroscopic Findings",
+		"description": "The study day that a macroscopic findings assessment is performed.",
+		"value": "C119858",
+		"symbol": "MADY",
+		"quantity": "study day"
+	},
+	{
+		"name": "Study Day of Food and Water Consumption",
+		"description": "The study day that the food and water consumption data is captured.",
+		"value": "C119828",
+		"symbol": "FWDY",
+		"quantity": "study day"
+	},
+	{
+		"name": "Study Day of Body Weight Gain",
+		"description": "The study day that a body weight gain assessment is performed.",
+		"value": "C119762",
+		"symbol": "BGDY",
+		"quantity": "study day"
+	},
+	{
+		"name": "Study Day of Body Weight",
+		"description": "The study day that a body weight assessment is performed.",
+		"value": "C119782",
+		"symbol": "BWDY",
+		"quantity": "study day"
+	},
+	{
+		"name": "Study Day of Clinical Observations",
+		"description": "The study day that a clinical observation is made.",
+		"value": "C119799",
+		"symbol": "CLDY",
+		"quantity": "study day"
+	},
+	{
+		"name": "Study Day of Tumor Findings",
+		"description": "The study day that a tumor findings assessment is performed.",
+		"value": "C119928",
+		"symbol": "TFDY",
+		"quantity": "study day"
+	},
+	{
+		"name": "Study Day of Palpable Masses",
+		"description": "The study day that a palpable masses assessment is performed.",
+		"value": "C119907",
+		"symbol": "PMDY",
+		"quantity": "study day"
+	},
+	{
+		"name": "Study Day of Organ Measurements",
+		"description": "The study day that an organ measurements assessment is performed.",
+		"value": "C119951",
+		"symbol": "OMDY",
+		"quantity": "study day"
+	},
+	{
+		"name": "Cardiovascular System Findings End Day",
+		"description": "The final day of the cardiovascular system assessment.",
+		"value": "C123958",
+		"symbol": "CVENDY",
+		"quantity": "observation end day"
+	},
+	{
+		"name": "Healthcare Encounters End Day",
+		"description": "The final day of the healthcare encounter assessment.",
+		"value": "C123959",
+		"symbol": "HOENDY",
+		"quantity": "observation end day"
+	},
+	{
+		"name": "Respiratory System Findings End Day",
+		"description": "The final day of the respiratory system assessment.",
+		"value": "C123960",
+		"symbol": "REENDY",
+		"quantity": "observation end day"
+	},
+	{
+		"name": "Procedure End Day",
+		"description": "The final day of the procedure.",
+		"value": "C117532",
+		"symbol": "PRENDY",
+		"quantity": "observation end day"
+	},
+	{
+		"name": "Laboratory Test Results End Day",
+		"description": "The final day of the laboratory test.",
+		"value": "C119846",
+		"symbol": "LBENDY",
+		"quantity": "observation end day"
+	},
+	{
+		"name": "ECG Test Results End Day",
+		"description": "The final day of the electrocardiographic test.",
+		"value": "C119822",
+		"symbol": "EGENDY",
+		"quantity": "observation end day"
+	},
+	{
+		"name": "Food and Water Consumption End Day",
+		"description": "The final day of the food and water consumption assessment.",
+		"value": "C119830",
+		"symbol": "FWENDY",
+		"quantity": "observation end day"
+	},
+	{
+		"name": "Body Weight Gain End Day",
+		"description": "The final day of the body weight gain assessment.",
+		"value": "C119765",
+		"symbol": "BGENDY",
+		"quantity": "observation end day"
+	},
+	{
+		"name": "Pharmacokinetic Concentration End Day",
+		"description": "The final day of the pharmacokinetic concentration assessment.",
+		"value": "C119903",
+		"symbol": "PCENDY",
+		"quantity": "observation end day"
+	},
+	{
+		"name": "Vital Signs End Day",
+		"description": "The final day of the vital signs assessment.",
+		"value": "C119948",
+		"symbol": "VSENDY",
+		"quantity": "observation end day"
+	},
+	{
+		"name": "Substance Use End Day",
+		"description": "The day of the week substance usage concluded.",
+		"value": "C83420",
+		"symbol": "SUENDY",
+		"quantity": "observation end day"
+	},
+	{
+		"name": "Concomitant Medication Use End Day",
+		"description": "The day of the week that concomitant medication usage ended.",
+		"value": "C83226",
+		"symbol": "CMENDY",
+		"quantity": "observation end day"
+	},
+	{
+		"name": "Adverse Event End Day",
+		"description": "The day of the week that an adverse event concluded.",
+		"value": "C83202",
+		"symbol": "AEENDY",
+		"quantity": "observation end day"
+	},
+	{
+		"name": "Exposure End Day",
+		"description": "The day of the week an exposure concluded.",
+		"value": "C83283",
+		"symbol": "EXENDY",
+		"quantity": "observation end day"
+	},
+	{
+		"name": "Exposure as Collected End Day",
+		"description": "The final day of the exposure collection period.",
+		"value": "C117499",
+		"symbol": "ECENDY",
+		"quantity": "observation end day"
+	},
+	{
+		"name": "Subject Visit End Day",
+		"description": "The day of the week a subject visit has concluded.",
+		"value": "C88000",
+		"symbol": "SVENDY",
+		"quantity": "observation end day"
+	},
+	{
+		"name": "Birth Day",
+		"description": "The day of the week on which a person was born.",
+		"value": "C83033",
+		"symbol": "BRTHDY",
+		"quantity": "day"
+	},
+	{
+		"name": "Visit Day",
+		"description": "The day of the week of a visit.",
+		"value": "C83450",
+		"symbol": "Visit Day",
+		"quantity": "day"
+	},
+	{
+		"name": "Tumor Findings Dosing Days to Detection",
+		"description": "The number of days from the start of dosing to the earliest detection of cancer.",
+		"value": "C119924",
+		"symbol": "TFDETECT",
+		"quantity": "dosing days to detection"
+	},
+	{
+		"name": "Actual Reproductive Phase Day of Observation Start",
+		"description": "The day within the reproductive phase on which the test or observation began.",
+		"value": "C170509",
+		"symbol": "Actual Reproductive Phase Day of Observation Start",
+		"quantity": "day"
+	},
+	{
+		"name": "Planned Reproductive Phase Day of Observation Start",
+		"description": "The day within the reproductive phase on which the test or observation was scheduled to begin.",
+		"value": "C170508",
+		"symbol": "Planned Reproductive Phase Day of Observation Start",
+		"quantity": "day"
+	},
+	{
+		"name": "Planned Reproductive Phase Day of Observation End",
+		"description": "The day within the reproductive phase on which the test or observation was scheduled to end.",
+		"value": "C170507",
+		"symbol": "Planned Reproductive Phase Day of Observation End",
+		"quantity": "day"
+	},
+	{
+		"name": "Planned Reproductive Phase Day of Observation",
+		"description": "The day within the reproductive phase on which the test or observation was scheduled to occur.",
+		"value": "C170506",
+		"symbol": "Planned Reproductive Phase Day of Observation",
+		"quantity": "day"
+	},
+	{
+		"name": "Actual Reproductive Phase Day of Observation End",
+		"description": "The day within the reproductive phase on which the test or observation ended.",
+		"value": "C170505",
+		"symbol": "Actual Reproductive Phase Day of Observation End",
+		"quantity": "day"
+	},
+	{
+		"name": "Actual Reproductive Phase Day of Observation",
+		"description": "The day within the reproductive phase on which the test or observation occurred.",
+		"value": "C170504",
+		"symbol": "Actual Reproductive Phase Day of Observation",
+		"quantity": "day"
+	},
+	{
+		"name": "Per Millisecond",
+		"description": "A unit of time, which is equal to the reciprocal of one thousandth of a second.",
+		"value": "C161490",
+		"symbol": "/ms",
+		"quantity": "time"
+	},
+	{
+		"name": "Square Millisecond",
+		"description": "A unit of time which is equal to one thousandth of a second squared.",
+		"value": "C161489",
+		"symbol": "ms2",
+		"quantity": "time"
+	},
+	{
+		"name": "Hour",
+		"description": "A unit measure of time equal to 3,600 seconds or 60 minutes. It is approximately 1/24 of a median day.",
+		"value": "C25529",
+		"symbol": "h",
+		"quantity": "potency unit"
+	},
+	{
+		"name": "Millisecond",
+		"description": "A unit of time equal to one thousandth of a second (10E-3 second).",
+		"value": "C41140",
+		"symbol": "ms",
+		"quantity": "time"
+	},
+	{
+		"name": "Second",
+		"description": "A unit of time, one of the seven base units of the International System of Units (Systeme International d'Unites, SI). The second is the duration of 919 263 177 0 periods of the specified light radiation corresponding to the transition between the two hyperfine levels of the caesium 133 atom in its ground state at 0 K. According to the convention, 60 seconds constitute one minute; 3,600 seconds constitute one hour.",
+		"value": "C42535",
+		"symbol": "s",
+		"quantity": "base international system of units"
+	},
+	{
+		"name": "Decade",
+		"description": "A period of 10 years.",
+		"value": "C87556",
+		"symbol": "Decade",
+		"quantity": "time"
+	},
+	{
+		"name": "Seconds Per Hour",
+		"description": "A rate unit expressed in seconds per period of time equal to sixty minutes.",
+		"value": "C150899",
+		"symbol": "s/h",
+		"quantity": "time"
+	},
+	{
+		"name": "Minute",
+		"description": "A unit measure of time equal to 60 seconds.",
+		"value": "C48154",
+		"symbol": "min",
+		"quantity": "time"
+	},
+	{
+		"name": "Picosecond",
+		"description": "A unit of time equal to one trillionth of a second.",
+		"value": "C73768",
+		"symbol": "ps",
+		"quantity": "time"
+	},
+	{
+		"name": "Nanosecond",
+		"description": "A unit of time equal to one billionth of a second.",
+		"value": "C73767",
+		"symbol": "ns",
+		"quantity": "time"
+	},
+	{
+		"name": "Mortality Cut-off Year, National Death Index",
+		"description": "The last year of data used in the National Death Index.",
+		"value": "C159714",
+		"symbol": "Mortality Cut-off Year, National Death Index",
+		"quantity": "year"
+	},
+	{
+		"name": "Birth Month",
+		"description": "The month in which a person was born.",
+		"value": "C83090",
+		"symbol": "BRTHMO",
+		"quantity": "month"
+	},
+	{
+		"name": "Month-Day-Year",
+		"description": "A format of a date in time, with the month followed by the date followed by the year.",
+		"value": "C156816",
+		"symbol": "MM/DD/YYYY",
+		"quantity": "month"
+	},
+	{
+		"name": "Week",
+		"description": "Any period of seven consecutive days.",
+		"value": "C29844",
+		"symbol": "wk",
+		"quantity": "time"
+	},
+	{
+		"name": "Second Trimester",
+		"description": "The period of gestation that ranges from the 13th to the 27th week of pregnancy.",
+		"value": "C92876",
+		"symbol": "Second Trimester",
+		"quantity": "trimester"
+	},
+	{
+		"name": "Late Third Trimester",
+		"description": "The period of gestation generally corresponding to the last half of the third trimester.",
+		"value": "C141438",
+		"symbol": "Late Third Trimester",
+		"quantity": "third trimester"
+	},
+	{
+		"name": "Early Third Trimester",
+		"description": "The period of gestation generally corresponding to the first half of the third trimester.",
+		"value": "C141437",
+		"symbol": "Early Third Trimester",
+		"quantity": "third trimester"
+	},
+	{
+		"name": "First Trimester",
+		"description": "The period of gestation that ranges from the first day of the last menstrual period in a woman up to the 12th week of her pregnancy.",
+		"value": "C92799",
+		"symbol": "First Trimester",
+		"quantity": "trimester"
+	},
+	{
+		"name": "Semester",
+		"description": "Half a year; a period of 6 months.",
+		"value": "C69120",
+		"symbol": "Semester",
+		"quantity": "time"
+	},
+	{
+		"name": "Gram per Deciliter",
+		"description": "A unit of mass concentration defined as the concentration of one gram of a substance per unit volume of the mixture equal to one deciliter (100 milliliters). The concept also refers to the metric unit of mass density (volumic mass) defined as the density of substance which mass equal to one gram occupies the volume one deciliter.",
+		"value": "C64783",
+		"symbol": "g%",
+		"quantity": "mass concentration"
+	},
+	{
+		"name": "Microgram per Milliliter",
+		"description": "A metric unit of mass concentration defined as the concentration of one gram of a substance per unit volume of the mixture equal to one cubic meter. The concept also refers to the metric unit of mass density (volumic mass) defined as the density of a substance which mass equal to one gram occupies the volume of one cubic meter.",
+		"value": "C64572",
+		"symbol": "mg/L",
+		"quantity": "derived international system of units"
+	},
+	{
+		"name": "Kilogram per Liter",
+		"description": "A unit of mass concentration defined as the concentration of one kilogram of a substance in unit volume of the mixture equal to one liter. The concept also refers to the unit of mass density (volumic mass) defined as the density of substance which mass equal to one kilogram occupies the volume one liter.",
+		"value": "C64566",
+		"symbol": "kg/L",
+		"quantity": "mass concentration"
+	},
+	{
+		"name": "Kilogram per Cubic Meter",
+		"description": "A SI derived unit of mass concentration defined as the concentration of one kilogram of a substance per unit volume of the mixture equal to one cubic meter, or the concentration of one milligram of a substance per unit volume of the mixture equal to one milliliter, or one gram of a substance per one liter of the mixture. It is also a unit of mass density (volumic mass) defined as the density of substance which mass equal to one milligram occupies the volume one milliliter.",
+		"value": "C42576",
+		"symbol": "g/l",
+		"quantity": "derived international system of units"
+	},
+	{
+		"name": "Milligram per Deciliter",
+		"description": "A unit of mass concentration defined as the concentration of one milligram of a substance in unit volume of the mixture equal to one cubic deciliter or 100 cubic centimeters. It is also a unit of mass density (volumic mass) defined as the density of substance which mass equal to one milligram occupies the volume one cubic deciliter or 100 cubic centimeters.",
+		"value": "C67015",
+		"symbol": "mg%",
+		"quantity": "mass concentration"
+	},
+	{
+		"name": "Microgram per Liter",
+		"description": "A unit of mass concentration defined as the concentration of one microgram of a substance per unit volume of the mixture equal to one liter. The concept also refers to the unit of mass density (volumetric mass) defined as the density of a substance which mass equal to one microgram occupies the volume of one liter.",
+		"value": "C67306",
+		"symbol": "ug/L",
+		"quantity": "mass concentration"
+	},
+	{
+		"name": "Microgram per Deciliter",
+		"description": "A unit of mass concentration defined as the concentration of one microgram of a substance per unit volume of the mixture equal to one deciliter. The concept also refers to the unit of mass density (volumic mass) defined as the density of substance which mass equal to one microgram occupies the volume one deciliter.",
+		"value": "C67305",
+		"symbol": "ug/dL",
+		"quantity": "mass concentration"
+	},
+	{
+		"name": "Gram per Microliter",
+		"description": "A unit of mass concentration defined as the concentration of one gram of a substance per unit volume of the mixture equal to one microliter. The concept also refers to the unit of mass density (volumic mass) defined as the density of substance which mass equal to one gram occupies the volume one microliter.",
+		"value": "C67301",
+		"symbol": "g/uL",
+		"quantity": "mass concentration"
+	},
+	{
+		"name": "Picogram per Deciliter",
+		"description": "A unit of mass concentration defined as the concentration of one picogram of a substance per unit volume of the mixture equal to one deciliter. The concept also refers to the unit of mass density (volumic mass) defined as the density of a substance which mass equal to one picogram occupies the volume of one deciliter.",
+		"value": "C67331",
+		"symbol": "pg/dL",
+		"quantity": "mass concentration"
+	},
+	{
+		"name": "Nanogram per Liter",
+		"description": "A unit of mass concentration defined as the concentration of one nanogram of a substance per one liter of the mixture, or one picogram of a substance per unit volume of the mixture equal to one milliliter, or one microgram of a substance per one cubic meter of the mixture. The concept also refers to the metric unit of mass density (volumic mass) defined as the density of a substance which mass equal to one nanogram occupies the volume of one liter.",
+		"value": "C67327",
+		"symbol": "ng/L",
+		"quantity": "mass concentration"
+	},
+	{
+		"name": "Nanogram per Deciliter",
+		"description": "A unit of mass concentration defined as the concentration of one nanogram of a substance per unit volume of the mixture equal to one deciliter. The concept also refers to the unit of mass density (volumic mass) defined as the density of substance which mass equal to one nanogram occupies the volume of one deciliter.",
+		"value": "C67326",
+		"symbol": "ng/dL",
+		"quantity": "mass concentration"
+	},
+	{
+		"name": "Gram Per Unit",
+		"description": "A unit of concentration or mass density equal to one gram of substance per unit(s) of substance.",
+		"value": "C166099",
+		"symbol": "g/U",
+		"quantity": "mass density"
+	},
+	{
+		"name": "Pound per Gallon",
+		"description": "A unit of mass concentration defined as the concentration of one pound of a substance in unit volume of the mixture equal to one gallon. The concept also refers to the unit of mass density (volumic mass) defined as the density of substance which mass equal to one pound occupies the volume one gallon.",
+		"value": "C69102",
+		"symbol": "lb/gal",
+		"quantity": "mass concentration"
+	},
+	{
+		"name": "Nanometer",
+		"description": "A metric unit of length equal to one billionth of a meter (10E-9 meter). Nanometer is used as a unit for light wavelength measurement.",
+		"value": "C67328",
+		"symbol": "nm",
+		"quantity": "length"
+	}
+]

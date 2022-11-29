@@ -1,0 +1,319 @@
+Item No.: 9-1
+Quantity: number of entities
+Symbol: N_X
+Defn: number of elementary entities of kind X in a system
+Unit: 1
+Remarks: The elementary entities must be specified and can be atoms, molecules, ions, electrons, other particle, or a specified group of such particles. It is important to always give a precise specification of the entity involved; this should preferably be done by the empirical chemical formula of the material involved.
+
+
+9-2,amount of substance (DEPRECATED: number of moles),n(X),quotient of number N of specified elementary entities of kind X (item 9-1) in a sample, and the Avogadro constant N_A (ISO 80000-1): n(X) = N(X)/N_A,mol
+Amount of substance is one of the seven base quantities in the International System of Quantities, ISQ (see ISO 80000-1). Elementary entities, such as molecules, atoms, ions, electrons, holes and other quasi-particles, double bonds can be used. It is necessary to specify precisely the entity involved, e.g. atoms of hydrogen H vs. molecules of hydrogen H2, preferably by giving the molecular chemical formula of the material involved. In the name “amount of substance”, the words “of substance” could be replaced by words specifying the substance concerned, e.g. “amount of hydrogen chloride, HCl”, or “amount of benzene, C6H6”. The name “number of moles” is often used for “amount of substance”, but this is deprecated because the name of a quantity should be distinguished from the name of the unit.
+
+9-3	relative atomic mass	mml_m14	quotient of the average mass (ISO 80000-4) of atom X and the unified atomic mass (ISO 80000-10)	1	A similar quantity “relative molecular mass” can be defined for molecules.
+EXAMPLE
+mml_m15
+mml_m16
+The relative atomic or relative molecular mass depends on the nuclidic composition.
+The International Union of Pure and Applied Chemistry (IUPAC) accepts the use of the special names “atomic weight” and “molecular weight” for the quantities “relative atomic mass” and “relative molecular mass”, respectively. The use of these traditional names is deprecated.
+9-4	molar mass	mml_m17	for a pure substance X, quotient of mass m(X) (ISO 80000-4) and amount n of substance (item 9-2):
+    mml_m18
+	g/mol
+kg mol−1
+	 
+9-5	molar volume	Vm	for a pure substance, quotient of its volume V (ISO 80000−3) and amount n of substance (item 9-2):
+    mml_m19
+	m3 mol−1	 
+9-6.1	molar internal
+energy	Um	quotient of internal energy U (ISO 80000-5) and amount n of substance (item 9-2):
+    mml_m20
+	J/mol
+kg m2 s−2 mol−1
+	Molar quantities are normally only used with reference to pure substances.
+9-6.2	molar enthalpy	Hm	quotient of enthalpy H (ISO 80000-5) and amount n of substance (item 9-2):
+    mml_m21
+	J/mol
+kg m2 s−2 mol−1
+	Molar quantities are normally only used with reference to pure substances.
+9-6.3	molar Helmholtz
+energy	Fm	quotient of the Helmholtz energy F (ISO 80000-5) and amount n of substance (item 9-2):
+    mml_m22
+	J/mol
+kg m2 s−2 mol−1
+	Molar quantities are normally only used with reference to pure substances.
+9-6.4	molar Gibbs energy	Gm	quotient of the Gibbs energy G (ISO 80000-5) and amount n of substance (item 9-2):
+    mml_m23
+	J/mol
+kg m2 s−2 mol−1
+	Molar quantities are normally only used with reference to pure substances.
+9-7	molar heat capacity	Cm	quotient of heat capacity C (ISO 80000-5) and amount of substance n (item 9-2):
+    mml_m24
+	J/(mol K)
+kg m2 s−2 K−1 mol−1
+	Conditions (constant pressure or volume etc.) must be specified.
+9-8	molar entropy	Sm	quotient of entropy S (ISO 80000-5) and amount n of substance (item 9-2):
+    mml_m25
+	J/(mol K)
+kg m2 s−2 K−1 mol−1
+	Conditions (constant pressure or volume etc.) must be specified.
+9-9.1	particle
+concentration	n, (C)	quotient of number N of particles (item 9-1) and volume V (ISO 80000−3):
+    mml_m26
+	m–3	The term “number density” is also used.
+9-9.2	molecular concentration	C(X), CX	for substance X in a mixture, quotient of number NX of molecules of substance X and volume V (ISO 80000−3) of the mixture:
+    mml_m27
+	m–3	 
+9-10	mass concentration	γX, (ρX)	for substance X in a mixture, quotient of mass mX (ISO 80000-4) of substance X and volume V (ISO 80000−3) of the mixture:
+    mml_m28
+	g/l
+kg m−3
+	Decided by the 16th CGPM (1979), both “l” and “L” are allowed for the symbols for the litre.
+9-11	mass fraction	wX	for substance X in a mixture, quotient of mass mX (ISO 80000-4) of substance X and total mass m of the mixture:
+    mml_m29
+	1	 
+9-12.1	amount-of-substance
+concentration	cX	for substance X in a mixture, quotient of amount nX of substance (item 9-2) of X and volume V (ISO 80000−3) of the mixture:
+    mml_m30
+	mol/l
+mol m–3
+	In chemistry, the name “amount-of-substance concentration” is generally abbreviated to the single word “concentration”, it being assumed that the adjective “amount-of-substance” is intended. For this reason, however, the word “mass” should never be omitted from the name “mass concentration” in item 9-10.
+Decided by the 16th CGPM (1979), both “l” and “L” are allowed for the symbols for the litre.
+9-12.2	standard amount-of-substance
+concentration	mml_m31	for substance X, one mole per litre	mol/l
+mol m−3
+	 Decided by the 16th CGPM (1979), both “l” and “L” are allowed for the symbols for the litre.
+9-13	amount-of-substance
+fraction
+mole fraction
+	xX, yX	for substance X in a mixture, quotient of amount of substance nX (item 9-2) of X and total amount n of substance (item 9-2) in the mixture:
+    mml_m32
+	1	For condensed phases, xX is used, and for gaseous mixtures yX may be used.
+The unsystematic name “mole fraction” is still used. However, the use of this name is deprecated.
+For this quantity, the entity used to define the amount of substance should always be a single molecule for every species in the mixture.
+9-14	volume fraction	mml_m33	for substance X, quotient of product of amount of substance fraction xX (item 9-13) of X and molar volume Vm,X (item 9-5) of the pure substance X at the same temperature (ISO 80000-5) and pressure(ISO 80000-4), and sum over all substances i of products of amount-of-substance fractions xi (item 9-13) of substance i and their molar volumes Vm,i (item 9-5):
+    mml_m34
+	ml/l
+1
+	Generally, the volume fraction is temperature dependent.
+Decided by the 16th CGPM (1979), both “l” and “L” are allowed for the symbols for the litre.
+9-15	molality	bB, mB	quotient of amount of substance (item 9-2) of solute B and mass mA (ISO 80000-4) of the solvent substance A
+bB = nB/mA	mol/kg	The alternative symbol mB should be avoided in situations where it might be mistaken for the mass of substance B. However, the symbol mB is much more commonly used than the symbol bB for molality, despite the possible confusion with mass.
+9-16	latent heat of phase
+transition,
+enthalpy of phase
+transition
+	Cpt	energy (ISO 80000-5) necessary to be added or subtracted isothermally and isobarically to a system to completely undergo the phase transition	J
+kg m2 s−2
+	Mostly, molar or specific quantity is used and phase transition is expressed explicitly, e.g. molar latent heat of evaporation.
+The subscript “pt” is the qualifier for the phase transition, which may be changed to e.g. “l-g”.
+The term “enthalpy of phase transition” is mainly used in theory.
+9-17	chemical potential
+<chemistry>	mml_m35	partial derivative of the Gibbs energy (ISO 80000-5) with respect to amount nX of substance X (item 9-2) at constant temperature T (ISO 80000-5) and pressure p (ISO 80000-4):
+    mml_m36
+	J/mol
+kg m2 s−2 mol−1
+	For a pure substance, where Gm is the molar Gibbs energy. In a mixture, μB is the partial molar Gibbs energy.
+In condensed matter physics, the chemical potential of electrons is energy.
+9-18	absolute activity	mml_m37	for substance X, exponential of quotient of chemical potential mml_m38 of substance B (item 9-17), and product of molar gas constant R (item 9-37.1) and thermodynamic temperature T (ISO 80000-5):
+    mml_m39
+	1	 
+9-19	partial pressure	mml_m40	for substance X in a gaseous mixture, product of amount-of-substance fraction yX of substance X (item 9-13) and total pressure p (ISO 80000-4):
+    mml_m41
+	Pa
+kg m−1 s−2
+	 
+9-20	fugacity	mml_m42	for substance X, quantity proportional to the absolute activity, mml_m43 (item 9-18), the proportionality factor, which is a function of temperature (ISO 80000-5) only, being determined by the condition that, at constant temperature and composition, mml_m44 tends to 1 for an indefinitely dilute gas	Pa
+kg m−1 s−2
+	    mml_m45
+where p is total pressure (ISO 80000-4).
+The IUPAC preferred symbol for fugacity is f.
+9-21	standard chemical
+potential	mml_m46,
+mml_m47
+	for substance B, value of the chemical potential (item 9-17) at specified standard conditions	J/mol
+kg m2 s−2 mol−1
+	    mml_m48
+where mml_m49 is a function of temperature T at the standard pressure mml_m50
+The standard chemical potential depends on the choice of standard state, which must be specified.
+In a liquid or solid solution, the standard state is referenced to the ideal dilute behaviour of the solute (substance B).
+9-22	activity factor	mml_m51	for substance X in a liquid or a solid mixture, quotient of absolute activity mml_m52 (item 9-18) of substance X and the product of absolute activity mml_m53 of the pure substance X at the same temperature (ISO 80000-5) and pressure (ISO 80000-4) and amount-of-substance fraction mml_m54 of substance X (item 9-13):
+    mml_m55
+	1	The systematic name is “activity factor”, but the name “activity coefficient” is also commonly used (see item 9-25).
+Activity factors can also be obtained applying Raoult’s law or Henry’s law.
+9-23	standard absolute
+activity
+<in a mixture>	mml_m56	for substance X in a liquid or a solid mixture, absolute activity mml_m57 (item 9-18) of the pure substance X at the same temperature (ISO 80000-5) but at standard pressure (ISO 80000-4) 105 Pa:
+    mml_m58
+	1	This quantity is a function of temperature only.
+9-24	activity of solute,
+relative activity
+of solute
+	mml_m59
+mml_m60
+	for a solute X in a solution, quantity proportional to the absolute activity, mml_m61 (item 9-18), the proportionality factor, which is a function of temperature (ISO 80000-5) and pressure (ISO 80000-4) only, being determined by the condition that, at constant temperature and pressure, aX divided by the molality (item 9-15) ratio, mml_m62 tends to 1 at infinite dilution; bX is the molality of solute X (item 9-15), and mml_m63 is standard molality:
+    mml_m64
+	1	The quantity mml_m65, similarly defined in terms of the concentration ratio mml_m66, is also called the activity or relative activity of solute X; mml_m67 is a standard amount-of-substance concentration (item 9-12.2):
+    mml_m68
+where ∑ denotes summation over all the solute substances. This especially applies to a dilute liquid solution.
+9-25	activity coefficient	mml_m69	for a solute B in a solution, quotient of activity aB of solute B (item 9-24), and quotient of the molality (item 9-15) bB of substance B and standard molality mml_m70:
+    mml_m71
+	1	The name “activity coefficient of solute B” is also used for the quantity mml_m72 defined as:
+    mml_m73
+See item 9-22.
+9-26	standard absolute
+activity
+<in a solution>	mml_m74	for a solute B in a solution:
+    mml_m75
+where ∑ denotes summation over all solutes, mml_m76 is a standard pressure (ISO 80000-4), mml_m77 is standard molality, and bB is the molality of substance B (item 9-15)
+	1	This quantity is a function of temperature only. It especially applies to a dilute liquid solution. The standard pressure is 105 Pa.
+9-27.1	activity of solvent,
+relative activity
+of solvent
+	aA	for the solvent A in a solution, quotient of the absolute activity of substance A, λA (item 9-18), and that, mml_m78, of the pure solvent at the same temperature (ISO 80000-5) and pressure (ISO 80000-4):
+    mml_m79
+	1	 
+9-27.2	osmotic factor
+of solvent,
+osmotic coefficient
+of solvent A
+	φ	quantity given by:
+    mml_m80
+where MA is the molar mass (item 9-4) of the solvent A, ∑ denotes summation over all the solutes, bB is the molality of solute B (item 9-15), and aA is the activity of solvent A (item 9-27.1)
+		The name “osmotic coefficient” is generally used, although the name “osmotic factor” is more systematic.
+This concept especially applies to a dilute liquid solution.
+9-27.3	standard absolute
+activity of solvent
+<in a dilute solution>	mml_m81	for solvent A, standard absolute activity (item 9-23) of the pure substance A at the same temperature (ISO 80000-5) and at a standard pressure mml_m82 (ISO 80000-4):
+    mml_m83
+		
+9-28	osmotic pressure	Π	excess pressure (ISO 80000-4) required to maintain osmotic equilibrium between a solution and the pure solvent separated by a membrane permeable to the solvent only	Pa
+kg m−1 s−2
+	 
+9-29	stoichiometric number of substance	mml_m84	for substance B, an integer number or a simple fraction, being negative for a reactant and positive for a product, occurring in the expression for a chemical reaction:
+    mml_m85
+where the symbol B denotes the reactants and products involved in the reaction
+	1	EXAMPLE
+(1/2)N2 + (3/2)H2 = NH3
+mml_m86(N2) = −1/2, mml_m87(H2) = −3/2, mml_m88(NH3) = +1.
+9-30	affinity of a chemical
+reaction	A	negative of the sum over all substances B of products of stoichiometric number mml_m89 of substance B (item 9-29) and chemical potential μB of substance B (item 9-17):
+    mml_m90
+	J/mol
+kg m2 s−2 mol−1
+	The affinity of a reaction is a measure of the “driving force” of the reaction. When it is positive, the reaction goes spontaneously from reactants to products, and when it is negative, the reaction goes in the opposite direction. Another way to write the definition is:
+    mml_m91
+where G is Gibbs energy (ISO 80000-5) and mml_m92 is the extent of the reaction (item 9-31).
+Note that vB is negative for reactants and positive for products.
+9-31	extent of reaction	mml_m93	difference of initial amount nB in of substance B (item 9-2) and equilibrium amount nB eq of substance B (item 9-2) divided by stoichiometric number mml_m94 of substance B (item 9-29):
+    mml_m95
+	mol	See remark to item 9-30.
+9-32	standard equilibrium constant,
+thermodynamic
+equilibrium constant
+	mml_m96	for a chemical reaction, product for all substances B of standard absolute activity mml_m97 of substance B (item 9-26) in power of minus stoichiometric number mml_m98 of substance B (item 9-29):
+    mml_m99
+	1	This quantity is a function of temperature only. Others depend on temperature, pressure, and composition.
+One can define in an analogous way an equilibrium constant in terms of fugacity, Kf, molality, Km, etc.
+9-33	equilibrium constant
+<pressure basis>	Kp	for gases, product for all substances B of partial pressure pB of substance B (item 9-19) in power of its stoichiometric number mml_m100 (item 9-29):
+    mml_m101
+	mml_m102
+mml_m103
+	 
+9-34	equilibrium constant
+<concentration basis>	Kc	for solutions, product for all substances B of concentration cB of substance B (item 9-9.1) in power of its stoichiometric number mml_m104 (item 9-29):
+    mml_m105
+	mml_m106	
+9-35.1	microcanonical
+partition function	mml_m107	number of all quantum states r consistent with given energy E (ISO 80000-4), volume (ISO 80000−3), and external fields:
+    mml_m108
+	1	    mml_m109
+where S is entropy (ISO 80000-5) and k is the Boltzmann constant (ISO 80000-1).
+9-35.2	canonical partition
+function	Z	sum over quantum states of energy Er (ISO 80000-4), expressed by:
+    mml_m110
+where k is the Boltzmann constant (ISO 80000-1), and T is thermodynamic temperature (ISO 80000-5)
+	1	    mml_m111
+where A is Helmholtz energy (ISO 80000-5).
+9-35.3	grand-canonical
+partition function,
+grand partition
+function
+	mml_m112	sum of canonical partition function Z (NA,NB,…) for the given number of particles A, B multiplied by absolute activities (item 9-18) mml_m113... of particles A, B:
+    mml_m114
+	1	    mml_m115
+where A is Helmholtz energy (ISO 80000-5), μB is the chemical potential of substance B, and nB is the amount of substance B.
+9-35.4	molecular partition
+function,
+partition function
+of a molecule
+	q	quantity given by:
+    mml_m116
+where εr is the energy (ISO 80000-5) of the r-th level of the molecule consistent with given volume (ISO 80000-3) and external fields, k is the Boltzmann constant (ISO 80000-1), and T is thermodynamic temperature (ISO 80000-5)
+	1	 
+9-36.1	statistical weight
+of subsystem	g	number of different microstates in a subsystem	1	 
+9-36.2	degeneracy,
+multiplicity
+	g	for quantum level, statistical weight of that level	1	If g = 1, the level is called non-degenerate.
+9-37.1	molar gas constant	R	product of the Boltzmann constant (ISO 80000-1) and the Avogadro constant (ISO 80000-1)	J/(mol K)
+kg m2 s−2 K−1 mol−1
+	For an ideal gas,
+    pVm = RT
+9-37.2	specific gas constant	Rs	quotient of molar gas constant R (item 9-37.1) and molar mass (item 9-4) M, i.e. Rs = R/M	J/(kg K)
+m2 s−2 K−1
+	 
+9-38	mean free path
+<chemistry>	l, λ	for a particle, the average distance d (ISO 80000−3) between two successive collisions with other particles	m	 
+9-39	diffusion coefficient
+<chemistry>	D	proportionality coefficient of local molecular concentration CB (item 9-9.2) of substance B in the mixture multiplied by the local average velocity (ISO 80000−3) mml_m117of the molecules of B, and minus the gradient of the local molecular concentration CB (item 9-9.2) of substance B in the mixture, expressed by:
+    mml_m118
+	m2 s−1	 
+9-40.1	thermal diffusion ratio	kT	in a steady-state of a binary mixture in which thermal diffusion occurs, proportionality factor between gradient of the amount-of-subsstance fraction xB (item 9-13) of the heavier substance B, and negative gradient of the local thermodynamic temperature T (ISO 80000-5) divided by that temperature (ISO 80000-5):
+    grad xB = −(kT/T) grad T
+	1	 
+9-40.2	thermal diffusion
+factor	mml_m119	quotient of the thermal diffusion ratio kT (item 9-40.1), and the product of the local amount-of-substance fractions xA, xB (item 9-13) of two substances A and B:
+    mml_m120
+	1	 
+9-41	thermal diffusion coefficient	DT	product of the thermal diffusion ratio kT (item 9-40.1) and the diffusion coefficient D (item 9-39):
+    mml_m121
+	m2 s−1	 
+9-42	ionic strength	I	in a sample, one half of the sum of square of the charge number zi (ISO 80000-10) of i-th ion multiplied by its molality bi (item 9-15) over any involved ion:
+    mml_m122
+	mol kg−1	 
+9-43	degree of dissociation,
+dissociation fraction
+	mml_m123	in a sample, quotient of the number nd of dissociated molecules and the total number n of molecules:
+    mml_m124
+	1	
+9-44	electrolytic
+conductivity	mml_m125	quotient of the magnitude of electric current density J (IEC 80000-6) and the magnitude electric field strength E (IEC 80000-6) in an electrolyte:
+    mml_m126
+	S/m
+kg−1 m−3 s3 A2
+	For anisotropic media, mml_m127 is a tensor.
+In IEC 80000-6 the symbols σ, γ are used.
+9-45	molar conductivity	mml_m128	in an electrolyte, quotient of electrolytic conductivity κ (item 9-44) and amount-of-substance concentration cB (item 9-12.1):
+    mml_m129
+	S m2/mol
+kg−1 s3 A2 mol−1
+	 
+9-46	transport number
+of the ion B,
+current fraction
+of the ion B
+	mml_m130	for the ion B, quotient of electric current iB (IEC 80000-6) carried by the ion B and total electric current i (IEC 80000-6) in an electrolyte:
+    mml_m131
+	1	 
+9-47	angle of optical
+rotation	mml_m132	angle through which plane-polarized light is rotated clockwise, as seen when facing the light source, in passing through an optically active medium	rad	 
+9-48	molar optical rotatory power	mml_m133	angle α of optical rotation (item 9-47), multiplied by the quotient of cross-sectional area A (ISO 80000−3) of a linearly polarized light beam and the amount of substance n (item 9-2) of the optically active component in the path of the beam:
+    mml_m134
+	rad m2/mol
+m2 mol−1
+	 
+9-49	specific optical rotatory power	mml_m135	angle α of optical rotation (item 9-47), multiplied by the quotient of cross-sectional area A (ISO 80000−3) of a linearly polarized light beam and the mass m (ISO 80000-4) of the optically active component in the path of the beam:
+    mml_m136
+	rad m2/kg1
+kg−1 m2
+	 

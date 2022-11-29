@@ -1,0 +1,146 @@
+{
+	"iri": "http://purl.obolibrary.org/obo/NCIT_C25709",
+	"lang": "en",
+	"description": ["A named quantity in terms of which other quantities are measured or specified, used as a standard measurement of like kinds."],
+	"synonyms": [
+		"Unit(s)",
+		"Units",
+		"Unit of Measure",
+		"unit(s)",
+		"UOM",
+		"Unit of Measurement",
+		"U",
+		"Unit",
+		"medication_units_of_measure",
+		"unit",
+		"medication units of measure"
+	],
+	"annotation": {
+		"Contributing_Source": [
+			"UCUM",
+			"NICHD",
+			"ICH",
+			"ICDC"
+		],
+		"Legacy Concept Name": ["Unit_of_Measure"],
+		"Preferred_Name": ["Unit of Measure"],
+		"Semantic_Type": ["Conceptual Entity"],
+		"UMLS_CUI": ["C1519795"],
+		"code": ["C25709"]
+	},
+	"label": "Unit of Measure",
+	"ontology_name": "ncit",
+	"ontology_prefix": "NCIT",
+	"ontology_iri": "http://purl.obolibrary.org/obo/ncit.owl",
+	"is_obsolete": false,
+	"term_replaced_by": null,
+	"is_defining_ontology": true,
+	"has_children": true,
+	"is_root": false,
+	"short_form": "NCIT_C25709",
+	"obo_id": "NCIT:C25709",
+	"in_subset": [
+		"NCIT_C90259",
+		"NCIT_C166373",
+		"NCIT_C165451",
+		"NCIT_C67567",
+		"NCIT_C89506",
+		"NCIT_C68668"
+	],
+	"obo_definition_citation": [
+		{
+			"definition": "A named quantity in terms of which other quantities are measured or specified, used as a standard measurement of like kinds.",
+			"oboXrefs": [
+				{
+					"database": null,
+					"id": "NCI",
+					"description": null,
+					"url": null
+				}
+			]
+		}
+	],
+	"obo_xref": null,
+	"obo_synonym": [
+		{
+			"name": "Units",
+			"scope": "hasExactSynonym",
+			"type": null,
+			"xrefs": []
+		},
+		{
+			"name": "Unit of Measure",
+			"scope": "hasExactSynonym",
+			"type": null,
+			"xrefs": []
+		},
+		{
+			"name": "Unit of Measurement",
+			"scope": "hasExactSynonym",
+			"type": null,
+			"xrefs": []
+		},
+		{
+			"name": "unit",
+			"scope": "hasExactSynonym",
+			"type": null,
+			"xrefs": []
+		},
+		{
+			"name": "medication units of measure",
+			"scope": "hasExactSynonym",
+			"type": null,
+			"xrefs": []
+		},
+		{
+			"name": "medication_units_of_measure",
+			"scope": "hasExactSynonym",
+			"type": null,
+			"xrefs": []
+		},
+		{
+			"name": "U",
+			"scope": "hasExactSynonym",
+			"type": null,
+			"xrefs": []
+		},
+		{
+			"name": "UOM",
+			"scope": "hasExactSynonym",
+			"type": null,
+			"xrefs": []
+		},
+		{
+			"name": "Unit(s)",
+			"scope": "hasExactSynonym",
+			"type": null,
+			"xrefs": []
+		},
+		{
+			"name": "unit(s)",
+			"scope": "hasExactSynonym",
+			"type": null,
+			"xrefs": []
+		},
+		{
+			"name": "Unit",
+			"scope": "hasExactSynonym",
+			"type": null,
+			"xrefs": []
+		}
+	],
+	"is_preferred_root": false,
+	"_links": {
+		"self": {"href": "https://www.ebi.ac.uk/ols/api/ontologies/ncit/terms/http%253A%252F%252Fpurl.obolibrary.org%252Fobo%252FNCIT_C25709?lang=en"},
+		"parents": {"href": "https://www.ebi.ac.uk/ols/api/ontologies/ncit/terms/http%253A%252F%252Fpurl.obolibrary.org%252Fobo%252FNCIT_C25709/parents"},
+		"ancestors": {"href": "https://www.ebi.ac.uk/ols/api/ontologies/ncit/terms/http%253A%252F%252Fpurl.obolibrary.org%252Fobo%252FNCIT_C25709/ancestors"},
+		"hierarchicalParents": {"href": "https://www.ebi.ac.uk/ols/api/ontologies/ncit/terms/http%253A%252F%252Fpurl.obolibrary.org%252Fobo%252FNCIT_C25709/hierarchicalParents"},
+		"hierarchicalAncestors": {"href": "https://www.ebi.ac.uk/ols/api/ontologies/ncit/terms/http%253A%252F%252Fpurl.obolibrary.org%252Fobo%252FNCIT_C25709/hierarchicalAncestors"},
+		"jstree": {"href": "https://www.ebi.ac.uk/ols/api/ontologies/ncit/terms/http%253A%252F%252Fpurl.obolibrary.org%252Fobo%252FNCIT_C25709/jstree"},
+		"children": {"href": "https://www.ebi.ac.uk/ols/api/ontologies/ncit/terms/http%253A%252F%252Fpurl.obolibrary.org%252Fobo%252FNCIT_C25709/children"},
+		"descendants": {"href": "https://www.ebi.ac.uk/ols/api/ontologies/ncit/terms/http%253A%252F%252Fpurl.obolibrary.org%252Fobo%252FNCIT_C25709/descendants"},
+		"hierarchicalChildren": {"href": "https://www.ebi.ac.uk/ols/api/ontologies/ncit/terms/http%253A%252F%252Fpurl.obolibrary.org%252Fobo%252FNCIT_C25709/hierarchicalChildren"},
+		"hierarchicalDescendants": {"href": "https://www.ebi.ac.uk/ols/api/ontologies/ncit/terms/http%253A%252F%252Fpurl.obolibrary.org%252Fobo%252FNCIT_C25709/hierarchicalDescendants"},
+		"graph": {"href": "https://www.ebi.ac.uk/ols/api/ontologies/ncit/terms/http%253A%252F%252Fpurl.obolibrary.org%252Fobo%252FNCIT_C25709/graph"}
+	}
+}

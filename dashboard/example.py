@@ -16,49 +16,60 @@ from dashboard.repsys_ingest import *
 from datetime import date
 
 
-choice = 'getiecquants'
+choice = 'runncit'
 
-if choice == 'getiecquants':
+if choice == 'getiec':
+    # get the data in the IEC CDD and save it as files for quantities and units
     rsid = 15
-    # starting with the list of units file go out to all the quantities and record the units they point too
-    url = 'https://cdd.iec.ch/cdd/iec61360/iec61360.nsf/ListsOfUnits/'
+    repsysobj = Repsystems.objects.get(id=rsid)
+    repsys = Repsystems.objects.values('id', 'url', 'fileupdated').get(id=rsid)
+    # starting with the list of units page (below) go out to all the quantities and record the units they point too
+    url = repsys['url']
     html = requests.get(url)
     data = BeautifulSoup(html.content, "html.parser")
     quants = data.select("a[href*=OpenDocument]")
-    qout = {}
+    qout, uout = [], []
     for quant in quants:
         code = quant.text
         if 'UAD' not in code:  # UAD entries are quantities
             continue
         qurl = quant['href']
-        qout.update({'code': code, 'url': qurl})
+        qurl = qurl.replace('?opendocument', '')
+        qname = quant.parent.nextSibling.text
+        qout.append({'name': qname, 'code': code, 'url': qurl})
         # go to the quant page to get the units...
         qhtml = requests.get('https://cdd.iec.ch' + qurl)
         qdata = BeautifulSoup(qhtml.content, "html.parser")
-
-        print(code)
-        print(url)
-        exit()
-
-if choice == 'runiec':
-    rsid = 15
-    repsysobj = Repsystems.objects.get(id=rsid)
-    repsys = Repsystems.objects.values('id', 'url', 'fileupdated').get(id=rsid)
-    # check if URL is valid
-    req = requests.get(repsys['url'])
-    if req.status_code != 200:
-        print('invalid request!')
-    typechar = req.headers['Content-type']
-    parts = typechar.split("; ")
-    ext = mimetypes.guess_extension(parts[0], )
-    # TODO: add check for existing file and comparison of bytes
-    with open(os.path.join(BASE_DIR, STATIC_URL, f'repsys_{rsid}{ext}'), 'wb') as f:
-        f.write(req.content)
+        units = qdata.find(string=re.compile("Codes of units:")).parent.next_sibling.find_all('a')
+        for unit in units:
+            uurl = unit['href']
+            uurl = uurl.replace('?opendocument', '')
+            text = unit.text
+            code, name = text.split(' - ')
+            uhtml = requests.get('https://cdd.iec.ch' + uurl)
+            upage = BeautifulSoup(uhtml.content, "html.parser")
+            tbl = upage.find(id="contentL1")
+            udata = {}
+            for row in tbl.find_all('tr'):
+                cells = row.find_all('td')
+                name = cells[0].text.strip('\n :')
+                value = cells[1].text.strip('\n ')
+                udata.update({name: value})
+            uout.append({'name': udata['Preferred name'], 'code': code, 'url': uurl, 'shortname': udata['Short name'],
+                         'definition': udata['Definition'], 'unece': udata['Remark'].replace('UN/ECE code: ', ''),
+                         'quantity': qname, 'quanturl': qurl})
+    # write out the files
+    jqout = json.dumps(qout)
+    with open(os.path.join(BASE_DIR, STATIC_URL, f'repsys_{rsid}_quants.json'), 'w') as f:
+        f.write(jqout)
         f.close()
-    # check for file update -> format of req['Last-Modified'] is "Mon, 10 Oct 2022 20:32:55 GMT"
-    rdate = datetime.strptime(req.headers['Last-Modified'], '%a, %d %b %Y %H:%M:%S %Z').date()
+    juout = json.dumps(uout)
+    with open(os.path.join(BASE_DIR, STATIC_URL, f'repsys_{rsid}_units.json'), 'w') as f:
+        f.write(juout)
+        f.close()
+    # update the DB record
+    rdate = datetime.strptime(html.headers['Last-Modified'], '%a, %d %b %Y %H:%M:%S %Z').date()
     ldate = repsys['fileupdated']
-
     if ldate is None:
         repsysobj.fileupdated = rdate
         print('added file last modified date')
@@ -70,16 +81,55 @@ if choice == 'runiec':
     pyjax = pytz.timezone("America/New_York")
     repsysobj.checked = pyjax.localize(datetime.now())
     repsysobj.save()
+    exit()
+
+if choice == 'runiec':
+    # read the units data file and add the units to the entities table
+    rsid = 15
+    with open(os.path.join(BASE_DIR, STATIC_URL, f'repsys_{rsid}_units.json'), 'r') as f:
+        tmp = f.read()
+        f.close()
+    units = json.loads(tmp)
+    for unit in units:
+        ent, created = Entities.objects.get_or_create(
+            repsys='iec',
+            repsystem_id=rsid,
+            name=unit['name'],
+            symbol=unit['shortname'],
+            quantity=unit['quantity'],
+            lang='en',
+            value=unit['code'],
+            source='iec',
+            comment=unit['definition']
+        )
+        ent.save()
+        if created:
+            print("added '" + str(ent.value) + "' (" + str(ent.id) + ")")
+        else:
+            print("found '" + str(ent.value) + "' (" + str(ent.id) + ")")
+        # add unece equivalent if available
+        if unit['unece'] != "":
+            ent, created = Entities.objects.get_or_create(
+                repsys='unece',
+                repsystem_id=16,
+                name=unit['name'],
+                quantity=unit['quantity'],
+                lang='en',
+                value=unit['unece'],
+                source='iec'
+            )
+            ent.save()
+            if created:
+                print("added '" + str(ent.value) + "' (" + str(ent.id) + ")")
+            else:
+                print("found '" + str(ent.value) + "' (" + str(ent.id) + ")")
 
 if choice == 'runwd':
     # load current file
     rsid = 7
-    repsys = Repsystems.objects.values('id', 'url', 'fileupdated').get(id=rsid)
-    with open(os.path.join(BASE_DIR, STATIC_URL, f'repsys_{rsid}_data.json'), 'r') as f:
-        tmp = f.read()
-        f.close()
-    data = json.loads(tmp)
+    data = getrepsystemdata(rsid)
     for hit in data['results']['bindings']:
+        # check the hits for any that are not useful
         if "http://www.wikidata.org/entity/Q" not in hit['unit']['value']:
             continue
         wdid = hit['unit']['value'].replace("http://www.wikidata.org/entity/", "")
@@ -136,7 +186,6 @@ if choice == 'runwd':
                 print("found '" + ent.value + "' (" + str(ent.id) + ")")
         else:
             continue
-    exit()
 
 if choice == 'runqudt':
     rsid = 10
@@ -374,3 +423,42 @@ if choice == 'runsweet':
                 print("added '" + str(ent.value) + "' (" + str(ent.id) + ")")
             else:
                 print("found '" + str(ent.value) + "' (" + str(ent.id) + ")")
+
+if choice == 'runuo':
+    rsid = 8
+    jdata = getrepsystemdata(rsid)
+    data = json.loads(jdata)
+    for unit in data:
+        types = ':'.join(unit['@type'])
+        if types == 'http://www.w3.org/2002/07/owl#NamedIndividual:http://www.w3.org/2002/07/owl#Class':
+            value = unit['@id'].replace("http://purl.obolibrary.org/obo/", "")
+            cmmt = unit['http://www.w3.org/2000/01/rdf-schema#comment'][0]['@value']
+            name = unit['http://www.w3.org/2000/01/rdf-schema#label'][0]['@value']
+            symbol = None
+            if 'oboInOwl:hasExactSynonym' in unit:
+                for val in unit['oboInOwl:hasExactSynonym']:  # chooses the shortest length string as
+                    if not symbol:
+                        symbol = val['@value']
+                    elif len(val['@value']) < len(symbol):
+                        symbol = val['@value']
+            ent, created = Entities.objects.get_or_create(
+                repsys='uo',
+                repsystem_id=rsid,
+                name=name,
+                lang='en',
+                symbol=symbol,
+                value=value,
+                source='uo',
+                comment=cmmt
+            )
+            ent.save()
+            if created:
+                print("added '" + str(ent.value) + "' (" + str(ent.id) + ")")
+            else:
+                print("found '" + str(ent.value) + "' (" + str(ent.id) + ")")
+
+if choice == 'runncit':
+    rsid = 9
+    jdata = getrepsystemdata(rsid)
+    print(jdata)
+    exit()
