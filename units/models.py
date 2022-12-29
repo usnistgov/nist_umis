@@ -112,16 +112,27 @@ class Domains(models.Model):
 
 class Quantities(models.Model):
     id = models.SmallAutoField(primary_key=True)
-    quantitykind = models.ForeignKey(Quantitykinds, on_delete=models.PROTECT, db_column='quantitykind_id')
-    quantitysystem = models.ForeignKey(Quantitysystems, on_delete=models.PROTECT, db_column='quantitysystem_id')
+    quantitykind_id = models.SmallIntegerField()
+    quantitysystem_id = models.IntegerField(blank=True, null=True)
     name = models.CharField(max_length=128)
     description = models.CharField(max_length=1024, blank=True, null=True)
     symbol = models.CharField(max_length=128, blank=True, null=True)
     latexsymbol = models.CharField(max_length=512, blank=True, null=True)
     latexdefn = models.CharField(max_length=512, blank=True, null=True)
     url = models.CharField(max_length=256, blank=True, null=True)
-    domain = models.ForeignKey(Domains, on_delete=models.PROTECT, db_column='domain_id')
+    domain_id = models.IntegerField(blank=True, null=True)
     updated = models.DateTimeField()
+    sysml_name = models.CharField(max_length=128, blank=True, null=True)
+    sysml_src = models.CharField(max_length=8, blank=True, null=True)
+    sysml_defn = models.CharField(max_length=512, blank=True, null=True)
+    sysml_symbol = models.CharField(max_length=32, blank=True, null=True)
+    sysml_numtype = models.CharField(max_length=128, blank=True, null=True)
+    sysml_unittype = models.CharField(max_length=128, blank=True, null=True)
+    sysml_torder = models.IntegerField(blank=True, null=True)
+    sysml_qdim = models.CharField(max_length=64, blank=True, null=True)
+    sysml_unit = models.CharField(max_length=128, blank=True, null=True)
+    sysml_remark = models.CharField(max_length=256, blank=True, null=True)
+    iso_source = models.CharField(max_length=256, blank=True, null=True)
 
     class Meta:
         managed = False
