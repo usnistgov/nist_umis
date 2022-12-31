@@ -123,7 +123,7 @@ class Quantities(models.Model):
     domain_id = models.IntegerField(blank=True, null=True)
     updated = models.DateTimeField()
     sysml_name = models.CharField(max_length=128, blank=True, null=True)
-    sysml_src = models.CharField(max_length=8, blank=True, null=True)
+    sysml_domain = models.CharField(max_length=32, blank=True, null=True)
     sysml_defn = models.CharField(max_length=512, blank=True, null=True)
     sysml_symbol = models.CharField(max_length=32, blank=True, null=True)
     sysml_numtype = models.CharField(max_length=128, blank=True, null=True)
@@ -133,6 +133,8 @@ class Quantities(models.Model):
     sysml_unit = models.CharField(max_length=128, blank=True, null=True)
     sysml_remark = models.CharField(max_length=256, blank=True, null=True)
     iso_source = models.CharField(max_length=256, blank=True, null=True)
+    iso_item = models.CharField(max_length=8, blank=True, null=True)
+    done = models.CharField(max_length=3)
 
     class Meta:
         managed = False
