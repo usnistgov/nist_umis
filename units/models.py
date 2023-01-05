@@ -70,7 +70,6 @@ class Unitsystems(models.Model):
 
 class Units(models.Model):
     name = models.CharField(max_length=128)
-    quantitykind = models.ForeignKey(Quantitykinds, on_delete=models.PROTECT, db_column='quantitykind_id')
     unitsystem = models.ForeignKey(Unitsystems, on_delete=models.PROTECT, db_column='unitsystem_id')
     description = models.CharField(max_length=1024, blank=True, null=True)
     prefix_id = models.IntegerField(blank=True, null=True)
@@ -293,3 +292,13 @@ class Entities(models.Model):
     class Meta:
         managed = False
         db_table = 'entities'
+
+
+class QuantitykindsUnits(models.Model):
+    quantitykind = models.ForeignKey(Quantitykinds, on_delete=models.PROTECT, db_column='quantitykind_id')
+    unit = models.ForeignKey(Units, on_delete=models.PROTECT, db_column='unit_id')
+    updated = models.DateTimeField()
+
+    class Meta:
+        managed = False
+        db_table = 'quantitykinds_units'

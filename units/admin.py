@@ -6,9 +6,12 @@ from units.models import *
 @admin.register(Units)
 class UnitsAdmin(admin.ModelAdmin):
     """ systems table admin config """
-    list_display = ('id', 'name', 'quantitykind', 'unitsystem')
+    list_display = ('id', 'name', 'qkindname', 'unitsystem')
     ordering = ('name',)
     search_fields = ('name',)
+
+    def qkindname(self, obj):
+        return obj.quantities_units.quantities.name
 
 
 @admin.register(Domains)

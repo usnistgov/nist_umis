@@ -11,14 +11,24 @@ def home(request):
 
 def index(request):
     """ present an overview page about the system in the sds """
-    data = Units.objects.all().order_by('quantitykind__name', 'name')
+    data = Units.objects.all().order_by('quantitykindsunits__quantitykind__name', 'name')
     byq = {}
+    unitids = {}
     for unit in data:
-        if unit.quantitykind.name not in byq.keys():
-            byq.update({unit.quantitykind.name: []})
-        tmp = {'id': unit.id, 'name': unit.name}
-        byq[unit.quantitykind.name].append(tmp)
-    return render(request, "../templates/units/index.html", {'data': byq})
+        qkinds = unit.quantitykindsunits_set.all()
+        for qkind in qkinds:
+            if qkind.quantitykind.name not in byq.keys():
+                byq.update({qkind.quantitykind.name: []})
+                unitids.update({qkind.quantitykind.name: []})
+            if unit.id not in unitids[qkind.quantitykind.name]:
+                tmp = {'id': unit.id, 'name': unit.name}
+                unitids[qkind.quantitykind.name].append(unit.id)
+                byq[qkind.quantitykind.name].append(tmp)
+    # sort by key (order by in units call does not work because of multiple qkinds per unit possible)
+    tmp2 = list(byq.keys())
+    tmp2.sort()
+    data = {i: byq[i] for i in tmp2}
+    return render(request, "../templates/units/index.html", {'data': data})
 
 
 def view(request, uid):
@@ -31,11 +41,25 @@ def view(request, uid):
         except Units.DoesNotExist:
             return redirect('/')
     unit = Units.objects.get(id=uid)
-    qkind = unit.quantitykind
+    qkinds = unit.quantitykindsunits_set.all()
     usys = unit.unitsystem
-    qsys = qkind.quantitysystem
-    dv = qkind.dimensionvector
-    quants = qkind.quantities_set.all()
+    qsyss = []
+    dvs = []
+    quants = []
+    types = []
+    for qkind in qkinds:
+        qsyss.append(qkind.quantitykind.quantitysystem)
+        dvs.append(qkind.quantitykind.dimensionvector)
+        types.append(qkind.quantitykind.type)
+        for quant in qkind.quantitykind.quantities_set.all():
+            quants.append(quant)
+    qsyss = list(set(qsyss))
+    qsys = qsyss[0]
+    dvs = list(set(dvs))
+    dv = dvs[0]
+    types = list(set(dvs))
+    type = types[0]
+    quants = list(set(quants))
     data = unit.representations_set.all().filter(repsystem_id__isnull=False).\
         annotate(count=Count('repsystem')).order_by('count')
     equsf = unit.equ_fromunit_related.all()
@@ -57,5 +81,5 @@ def view(request, uid):
         reps[sg]['systems'].append(tmp)
 
     return render(request, "../templates/units/view.html",
-                  {'unit': unit, 'reps': reps, 'qkind': qkind, 'usys': usys, 'equsf': equsf, 'equst': equst,
-                   'corsf': corsf, 'corst': corst, 'qsys': qsys, 'dv': dv, 'quants': quants})
+                  {'unit': unit, 'reps': reps, 'qkinds': qkinds, 'usys': usys, 'equsf': equsf, 'equst': equst,
+                   'corsf': corsf, 'corst': corst, 'qsys': qsys, 'dv': dv, 'quants': quants, 'type': type})

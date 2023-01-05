@@ -2286,7 +2286,7 @@ standard library package ISQElectromagnetism {
         doc
         /*
          * source: item 6-57 apparent power
-         * symbol(s): ``, `underline(S)`, ``
+         * symbol(s): `|underline(S)|`
          * application domain: generic
          * name: ApparentPower (specializes Power)
          * quantity dimension: L^2*M^1*T^-3
