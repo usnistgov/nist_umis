@@ -112,9 +112,10 @@ class Domains(models.Model):
 
 class Quantities(models.Model):
     id = models.SmallAutoField(primary_key=True)
-    quantitykind_id = models.SmallIntegerField()
-    quantitysystem_id = models.IntegerField(blank=True, null=True)
+    quantitykind = models.ForeignKey(Quantitykinds, on_delete=models.PROTECT, db_column='quantitykind_id')
+    quantitysystem = models.ForeignKey(Quantitysystems, on_delete=models.PROTECT, db_column='quantitysystem_id')
     name = models.CharField(max_length=128)
+    altnames = models.CharField(max_length=512)
     description = models.CharField(max_length=1024, blank=True, null=True)
     symbol = models.CharField(max_length=128, blank=True, null=True)
     latexsymbol = models.CharField(max_length=512, blank=True, null=True)

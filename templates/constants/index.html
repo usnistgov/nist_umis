@@ -17,7 +17,7 @@
             </div>
             <div class="list-group card-responsive">
                 {% for constant in constants %}
-                    <li class="list-group-item constant" data-constant="{{ constant.name|lower }}">
+                    <li class="list-group-item item" data-content="{{ constant.name|lower }}">
                         <a href="/constants/view/{{ constant.id }}">{{ constant.name }}</a>
                     </li>
                 {% endfor %}

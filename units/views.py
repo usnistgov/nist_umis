@@ -11,17 +11,18 @@ def home(request):
 
 def index(request):
     """ present an overview page about the system in the sds """
-    data = Units.objects.all().order_by('quantitykind__shortname', 'name')
+    data = Units.objects.all().order_by('quantitykind__name', 'name')
     byq = {}
     for unit in data:
-        if unit.quantitykind.shortname not in byq.keys():
-            byq.update({unit.quantitykind.shortname: []})
+        if unit.quantitykind.name not in byq.keys():
+            byq.update({unit.quantitykind.name: []})
         tmp = {'id': unit.id, 'name': unit.name}
-        byq[unit.quantitykind.shortname].append(tmp)
+        byq[unit.quantitykind.name].append(tmp)
     return render(request, "../templates/units/index.html", {'data': byq})
 
 
 def view(request, uid):
+    """ view the different representations of a unit"""
     if uid.isnumeric():
         pass
     elif isinstance(uid, str):

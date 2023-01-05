@@ -14,12 +14,12 @@
                         <b>Description</b>: {{ quant.description }}<br/>
                         <b>Quantity Kind</b>: {{ quant.quantitykind.name }}<br/>
                         <b>Quantity System</b>: {{ quant.quantitysystem.name }}<br/>
-                        <b>Symbol</b>: {{ quant.symbol }}<br/>
+                        <b>Symbol</b>: {{ quant.sysml_symbol }}<br/>
                         <b>Source</b>: <a href="{{ quant.url }}" target="_blank">{{ quant.url }}</a><br/>
                     </div>
                     <div class="col-6">
                         {% if units|length > 0 %}
-                            <b><em>Units derived from this quantity</em></b><br/>
+                            <b><em>Applicable units for this quantity</em></b><br/>
                             {% for unit in units %}
                                 <a href="/units/view/{{ unit.id }}" class="btn btn-sm btn-warning">{{ unit.name }}</a>
                             {% endfor %}

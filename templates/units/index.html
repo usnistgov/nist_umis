@@ -4,19 +4,26 @@
 {% block content %}
 <h2>Units of Measure (by Quantity Kind)</h2>
 <div class="row">
-    {% for key, units in data.items %}
-	<div class="col-sm-3">
-		<div class="card card-success mb-2">
-			<div class="card-header bg-lightgrn">
-				<h5 class="card-title">{{ key }}</h5>
-			</div>
-			<div class="card-body list-group list-group-flush p-0">
-                {% for unit in units %}
-                    <a class='list-group-item' href="/units/view/{{ unit.id }}">{{ unit.name }}</a>
-                {% endfor %}
-			</div>
-		</div>
-	</div>
-    {% endfor %}
+    <div class="card mt-3">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-12">
+                    <div class="table-responsive-u-view">
+                        <table class="table table-sm table-striped fs-6">
+                           {% for key, units in data.items %}
+                                <tr class="item">
+                                    <td><b>{{ key }}</b>:
+                                        {% for unit in units %}
+                                            <a href="/units/view/{{ unit.id }}">{{ unit.name }}</a>{% if not forloop.last %}, {% endif %}
+                                        {% endfor %}
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 {% endblock %}
