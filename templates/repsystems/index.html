@@ -7,7 +7,7 @@
     {% for rsys in rsyss %}
 	<div class="col-4">
 		<div class="card card-success mb-2">
-			<div class="card-header bg-lightgrn">
+			<div class="card-header {% if rsys.status == 'legacy' %} bg-red {% else %} bg-lightgrn {% endif %}">
                 <h6 class="card-title"><a href="/repsystems/view/{{ rsys.id }}">{{ rsys.name }}&nbsp;({{ rsys.abbrev }})</a></h6>
 			</div>
 			<div class="card-body justify fs-7">{{ rsys.description|truncatewords:32 }}</div>

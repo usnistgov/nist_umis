@@ -1,4 +1,4 @@
-SELECT ?unit ?unitLabel ?subclassLabel ?qudt ?ncit ?ucum ?unece ?uom2 ?iec ?wolf ?iev
+SELECT ?unit ?unitLabel ?subclassLabel ?qudt ?ncit ?ucum ?unece ?uom2 ?iec ?wolf ?iev ?wur
 WHERE 
 {
   ?subclass wdt:P279 wd:Q47574.
@@ -11,6 +11,8 @@ WHERE
   OPTIONAL { ?unit wdt:P8855 ?iec }
   OPTIONAL { ?unit wdt:P7007 ?wolf }
   OPTIONAL { ?unit wdt:P8855 ?iev }
+  OPTIONAL { ?unit wdt:P3328 ?wur }
+  OPTIONAL { ?unit wdt:P4732 ?igb }
   FILTER(?subclass != wd:Q8142)
   SERVICE wikibase:label { bd:serviceParam wikibase:language "[AUTO_LANGUAGE],en". }
 }

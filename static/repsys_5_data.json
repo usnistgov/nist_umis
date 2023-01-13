@@ -138,7 +138,10 @@
 				"@language": "en",
 				"@value": "formazin turbidity unit"
 			},
-			"notation": ["FTU","FNU"]
+			"notation": [
+				"FTU",
+				"FNU"
+			]
 		},
 		{
 			"@id": "sorepsu:LogarithmicUnit",

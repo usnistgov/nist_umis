@@ -16,80 +16,13 @@ from dashboard.repsys_ingest import *
 from datetime import date
 
 
-choice = 'runncit'
+choice = 'rungb'
 
-if choice == 'getiec':
-    # get the data in the IEC CDD and save it as files for quantities and units
-    rsid = 15
-    repsysobj = Repsystems.objects.get(id=rsid)
-    repsys = Repsystems.objects.values('id', 'url', 'fileupdated').get(id=rsid)
-    # starting with the list of units page (below) go out to all the quantities and record the units they point too
-    url = repsys['url']
-    html = requests.get(url)
-    data = BeautifulSoup(html.content, "html.parser")
-    quants = data.select("a[href*=OpenDocument]")
-    qout, uout = [], []
-    for quant in quants:
-        code = quant.text
-        if 'UAD' not in code:  # UAD entries are quantities
-            continue
-        qurl = quant['href']
-        qurl = qurl.replace('?opendocument', '')
-        qname = quant.parent.nextSibling.text
-        qout.append({'name': qname, 'code': code, 'url': qurl})
-        # go to the quant page to get the units...
-        qhtml = requests.get('https://cdd.iec.ch' + qurl)
-        qdata = BeautifulSoup(qhtml.content, "html.parser")
-        units = qdata.find(string=re.compile("Codes of units:")).parent.next_sibling.find_all('a')
-        for unit in units:
-            uurl = unit['href']
-            uurl = uurl.replace('?opendocument', '')
-            text = unit.text
-            code, name = text.split(' - ')
-            uhtml = requests.get('https://cdd.iec.ch' + uurl)
-            upage = BeautifulSoup(uhtml.content, "html.parser")
-            tbl = upage.find(id="contentL1")
-            udata = {}
-            for row in tbl.find_all('tr'):
-                cells = row.find_all('td')
-                name = cells[0].text.strip('\n :')
-                value = cells[1].text.strip('\n ')
-                udata.update({name: value})
-            uout.append({'name': udata['Preferred name'], 'code': code, 'url': uurl, 'shortname': udata['Short name'],
-                         'definition': udata['Definition'], 'unece': udata['Remark'].replace('UN/ECE code: ', ''),
-                         'quantity': qname, 'quanturl': qurl})
-    # write out the files
-    jqout = json.dumps(qout)
-    with open(os.path.join(BASE_DIR, STATIC_URL, f'repsys_{rsid}_quants.json'), 'w') as f:
-        f.write(jqout)
-        f.close()
-    juout = json.dumps(uout)
-    with open(os.path.join(BASE_DIR, STATIC_URL, f'repsys_{rsid}_units.json'), 'w') as f:
-        f.write(juout)
-        f.close()
-    # update the DB record
-    rdate = datetime.strptime(html.headers['Last-Modified'], '%a, %d %b %Y %H:%M:%S %Z').date()
-    ldate = repsys['fileupdated']
-    if ldate is None:
-        repsysobj.fileupdated = rdate
-        print('added file last modified date')
-    elif ldate < rdate:
-        repsysobj.fileupdated = rdate
-        print('file has been updated')
-    else:
-        print('file unchanged')
-    pyjax = pytz.timezone("America/New_York")
-    repsysobj.checked = pyjax.localize(datetime.now())
-    repsysobj.save()
-    exit()
-
+# checked 1/12/23
 if choice == 'runiec':
     # read the units data file and add the units to the entities table
     rsid = 15
-    with open(os.path.join(BASE_DIR, STATIC_URL, f'repsys_{rsid}_units.json'), 'r') as f:
-        tmp = f.read()
-        f.close()
-    units = json.loads(tmp)
+    units = getrepsystemdata(rsid)
     for unit in units:
         ent, created = Entities.objects.get_or_create(
             repsys='iec',
@@ -107,6 +40,7 @@ if choice == 'runiec':
             print("added '" + str(ent.value) + "' (" + str(ent.id) + ")")
         else:
             print("found '" + str(ent.value) + "' (" + str(ent.id) + ")")
+
         # add unece equivalent if available
         if unit['unece'] != "":
             ent, created = Entities.objects.get_or_create(
@@ -124,6 +58,7 @@ if choice == 'runiec':
             else:
                 print("found '" + str(ent.value) + "' (" + str(ent.id) + ")")
 
+# checked 1/10/23
 if choice == 'runwd':
     # load current file
     rsid = 7
@@ -132,13 +67,16 @@ if choice == 'runwd':
         # check the hits for any that are not useful
         if "http://www.wikidata.org/entity/Q" not in hit['unit']['value']:
             continue
+        if "UCUM derived unit" == hit['subclassLabel']['value'] or "UCUM base unit" == hit['subclassLabel']['value']:
+            continue
         wdid = hit['unit']['value'].replace("http://www.wikidata.org/entity/", "")
         # disabled so we capture this data that is mostly ucum codes...
         # if wdid == hit['unitLabel']['value']:
         #     # entries where name is not defined
         #     continue
         #     print(hit)
-        if ('qudt' or 'ncit' or 'ucum' or 'unece' or 'uom2' or 'iec' or 'wolf' or 'iev') in hit:
+
+        if ('qudt' or 'ncit' or 'ucum' or 'unece' or 'uom2' or 'iec' or 'wolf' or 'iev' or 'wur') in hit:
             repsyss = []
             if 'qudt' in hit:
                 repsyss.append({'name': "qudt", 'rsid': 10})
@@ -149,13 +87,15 @@ if choice == 'runwd':
             if 'unece' in hit:
                 repsyss.append({'name': "unece", 'rsid': 6})
             if 'uom2' in hit:
-                repsyss.append({'name': "uom2", 'rsid': 10})
+                repsyss.append({'name': "uom2", 'rsid': 13})
             if 'iec' in hit:
-                repsyss.append({'name': "iec", 'rsid': 10})
+                repsyss.append({'name': "iec", 'rsid': 15})
             if 'wolf' in hit:
-                repsyss.append({'name': "wolf", 'rsid': 10})
+                repsyss.append({'name': "wolf", 'rsid': 20})
             if 'iev' in hit:
-                repsyss.append({'name': "iev", 'rsid': 10})
+                repsyss.append({'name': "iev", 'rsid': 21})
+            if 'wur' in hit:
+                repsyss.append({'name': "wur", 'rsid': 23})
             for repsys in repsyss:
                 ent, created = Entities.objects.get_or_create(
                     name=hit['unitLabel']['value'],
@@ -187,38 +127,35 @@ if choice == 'runwd':
         else:
             continue
 
+# checked 1/13/23
 if choice == 'runqudt':
     rsid = 10
-    repsys = Repsystems.objects.values('id', 'url', 'fileupdated').get(id=rsid)
-    # getrepsystemdata(rsid)  # converts the ttl file into jsonld (when .ttl file updated)
-    # TODO: run update when todays date of ttl file is more recent than that of the json file
-    with open(os.path.join(BASE_DIR, STATIC_URL, f'repsys_{rsid}_data.json'), 'r') as f:
-        tmp = f.read()
-        f.close()
-    # process as RDF
+    rdf = getrepsystemdata(rsid)
     g = Graph()
-    g.parse(tmp.encode("utf-8"), format="json-ld")
+    g.parse(rdf.encode("utf-8"), format="json-ld")
     qudtunit = """
-    PREFIX qk: <http://qudt.org/vocab/quantitykind/>
-    PREFIX qudt: <http://qudt.org/schema/qudt/>
-    PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
-    PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
-    PREFIX qudt: <http://qudt.org/schema/qudt/>
-    PREFIX qk: <http://qudt.org/vocab/quantitykind/>
+            PREFIX qk: <http://qudt.org/vocab/quantitykind/>
+            PREFIX qudt: <http://qudt.org/schema/qudt/>
+            PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+            PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+            PREFIX qudt: <http://qudt.org/schema/qudt/>
+            PREFIX qk: <http://qudt.org/vocab/quantitykind/>
 
-    SELECT * WHERE {
-        ?unit   rdf:type qudt:Unit;
-                rdfs:label ?name;
-                qudt:hasQuantityKind ?type .
-        OPTIONAL { ?unit qudt:symbol ?sym . }
-        OPTIONAL { ?unit qudt:ucumCode ?ucum . }
-        OPTIONAL { ?unit qudt:uneceCommonCode ?unece . }
-        OPTIONAL { ?unit qudt:iec61360Code ?iec . }
-        OPTIONAL { ?unit qudt:udunitsCode ?udu . }
-        FILTER (?type != qk:Currency)
-    }
-    ORDER BY ?name
-    """
+            SELECT * WHERE {
+                ?unit   rdf:type qudt:Unit;
+                        rdfs:label ?name;
+                        qudt:hasQuantityKind ?type .
+                OPTIONAL { ?unit qudt:symbol ?sym . }
+                OPTIONAL { ?unit qudt:ucumCode ?ucum . }
+                OPTIONAL { ?unit qudt:uneceCommonCode ?unece . }
+                OPTIONAL { ?unit qudt:iec61360Code ?iec . }
+                OPTIONAL { ?unit qudt:udunitsCode ?udu . }
+                OPTIONAL { ?unit qudt:dbpediaMatch ?dbp . }
+                OPTIONAL { ?unit qudt:omUnit ?oum2 . }
+                FILTER (?type != qk:Currency)
+            }
+            ORDER BY ?name
+            """
 
     units = g.query(qudtunit)
     for hit in units:
@@ -231,8 +168,17 @@ if choice == 'runqudt':
             repsyss.append({"name": "iec", "rsid": 15})
         if hit.udu:
             repsyss.append({"name": "udu", "rsid": 14})
+        if hit.dbp:
+            repsyss.append({"name": "dbp", "rsid": 22})
+        if hit.oum2:
+            repsyss.append({"name": "oum2", "rsid": 13})
 
         for repsys in repsyss:
+            repl = ''
+            if 'dbpedia' in hit[repsys['name']]:
+                repl = 'http://dbpedia.org/resource/'
+            elif 'units-of-measure' in hit[repsys['name']]:
+                repl = 'http://www.ontology-of-units-of-measure.org/resource/om-2/'
             ent, created = Entities.objects.get_or_create(
                 name=hit.name,
                 lang=hit.name.language,
@@ -240,14 +186,14 @@ if choice == 'runqudt':
                 repsystem_id=repsys['rsid'],
                 symbol=hit.sym,
                 quantity=hit.type.replace("http://qudt.org/vocab/quantitykind/", ""),
-                value=hit[repsys['name']],
+                value=hit[repsys['name']].replace(repl, ''),
                 source='qudt')
             ent.lastupdate = date.today()
             ent.save()
             if created:
-                print("added '" + ent.value + "' (" + str(ent.id) + ")")
+                print("added '" + str(ent.value) + "' (" + str(ent.id) + ")")
             else:
-                print("found '" + ent.value + "' (" + str(ent.id) + ")")
+                print("found '" + str(ent.value) + "' (" + str(ent.id) + ")")
         # add the qudt representation
         ent, created = Entities.objects.get_or_create(
             name=hit.name,
@@ -265,13 +211,11 @@ if choice == 'runqudt':
         else:
             print("found '" + ent.value + "' (" + str(ent.id) + ")")
 
+# checked 1/12/23
 if choice == 'runnerc':
+    # raw file is the data file
     rsid = 16
-    repsys = Repsystems.objects.values('id', 'url', 'fileupdated').get(id=rsid)
-    with open(os.path.join(BASE_DIR, STATIC_URL, f'repsys_{rsid}_data.json'), 'r') as f:
-        tmp = f.read()
-        f.close()
-    terms = json.loads(tmp)
+    terms = getrepsystemdata(rsid)
     for term in terms["@graph"]:
         if term["@type"] == "skos:Concept":
             quant = None
@@ -357,13 +301,11 @@ if choice == 'runnerc':
                         else:
                             print("found '" + ent.value + "' (" + str(ent.id) + ")")
 
+# checked 1/12/23
 if choice == 'rununece':
+    # raw file is the data file
     rsid = 6
-    repsys = Repsystems.objects.values('id', 'url', 'fileupdated').get(id=rsid)
-    with open(os.path.join(BASE_DIR, STATIC_URL, f'repsys_{rsid}_data.json'), 'r') as f:
-        tmp = f.read()
-        f.close()
-    units = json.loads(tmp)
+    units = getrepsystemdata(rsid)
     for unit in units["@graph"]:
         symbol = None
         if unit['uncefact:symbol'] != "":
@@ -390,13 +332,11 @@ if choice == 'rununece':
             print("found '" + ent.value + "' (" + str(ent.id) + ")")
         print(unit)
 
+# checked 1/12/23
 if choice == 'runsweet':
+    # raw file is the data file
     rsid = 5
-    repsys = Repsystems.objects.values('id', 'url', 'fileupdated').get(id=rsid)
-    with open(os.path.join(BASE_DIR, STATIC_URL, f'repsys_{rsid}_data.json'), 'r') as f:
-        tmp = f.read()
-        f.close()
-    units = json.loads(tmp)
+    units = getrepsystemdata(rsid)
     for unit in units["@graph"]:
         if 'sameAs' in unit or 'notation' not in unit:
             continue
@@ -424,10 +364,10 @@ if choice == 'runsweet':
             else:
                 print("found '" + str(ent.value) + "' (" + str(ent.id) + ")")
 
+# checked 1/12/23
 if choice == 'runuo':
     rsid = 8
-    jdata = getrepsystemdata(rsid)
-    data = json.loads(jdata)
+    data = getrepsystemdata(rsid)
     for unit in data:
         types = ':'.join(unit['@type'])
         if types == 'http://www.w3.org/2002/07/owl#NamedIndividual:http://www.w3.org/2002/07/owl#Class':
@@ -457,8 +397,70 @@ if choice == 'runuo':
             else:
                 print("found '" + str(ent.value) + "' (" + str(ent.id) + ")")
 
+# checked 1/12/23
 if choice == 'runncit':
     rsid = 9
-    jdata = getrepsystemdata(rsid)
-    print(jdata)
-    exit()
+    units = getrepsystemdata(rsid)
+    for unit in units:
+        ent, created = Entities.objects.get_or_create(
+            repsys='ncit',
+            repsystem_id=rsid,
+            name=unit['name'],
+            symbol=unit['symbol'],
+            quantity=unit['quantity'],
+            lang='en',
+            value=unit['value'],
+            source='ncit',
+            comment=unit['description']
+        )
+        ent.lastupdate = date.today()
+        ent.save()
+        if created:
+            print("added '" + str(ent.value) + "' (" + str(ent.id) + ")")
+        else:
+            print("found '" + str(ent.value) + "' (" + str(ent.id) + ")")
+
+# checked 1/12/23
+if choice == 'rununitsml':
+    rsid = 19
+    units = getrepsystemdata(rsid)
+    for unit in units:
+        ent, created = Entities.objects.get_or_create(
+            repsys='unitsml',
+            repsystem_id=rsid,
+            name=unit['name'],
+            symbol=unit['symbol'],
+            quantity=unit['quantity'],
+            quantityid=unit['quantityids'],
+            lang='en',
+            value=unit['code'],
+            source='unitsml',
+            comment=unit['type']
+        )
+        ent.lastupdate = date.today()
+        ent.save()
+        if created:
+            print("added '" + str(ent.value) + "' (" + str(ent.id) + ")")
+        else:
+            print("found '" + str(ent.value) + "' (" + str(ent.id) + ")")
+
+# checked 1/13/23
+if choice == 'rungb':
+    rsid = 3
+    units = getrepsystemdata(rsid)
+    for unit in units:
+        ent, created = Entities.objects.get_or_create(
+            repsys='igb',
+            repsystem_id=rsid,
+            name=unit['name'],
+            lang='en',
+            value=unit['code'],
+            source='igb',
+            comment=unit['defn']
+        )
+        ent.lastupdate = date.today()
+        ent.save()
+        if created:
+            print("added '" + str(ent.value) + "' (" + str(ent.id) + ")")
+        else:
+            print("found '" + str(ent.value) + "' (" + str(ent.id) + ")")

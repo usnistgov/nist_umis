@@ -77,7 +77,7 @@ def view(request, uid):
         reps[sg]['enccount'] = encs.count()
         if encs.count() > 0:
             reps[sg]['strng_id'] = rep.strng.id
-        tmp = {'id': sys.id, 'name': sys.name, 'abbrev': sys.abbrev, 'repo': sys.repository, 'encs': encs}
+        tmp = {'id': sys.id, 'name': sys.name, 'abbrev': sys.abbrev, 'path': sys.path, 'encs': encs}
         reps[sg]['systems'].append(tmp)
 
     return render(request, "../templates/units/view.html",

@@ -50,8 +50,8 @@
                                     <td>
                                         {% for sys in data.systems %}
                                             <a href="/repsystems/view/{{ sys.id }}">{{ sys.name }} ({{ sys.abbrev }})</a>
-                                            {% if sys.repo %}
-                                                (<a href="{{ sys.repo }}">definition</a><span class='bi bi-link-45deg'></span>)
+                                            {% if sys.path %}
+                                                (<a href="{{ sys.path }}{{ strng }}" target="_blank">definition</a><span class='bi bi-link-45deg'></span>)
                                             {% endif %}
                                             <br/>
                                         {% endfor %}

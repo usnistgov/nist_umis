@@ -3,7 +3,7 @@ from units.models import *
 
 
 def index(request):
-    rsyss = Repsystems.objects.all().order_by('name')
+    rsyss = Repsystems.objects.all().order_by('name').exclude(status='ignore')
     return render(request, "../templates/repsystems/index.html", {'rsyss': rsyss})
 
 

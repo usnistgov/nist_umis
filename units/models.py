@@ -150,6 +150,7 @@ class Repsystems(models.Model):
     status = models.CharField(max_length=7, blank=True, null=True)
     url = models.CharField(max_length=256, blank=True, null=True)
     repository = models.CharField(max_length=256, blank=True, null=True)
+    path = models.CharField(max_length=256, blank=True, null=True)
     domain = models.ForeignKey(Domains, on_delete=models.PROTECT, db_column='domain_id')
     fileupdated = models.DateField()
     fileformat = models.CharField(max_length=8, blank=True, null=True)
@@ -277,15 +278,17 @@ class Dimensions(models.Model):
 
 
 class Entities(models.Model):
+    unit = models.ForeignKey('Units', models.DO_NOTHING, blank=True, null=True, db_column='unit_id')
     repsys = models.CharField(max_length=16)
     repsystem = models.ForeignKey(Repsystems, on_delete=models.PROTECT, db_column='repsystem_id')
     name = models.CharField(max_length=64, blank=True, null=True)
     lang = models.CharField(max_length=16, blank=True, null=True)
     symbol = models.CharField(max_length=128, blank=True, null=True)
-    quantity = models.CharField(max_length=64, blank=True, null=True)
+    quantity = models.CharField(max_length=1024, blank=True, null=True)
+    quantityid = models.CharField(max_length=1024, blank=True, null=True)
     value = models.CharField(max_length=128, blank=True, null=True)
     source = models.CharField(max_length=32, blank=True, null=True)
-    comment = models.CharField(max_length=256, blank=True, null=True)
+    comment = models.CharField(max_length=1024, blank=True, null=True)
     lastupdate = models.DateField(blank=True, null=True)
     updated = models.DateTimeField()
 
