@@ -24,13 +24,20 @@ for ent in ents:
         print("problem!")
         exit()
     elif len(reps) == 0:
-        print("add representation")
+        print("add representation: " + str(ent.value))
+        exit()
     else:
-        print("representation found")
+        found = "representation found,"
         if reps[0].strng.string == ent.value:
-            print("string verified")
-            # update checked and migrated
+            print(found + " string verified '" + ent.value + "'")
+            # add value to strngs table
+            string  = Strngs(string=ent.value)
+            string.status = 'current'
+
+            # add to representations table
+
+            # update status/checked (representations) and migrated (entities)
 
         else:
-            print("string different! " + reps[0].strng.string + " | " + ent.value)
-    exit()
+            print(found + " string different! " + reps[0].strng.string + " | " + ent.value)
+            exit()
