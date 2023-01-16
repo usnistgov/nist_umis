@@ -168,10 +168,11 @@ class Repsystems(models.Model):
 
 
 class Strngs(models.Model):
-    name = models.CharField(max_length=128)
+    name = models.CharField(max_length=128, blank=True, null=True)
     string = models.CharField(max_length=512)
     status = models.CharField(max_length=11, blank=True, null=True)
     reason = models.CharField(max_length=128, blank=True, null=True)
+    autoadded = models.CharField(max_length=3)
     updated = models.DateTimeField()
 
     class Meta:
@@ -197,6 +198,8 @@ class Representations(models.Model):
     repsystem = models.ForeignKey(Repsystems, on_delete=models.PROTECT, db_column='repsystem_id')
     strng = models.ForeignKey(Strngs, on_delete=models.PROTECT, db_column='strng_id')
     url = models.CharField(max_length=256, blank=True, null=True)
+    status = models.CharField(max_length=7, blank=True, null=True)
+    checked = models.CharField(max_length=3)
     updated = models.DateTimeField()
 
     class Meta:

@@ -61,7 +61,7 @@ def view(request, uid):
     type = types[0]
     quants = list(set(quants))
     data = unit.representations_set.all().filter(repsystem_id__isnull=False).\
-        annotate(count=Count('repsystem')).order_by('count')
+        order_by('strng__string').exclude(repsystem__status='legacy')
     equsf = unit.equ_fromunit_related.all()
     equst = unit.equ_tounit_related.all()
     corsf = unit.cor_fromunit_related.all()
@@ -69,6 +69,8 @@ def view(request, uid):
     reps = {}
     for rep in data:
         sg = rep.strng.string
+        if rep.repsystem_id == 15:
+            sg = sg.replace('/', '-').replace('#', '%23')  # needed for IEC codes
         st = rep.strng.status
         if sg not in reps.keys():
             reps.update({sg: {'status': st, 'enccount': 0, 'strng_id': 0, 'systems': []}})
@@ -82,4 +84,4 @@ def view(request, uid):
 
     return render(request, "../templates/units/view.html",
                   {'unit': unit, 'reps': reps, 'qkinds': qkinds, 'usys': usys, 'equsf': equsf, 'equst': equst,
-                   'corsf': corsf, 'corst': corst, 'qsys': qsys, 'dv': dv, 'quants': quants, 'type': type})
+                   'dv': dv, 'corsf': corsf, 'corst': corst, 'qsys': qsys, 'quants': quants, 'type': type})
