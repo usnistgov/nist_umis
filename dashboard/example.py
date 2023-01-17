@@ -69,7 +69,7 @@ if choice == 'runwd':
             continue
 
         wdid = hit['unit']['value'].replace("http://www.wikidata.org/entity/", "")
-        if ('qudt' or 'ncit' or 'ucum' or 'unece' or 'uom2' or 'iec' or 'wolf' or 'iev' or 'wur' or 'igb') in hit:
+        if ('qudt' or 'ncit' or 'ucum' or 'unece' or 'uom2' or 'wolf' or 'iev' or 'wur' or 'igb') in hit:
             repsyss = []
             if 'qudt' in hit:
                 repsyss.append({'name': "qudt", 'rsid': 10})
@@ -81,8 +81,6 @@ if choice == 'runwd':
                 repsyss.append({'name': "unece", 'rsid': 6})
             if 'uom2' in hit:
                 repsyss.append({'name': "uom2", 'rsid': 13})
-            if 'iec' in hit:
-                repsyss.append({'name': "iec", 'rsid': 15})
             if 'wolf' in hit:
                 repsyss.append({'name': "wolf", 'rsid': 20})
             if 'iev' in hit:
@@ -92,14 +90,19 @@ if choice == 'runwd':
             if 'igb' in hit:
                 repsyss.append({'name': "igb", 'rsid': 3})
 
-            # TODO: aggregate the subclasses ('quantities')
-            # TODO: fix import mistmatch based on labels
+            quant = None
+            if hit['subclass1Label']['value'].find("unit of") != -1:
+                quant = hit['subclass1Label']['value'].replace("unit of ", "")
+            else:
+                if hit['subclass2Label']['value'].find("unit of") != -1:
+                    quant = hit['subclass2Label']['value'].replace("unit of ", "")
+
             for repsys in repsyss:
                 ent, created = Entities.objects.get_or_create(
                     name=hit['unitLabel']['value'],
                     repsys=repsys['name'],
                     repsystem_id=repsys['rsid'],
-                    quantity=hit['subclass1Label']['value'].replace("unit of", ""),
+                    quantity=quant,
                     value=hit[repsys['name']]['value'],
                     source='wikidata')
                 ent.lastupdate = date.today()
@@ -108,12 +111,14 @@ if choice == 'runwd':
                     print("added '" + ent.value + "' (" + str(ent.id) + ")")
                 else:
                     print("found '" + ent.value + "' (" + str(ent.id) + ")")
+                exit()
+
             # add wikidata entry
             ent, created = Entities.objects.get_or_create(
                 name=hit['unitLabel']['value'],
                 repsys='wikidata',
                 repsystem_id=7,
-                quantity=hit['subclass1Label']['value'].replace("unit of", ""),
+                quantity=quant,
                 value=wdid,
                 source='wikidata')
             ent.lastupdate = date.today()
@@ -122,6 +127,7 @@ if choice == 'runwd':
                 print("added '" + ent.value + "' (" + str(ent.id) + ")")
             else:
                 print("found '" + ent.value + "' (" + str(ent.id) + ")")
+            exit()
         else:
             continue
 
