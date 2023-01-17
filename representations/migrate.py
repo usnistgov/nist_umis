@@ -29,7 +29,7 @@ for ent in ents:
         # add value to strngs table
         found = Strngs.objects.filter(string=ent.value)
         if found:
-            strngid = found.id
+            strngid = found[0].id
         else:
             strng = Strngs(string=ent.value, status='current', autoadded='yes')
             strng.save()
@@ -47,10 +47,9 @@ for ent in ents:
         # update migrated (entities)
         if not rep.id:
             print("representation not saved: " + ent.value)
+            exit()
         else:
             print("representation saved: " + ent.value)
-            exit()
-        exit()
     else:
         found = "representation found,"
         if reps[0].strng.string == ent.value:

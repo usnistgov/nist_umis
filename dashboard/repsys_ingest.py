@@ -79,9 +79,9 @@ def getrepsystemdata(rsid):
             data = json.loads(jsn)
 
     # update repsystems table with current data
-    repsysobj = Repsystems.objects.get(id=rsid)
-    repsysobj.jsondata = jsn
-    repsysobj.save()
+    # repsysobj = Repsystems.objects.get(id=rsid)
+    # repsysobj.jsondata = jsn
+    # repsysobj.save()
     return data
 
 

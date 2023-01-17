@@ -1,4 +1,4 @@
-SELECT ?unit ?unitLabel ?subclassLabel ?qudt ?ncit ?ucum ?unece ?uom2 ?iec ?wolf ?iev ?wur
+SELECT ?unit ?unitLabel ?subclassLabel ?qudt ?ncit ?ucum ?unece ?uom2 ?wolf ?iev ?wur ?igb
 WHERE 
 {
   ?subclass wdt:P279 wd:Q47574.
@@ -8,7 +8,6 @@ WHERE
   OPTIONAL { ?unit wdt:P7825 ?ucum }
   OPTIONAL { ?unit wdt:P6512 ?unece }
   OPTIONAL { ?unit wdt:P8769 ?uom2 }
-  OPTIONAL { ?unit wdt:P8855 ?iec }
   OPTIONAL { ?unit wdt:P7007 ?wolf }
   OPTIONAL { ?unit wdt:P8855 ?iev }
   OPTIONAL { ?unit wdt:P3328 ?wur }

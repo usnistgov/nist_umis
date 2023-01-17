@@ -16,7 +16,7 @@ from dashboard.repsys_ingest import *
 from datetime import date
 
 
-choice = 'rungb'
+choice = 'runwd'
 
 # checked 1/12/23
 if choice == 'runiec':
@@ -67,16 +67,9 @@ if choice == 'runwd':
         # check the hits for any that are not useful
         if "http://www.wikidata.org/entity/Q" not in hit['unit']['value']:
             continue
-        if "UCUM derived unit" == hit['subclassLabel']['value'] or "UCUM base unit" == hit['subclassLabel']['value']:
-            continue
-        wdid = hit['unit']['value'].replace("http://www.wikidata.org/entity/", "")
-        # disabled so we capture this data that is mostly ucum codes...
-        # if wdid == hit['unitLabel']['value']:
-        #     # entries where name is not defined
-        #     continue
-        #     print(hit)
 
-        if ('qudt' or 'ncit' or 'ucum' or 'unece' or 'uom2' or 'iec' or 'wolf' or 'iev' or 'wur') in hit:
+        wdid = hit['unit']['value'].replace("http://www.wikidata.org/entity/", "")
+        if ('qudt' or 'ncit' or 'ucum' or 'unece' or 'uom2' or 'iec' or 'wolf' or 'iev' or 'wur' or 'igb') in hit:
             repsyss = []
             if 'qudt' in hit:
                 repsyss.append({'name': "qudt", 'rsid': 10})
@@ -96,12 +89,17 @@ if choice == 'runwd':
                 repsyss.append({'name': "iev", 'rsid': 21})
             if 'wur' in hit:
                 repsyss.append({'name': "wur", 'rsid': 23})
+            if 'igb' in hit:
+                repsyss.append({'name': "igb", 'rsid': 3})
+
+            # TODO: aggregate the subclasses ('quantities')
+            # TODO: fix import mistmatch based on labels
             for repsys in repsyss:
                 ent, created = Entities.objects.get_or_create(
                     name=hit['unitLabel']['value'],
                     repsys=repsys['name'],
                     repsystem_id=repsys['rsid'],
-                    quantity=hit['subclassLabel']['value'].replace("unit of", ""),
+                    quantity=hit['subclass1Label']['value'].replace("unit of", ""),
                     value=hit[repsys['name']]['value'],
                     source='wikidata')
                 ent.lastupdate = date.today()
@@ -115,7 +113,7 @@ if choice == 'runwd':
                 name=hit['unitLabel']['value'],
                 repsys='wikidata',
                 repsystem_id=7,
-                quantity=hit['subclassLabel']['value'].replace("unit of", ""),
+                quantity=hit['subclass1Label']['value'].replace("unit of", ""),
                 value=wdid,
                 source='wikidata')
             ent.lastupdate = date.today()
