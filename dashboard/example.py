@@ -68,6 +68,28 @@ if choice == 'runwd':
         if "http://www.wikidata.org/entity/Q" not in hit['unit']['value']:
             continue
 
+        quant = None
+        find1 = hit['subclass1Label']['value'].find("unit of ")
+        find2 = hit['subclass2Label']['value'].find("unit of ")
+        if find1 == 0:
+            quant = hit['subclass1Label']['value'].replace("unit of ", "")
+        elif find1 > 0:
+            quant = hit['subclass1Label']['value']
+
+        if not quant:
+            if find2 == 0:
+                quant = hit['subclass2Label']['value'].replace("unit of ", "")
+            elif find2 > 0:
+                quant = hit['subclass2Label']['value']
+
+        sivals = ["SI unit", "SI base unit", "SI or accepted non-SI unit", "SI-accepted non-SI unit",
+                  "SI derived unit", "SI unit with special name", "coherent SI unit"]
+        if not quant:
+            if hit['subclass1Label']['value'] in sivals:
+                quant = "SI unit"
+            if hit['subclass2Label']['value'] in sivals:
+                quant = "SI unit"
+
         wdid = hit['unit']['value'].replace("http://www.wikidata.org/entity/", "")
         if ('qudt' or 'ncit' or 'ucum' or 'unece' or 'uom2' or 'wolf' or 'iev' or 'wur' or 'igb') in hit:
             repsyss = []
@@ -90,13 +112,6 @@ if choice == 'runwd':
             if 'igb' in hit:
                 repsyss.append({'name': "igb", 'rsid': 3})
 
-            quant = None
-            if hit['subclass1Label']['value'].find("unit of") != -1:
-                quant = hit['subclass1Label']['value'].replace("unit of ", "")
-            else:
-                if hit['subclass2Label']['value'].find("unit of") != -1:
-                    quant = hit['subclass2Label']['value'].replace("unit of ", "")
-
             for repsys in repsyss:
                 ent, created = Entities.objects.get_or_create(
                     name=hit['unitLabel']['value'],
@@ -111,7 +126,6 @@ if choice == 'runwd':
                     print("added '" + ent.value + "' (" + str(ent.id) + ")")
                 else:
                     print("found '" + ent.value + "' (" + str(ent.id) + ")")
-                exit()
 
             # add wikidata entry
             ent, created = Entities.objects.get_or_create(
@@ -127,7 +141,6 @@ if choice == 'runwd':
                 print("added '" + ent.value + "' (" + str(ent.id) + ")")
             else:
                 print("found '" + ent.value + "' (" + str(ent.id) + ")")
-            exit()
         else:
             continue
 
