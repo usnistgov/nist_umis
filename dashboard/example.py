@@ -14,9 +14,10 @@ from bs4 import BeautifulSoup
 from datetime import datetime
 from dashboard.repsys_ingest import *
 from datetime import date
+from rdflib.plugins.sparql.results import jsonresults
 
 
-choice = 'runwd'
+choice = 'runqudt'
 
 # checked 1/12/23
 if choice == 'runiec':
@@ -149,7 +150,7 @@ if choice == 'runqudt':
     rsid = 10
     rdf = getrepsystemdata(rsid)
     g = Graph()
-    g.parse(rdf.encode("utf-8"), format="json-ld")
+    g.parse(rdf.encode("utf-8")).serialize(format="json-ld")
     qudtunit = """
             PREFIX qk: <http://qudt.org/vocab/quantitykind/>
             PREFIX qudt: <http://qudt.org/schema/qudt/>
@@ -158,7 +159,7 @@ if choice == 'runqudt':
             PREFIX qudt: <http://qudt.org/schema/qudt/>
             PREFIX qk: <http://qudt.org/vocab/quantitykind/>
 
-            SELECT * WHERE {
+            SELECT ?unit ?name ?type ?sym ?ucum ?unece ?iec ?udu ?dbp ?uom2 WHERE {
                 ?unit   rdf:type qudt:Unit;
                         rdfs:label ?name;
                         qudt:hasQuantityKind ?type .
@@ -168,7 +169,7 @@ if choice == 'runqudt':
                 OPTIONAL { ?unit qudt:iec61360Code ?iec . }
                 OPTIONAL { ?unit qudt:udunitsCode ?udu . }
                 OPTIONAL { ?unit qudt:dbpediaMatch ?dbp . }
-                OPTIONAL { ?unit qudt:omUnit ?oum2 . }
+                OPTIONAL { ?unit qudt:omUnit ?uom2 . }
                 FILTER (?type != qk:Currency)
             }
             ORDER BY ?name
@@ -187,9 +188,10 @@ if choice == 'runqudt':
             repsyss.append({"name": "udu", "rsid": 14})
         if hit.dbp:
             repsyss.append({"name": "dbp", "rsid": 22})
-        if hit.oum2:
-            repsyss.append({"name": "oum2", "rsid": 13})
+        if hit.uom2:
+            repsyss.append({"name": "uom2", "rsid": 13})
 
+        # process the other unit system representations
         for repsys in repsyss:
             repl = ''
             if 'dbpedia' in hit[repsys['name']]:
@@ -209,8 +211,10 @@ if choice == 'runqudt':
             ent.save()
             if created:
                 print("added '" + str(ent.value) + "' (" + str(ent.id) + ")")
+                exit()
             else:
                 print("found '" + str(ent.value) + "' (" + str(ent.id) + ")")
+
         # add the qudt representation
         ent, created = Entities.objects.get_or_create(
             name=hit.name,
@@ -225,6 +229,7 @@ if choice == 'runqudt':
         ent.save()
         if created:
             print("added '" + ent.value + "' (" + str(ent.id) + ")")
+            exit()
         else:
             print("found '" + ent.value + "' (" + str(ent.id) + ")")
 

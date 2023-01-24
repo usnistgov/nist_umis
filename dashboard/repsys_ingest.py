@@ -24,7 +24,19 @@ def getrepsystemdata(rsid):
     ext = repsys['fileformat']
     data = []
     jsn = ''
-    if not os.path.exists(os.path.join(BASE_DIR, STATIC_URL, f'repsys_{rsid}_data.json')):
+    if ext == "ttl":
+        # no need to convert file just read
+        if not os.path.exists(os.path.join(BASE_DIR, STATIC_URL, f'repsys_{rsid}_data.ttl')):
+            rsfile = requests.get(repsys['url'])
+            data = rsfile.text
+            with open(os.path.join(BASE_DIR, STATIC_URL, f'repsys_{rsid}_data.ttl'), 'w') as f:
+                f.write(data)
+                f.close()
+        else:
+            with open(os.path.join(BASE_DIR, STATIC_URL, f'repsys_{rsid}_data.ttl'), 'r') as f:
+                data = f.read()
+                f.close()
+    elif not os.path.exists(os.path.join(BASE_DIR, STATIC_URL, f'repsys_{rsid}_data.json')):
         # get and send the raw data file for repsys to function to create json data file
         if ext == 'url':
             rsfile = requests.get(repsys['url'])
@@ -52,8 +64,6 @@ def getrepsystemdata(rsid):
             data = getuo(rsfile)
         elif rsid == 9:
             data = getncit(rsfile)
-        elif rsid == 10:
-            data = getqudt(rsfile)
         elif rsid == 15:
             data = getiecdata(rsfile)
         elif rsid == 16:
@@ -86,6 +96,7 @@ def getrepsystemdata(rsid):
 
 
 def getgbdata(rsfile):
+    """ get the IUPAC Gold Book unit data """
     e = json.loads(rsfile)
     entries = e['entries']
     units = []
@@ -103,7 +114,7 @@ def getgbdata(rsfile):
 
 
 def getiecdata(rsfile):
-    # get the data in the IEC CDD and save it as files for quantities and units
+    """ get the data in the IEC CDD and save it as files for quantities and units """
     rsid = 15
     repsysobj = Repsystems.objects.get(id=rsid)
     repsys = Repsystems.objects.values('id', 'url', 'fileupdated').get(id=rsid)
@@ -169,6 +180,7 @@ def getiecdata(rsfile):
 
 
 def getwikidata(rsfile):
+    """ get unit data from Wikidata via SPARQL query """
     rsid = 7
     # check if the data file has been updated today or not
     path = os.path.join(BASE_DIR, STATIC_URL, f'repsys_{rsid}_data.json')
@@ -193,15 +205,8 @@ def getwikidata(rsfile):
     return data
 
 
-def getqudt(rsfile):
-    tmp = rsfile.encode("utf-8")  # required to process correctly
-    g = Graph()
-    g.parse(tmp)
-    jld = g.serialize(format="json-ld")
-    return json.loads(jld)
-
-
 def getuo(rsfile):
+    """ get uo units """
     tmp = rsfile.encode("utf-8")  # required to process correctly
     g = Graph()
     g.parse(tmp, format='xml')
@@ -213,6 +218,7 @@ ncitiris = []
 
 
 def getncitunits(page):
+    """ NCIT units recursive function """
     # recursive function to drill down levels in the NCIT ontology
     # required by the getncit function
     for term in page['_embedded']['terms']:
@@ -227,6 +233,7 @@ def getncitunits(page):
 
 
 def getncit(rsfile):
+    """ get NCIT units """
     # the starting data file as a json output of the OLS service
     # https://www.ebi.ac.uk/ols/api/ontologies/ncit/terms/http%253A%252F%252Fpurl.obolibrary.org%252Fobo%252FNCIT_C25709
     # variable to contain ncit units
@@ -300,6 +307,7 @@ def getncit(rsfile):
 
 
 def getunitsml(rsfile):
+    """ get UnitsML units """
     # data is in a yaml file from the GitHub repo (https://github.com/unitsml/unitsdb/blob/main/units.yaml)
     # file needs to be edited to add --- (indicator of different docs) so it can be processed below
     out = []
