@@ -50,9 +50,13 @@ for ent in ents:
             exit()
         else:
             print("representation saved: " + ent.value)
+            ent.migrated = 'yes'
+            ent.save()
     else:
         found = "representation found,"
         if reps[0].strng.string == ent.value:
             print(found + " string verified '" + ent.value + "'")
+            ent.migrated = 'yes'
+            ent.save()
         else:
             print(found + " string different! " + reps[0].strng.string + " | " + ent.value + " (" + str(ent.id) + ")")

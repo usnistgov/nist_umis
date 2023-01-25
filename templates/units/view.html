@@ -3,7 +3,7 @@
 {% block header %} Unit {% endblock %}
 {% block content %}
 <div class="row" style="margin-top: 10px;">
-	<div class="col-10 offset-1">
+	<div class="col-12">
         <div class="card card-success">
             <div class="card-header">
                 <a type="button" href="/units/view/{{ unit.id }}/json" class="btn btn-lightgrn btn-sm float-end">JSON Download</a>
@@ -14,7 +14,7 @@
                     <div class="col-6">
                         <b>Unit System</b>: <a href="/unitsystems/view/{{ usys.id }}">{{ usys.name }}</a><br/>
                         <b>Unit Type</b>: {{ unit.type }}<br/>
-                        <b>Quantity System</b>: <a href="/quantitysystems/view/{{ qsys.id }}">{{ qsys.name }}</a><br/>
+                        {% if qsys %}<b>Quantity System</b>: <a href="/quantitysystems/view/{{ qsys.id }}">{{ qsys.name }}</a><br/>{% endif %}
                         <b>Quantity Kind(s)</b>:
                             {% for qkind in qkinds %}
                                 <a href="/quantitykinds/view/{{ qkind.quantitykind.id }}">{{ qkind.quantitykind.name }}</a>{% if not forloop.last %}, {% endif %}
@@ -130,12 +130,12 @@
                                 {% endfor %}
                             {% endif %}
                             {% if corst %}
-                                {% for cort in equst %}
+                                {% for cort in corst %}
                                 <tr class="fs-7">
                                     <td>{{ cort.tounit.name }}</td>
                                     <td>
                                         {% if cort.factor %}
-                                            {{ cort.factor }}
+                                            1/{{ cort.factor }}
                                         {% endif %}
                                         {% if cort.prefix %}
                                             {{ cort.prefix.inverse }}

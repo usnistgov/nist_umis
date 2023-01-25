@@ -5,7 +5,7 @@ from django.db.models import Count
 
 
 def home(request):
-    """homepage"""
+    """ return the homepage """
     return render(request, "../templates/home.html")
 
 
@@ -34,7 +34,10 @@ def index(request):
 def view(request, uid):
     """ view the different representations of a unit"""
     if uid.isnumeric():
-        pass
+        try:
+            uid = Units.objects.get(id=uid).id
+        except Units.DoesNotExist:
+            return redirect('/')
     elif isinstance(uid, str):
         try:
             uid = Units.objects.get(name=uid.lower()).id
@@ -43,18 +46,17 @@ def view(request, uid):
     unit = Units.objects.get(id=uid)
     qkinds = unit.quantitykindsunits_set.all()
     usys = unit.unitsystem
-    qsyss = []
     dvs = []
     quants = []
     types = []
     for qkind in qkinds:
-        qsyss.append(qkind.quantitykind.quantitysystem)
         dvs.append(qkind.quantitykind.dimensionvector)
         types.append(qkind.quantitykind.type)
         for quant in qkind.quantitykind.quantities_set.all():
             quants.append(quant)
-    qsyss = list(set(qsyss))
-    qsys = qsyss[0]
+    qsys = None
+    if usys.id == 1:  # if the unit system is the SI then make the quantity system the ISQ. Otherwise empty
+        qsys = Quantitysystems.objects.get(id=1)
     dvs = list(set(dvs))
     dv = dvs[0]
     types = list(set(dvs))

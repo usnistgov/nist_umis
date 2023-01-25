@@ -281,8 +281,8 @@ if choice == 'runnerc':
                             rsid2 = 10
                         elif 'dbpedia' in entry:
                             rep = entry.replace('http://dbpedia.org/resource/', '')
-                            repsys = 'dbpedia'
-                            rsid2 = 17
+                            repsys = 'dbp'
+                            rsid2 = 22
                         if rep:
                             ent, created = Entities.objects.get_or_create(
                                 repsys=repsys,
@@ -304,8 +304,8 @@ if choice == 'runnerc':
                         rsid2 = 10
                         rep = term['sameAs'].replace('http://qudt.org/vocab/unit/', '')
                     elif 'dbpedia' in term['sameAs']:
-                        repsys = 'dbpedia'
-                        rsid2 = 17
+                        repsys = 'dbp'
+                        rsid2 = 22
                         rep = term['sameAs'].replace('http://dbpedia.org/resource/', '')
                     if rep:
                         ent, created = Entities.objects.get_or_create(

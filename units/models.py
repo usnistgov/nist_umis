@@ -292,6 +292,7 @@ class Entities(models.Model):
     value = models.CharField(max_length=128, blank=True, null=True)
     source = models.CharField(max_length=32, blank=True, null=True)
     comment = models.CharField(max_length=1024, blank=True, null=True)
+    migrated = models.CharField(max_length=3)
     lastupdate = models.DateField(blank=True, null=True)
     updated = models.DateTimeField()
 
