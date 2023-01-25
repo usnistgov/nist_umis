@@ -9,5 +9,7 @@ def index(request):
 
 def view(request, qid):
     quant = Quantities.objects.get(id=qid)
-    units = Units.objects.filter(quantitykind__quantities__id=qid)
+    qkindid = Quantities.objects.get(id=qid).quantitykind_id
+    unitids = QuantitykindsUnits.objects.filter(quantitykind_id=qkindid)
+    units = Units.objects.filter(id__in=unitids)
     return render(request, "../templates/quantities/view.html", {'quant': quant, 'units': units})
