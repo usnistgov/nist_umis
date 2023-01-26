@@ -197,7 +197,7 @@ class Representations(models.Model):
     unitsystem = models.ForeignKey(Unitsystems, on_delete=models.PROTECT, db_column='unitsystem_id')
     repsystem = models.ForeignKey(Repsystems, on_delete=models.PROTECT, db_column='repsystem_id')
     strng = models.ForeignKey(Strngs, on_delete=models.PROTECT, db_column='strng_id')
-    url = models.CharField(max_length=256, blank=True, null=True)
+    url_endpoint = models.CharField(max_length=3, blank=True, null=True)
     status = models.CharField(max_length=7, blank=True, null=True)
     checked = models.CharField(max_length=3)
     updated = models.DateTimeField()
@@ -292,7 +292,7 @@ class Entities(models.Model):
     value = models.CharField(max_length=128, blank=True, null=True)
     source = models.CharField(max_length=32, blank=True, null=True)
     comment = models.CharField(max_length=1024, blank=True, null=True)
-    migrated = models.CharField(max_length=3)
+    migrated = models.CharField(max_length=3, blank=True, null=True)
     lastupdate = models.DateField(blank=True, null=True)
     updated = models.DateTimeField()
 

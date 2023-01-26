@@ -21,7 +21,7 @@
                         {% if quants|length > 0 %}
                             <b><em>Quantities derived from this kind</em></b><br/>
                             {% for quant in quants %}
-                                <a href="/quantities/view/{{ quant.id }}" class="btn btn-sm btn-warning">{{ quant.name }}</a>
+                                <a href="/quantities/view/{{ quant.id }}" class="btn btn-xs btn-warning">{{ quant.name }}</a>
                             {% endfor %}
                         {% endif %}
                     </div>

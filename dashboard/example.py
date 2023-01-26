@@ -68,6 +68,10 @@ if choice == 'runwd':
         # check the hits for any that are not useful
         if "http://www.wikidata.org/entity/Q" not in hit['unit']['value']:
             continue
+        elif hit['unitLabel']['value'].startswith('Q'):
+            continue
+        else:
+            print(hit['unit']['value'])
 
         quant = None
         find1 = hit['subclass1Label']['value'].find("unit of ")
@@ -92,27 +96,27 @@ if choice == 'runwd':
                 quant = "SI unit"
 
         wdid = hit['unit']['value'].replace("http://www.wikidata.org/entity/", "")
-        if ('qudt' or 'ncit' or 'ucum' or 'unece' or 'uom2' or 'wolf' or 'iev' or 'wur' or 'igb') in hit:
-            repsyss = []
-            if 'qudt' in hit:
-                repsyss.append({'name': "qudt", 'rsid': 10})
-            if 'ncit' in hit:
-                repsyss.append({'name': "ncit", 'rsid': 9})
-            if 'ucum' in hit:
-                repsyss.append({'name': "ucum", 'rsid': 2})
-            if 'unece' in hit:
-                repsyss.append({'name': "unece", 'rsid': 6})
-            if 'uom2' in hit:
-                repsyss.append({'name': "uom2", 'rsid': 13})
-            if 'wolf' in hit:
-                repsyss.append({'name': "wolf", 'rsid': 20})
-            if 'iev' in hit:
-                repsyss.append({'name': "iev", 'rsid': 21})
-            if 'wur' in hit:
-                repsyss.append({'name': "wur", 'rsid': 23})
-            if 'igb' in hit:
-                repsyss.append({'name': "igb", 'rsid': 3})
+        repsyss = []
+        if 'qudt' in hit:
+            repsyss.append({'name': "qudt", 'rsid': 10})
+        if 'ncit' in hit:
+            repsyss.append({'name': "ncit", 'rsid': 9})
+        if 'ucum' in hit:
+            repsyss.append({'name': "ucum", 'rsid': 2})
+        if 'unece' in hit:
+            repsyss.append({'name': "unece", 'rsid': 6})
+        if 'uom2' in hit:
+            repsyss.append({'name': "uom2", 'rsid': 13})
+        if 'wolf' in hit:
+            repsyss.append({'name': "wolf", 'rsid': 20})
+        if 'iev' in hit:
+            repsyss.append({'name': "iev", 'rsid': 21})
+        if 'wur' in hit:
+            repsyss.append({'name': "wur", 'rsid': 23})
+        if 'igb' in hit:
+            repsyss.append({'name': "igb", 'rsid': 3})
 
+        if repsyss:
             for repsys in repsyss:
                 ent, created = Entities.objects.get_or_create(
                     name=hit['unitLabel']['value'],
@@ -120,12 +124,13 @@ if choice == 'runwd':
                     repsystem_id=repsys['rsid'],
                     quantity=quant,
                     value=hit[repsys['name']]['value'],
-                    source='wikidata')
-                ent.lastupdate = date.today()
-                ent.save()
+                    source='wikidata'
+                )
                 if created:
+                    ent.migrated = 'no'
+                    ent.lastupdate = date.today()
+                    ent.save()
                     print("added '" + ent.value + "' (" + str(ent.id) + ")")
-                    exit()
                 else:
                     print("found '" + ent.value + "' (" + str(ent.id) + ")")
 
@@ -137,11 +142,11 @@ if choice == 'runwd':
                 quantity=quant,
                 value=wdid,
                 source='wikidata')
-            ent.lastupdate = date.today()
-            ent.save()
             if created:
+                ent.migrated = 'no'
+                ent.lastupdate = date.today()
+                ent.save()
                 print("added '" + ent.value + "' (" + str(ent.id) + ")")
-                exit()
             else:
                 print("found '" + ent.value + "' (" + str(ent.id) + ")")
         else:

@@ -18,7 +18,7 @@
                     {% if qkinds|length > 0 %}
                         <b>Quantity Kind(s)</b><br/>
                         {% for qkind in qkinds %}
-                            <a href="/quantitykinds/view/{{ qkind.id }}" class="btn btn-sm btn-warning">{{ qkind.name }}</a>
+                            <a href="/quantitykinds/view/{{ qkind.id }}" class="btn btn-xs btn-warning">{{ qkind.name }}</a>
                         {% endfor %}
                     {% endif %}
                 </div>

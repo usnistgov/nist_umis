@@ -26,14 +26,12 @@
                             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Browse the System</a>
                             <ul class="dropdown-menu">
                                 <li><a class="dropdown-item" href="/units">Units</a></li>
-                                <li><a class="dropdown-item" href="/unitsystems">Unit Systems</a></li>
+                                <li><a class="dropdown-item" href="/quantities">Quantities</a></li>
                                 <li><a class="dropdown-item" href="/repsystems">Unit Representation Systems</a></li>
                                 <li><a class="dropdown-item" href="/representations">Unit Representations</a></li>
                                 <li><a class="dropdown-item" href="/quantitysystems">Quantity Systems</a></li>
                                 <li><a class="dropdown-item" href="/quantitykinds">Quantity Kinds</a></li>
-                                <li><a class="dropdown-item" href="/quantities">Quantities</a></li>
-                                <li><a class="dropdown-item" href="/vectors">Dimension Vectors</a></li>
-                                <li><a class="dropdown-item" href="/constants">Fundamental Constants</a></li>
+                                <li><a class="dropdown-item" href="/constants">Constants</a></li>
                             </ul>
                         </li>
                     </ul>
@@ -41,15 +39,16 @@
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Services<span class="caret"></span></a>
                             <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="/units/crosswalk">Unit Crosswalks</a></li>
-                                <li><a class="dropdown-item" href="/api/index">REST API</a></li>
+{#                                <li><a class="dropdown-item" href="/units/crosswalk">Unit Crosswalks</a></li>#}
+                                <li><a class="dropdown-item" href="/api/">REST API</a></li>
+                                <li><a class="dropdown-item" href="/calculations">Calculations</a></li>
                             </ul>
                         </li>
                     </ul>
                 </div>
-                <form class="form">
+                <form class="form" action="{% url 'search' %}" method="get">
                     <label for="search"></label>
-                    <input id="search" type="text" class="form-control" placeholder="Search...">
+                    <input id="search" name="q" type="text" class="form-control" placeholder="Search...">
                 </form>
             </div>
         </nav>

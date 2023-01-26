@@ -1,7 +1,6 @@
 """ views for the units app """
 from django.shortcuts import render, redirect
 from units.models import *
-from django.db.models import Count
 
 
 def home(request):
@@ -81,9 +80,27 @@ def view(request, uid):
         reps[sg]['enccount'] = encs.count()
         if encs.count() > 0:
             reps[sg]['strng_id'] = rep.strng.id
-        tmp = {'id': sys.id, 'name': sys.name, 'abbrev': sys.abbrev, 'path': sys.path, 'encs': encs}
+        tmp = {'id': sys.id, 'name': sys.name, 'abbrev': sys.abbrev, 'path': sys.path, 'encs': encs,
+               'url_ep': rep.url_endpoint}
         reps[sg]['systems'].append(tmp)
 
     return render(request, "../templates/units/view.html",
                   {'unit': unit, 'reps': reps, 'qkinds': qkinds, 'usys': usys, 'equsf': equsf, 'equst': equst,
                    'dv': dv, 'corsf': corsf, 'corst': corst, 'qsys': qsys, 'quants': quants, 'type': type})
+
+
+def search(request):
+    term = request.GET.get("q")
+    if term:
+        strngs = Strngs.objects.filter(string=term).values_list(id, flat=True)
+        if strngs:
+            units = Units.objects.select_related('representations').get(representations__strng_id__in=strngs)
+            if len(units) == 1:
+                unit = units[0]
+                return redirect('/units/view/' + str(unit.id))
+            else:
+                return render(request, "../templates/search.html", {'units': units, 'term': term})
+        else:
+            return redirect('/')
+    else:
+        return redirect('/')

@@ -1,11 +1,17 @@
+from django.shortcuts import render
 from calculations.models import *
 from constants.models import *
 import json
 from GTC import *
 
 
+def index(request):
+    """ return the homepage """
+    return render(request, "../templates/home.html")
+
+
 # SELECT * FROM `constantvalues` WHERE `constant_id` IN (43,101,97) AND `year` = '2018'
-def calculate(calcid):
+def calculate(request, usrkey=None, calcid=None):
     """ function to calulate the requested value """
     calc = Calculations.objects.get(id=calcid)
     equ = calc.equation
@@ -39,9 +45,16 @@ def calculate(calcid):
             mathj[vrs[key]] = {'value': tmp.value_num, 'uncert': tmp.uncert_num}
 
     # execute calculation using GTC (data in mathj)
+    answer = ''
     if mathj[0] == "Multiply":
         var1 = ureal(float(mathj[1]['value']), float(mathj[1]['uncert']))
         var2 = ureal(float(mathj[2]['value']), float(mathj[2]['uncert']))
         answer = result(var1*var2)
         print("Answer: " + '{:e}'.format(answer))
         print("CODATA value: 5.4857990888(17)e-7")
+
+    # send results
+    results = "{'answer':" + str(answer) + "}"
+
+    # TODO: output needs work...
+    return JsonResponse(results, safe=False)

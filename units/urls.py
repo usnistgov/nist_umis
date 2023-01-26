@@ -5,6 +5,7 @@ from . import views
 
 urlpatterns = [
     path("", views.home, name='homepage'),
+    path("search", views.search, name='search'),
     path("units", views.index, name='index'),
     path("units/view/<uid>", views.view, name='view'),
     path('unitsystems/', include('unitsystems.urls')),
