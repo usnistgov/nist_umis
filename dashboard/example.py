@@ -17,7 +17,7 @@ from datetime import date
 from rdflib.plugins.sparql.results import jsonresults
 
 
-choice = 'runqudt'
+choice = 'runwd'
 
 # checked 1/12/23
 if choice == 'runiec':
@@ -125,6 +125,7 @@ if choice == 'runwd':
                 ent.save()
                 if created:
                     print("added '" + ent.value + "' (" + str(ent.id) + ")")
+                    exit()
                 else:
                     print("found '" + ent.value + "' (" + str(ent.id) + ")")
 
@@ -140,6 +141,7 @@ if choice == 'runwd':
             ent.save()
             if created:
                 print("added '" + ent.value + "' (" + str(ent.id) + ")")
+                exit()
             else:
                 print("found '" + ent.value + "' (" + str(ent.id) + ")")
         else:

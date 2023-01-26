@@ -1,9 +1,9 @@
 .bg-lightgrn, .btn-lightgrn {
-    background-color: rgb(214,233,198);
+    background-color: #d6e9c6;
 }
 
 .redtext {
-    color: red;
+    color: #ff0000;
 }
 
 .hover {
@@ -14,10 +14,10 @@
     text-decoration: none !important;
 }
 
-a:link {text-decoration:none}
-a:visited {text-decoration:none}
-a:hover {text-decoration:none}
-a:active {text-decoration:none}
+a:link {text-decoration: none;}
+a:visited {text-decoration: none;}
+a:hover {text-decoration: none;}
+a:active {text-decoration: none;}
 
 .fs-7 {
     font-size: 0.9rem !important;
@@ -63,4 +63,10 @@ a:active {text-decoration:none}
 
 .nistbc {
     background-color: #cce2f3 !important;
+}
+
+.btn-xs {
+    --bs-btn-padding-y: .25rem;
+    --bs-btn-padding-x: .5rem;
+    --bs-btn-font-size: .75rem;
 }

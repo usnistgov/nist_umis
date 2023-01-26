@@ -11,7 +11,7 @@
             </div>
             <div class="card-body">
                 <div class="row">
-                    <div class="col-6">
+                    <div class="col-5">
                         <b>Unit System</b>: <a href="/unitsystems/view/{{ usys.id }}">{{ usys.name }}</a><br/>
                         <b>Unit Type</b>: {{ unit.type }}<br/>
                         {% if qsys %}<b>Quantity System</b>: <a href="/quantitysystems/view/{{ qsys.id }}">{{ qsys.name }}</a><br/>{% endif %}
@@ -22,11 +22,11 @@
                         <br/>
                         <b>Dimension</b>: {{ dv.symbol|safe }}<br/>
                     </div>
-                    <div class="col-6">
+                    <div class="col-7 text-end">
                         {% if quants|length > 0 %}
                             <b><em>Quantities that are measured in this unit</em></b><br/>
                             {% for quant in quants %}
-                                <a href="/quantities/view/{{ quant.id }}" class="btn btn-sm btn-success m-1">{{ quant.name }}</a>
+                                <a href="/quantities/view/{{ quant.id }}" class="btn btn-xs btn-success m-1">{{ quant.name }}</a>
                             {% endfor %}
                         {% endif %}
                     </div>
