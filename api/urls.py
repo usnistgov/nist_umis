@@ -5,5 +5,6 @@ from api import views
 
 urlpatterns = [
     path("", views.home, name='index'),
-    path("units/<uid>", views.units, name='json'),
+    path("units/view/<uid>", views.unitview, name='json'),
+    path("units/list/", views.unitslist, name='list'),
 ]

@@ -1,0 +1,193 @@
+{% extends 'base.html' %}
+{% block title %} Units Index {% endblock %}
+{% block header %} Units Index {% endblock %}
+{% block content %}
+   <script type="text/javascript">
+    $(document).ready(function() {
+        $('#sys1').on('change', function() {
+            let sys1 = $("#sys1");let sys2 = $("#sys2");
+            let sid1 = sys1.find("option:selected").val();
+            let sid2 = sys2.find("option:selected").val();
+            let url = "http://127.0.0.1:8000/repsystems/units/";
+            let units1 = null, units2 = null, submit = $("#getcw");
+            if (sid1 !== "") {
+                $.getJSON(url + sid1).done(function (data) { units1 = data; });
+            }
+            if (sid2 !== "") {
+                $.getJSON(url + sid2).done(function (data) { units2 = data; });
+            }
+            setTimeout(function () {
+                submit.hide();
+                if (sid1 !== "") {
+                    sys2.find("option").prop('disabled',false);
+                    sys2.find("option[value='" + sid1 + "']").prop('disabled',true);
+                    if (sid2 === "") {
+                        // add entries for system 1 (there is no system 2)
+                        addsys1(units1);
+                    } else {
+                        // add entries to match those already in the table for system 2
+                        $('.extra').remove();
+                        let rows=$('.trow');
+                        $.each(rows, function() {
+                            let uid=$(this).attr("data-uid");
+                            let equiv="No equivalent";
+                            $.each(units1, function(i, ur) {
+                                let [u, r] = ur.split(':')
+                                if(i === uid) {
+                                    equiv=u + " - " + r;
+                                    let from=$(".trow[data-uid='" + i + "'] td[class='from']");
+                                    from.html(equiv);
+                                    delete units1[i];
+                                    return false;
+                                }
+                            });
+                        });
+                        // if there are any units that have not been matched display them
+                        addsys1(units1,true);
+                        submit.show();
+                    }
+                } else {
+                    // clear the system 1 units but leave system 2
+                    $('.trow').remove();
+                    if (sid2 !== "") {
+                        // add entries for system 2 (there is no system 1)
+                        addsys2(units2);
+                        sys2.find("option").prop('disabled',false);
+                    }
+                }
+            }, 3000); // 3 second delay after async getjson(s)
+            return false;
+        });
+        $('#sys2').on('change', function() {
+            let sys1 = $("#sys1");let sys2 = $("#sys2");
+            let sid1 = sys1.find("option:selected").val();
+            let sid2 = sys2.find("option:selected").val();
+            let url = "http://127.0.0.1:8000/repsystems/units/";
+            let units1 = null, units2 = null, submit = $("#getcw");
+            if (sid1 !== "") {
+                $.getJSON(url + sid1).done(function (data) { units1 = data; });
+            }
+            if (sid2 !== "") {
+                $.getJSON(url + sid2).done(function (data) { units2 = data; });
+            }
+            setTimeout(function () {
+                submit.hide();
+                if (sid2 !== "") {
+                    sys1.find("option").prop('disabled',false);
+                    sys1.find("option[value='" + sid2 + "']").prop('disabled',true);
+                    if (sid1 === "") {
+                        // add entries for system 1 (there is no system 2)
+                        addsys2(units2);
+                    } else {
+                        // add entries to match those already in the table for system 2
+                        $('.extra').remove();
+                        let rows=$('.trow');
+                        $.each(rows, function() {
+                            let uid=$(this).attr("data-uid");
+                            let equiv="No equivalent";
+                            $.each(units2, function(i,ur) {
+                                let [u, r] = ur.split(':')
+                                if(i === uid) {
+                                    equiv=u + " - " + r;
+                                    let from=$(".trow[data-uid='" + i + "'] td[class='to']");
+                                    from.html(equiv);
+                                    delete units2[i];
+                                    return false;
+                                }
+                            });
+                        });
+                        // if there are any units that have not been matched display them
+                        addsys2(units2,true);
+                        submit.show();
+                    }
+                } else {
+                    // clear system 2 units but leave system 1
+                    $('.trow').remove();
+                    if (sid1 !== "") {
+                        // add entries for system 1 (there is no system 2)
+                        addsys1(units1);
+                        sys1.find("option").prop('disabled',false);
+                    }
+                }
+            }, 3000); // 3 second delay after async getjson(s)
+            return false;
+        });
+
+        function addsys1(units,extra=false) {
+            let tbody = $("#tbody");
+            let trow = "";
+            $.each(units, function (i, ur) {
+                let [u,r] = ur.split(':')
+                if(extra) {
+                    trow = "<tr class='trow extra' data-uid='" + i + "'><td id='from" + u + "' class='from'>" + u + " - " + r + "</td><td id='to" + u + "' class='to'>" + u + " - no equivalent</td></tr>";
+                } else {
+                    trow = "<tr class='trow' data-uid='" + i + "'><td id='from" + u + "' class='from'>" + u + " - " + r + "</td><td id='to" + u + "' class='to'></td></tr>";
+                }
+                tbody.append(trow);
+            });
+        }
+
+        function addsys2(units,extra=false) {
+            let tbody = $("#tbody");
+            let trow = "";
+            $.each(units, function (i, ur) {
+                let [u,r] = ur.split(':')
+                if(extra) {
+                    trow = "<tr class='trow extra' data-uid='" + i + "'><td id='from" + u + "' class='from'>" + u + " - no equivalent</td><td id='to" + u + "' class='to'>" + u + " - " + r + "</td></tr>";
+                } else {
+                    trow = "<tr class='trow' data-uid='" + i + "'><td id='from" + u + "' class='from'></td><td id='to" + u + "' class='to'>" + u + " - " + r + "</td></tr>";
+                }
+                tbody.append(trow);
+            });
+        }
+    });
+</script>
+
+<div class="row" style="margin-top: 10px;">
+	<div class="col-xs-12 col-md-10 col-md-offset-1">
+		<div class="card card">
+			<div class="card-header">
+				<h2 class="card-title">UNIT SYSTEM CROSSWALK</h2>
+			</div>
+			<div class="card-body">
+				<div class="col-xs-12">
+					Pick the two unit systems that you would like to crosswalk between from the dropdown menus.
+					Then click the export button to download the crosswalked units.
+				</div>
+                <form class="form col-12" action="{% url 'compute' %}" method="post">
+                    {% csrf_token %}
+                    <table id="table" class="table table-sm table-striped">
+                        <thead>
+                        <tr>
+                            <th id="syshdr1" class="col-6">
+                                <label for="sys1"></label>
+                                <select id="sys1" name="sys1" class="col-12 fs-6">
+                                    <option value="">Select System 1</option>
+                                    {% for id, name in data %}
+                                        <option value="{{ id }}">{{ name }}</option>
+                                    {% endfor %}
+                                </select>
+                            </th>
+                            <th id="syshdr2" class="col-6">
+                                <label for="sys2"></label>
+                                <select id="sys2" name="sys2" class="col-12 fs-6">
+                                    <option value="">Select System 2</option>
+                                    {% for id, name in data %}
+                                        <option value="{{ id }}">{{ name }}</option>
+                                    {% endfor %}
+                                </select>
+                            </th>
+                        </tr>
+                        </thead>
+                        <tbody id="tbody">
+                        </tbody>
+                    </table>
+                </form>
+                <div id="getcw" class="col-12" style="display: none;">
+                    <button type="submit" class="btn btn-default pull-right">Get Crosswalk</button>
+                </div>
+			</div>
+		</div>
+	</div>
+</div>
+{% endblock %}

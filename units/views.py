@@ -104,3 +104,11 @@ def search(request):
             return redirect('/')
     else:
         return redirect('/')
+
+
+def crosswalk(request):
+    if request.POST:
+        pass
+    else:
+        data = Repsystems.objects.all().values_list('id', 'name').order_by('name')
+        return render(request, "../templates/units/crosswalk.html", {'data': data})
