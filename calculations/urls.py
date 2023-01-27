@@ -1,9 +1,10 @@
 """ urls for the representations app """
 from django.urls import path
-from api import views
+from calculations import views
 
 
 urlpatterns = [
-    path("", views.home, name='index'),
-    path("calculate/<usrkey>/<uid>", views.units, name='json'),
+    path("", views.index, name='index'),
+    path("calculate/<usrkey>/<uid>", views.calculate, name='json'),
+    path("compute", views.compute, name='compute'),
 ]

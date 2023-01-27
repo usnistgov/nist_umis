@@ -8,4 +8,9 @@ $(document).ready(function() {
             items.not('[data-content*="' + val + '"]').hide();
         }
     });
+
+    // dynamic update of related select list based on selection from another select
+    $(".cascade").on('keyup',function(){
+
+    });
 });
