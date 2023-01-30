@@ -140,6 +140,8 @@ def crosswalk(request, sys1id=None, sys2id=None):
             sys2id = data['sys2']
         if not sys1id or not sys2id:
             return redirect('/')
+        if sys1id == sys2id:
+            return redirect('/repsystems/view/' + str(sys1id))
         site = "http://127.0.0.1/"
         # generate output dictionary
         output = {}
@@ -176,16 +178,16 @@ def crosswalk(request, sys1id=None, sys2id=None):
                 u = {'id': unit['id'], 'name': unit['name'], 'url': site + 'units/view/' + str(unit['id'])}
                 reps = []
                 if unit['id'] in u1.keys():
-                    r1 = {'id': sys1id, 'representation': u1[unit['id']]}
+                    r1 = {'id': sys1id, 'string': u1[unit['id']]}
                 else:
-                    r1 = {'id': sys1id, 'representation': 'no equivalent'}
+                    r1 = {'id': sys1id, 'string': 'no equivalent'}
                 reps.append(r1)
                 if unit['id'] in u2.keys():
-                    r2 = {'id': sys2id, 'representation': u2[unit['id']]}
+                    r2 = {'id': sys2id, 'string': u2[unit['id']]}
                 else:
-                    r2 = {'id': sys2id, 'representation': 'no equivalent'}
+                    r2 = {'id': sys2id, 'string': 'no equivalent'}
                 reps.append(r2)
-                u.update({'reps': reps})
+                u.update({'representations': reps})
                 output['units'].append(u)
 
         return JsonResponse(output, safe=False)
