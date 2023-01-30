@@ -1,10 +1,8 @@
 """ views for the units app """
-from django.shortcuts import render, redirect
+from django.shortcuts import redirect
 from units.models import *
-from django.core.serializers import serialize
 from django.http import JsonResponse
 import datetime
-import json
 
 
 def home(request):
@@ -41,14 +39,14 @@ def unitview(request, uid=None):
     }, {
         "@base": "http://127.0.0.1:8000/api/units/list/"
     }]}
-    output.update({"@id": "http://127.0.0.1:8000/api/units/view/" + uid})
+    output.update({"@id": site + "api/units/view/" + uid})
     output.update({"generatedAt": datetime.datetime.now()})
     output.update({"version": 0.6})
-    graph = {"@id": "http://127.0.0.1:8000/api/units/view/" + uid}
+    graph = {"@id": site + "api/units/view/" + uid}
     graph.update({"@type": "ncit:NCIT_C25709"})
     graph.update({"name": unit.name})
     graph.update({"description": unit.description})
-    graph.update({"url": "http://127.0.0.1:8000/api/units/view/" + uid})
+    graph.update({"url": site + "api/units/view/" + uid})
     graph.update({"definitionurl": unit.url})
     graph.update({"unittype": unit.type})
     graph.update({"unitshortcode": unit.shortcode})
@@ -57,7 +55,7 @@ def unitview(request, uid=None):
     output.update({"@graph": graph})
     rs = []
     for rep in reps:
-        r = {'@id': "http://127.0.0.1:8000/representations/view/" + uid}
+        r = {'@id': site + "representations/view/" + uid}
         r.update({"@type": "ncit:NCIT_C67045"})
         r.update({"repsystem": rep.repsystem.name})
         r.update({"string": rep.strng.string})
@@ -67,6 +65,7 @@ def unitview(request, uid=None):
 
 
 def unitslist(request):
+    """ API endpoint for the list of units """
     data = Units.objects.all()
     site = "http://127.0.0.1:8000/"
     output = {"@context": ["http://127.0.0.1:8000/files/contexts/umis.jsonld", {

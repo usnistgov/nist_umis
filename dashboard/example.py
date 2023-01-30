@@ -17,7 +17,7 @@ from datetime import date
 from rdflib.plugins.sparql.results import jsonresults
 
 
-choice = 'runwd'
+choice = 'runqudt'
 
 # checked 1/12/23
 if choice == 'runiec':
@@ -168,8 +168,8 @@ if choice == 'runqudt':
 
             SELECT ?unit ?name ?type ?sym ?ucum ?unece ?iec ?udu ?dbp ?uom2 WHERE {
                 ?unit   rdf:type qudt:Unit;
-                        rdfs:label ?name;
-                        qudt:hasQuantityKind ?type .
+                        rdfs:label ?name .
+                OPTIONAL { ?unit qudt:hasQuantityKind ?type . }
                 OPTIONAL { ?unit qudt:symbol ?sym . }
                 OPTIONAL { ?unit qudt:ucumCode ?ucum . }
                 OPTIONAL { ?unit qudt:uneceCommonCode ?unece . }
@@ -177,13 +177,14 @@ if choice == 'runqudt':
                 OPTIONAL { ?unit qudt:udunitsCode ?udu . }
                 OPTIONAL { ?unit qudt:dbpediaMatch ?dbp . }
                 OPTIONAL { ?unit qudt:omUnit ?uom2 . }
-                FILTER (?type != qk:Currency)
             }
             ORDER BY ?name
             """
 
     units = g.query(qudtunit)
     for hit in units:
+        if hit.type is not None and 'Currency' in hit.type:
+            continue
         repsyss = []
         if hit.ucum:
             repsyss.append({"name": "ucum", "rsid": 2})
@@ -205,38 +206,40 @@ if choice == 'runqudt':
                 repl = 'http://dbpedia.org/resource/'
             elif 'units-of-measure' in hit[repsys['name']]:
                 repl = 'http://www.ontology-of-units-of-measure.org/resource/om-2/'
+            if hit.type is not None:
+                hit.type = hit.type.replace("http://qudt.org/vocab/quantitykind/", "")
             ent, created = Entities.objects.get_or_create(
                 name=hit.name,
                 lang=hit.name.language,
                 repsys=repsys['name'],
                 repsystem_id=repsys['rsid'],
                 symbol=hit.sym,
-                quantity=hit.type.replace("http://qudt.org/vocab/quantitykind/", ""),
+                quantity=hit.type,
                 value=hit[repsys['name']].replace(repl, ''),
                 source='qudt')
             ent.lastupdate = date.today()
             ent.save()
             if created:
                 print("added '" + str(ent.value) + "' (" + str(ent.id) + ")")
-                exit()
             else:
                 print("found '" + str(ent.value) + "' (" + str(ent.id) + ")")
 
         # add the qudt representation
+        if hit.type is not None:
+            hit.type = hit.type.replace("http://qudt.org/vocab/quantitykind/", "")
         ent, created = Entities.objects.get_or_create(
             name=hit.name,
             lang=hit.name.language,
             repsys="qudt",
             repsystem_id=10,
             symbol=hit.sym,
-            quantity=hit.type.replace("http://qudt.org/vocab/quantitykind/", ""),
+            quantity=hit.type,
             value=hit.unit.replace("http://qudt.org/vocab/unit/", ""),
             source='qudt')
         ent.lastupdate = date.today()
         ent.save()
         if created:
             print("added '" + ent.value + "' (" + str(ent.id) + ")")
-            exit()
         else:
             print("found '" + ent.value + "' (" + str(ent.id) + ")")
 
@@ -486,6 +489,57 @@ if choice == 'rungb':
             value=unit['code'],
             source='igb',
             comment=unit['defn']
+        )
+        ent.lastupdate = date.today()
+        ent.save()
+        if created:
+            print("added '" + str(ent.value) + "' (" + str(ent.id) + ")")
+        else:
+            print("found '" + str(ent.value) + "' (" + str(ent.id) + ")")
+
+# checked 1/28/23
+if choice == 'runucum':
+    # read the units data file and add the units to the entities table
+    rsid = 2
+    data = getrepsystemdata(rsid)
+    units = data['units']['data']
+    for unit in units:
+        # case-sensitive (index 2 in json array)
+        if unit[16] is None:
+            unit[16] = ""
+        if unit[18] is None:
+            unit[18] = ""
+        if unit[19] is None:
+            unit[19] = ""
+        if unit[20] is None:
+            unit[20] = ""
+
+        ent, created = Entities.objects.get_or_create(
+            repsys='ucum',
+            repsystem_id=rsid,
+            name=unit[1],
+            lang='en',
+            value=unit[2],
+            source='ucum',
+            comment='{"LOINC property": "' + unit[18] + '", "synonyms": "' + unit[16] +
+                    '", "category": "' + unit[19] + '", "guidance": "' + unit[20] + '"}'
+        )
+        ent.lastupdate = date.today()
+        ent.save()
+        if created:
+            print("added '" + str(ent.value) + "' (" + str(ent.id) + ")")
+        else:
+            print("found '" + str(ent.value) + "' (" + str(ent.id) + ")")
+        # case-insensitive (index 3 in json array)
+        ent, created = Entities.objects.get_or_create(
+            repsys='ucum',
+            repsystem_id=rsid,
+            name=unit[1],
+            lang='en',
+            value=unit[3],
+            source='ucum',
+            comment='{"LOINC property": "' + unit[18] + '", "synonyms": "' + unit[16] +
+                    '", "category": "' + unit[19] + '", "guidance": "' + unit[20] + '"}'
         )
         ent.lastupdate = date.today()
         ent.save()
