@@ -194,3 +194,28 @@ def crosswalk(request, sys1id=None, sys2id=None):
     else:
         data = Repsystems.objects.all().values_list('id', 'name').order_by('name')
         return render(request, "../templates/units/crosswalk.html", {'data': data})
+
+
+def unitimport(request):
+    units = Units.objects.filter(representations__repsystem__id=10)
+    output = {}
+    output.update({'system': 'qudt'})
+    output.update({'version': '2.1.24'})
+    output.update({'date': '2023-02-01'})
+    output.update({'units': []})
+    for unit in units:
+        u = {}
+        u.update({'name': unit.name})
+        u.update({'code': unit.representations_set.all()[0].strng.string})
+        qks = unit.quantitykindsunits_set.all()
+        qs = []
+        for qk in qks:
+            quants = qk.quantitykind.quantities_set.all()
+            for quant in quants:
+                qs.append(quant.name)
+        sorted = qs.sort()
+        u.update({'quantities': sorted})
+        u.update({'status': 'current'})
+        u.update({'updates': []})
+        output['units'].append(u)
+    return JsonResponse(output, safe=False)
