@@ -1,5 +1,5 @@
 # Basic nginx dockerfile starting with Ubuntu 20.04
 FROM ubuntu:20.04
-RUN apt-get -y update
-RUN apt-get -y install nginx
-RUN apt-get -y mysql-server
+RUN apt -y update
+RUN apt -y install nginx
+RUN apt -y mysql-server
