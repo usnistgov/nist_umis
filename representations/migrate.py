@@ -17,7 +17,7 @@ from datetime import date
 
 
 # migrate data from the entities table into the representations table
-ents = Entities.objects.filter(unit__isnull=False)
+ents = Entities.objects.filter(unit__isnull=False, migrated='no')
 for ent in ents:
     reps = Representations.objects.filter(unit_id=ent.unit_id,
                                           repsystem_id=ent.repsystem_id, strng__string__exact=ent.value)
@@ -37,10 +37,20 @@ for ent in ents:
                 print("string not saved: " + ent.value)
                 exit()
             strngid = strng.id
+        # lookup repsystem info for url (url_endpoint) or not
+        rsurls = Repsystems.objects.filter(status='current').values_list('id', 'path')
+        rsyseps = {}
+        for rsid, url in rsurls:
+            rsyseps.update({rsid: url})
+
         # add to representations table
         rep = Representations(strng_id=strngid)
         rep.unit_id = ent.unit_id
         rep.repsystem_id = ent.repsystem_id
+        if rsyseps[ent.repsystem_id] is None:
+            rep.url_endpoint = 'no'
+        else:
+            rep.url_endpoint = 'yes'
         rep.status = 'current'
         rep.checked = 'no'
         rep.save()

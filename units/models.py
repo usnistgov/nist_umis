@@ -193,8 +193,6 @@ class Encodings(models.Model):
 
 class Representations(models.Model):
     unit = models.ForeignKey(Units, on_delete=models.PROTECT, db_column='unit_id')
-    quantity = models.ForeignKey(Quantities, on_delete=models.PROTECT, db_column='quantity_id')
-    unitsystem = models.ForeignKey(Unitsystems, on_delete=models.PROTECT, db_column='unitsystem_id')
     repsystem = models.ForeignKey(Repsystems, on_delete=models.PROTECT, db_column='repsystem_id')
     strng = models.ForeignKey(Strngs, on_delete=models.PROTECT, db_column='strng_id')
     url_endpoint = models.CharField(max_length=3, blank=True, null=True)

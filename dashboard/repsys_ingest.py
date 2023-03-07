@@ -48,7 +48,11 @@ def getrepsystemdata(rsid):
             with open(rawpath, 'r') as f:
                 rsfile = f.read()
 
-        if rsid == 3:
+        if rsid == 2:
+            # raw file is ready to import directly
+            # this does not get used as the data file always exists...
+            pass
+        elif rsid == 3:
             data = getgbdata(rsfile)
         elif rsid == 5:
             # raw file is ready to import directly
@@ -316,7 +320,7 @@ def getunitsml(rsfile):
         keys = list(unit.keys())  # only one
         data = unit[keys[0]]
         u = {}
-        u.update({'name': data['short']})
+        u.update({'name': data['unit_name'][0]})
         u.update({'code': keys[0]})
         u.update({'type': data['unit_system']['type']})
         u.update({'symbol': data['unit_symbols'][0]['id']})

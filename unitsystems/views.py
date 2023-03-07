@@ -15,7 +15,7 @@ def view(request, usid):
     sys, units = None, None
     try:
         sys = Unitsystems.objects.get(id=usid)
-        units = sys.units_set.all()
+        units = sys.units_set.all().order_by('unitsystem__units__name')
     except ObjectDoesNotExist:
         return redirect('/')
     return render(request, "../templates/unitsystems/view.html", {'sys': sys, 'units': units})

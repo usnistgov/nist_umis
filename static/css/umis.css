@@ -44,7 +44,7 @@ a:active {text-decoration: none;}
 }
 
 .table-responsive-u-view {
-    max-height: calc(100vh - 300px);
+    max-height: calc(100vh - 200px);
     -webkit-overflow-scrolling: touch;
     overflow-y: auto;
 }
