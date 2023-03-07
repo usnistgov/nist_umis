@@ -2,4 +2,4 @@
 FROM ubuntu:20.04
 RUN apt -y update
 RUN apt -y install nginx
-RUN apt -y mysql-server
+RUN apt -y install mysql-server
