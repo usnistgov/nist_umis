@@ -17,3 +17,7 @@ jobs:
         registry: ghcr.io
         username: ${{ github.actor }}
         password: ${{ secrets.GITHUB_TOKEN }}
+    - name: Build the Docker image
+      run: docker build . --file Dockerfile --tag my-image-name:$(date +%s)
+    - name: Push image to CR
+      run: docker push ghcr.io/stuchalk/umis:latest
