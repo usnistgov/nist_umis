@@ -14,7 +14,6 @@ jobs:
     - name: GH Container Registry Login
       uses: docker/login-action@v2
       with:
-        name: stuchalk/nist_umis/umis:latest
         registry: ghcr.io
         username: ${{ github.actor }}
         password: ${{ secrets.GITHUB_TOKEN }}
