@@ -1,0 +1,52 @@
+name: UMIS Build of Project
+
+on:
+    workflow_call:
+    workflow_dispatch:
+    push:
+       branches: [main]
+    pull_request:
+        branches: [main]
+
+jobs:
+  simple_build:
+    runs-on: ubuntu-latest
+    env:
+      MYSQL_USER: 'root'
+      MYSQL_PASS: 'sniggle'
+      MYSQL_DB: 'scidata_sds'
+      MYSQL_PORT: 3306
+      DJANGO_SECRET_KEY: 'django-insecure-he7e)w079cm_z1f*bx4v+o&s_&(=wgbe1+s@n@57s&dbppj7xf'
+    strategy:
+      matrix:
+        python-version: ["3.10"]
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - name: Setup MySQL
+        uses: mirromutth/mysql-action@v1.1
+        with:
+        mysql version: '8.0'
+        mysql database: ${{ env.MYSQL_DB }}
+        mysql user: ${{ env.MYSQL_USER }}
+        mysql password: ${{ env.MYSQL_PASS }}
+        host port: ${{ env.MYSQL_PORT }}
+        container port: ${{ env.MYSQL_PORT }}
+      - name: Add MySQL data
+        run: |
+          sudo /etc/init.d/mysql start
+          mysql -u${{ env.MYSQL_USER }} -p{{ env.MYSQL_PASS }}  ${{ env.MYSQL_DB }}< ./umis.sql
+      - name: Checkout code
+        uses: actions/checkout@v3
+      - name: Setup Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v3
+        with:
+           python-version: 3.10
+      - name: Install requirements
+        run: |
+            pip install -r requirements.txt
+      - name: Run Django
+        env:
+          DEBUG: "0"
+          DJANGO_SECRET_KEY: ${{ env.DJANGO_SECRET_KEY }}
+        run: |
+            python manage.py server 8000
