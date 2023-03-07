@@ -31,12 +31,12 @@ jobs:
           mysql password: ${{ env.MYSQL_PASS }}
           host port: ${{ env.MYSQL_PORT }}
           container port: ${{ env.MYSQL_PORT }}
+      - name: Checkout code
+        uses: actions/checkout@v3
       - name: Add MySQL data
         run: |
           sudo /etc/init.d/mysql start
-          mysql -u${{ env.MYSQL_USER }} -p{{ env.MYSQL_PASS }}  ${{ env.MYSQL_DB }} < ../../umis.sql
-      - name: Checkout code
-        uses: actions/checkout@v3
+          mysql -u${{ env.MYSQL_USER }} -p{{ env.MYSQL_PASS }}  ${{ env.MYSQL_DB }} < umis.sql
       - name: Setup Python ${{ matrix.python-version }}
         uses: actions/setup-python@v3
         with:
