@@ -34,7 +34,7 @@ jobs:
       - name: Add MySQL data
         run: |
           sudo /etc/init.d/mysql start
-          mysql -u${{ env.MYSQL_USER }} -p{{ env.MYSQL_PASS }}  ${{ env.MYSQL_DB }}< ./umis.sql
+          mysql -u${{ env.MYSQL_USER }} -p{{ env.MYSQL_PASS }}  ${{ env.MYSQL_DB }} < umis.sql
       - name: Checkout code
         uses: actions/checkout@v3
       - name: Setup Python ${{ matrix.python-version }}
