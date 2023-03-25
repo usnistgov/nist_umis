@@ -20,15 +20,16 @@ numpy = "==1.24.2"
 charset-normalizer = "==2.1.1"
 selenium = "*"
 attrs = "==22.2.0"
-urllib3 = "==1.26.14"
+urllib3 = "==1.26.15"
 scipy = "==1.10.1"
 sqlparse = "==0.4.3"
 pyyaml = "*"
-wheel = "==0.38.4"
+wheel = "==0.40.0"
 gunicorn = "*"
 pip-tools = "==6.12.3"
 pip = "==23.0.1"
 pymysql = "*"
+setuptools = "==67.6.0"
 
 [dev-packages]
 
