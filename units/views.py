@@ -63,7 +63,7 @@ def view(request, uid):
     types = list(set(dvs))
     typ = types[0]
     quants = list(set(quants))
-    data = unit.representations_set.all().filter(repsystem_id__isnull=False).\
+    data = unit.representations_set.all().filter(repsystem_id__isnull=False). \
         order_by('strng__string').exclude(repsystem__status='legacy')
     equsf = unit.equ_fromunit_related.all()
     equst = unit.equ_tounit_related.all()
@@ -160,13 +160,13 @@ def crosswalk(request, sys1id=None, sys2id=None):
         # get a list of all units
         units = Units.objects.values('id', 'name').all()
         # get list of units in system 1
-        units1 = Units.objects.filter(representations__repsystem=sys1id).\
+        units1 = Units.objects.filter(representations__repsystem=sys1id, representations__url_endpoint='yes'). \
             values_list('id', 'representations__strng__string')
         u1 = {}
         for uid, ustr in units1:
             u1.update({uid: ustr})
         # get list of units in system 2
-        units2 = Units.objects.filter(representations__repsystem=sys2id).\
+        units2 = Units.objects.filter(representations__repsystem=sys2id, representations__url_endpoint='yes'). \
             values_list('id', 'representations__strng__string')
         u2 = {}
         for uid, ustr in units2:

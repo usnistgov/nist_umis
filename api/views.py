@@ -37,7 +37,7 @@ def unitslist(request):
 
 
 def unitview(request, uid=None):
-    """ API endpoint for units """
+    """ API endpoint for individual unit by id or name """
     if not uid:
         # redirect to the API home page if no unit identifier given
         return redirect('/api/home')
@@ -79,3 +79,17 @@ def unitview(request, uid=None):
     return JsonResponse(output, safe=False)
 
 
+def unitsrch(request, term=None):
+    """ API endpoint for unit search by strng value """
+    if not term:
+        # redirect to the API home page if no unit identifier given
+        return redirect('/api/home')
+    # search the strings in the strngs table - look for exact match
+    hits = Strngs.objects.filter(string=term)  # filter avoids not found error
+    if hits:
+        # get the first hit and rdirect to the unit API...
+        hit = hits[0]
+        reps = Representations.objects.filter(strng_id=hit.id)
+        return redirect('/api/units/view/' + str(reps[0].unit_id))
+    # redirect to the API home page if no unit identifier given
+    return redirect('/api/home')

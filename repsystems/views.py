@@ -19,7 +19,7 @@ def view(request, rsid):
 
 def units(request, rsid):
     """ get a list of representations unit system to send to a browser via ajax """
-    reps = Representations.objects.filter(repsystem_id=rsid).order_by('unit__name')
+    reps = Representations.objects.filter(repsystem_id=rsid, url_endpoint='yes').order_by('unit__name')
     data = {}
     for rep in reps:
         name = rep.unit.name
