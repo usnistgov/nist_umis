@@ -94,6 +94,17 @@ DATABASES = {
         'OPTIONS': {
             'init_command': "SET sql_mode='STRICT_TRANS_TABLES'"
         }
+    },
+    'domains': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': mysqltabl,
+        'USER': mysqluser,
+        'PASSWORD': mysqlpass,
+        'HOST': mysqlhost,
+        'PORT': '3306',
+        'OPTIONS': {
+            'init_command': "SET sql_mode='STRICT_TRANS_TABLES'"
+        }
     }
 }
 

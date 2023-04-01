@@ -9,7 +9,7 @@ urlpatterns = [
     path("spec", views.spec, name='spec'),
     path("units/list/", views.unitslist, name='units list'),
     path("units/view/<uid>", views.unitview, name='unit view'),
-    path("units/search/<term>", views.unitsrch, name='unit search'),
+    path("units/search/", views.search, name='unit search'),
     path("units/crosswalk/<sys1id>/<sys2id>", uviews.crosswalk, name='unit crosswalk'),
 
 ]

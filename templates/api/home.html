@@ -3,12 +3,24 @@
 {% block content %}
     <h1><em>The UMIS Application Programming Interface (API)</em></h1>
     <div class="card bg-light p-3 mb-2">
-        <p class="mb-0 justify-content">Bringing units interoperability to machines.</p>
+        <p class="mb-0 justify-content">Bringing units interoperability to machines. The UMIS API is defined formally as an OpenAPI specification and can be accessed <a href="spec">here</a></p>
     </div>
     <div class="row">
-        <p>The UMIS API is defined formally as an OpenAPI specification and can be accessed <a href="spec">here</a></p>
+        <h2>API Search: Find a Unit by its Code</h2>
+        <p></p>
         <div class="col-12">
-
+            <form action="/api/units/search/" method="post">
+                {% csrf_token %}
+                {{ form }}
+                <input type="submit" value="Submit">
+            </form>
+            {% if messages %}
+                <div class="messages">
+                    {% for message in messages %}
+                        <p style="font-weight: bold;" {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</p>
+                    {% endfor %}
+                </div>
+            {% endif %}
         </div>
     </div>
 {% endblock %}

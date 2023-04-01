@@ -1,15 +1,21 @@
 """ views for the units app """
 from django.shortcuts import render, redirect
+from django.contrib import messages
 from units.models import *
-from django.http import JsonResponse
+from django.http import JsonResponse, HttpResponse
+from .forms import SearchForm
+
 import datetime
 
 site = "http://127.0.0.1:8000/"
 
 
+
 def home(request):
     """ information page about the API """
-    return render(request, '../templates/api/home.html')
+    # include the search form...
+    form = SearchForm()
+    return render(request, '../templates/api/home.html', {'form': form})
 
 
 def spec(request):
@@ -79,17 +85,29 @@ def unitview(request, uid=None):
     return JsonResponse(output, safe=False)
 
 
-def unitsrch(request, term=None):
+def search(request):
     """ API endpoint for unit search by strng value """
-    if not term:
-        # redirect to the API home page if no unit identifier given
-        return redirect('/api/home')
-    # search the strings in the strngs table - look for exact match
-    hits = Strngs.objects.filter(string=term)  # filter avoids not found error
-    if hits:
-        # get the first hit and rdirect to the unit API...
-        hit = hits[0]
-        reps = Representations.objects.filter(strng_id=hit.id)
-        return redirect('/api/units/view/' + str(reps[0].unit_id))
-    # redirect to the API home page if no unit identifier given
-    return redirect('/api/home')
+    if request.method == 'POST':
+        # create a form instance and populate it with data from the request:
+        form = SearchForm(request.POST)
+        # check whether it's valid:
+        if form.is_valid():
+            # process the data in form.cleaned_data as required
+            if not form.cleaned_data['term']:
+                # redirect to the API home page if no unit identifier given
+                messages.add_message(request, messages.INFO, 'No term entered!')
+                return redirect('/api/')
+            # search the strings in the strngs table - look for exact match
+            hits = Strngs.objects.filter(string=form.cleaned_data['term'])  # filter avoids not found error
+            if hits:
+                # get the first hit and rdirect to the unit API...
+                hit = hits[0]
+                reps = Representations.objects.filter(strng_id=hit.id)
+                return redirect('/api/units/view/' + str(reps[0].unit_id))
+            else:
+                messages.add_message(request, messages.INFO, 'No unit found!')
+                return redirect('/api/')
+        else:
+            # redirect to the API home page if no unit identifier given
+            messages.add_message(request, messages.INFO, 'Invalid term!')
+            return redirect('/api/')
