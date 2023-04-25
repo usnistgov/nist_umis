@@ -20,4 +20,6 @@ jobs:
     - name: Build the Docker image
       run: docker build . --file Dockerfile --tag umis
     - name: Push image to CR
-      run: docker push ghcr.io/stuchalk/umis:latest
+      run:
+        docker tag umis ghcr.io/stuchalk/umis:latest
+        docker push ghcr.io/stuchalk/umis:latest

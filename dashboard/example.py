@@ -17,7 +17,7 @@ from datetime import date
 from rdflib.plugins.sparql.results import jsonresults
 
 
-choice = 'runqudt'
+choice = 'runiec'
 
 # checked 1/12/23
 if choice == 'runiec':
@@ -152,7 +152,7 @@ if choice == 'runwd':
         else:
             continue
 
-# checked 1/13/23
+# checked 4/7/23
 if choice == 'runqudt':
     rsid = 10
     rdf = getrepsystemdata(rsid)
@@ -243,7 +243,7 @@ if choice == 'runqudt':
         else:
             print("found '" + ent.value + "' (" + str(ent.id) + ")")
 
-# checked 1/12/23
+# checked 4/7/23
 if choice == 'runnerc':
     # raw file is the data file
     rsid = 16
