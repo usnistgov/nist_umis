@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% block title %} Dimension Vectors {% endblock %}
+{% block header %} Dimension Vectors {% endblock %}
+{% block content %}
+<div class="row">
+    <div class="col-8 offset-2">
+        <div class="card card-danger">
+            <div class="card-header">
+                <h5 class="card-title mb-0">Dimension Vectors</h5>
+            </div>
+            <div class="list-group card-responsive">
+                {% for vector in vectors %}
+                    <li class='list-group-item'><a href="/vectors/view/{{ vector.id }}">{{ vector.name }}</a></li>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

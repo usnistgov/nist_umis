@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% block title %} Quantities {% endblock %}
+{% block header %} Quantities {% endblock %}
+{% block content %}
+    <div class="row">
+        <div class="col-7"><h2>Quantities</h2></div>
+        <div class="col-5 px-0">
+            <input id="listsrc" placeholder="Search quantities (or scroll)" class="form-control form-control-sm float-end" data-search-override="true" type="text"/>
+        </div>
+    </div>
+    <div class="row">
+    <div class="card mt-2">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-12">
+                    <div class="table-responsive-u-view">
+                        <table class="table table-sm table-striped fs-6">
+                            {% for quant in quants %}
+                                <tr class="item" data-content="{{ quant.name|lower }}">
+                                    <td class="col-4"><a href="/quantities/view/{{ quant.id }}">{{ quant.name }}</a></td>
+                                    <td class="col-8">
+                                        {% if quant.sysml_defn %}
+                                            {{ quant.sysml_defn|truncatewords:32 }}
+                                        {% else %}
+                                            No description
+                                        {% endif %}
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

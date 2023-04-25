@@ -1,0 +1,29 @@
+# umittest ENV file
+VERSION=3.8
+#Sets the project name. This value is prepended along with the service name to the container’s name on startup.
+COMPOSE_PROJECT_NAME=umis
+
+#specify docker-compose files. Example :
+#COMPOSE_FILE=docker-compose.yml:docker-compose.prod.yml
+
+# M Y S Q L    S E R V I C E 
+MYSQL_DATABASE=stuchalk_umis
+MYSQL_USER=mysqluser
+MYSQL_PASSWORD=
+MYSQL_ROOT_PASSWORD=
+MYSQL_DATABASE_HOST=umis_mysql
+MYSQL_DATABASE_PORT=3306
+
+# P R O X Y     S E R V I C E
+PROXYIMAGE=nginx
+PROXYIMAGETAG=alpine
+PROXYNAME=umis_nginx
+PROXYLIMITMEM=8096M
+PROXYRESERVEMEM=4096M
+PROXYPORTS='80:8081'
+PROXYNETWORK=prod-shared
+PROXYVOL1=/data/workspace/LOGS:/var/log/nginx
+PROXYVOL2=./nginx/conf:/etc/nginx/conf.d
+PROXYVOL3=./nginx/etc/nginx/nginx.conf:/etc/nginx/nginx.conf
+PROXYVOL4=./nginx/backend-not-found.html:/var/www/html/backend-not-found
+PROXYVOL5=./nginx/includes:/etc/nginx/includes

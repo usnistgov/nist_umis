@@ -1,0 +1,13 @@
+todo:
+
+
+renamed nist_umis-main/umisconfig/_init_.py to _init_.py.old
+
+add pdflatex to requirements.txt (caused a conflict)
+commented out #import pdflatex in /constant/views
+
+
+#testing
+From Python container
+mysql --host=umis_mysql --user=mysqluser -p stuchalk_umis
+

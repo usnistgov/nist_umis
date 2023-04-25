@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% block title %} Dimension Vector {% endblock %}
+{% block header %} Dimension Vector {% endblock %}
+{% block content %}
+<div class="row">
+    <div class="col-12 col-md-10 offset-1">
+        <div class="card card-success">
+            <div class="card-header">
+                <h5 class="card-title mb-0">Dimension Vector: {{ vector.name }}</h5>
+            </div>
+            <div class="card-body">
+                <div class="col-12">
+                    <b>Description</b>: {{ vector.description }}<br />
+                    <b>Quantity System</b>: <a href="/quantitysystems/view/{{ qsys.id }}">{{ qsys.name }}</a><br />
+                    <b>Short Code</b>: {{ vector.shortcode }}<br />
+                    <b>Long Code</b>: {{ vector.longcode }}<br />
+                    <b>Symbol</b>:  {{ vector.symbol|safe }}<br />
+                    {% if qkinds|length > 0 %}
+                        <b>Quantity Kind(s)</b><br/>
+                        {% for qkind in qkinds %}
+                            <a href="/quantitykinds/view/{{ qkind.id }}" class="btn btn-xs btn-warning">{{ qkind.name }}</a>
+                        {% endfor %}
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

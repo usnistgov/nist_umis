@@ -1,0 +1,80 @@
+{% extends 'base.html' %}
+{% block title %} Quantity System {% endblock %}
+{% block header %} Quantity System {% endblock %}
+{% block content %}
+<div class="row" style="margin-top: 10px;">
+	<div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                <a type="button" href="/quantitysystems" class="btn btn-lightgrn btn-xs float-end">Back to the Index</a>
+                <h4 class="card-title mb-0">Quantity System: {{ qsys.name }}</h4>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-8 justify">
+                        <b>Description</b>: {{ qsys.description }}<br/>
+                        <b>Abbreviation</b>: {{ qsys.abbrev }}<br/>
+                        <b>Source</b>: <a href="{{ qsys.url }}" target="_blank">{{ qsys.url }}</a><br/>
+                    </div>
+                    <div class="col-4">
+                        <table class="table table-sm table-striped">
+                            <tr>
+                                <th class="col-md-6">Dimension</th>
+                                <th class="col-md-6">Symbol</th>
+                            </tr>
+                            {% for dim in dims %}
+                                <tr class="fs-7">
+                                    <td>{{ dim.type|capfirst }}</td>
+                                    <td>{{ dim.symbol }}</td>
+                                </tr>
+                            {% endfor %}
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card mt-3">
+            <div class="card-header">
+                <div class="row">
+                    <div class="col-5">
+                        <h5 class="card-title mb-0">Quantities</h5>
+                    </div>
+                    <div class="col-5 offset-2 px-0">
+                        <label for="listsrc" hidden>Page search for quantities</label>
+                        <input id="listsrc" placeholder="Search quantities (or scroll)" class="form-control form-control-sm float-end" data-search-override="true" type="text"/>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body pt-0">
+                <div class="row">
+                    <div class="col-12">
+                        <table class="table table-sm">
+                            <tr>
+                                <th class="col-md-6">Name</th>
+                                <th class="col-md-3">Quantity Kind</th>
+                                <th class="col-md-3">Dimensionality</th>
+                            </tr>
+                        </table>
+                        <div class="table-responsive-qs-view">
+                            <table class="table table-sm table-striped fs-7">
+                                <tr style="display: none;">
+                                    <th class="col-md-6">&nbsp;</th>
+                                    <th class="col-md-3">&nbsp;</th>
+                                    <th class="col-md-3">&nbsp;</th>
+                                </tr>
+                                {% for quant in quants %}
+                                <tr class="item" data-content="{{ quant.name|lower }} {% if quant.altnames %} {{ quant.altnames|lower }} {% endif %} {{ quant.quantitykind.name|lower }} {{ quant.sysml_qdim|lower }}">
+                                    <td><a href="/quantities/view/{{ quant.id }}">{{ quant.name }}</a>{% if quant.altnames %}  ({{ quant.altnames }}) {% endif %}</td>
+                                    <td>{{ quant.quantitykind.name }}</td>
+                                    <td>{{ quant.sysml_qdim }}</td>
+                                </tr>
+                                {% endfor %}
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+	</div>
+</div>
+{% endblock %}

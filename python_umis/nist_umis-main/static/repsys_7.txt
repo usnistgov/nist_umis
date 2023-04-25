@@ -1,0 +1,29 @@
+SELECT ?unit ?unitLabel ?subclass1Label ?subclass2Label ?qudt ?ncit ?ucum ?unece ?uom2 ?wolf ?iev ?wur ?igb
+WHERE 
+{
+  ?subclass1 wdt:P279 wd:Q47574 .
+  ?subclass2 wdt:P279 ?subclass1 .
+  { ?unit wdt:P31 ?subclass1 . } UNION { ?unit wdt:P31 ?subclass2 . }
+  OPTIONAL { ?unit wdt:P2968 ?qudt }
+  OPTIONAL { ?unit wdt:P1748 ?ncit }
+  OPTIONAL { ?unit wdt:P7825 ?ucum }
+  OPTIONAL { ?unit wdt:P6512 ?unece }
+  OPTIONAL { ?unit wdt:P8769 ?uom2 }
+  OPTIONAL { ?unit wdt:P7007 ?wolf }
+  OPTIONAL { ?unit wdt:P8855 ?iev }
+  OPTIONAL { ?unit wdt:P3328 ?wur }
+  OPTIONAL { ?unit wdt:P4732 ?igb }
+  FILTER(?subclass1 != wd:Q8142)
+  FILTER(?subclass1 != wd:Q82047057)
+  FILTER(?subclass1 != wd:Q83155724)
+  FILTER(?subclass1 != wd:Q1499468)
+  FILTER(?subclass1 != wd:Q11639620)
+  FILTER(?subclass2 != wd:Q8142)
+  FILTER(?subclass2 != wd:Q82047057)
+  FILTER(?subclass2 != wd:Q83155724)
+  FILTER(?subclass2 != wd:Q28783456)
+  FILTER(?subclass2 != wd:Q3622170)
+  FILTER(?subclass2 != wd:Q28805608)
+  SERVICE wikibase:label { bd:serviceParam wikibase:language "[AUTO_LANGUAGE],en". }
+}
+ORDER BY ?unitLabel

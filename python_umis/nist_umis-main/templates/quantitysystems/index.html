@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% block title %} Quantity Systems {% endblock %}
+{% block header %} Quantity Systems {% endblock %}
+{% block content %}
+<h2>Quantity Systems</h2>
+<div class="row">
+    {% for qsys in qsyss %}
+	<div class="col-6">
+		<div class="card card-success mb-2">
+			<div class="card-header bg-lightgrn">
+                <h6 class="card-title"><a href="/quantitysystems/view/{{ qsys.id }}">{{ qsys.name }}&nbsp;({{ qsys.abbrev }})</a></h6>
+			</div>
+			<div class="card-body justify fs-7">{{ qsys.description|truncatewords:32 }}</div>
+		</div>
+	</div>
+    {% endfor %}
+</div>
+{% endblock %}
