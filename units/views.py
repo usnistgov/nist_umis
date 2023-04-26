@@ -1,6 +1,6 @@
 """ views for the units app """
 from django.shortcuts import render, redirect
-from django.core.serializers import serialize
+from umisconfig.settings import *
 from django.http import JsonResponse
 from units.models import *
 
@@ -193,7 +193,7 @@ def crosswalk(request, sys1id=None, sys2id=None):
         return JsonResponse(output, safe=False)
     else:
         data = Repsystems.objects.all().values_list('id', 'name').order_by('name')
-        return render(request, "../templates/units/crosswalk.html", {'data': data})
+        return render(request, "../templates/units/crosswalk.html", {'data': data, 'uport': uport})
 
 
 def unitimport(request):

@@ -3,8 +3,6 @@ from constants.models import *
 from django.http import HttpResponse
 from pnglatex import pnglatex
 from umisconfig.settings import *
-import pdflatex
-
 import json
 import requests
 

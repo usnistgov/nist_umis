@@ -2,13 +2,13 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from units.models import *
+from umisconfig.settings import *
 from django.http import JsonResponse, HttpResponse
 from .forms import SearchForm
 
 import datetime
 
-site = "http://127.0.0.1:8000/"
-
+site = "http://127.0.0.1:" + uport + '/'
 
 
 def home(request):

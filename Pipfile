@@ -28,7 +28,6 @@ wheel = ">=0.40"
 gunicorn = "*"
 pip-tools = ">=6.12"
 pip = ">=23.0"
-pymysql = "*"
 setuptools = ">=67.6"
 
 [dev-packages]
