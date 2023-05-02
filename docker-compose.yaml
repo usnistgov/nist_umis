@@ -4,7 +4,7 @@ networks:
 volumes:
   mysql_data:
 services:
-  umis:  
+  umis:
     container_name: umis_app
     hostname: umis_app
 #    image: umis:latest
