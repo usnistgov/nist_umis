@@ -1,0 +1,80 @@
+version: "3.8"
+networks:
+  prod-shared:
+volumes:
+  mysql_data:
+services:
+  umis:  
+    container_name: umis_app
+    hostname: umis_app
+#    image: umis:latest
+    build: ../nist_umis
+    pull_policy: always
+    restart: always
+    depends_on:
+     - mysql
+#     - proxy
+    volumes:
+      - ./entrypoint.sh:/app/entrypoint.sh
+    logging:
+      driver: "local"
+      options: {}
+    working_dir: /app
+    ports:
+      - '8081:8081'
+    networks:
+      - prod-shared
+    environment:
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_USER: ${MYSQL_USER} 
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+      MYSQL_DATABASE_HOST: ${MYSQL_DATABASE_HOST}
+  mysql:
+    container_name: umis_mysql
+    hostname: umis_mysql
+    image: mysql:8.0.32
+    pull_policy: always
+    restart: always
+    environment:
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_USER: ${MYSQL_USER}         #user granted access to database on import
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+    volumes:
+#      - mysql_data:/var/lib/mysql
+      #MySQL image with execute all .sql files on startup
+      - ./umis.sql:/docker-entrypoint-initdb.d/umis.sql #automagically imports any sql files in this folder
+
+    logging:
+      driver: "local"
+      options: {}
+    networks:
+      - prod-shared
+#  proxy:  
+#    image: ${PROXYIMAGE}:${PROXYIMAGETAG}
+#    container_name: ${PROXYNAME}
+#    deploy:
+#      resources:
+#          limits:
+#            memory: ${PROXYLIMITMEM}
+#          reservations:
+#            memory: ${PROXYRESERVEMEM}
+#    restart: always
+#    volumes: 
+  #    - ${PROXYVOL1}
+#      - ${PROXYVOL2}
+#      - ${PROXYVOL3}
+#      - ${PROXYVOL4}
+#      - ${PROXYVOL5}
+#      - ${PROXYVOL6}
+#    ports:
+#      - ${PROXYPORTS}
+#    networks:
+#      - ${PROXYNETWORK}
+#    networks:
+#      - umis-shared
+#networks:
+#  umis-shared:
+#    external: true
+#volumes:
+#  mysql-data:   
