@@ -8,7 +8,7 @@ from .forms import SearchForm
 
 import datetime
 
-site = "http://127.0.0.1:" + uport + '/'
+site = "http://127.0.0.1:"
 
 
 def home(request):
