@@ -7,8 +7,8 @@ services:
   umis:
     container_name: umis_app
     hostname: umis_app
-#    image: umis:latest
-    build: ../nist_umis
+    image: nistodi/umis:stage
+#    build: ../nist_umis
     pull_policy: always
     restart: always
     depends_on:
