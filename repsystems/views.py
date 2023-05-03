@@ -12,9 +12,10 @@ def index(request):
 
 def view(request, rsid):
     """ get data about a representation system and the unit representations in the db """
+    port = request.META['SERVER_PORT']
     rsys = Repsystems.objects.get(id=rsid)
     reps = rsys.representations_set.all()
-    return render(request, "../templates/repsystems/view.html", {'rsys': rsys, 'reps': reps})
+    return render(request, "../templates/repsystems/view.html", {'rsys': rsys, 'reps': reps, 'port': port})
 
 
 def units(request, rsid):
