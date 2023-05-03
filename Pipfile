@@ -4,7 +4,7 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
-django = ">=4.1"
+django = ">=4.1,<4.2"
 mysqlclient = "*"
 GTC = "*"
 bs4 = "*"
@@ -29,6 +29,7 @@ gunicorn = "*"
 pip-tools = ">=6.12"
 pip = ">=23.0"
 setuptools = ">=67.6"
+pymysql = "*"
 
 [dev-packages]
 
