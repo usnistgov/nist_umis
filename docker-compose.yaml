@@ -5,15 +5,14 @@ volumes:
   mysql_data:
 services:
   umis:
-    container_name: umis_app
-    hostname: umis_app
-    image: nistodi/umis:stage
+    container_name: ${CONTAINER}
+    hostname: ${HOSTNAME}    #nginx uses hostname to proxy
+    image: ${IMAGEURL}:${IMAGETAG}
 #    build: ../nist_umis
     pull_policy: always
     restart: always
     depends_on:
      - mysql
-#     - proxy
     volumes:
       - ./entrypoint.sh:/app/entrypoint.sh
     logging:
@@ -30,8 +29,8 @@ services:
       MYSQL_PASSWORD: ${MYSQL_PASSWORD}
       MYSQL_DATABASE_HOST: ${MYSQL_DATABASE_HOST}
   mysql:
-    container_name: umis_mysql
-    hostname: umis_mysql
+    container_name: ${MYSQL_CONTAINER_NAME}
+    hostname: ${MYSQL_HOSTNAME}
     image: mysql:8.0.32
     pull_policy: always
     restart: always
@@ -41,8 +40,6 @@ services:
       MYSQL_PASSWORD: ${MYSQL_PASSWORD}
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
     volumes:
-#      - mysql_data:/var/lib/mysql
-      #MySQL image with execute all .sql files on startup
       - ./umis.sql:/docker-entrypoint-initdb.d/umis.sql #automagically imports any sql files in this folder
 
     logging:
