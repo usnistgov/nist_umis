@@ -20,7 +20,7 @@
                         <b>Source</b>: <a href="{{ rsys.url }}" target="_blank">{{ rsys.url }}</a><br/>
                         <b>Version</b>: {{ rsys.version }}<br/>
                         <b>Status</b>: {{ rsys.status }} {% if rsys.status == 'legacy' %} (no longer maintained) {% endif %}<br/>
-                        <b>Permalink</b>: <a href="/repsystems/view/{{ rsys.symbol }}">http://127.0.0.1:8000/repsystems/view/{{ rsys.abbrev }}</a><br/>
+                        <b>Permalink</b>: <a href="/repsystems/view/{{ rsys.abbrev }}">http://127.0.0.1:{{ port }}/repsystems/view/{{ rsys.abbrev }}</a><br/>
                     </div>
                     <div class="col-12 mt-3">
                         <h5>Representations (scrollable)</h5>

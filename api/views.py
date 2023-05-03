@@ -2,13 +2,10 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from units.models import *
-from umisconfig.settings import *
-from django.http import JsonResponse, HttpResponse
+from django.http import JsonResponse
 from .forms import SearchForm
 
 import datetime
-
-site = "http://127.0.0.1:"
 
 
 def home(request):
@@ -24,6 +21,7 @@ def spec(request):
 
 
 def unitslist(request):
+    site = 'http://127.0.0.1:' + request.META['SERVER_PORT']
     """ API endpoint for the list of units """
     data = Units.objects.all()
     output = {}
@@ -43,6 +41,7 @@ def unitslist(request):
 
 
 def unitview(request, uid=None):
+    site = 'http://127.0.0.1:' + request.META['SERVER_PORT']
     """ API endpoint for individual unit by id or name """
     if not uid:
         # redirect to the API home page if no unit identifier given

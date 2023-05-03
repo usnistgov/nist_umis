@@ -4,12 +4,13 @@
 {% block content %}
     <script type="text/javascript">
     $(document).ready(function() {
-        // get data for system 1
+        let port = location.port
+	    // get data for system 1
         $('#sys1').on('change', function() {
             let sys1 = $("#sys1");let sys2 = $("#sys2");
             let sid1 = sys1.find("option:selected").val();
             let sid2 = sys2.find("option:selected").val();
-            let url = "http://127.0.0.1:{{ uport }}/repsystems/units/";
+            let url = "http://127.0.0.1:" + port + "/repsystems/units/";
             let units1 = null, units2 = null, submit = $("#getcw");
             if (sid1 !== "") {
                 $.getJSON(url + sid1).done(function (data) { units1 = data; });
@@ -64,7 +65,7 @@
             let sys1 = $("#sys1");let sys2 = $("#sys2");
             let sid1 = sys1.find("option:selected").val();
             let sid2 = sys2.find("option:selected").val();
-            let url = "http://127.0.0.1:8000/repsystems/units/";
+            let url = "http://127.0.0.1:" + port + "/repsystems/units/";
             let units1 = null, units2 = null, submit = $("#getcw");
             if (sid1 !== "") {
                 $.getJSON(url + sid1).done(function (data) { units1 = data; });
