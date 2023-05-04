@@ -18,7 +18,7 @@ jobs:
         username: ${{ github.actor }}
         password: ${{ secrets.GITHUB_TOKEN }}
     - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag umis:stage
+      run: docker build --tag umis:stage --file Dockerfile .
     - name: Push image to CR
       run:
         docker tag umis:stage ghcr.io/stuchalk/umis:latest
