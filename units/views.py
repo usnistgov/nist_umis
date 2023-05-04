@@ -193,7 +193,7 @@ def crosswalk(request, sys1id=None, sys2id=None):
         return JsonResponse(output, safe=False)
     else:
         data = Repsystems.objects.all().values_list('id', 'name').order_by('name')
-        return render(request, "../templates/units/crosswalk.html", {'data': data, 'uport': uport})
+        return render(request, "../templates/units/crosswalk.html", {'data': data})
 
 
 def unitimport(request):
@@ -213,8 +213,8 @@ def unitimport(request):
             quants = qk.quantitykind.quantities_set.all()
             for quant in quants:
                 qs.append(quant.name)
-        sorted = qs.sort()
-        u.update({'quantities': sorted})
+        sortd = qs.sort()
+        u.update({'quantities': sortd})
         u.update({'status': 'current'})
         u.update({'updates': []})
         output['units'].append(u)
