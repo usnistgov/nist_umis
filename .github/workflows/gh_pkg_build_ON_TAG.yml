@@ -6,7 +6,7 @@ on:
       - '*'
 
 jobs:
-  build_and_push:
+  build_nist_umis_on_tag:
     runs-on: ubuntu-latest
 
     steps:
