@@ -12,6 +12,10 @@ In the move toward big data applications there are many activities focused on th
 * Provide a mechanism whereby legacy units can be represented and related to current units
 * Produce a global network of synchronized unit repositories
 
+## Getting Started
+
+see quikstart.md
+
 ## Status
 
 This project is currently under development, contact the author for more information.  Stuart Chalk.
