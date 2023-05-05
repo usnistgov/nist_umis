@@ -1,5 +1,8 @@
-# Basic nginx dockerfile starting with Ubuntu 20.04
-FROM ubuntu:20.04
-RUN apt -y update
-RUN apt -y install nginx
-RUN apt -y install mysql-server
+FROM python:3.10
+ENV PYTHONUNBUFFERED 1
+WORKDIR /app
+RUN apt-get update && apt-get install -y vim python curl bash libmariadb-dev-compat libmariadb-dev default-mysql-client
+
+COPY . /app
+RUN pip install --trusted-host pypi.org --trusted-host files.pythonhosted.org pip -r requirements.txt
+ENTRYPOINT /app/entrypoint.sh
