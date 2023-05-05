@@ -1,4 +1,4 @@
-name: Build and Push Docker Image
+name: Build nist_umis:tagname and purch to ghcri.io
 
 on:
   push:
