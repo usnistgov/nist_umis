@@ -8,13 +8,10 @@ services:
     container_name: ${CONTAINER}
     hostname: ${HOSTNAME}    #nginx uses hostname to proxy
     image: ${IMAGEURL}:${IMAGETAG}
-#    build: ../nist_umis
     pull_policy: always
     restart: always
     depends_on:
      - mysql
-    volumes:
-      - ./entrypoint.sh:/app/entrypoint.sh
     logging:
       driver: "local"
       options: {}
@@ -41,7 +38,6 @@ services:
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
     volumes:
       - ./umis.sql:/docker-entrypoint-initdb.d/umis.sql #automagically imports any sql files in this folder
-
     logging:
       driver: "local"
       options: {}
