@@ -1,3 +1,4 @@
 .idea
 
 umisconfig/localsettings.py
+.env
