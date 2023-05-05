@@ -2,10 +2,8 @@
 VERSION=3.8
 #Sets the project name. This value is prepended along with the service name to the container’s name on startup.
 COMPOSE_PROJECT_NAME=umis
-IMAGEURL=ghcr.io/usnistgov/your-image-name
-IMAGETAG=9abc140c43654171497ed9689f115c6c242f2d3c
-#IMAGEURL=nistodi/umis
-#IMAGETAG=stage 
+IMAGEURL=ghcr.io/usnistgov/nist_umis
+IMAGETAG=latest
 CONTAINER=umis #name of container on docker host
 HOSTNAME=umis-i
 
