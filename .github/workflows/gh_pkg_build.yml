@@ -1,4 +1,4 @@
-name: Build nist_umis:tagname and purch to ghcri.io
+name: Build nist_umis:tagname and push to ghcri.io
 
 on:
   push:
