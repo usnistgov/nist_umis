@@ -10,7 +10,7 @@ ARG USERNAME=cuser
 ARG USER_UID=3815
 ARG USER_GID=3815
 
-RUN groupadd --gid $USER_GID $USERNAME && useradd --uid $USER_UID --gid $USER_GID -m $USERNAME ;  mkdir /app/logs
+RUN groupadd --gid $USER_GID $USERNAME && useradd --uid $USER_UID --gid $USER_GID -m $USERNAME
 
 RUN chown -R cuser:cuser /app && chmod -R o-rwx /app
 
