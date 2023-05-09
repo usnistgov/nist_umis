@@ -65,7 +65,7 @@
                                 {% for quant in quants %}
                                 <tr class="item" data-content="{{ quant.name|lower }} {% if quant.altnames %} {{ quant.altnames|lower }} {% endif %} {{ quant.quantitykind.name|lower }} {{ quant.sysml_qdim|lower }}">
                                     <td><a href="/quantities/view/{{ quant.id }}">{{ quant.name }}</a>{% if quant.altnames %}  ({{ quant.altnames }}) {% endif %}</td>
-                                    <td>{{ quant.quantitykind.name }}</td>
+                                    <td>{% if quant.quantitykind.name %}{{ quant.quantitykind.name }}{% else %}&nbsp;{% endif %}</td>
                                     <td>{{ quant.sysml_qdim }}</td>
                                 </tr>
                                 {% endfor %}
