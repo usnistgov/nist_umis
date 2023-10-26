@@ -11,13 +11,16 @@ django.setup()
 from units.models import *
 from umisconfig.settings import *
 from bs4 import BeautifulSoup
-from datetime import datetime
 from dashboard.repsys_ingest import *
-from datetime import date
+from django.utils import timezone
+from datetime import date, datetime
+import time
+import pytz
+
 from rdflib.plugins.sparql.results import jsonresults
 
 
-choice = 'runiec'
+choice = 'runqudt'
 
 # checked 1/12/23
 if choice == 'runiec':
@@ -218,6 +221,9 @@ if choice == 'runqudt':
                 value=hit[repsys['name']].replace(repl, ''),
                 source='qudt')
             ent.lastupdate = date.today()
+            timezone.now()
+            ts = time.time()
+            ent.updated = datetime.utcfromtimestamp(ts).strftime('%Y-%m-%d %H:%M:%S')
             ent.save()
             if created:
                 print("added '" + str(ent.value) + "' (" + str(ent.id) + ")")
@@ -237,10 +243,12 @@ if choice == 'runqudt':
             value=hit.unit.replace("http://qudt.org/vocab/unit/", ""),
             source='qudt')
         ent.lastupdate = date.today()
+        timezone.now()
+        ts = time.time()
+        ent.updated = datetime.utcfromtimestamp(ts).strftime('%Y-%m-%d %H:%M:%S')
         ent.save()
         if created:
             print("added '" + ent.value + "' (" + str(ent.id) + ")")
-        else:
             print("found '" + ent.value + "' (" + str(ent.id) + ")")
 
 # checked 4/7/23
