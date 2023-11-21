@@ -27,8 +27,14 @@
                         <table class="table table-sm table-striped mb-0">
                             <tr>
                                 <th class="col-3">Unit</th>
-                                <th class="col-4">Representation</th>
-                                <th class="col-5">Status</th>
+                                {% if rsys.id == 25 %}
+                                    <th class="col-3">Type</th>
+                                    <th class="col-3">Representation</th>
+                                    <th class="col-3">Status</th>
+                                {% else %}
+                                    <th class="col-4">Representation</th>
+                                    <th class="col-5">Status</th>
+                            {% endif %}
                             </tr>
                         </table>
                         <div class="table-responsive">
@@ -36,9 +42,19 @@
                                  {% for rep in reps %}
                                      <tr class="fs-7">
                                         <td class="col-3"><a href="/units/view/{{ rep.unit_id }}">{{ rep.unit.name }}</a></td>
-                                        <td class="col-4"><a href="{{ rep.url }}" target="_blank">{{ rep.strng.string }}</a></td>
-                                        <td class="col-5">{{ rep.strng.status }}</td>
-                                    </tr>
+                                         {% if rsys.id == 25 %}
+                                             <td class="col-3">{{ rep.unit.type }}</td>
+                                             <td class="col-3">{{ rep.strng.string }}
+                                                 {%  if rep.url_endpoint == 'yes' %}
+                                                    (<a href="{{ rsys.path }}{{ rep.unit.name }}" target="_blank">definition</a><span class='bi bi-link-45deg'></span>)
+                                                 {% endif %}
+                                             </td>
+                                             <td class="col-3">{{ rep.status }}</td>
+                                         {% else %}
+                                             <td class="col-4">{{ rep.strng.string }} (<a href="{{ rsys.path }}{{ rep.unit.name }}" target="_blank">definition</a><span class='bi bi-link-45deg'></span>)</td>
+                                             <td class="col-5">{{ rep.status }}</td>
+                                         {% endif %}
+                                     </tr>
                                 {% endfor %}
                             </table>
                         </div>

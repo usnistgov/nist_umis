@@ -11,10 +11,11 @@ django.setup()
 from units.models import *
 from umisconfig.settings import *
 from bs4 import BeautifulSoup
-from datetime import datetime
 from dashboard.repsys_ingest import *
 from datetime import date
-
+from django.utils import timezone
+from datetime import datetime
+import time
 
 # migrate data from the entities table into the representations table
 ents = Entities.objects.filter(unit__isnull=False, migrated='no')
@@ -25,13 +26,16 @@ for ent in ents:
         print("problem!" + " (" + str(ent.id) + ")")
         exit()
     elif len(reps) == 0:
+        timezone.now()
+        ts = time.time()
+        upd = datetime.utcfromtimestamp(ts).strftime('%Y-%m-%d %H:%M:%S')
         print("add representation: " + str(ent.value))
         # add value to strngs table
         found = Strngs.objects.filter(string=ent.value)
         if found:
             strngid = found[0].id
         else:
-            strng = Strngs(string=ent.value, status='current', autoadded='yes')
+            strng = Strngs(string=ent.value, status='current', autoadded='yes', updated=upd)
             strng.save()
             if not strng.id:
                 print("string not saved: " + ent.value)
@@ -53,6 +57,7 @@ for ent in ents:
             rep.url_endpoint = 'yes'
         rep.status = 'current'
         rep.checked = 'no'
+        rep.updated = upd
         rep.save()
         # update migrated (entities)
         if not rep.id:

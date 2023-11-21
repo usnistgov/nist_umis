@@ -28,3 +28,34 @@ def units(request, rsid):
         sym = rep.strng.string
         data.update({uid: name + ':' + sym})
     return JsonResponse(data, safe=False)
+
+
+def cross(request, rsid1, rsid2):
+    """ get a list of representations unit system to send to a browser via ajax """
+    reps1 = Representations.objects.filter(repsystem_id=rsid1, url_endpoint='yes').order_by('unit__name')
+    reps2 = Representations.objects.filter(repsystem_id=rsid2, url_endpoint='yes').order_by('unit__name')
+    rep2list = {}
+    for rep2 in reps2:
+        rep2list.update({rep2.unit.id: rep2.strng.string})
+
+    # add entries in reps1
+    data = {}
+    for rep1 in reps1:
+        uid = rep1.unit.id
+        name = rep1.unit.name
+        rep1 = rep1.strng.string
+        if uid in rep2list.keys():
+            rep2 = rep2list[uid]
+            del rep2list[uid]
+        else:
+            rep2 = 'no equivalent'
+        data.update({name: rep1 + ':' + rep2})
+    # add entries in reps2 that were not matched in reps1
+    for uid, rep2str in rep2list.items():
+        for rep2 in reps2:
+            if rep2.strng.string == rep2str:
+                data.update({rep2.unit.name: 'no equivalent:' + rep2str})
+    # sort by name
+    data = dict(sorted(data.items()))
+
+    return JsonResponse(data, safe=False)

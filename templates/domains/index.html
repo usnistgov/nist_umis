@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% block title %} Domains Index {% endblock %}
+{% block header %} Domains Index {% endblock %}
+{% block content %}
+<h2>Representation System Domains</h2>
+<div class="row">
+    <div class="card mt-2">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-12">
+                    <div class="table-responsive-u-view">
+                        <table class="table table-sm table-striped fs-6">
+                           {% for dom in doms %}
+                                <tr class="item">
+                                    <td><b>{{ dom.title }}</b>:
+                                        {% for rep in dom.repsystems_set.all %}
+                                            {% if rep.status != 'legacy' %}
+                                            <a href="/repsystems/view/{{ rep.id }}">{{ rep.name }}</a>{% if not forloop.last %}, {% endif %}
+                                            {% endif %}
+                                        {% endfor %}
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

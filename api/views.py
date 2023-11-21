@@ -21,14 +21,15 @@ def spec(request):
 
 
 def unitslist(request):
-    site = 'http://127.0.0.1:' + request.META['SERVER_PORT']
+    site = 'http://127.0.0.1:' + request.META['SERVER_PORT'] + '/'
     """ API endpoint for the list of units """
     data = Units.objects.all()
     output = {}
-    output.update({"title": "List of UMIS Units"})
-    output.update({"apiurl": site + "api/units/list/"})
-    output.update({"apiversion": "1.1.0"})
+    output.update({"title": "List of Units in the Units of Measurement Interoperability Service (UMIS)"})
+    output.update({"description": "List of units (" + str(len(data)) + ") currently available from the UMIS database"})
     output.update({"retrieved": datetime.datetime.now()})
+    output.update({"apiurl": site + "api/units/list"})
+    output.update({"apiversion": "1.1.0"})
     units = []
     for datum in data:
         u = {}

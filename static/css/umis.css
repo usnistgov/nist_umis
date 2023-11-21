@@ -70,3 +70,11 @@ a:active {text-decoration: none;}
     --bs-btn-padding-x: .5rem;
     --bs-btn-font-size: .75rem;
 }
+
+.unit {
+    text-align: center;
+}
+
+.to {
+    text-align: right;
+}

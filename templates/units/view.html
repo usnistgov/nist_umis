@@ -30,6 +30,18 @@
                             {% endfor %}
                         {% endif %}
                     </div>
+                    <!-- show reference point if available -->
+                    {% for strng, data in reps.items %}
+                        {% for sys in data.systems %}
+                            {% if sys.id == 25 and sys.url_ep == 'yes' %} <!-- 25 is the reference point -->
+                                <div class="alert alert-danger col-12 mt-3" role="alert">
+                                    <h5>Definitive Reference</h5>
+                                    The BIPM SI Reference Point URL for this SI Unit of Measurement is:
+                                        <a href="{{ sys.path }}{{ strng }}" target="_blank">{{ sys.path }}{{ unit.name }}</a><span class='bi bi-link-45deg'></span>
+                                </div>
+                            {% endif %}
+                        {% endfor %}
+                    {% endfor %}
                     <div class="col-12 mt-3">
                         <h5>Representations</h5>
                         <table class="table table-sm table-striped">
@@ -50,7 +62,7 @@
                                     <td>
                                         {% for sys in data.systems %}
                                             <a href="/repsystems/view/{{ sys.id }}">{{ sys.name }} ({{ sys.abbrev }})</a>
-                                            {% if sys.path and sys.url_ep == 'yes' %}
+                                            {% if sys.path and sys.url_ep == 'yes' and sys.id != 25 %}
                                                 (<a href="{{ sys.path }}{{ strng }}" target="_blank">definition</a><span class='bi bi-link-45deg'></span>)
                                             {% endif %}
                                             <br/>
