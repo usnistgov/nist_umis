@@ -12,8 +12,15 @@ def index(request):
 
 def view(request, rsid):
     """ get data about a representation system and the unit representations in the db """
+    if type(rsid) is int:
+        rsys = Repsystems.objects.get(id=rsid)
+    elif type(rsid) is str:
+        rsys = Repsystems.objects.get(abbrev=rsid)
+    else:
+        rsys = None
+    if rsys is None:
+        return render(request, '/')
     port = request.META['SERVER_PORT']
-    rsys = Repsystems.objects.get(id=rsid)
     reps = rsys.representations_set.all()
     return render(request, "../templates/repsystems/view.html", {'rsys': rsys, 'reps': reps, 'port': port})
 
