@@ -11,12 +11,4 @@ urlpatterns = [
     path("units/crosswalk/", views.crosswalk, name='crosswalk'),
     path("units/crosswalk/<sys1id>/<sys2id>", views.crosswalk, name='crosswalk'),
     path("units/view/<uid>", views.view, name='view'),
-    path('unitsystems/', include('unitsystems.urls')),
-    path('quantitysystems/', include('quantitysystems.urls')),
-    path('quantitykinds/', include('quantitykinds.urls')),
-    path('repsystems/', include('repsystems.urls')),
-    path('quantities/', include('quantities.urls')),
-    path('representations/', include('representations.urls')),
-    path('vectors/', include('vectors.urls')),
-    path('constants/', include('constants.urls')),
 ]
