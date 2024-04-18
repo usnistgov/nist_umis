@@ -24,6 +24,7 @@ Owlready2>=0.40
 packaging>=23.0
 pip-tools>=6.12
 pnglatex>=1.1
+pymysql==1.1.0
 pyparsing>=3.0
 pyproject_hooks>=1.0
 PySocks==1.7.1
