@@ -21,13 +21,13 @@ pytz = ">=2024.1"
 pyyaml = ">=6.0.0"
 qwikidata = ">=0.4.2"
 rdflib = ">=7.0"
-requests = ">=2.31.0"
+requests = ">=2.32.0"
 selenium = ">=4.19.0"
 scipy = ">=1.13.0"
 sqlparse = ">=0.5.0"
-urllib3 = ">=2.1"
+urllib3 = ">=2.2.0"
 
 [dev-packages]
 
 [requires]
-python_version = "3.11"
+python_version = "3.12"
