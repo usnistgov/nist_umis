@@ -4,7 +4,6 @@ from django.http import HttpResponse
 from pnglatex import pnglatex
 from umisconfig.settings import *
 import json
-import requests
 
 
 def index(request):
@@ -48,7 +47,7 @@ def view(request, cnid):
 
 
 def jsonout(request, cnid):
-    constant = dict(Constants.objects.values('identifier', 'name', 'units_si', 'nistpage','symbol').get(id=cnid))
+    constant = dict(Constants.objects.values('identifier', 'name', 'units_si', 'nistpage', 'symbol').get(id=cnid))
     values = Constantvalues.objects.filter(constant_id=cnid).\
         values('year', 'value_num', 'uncert_num', 'orig_unit', 'reluncert_man', 'reluncert_exp')
     constant.update({'values': []})
@@ -77,6 +76,6 @@ def symbol(request, cnid):
     sym = Constants.objects.filter(id=cnid).values('symbol')[0]
     latex = sym['symbol'].replace('$', '')
     ipath = STATIC_URL + 'symbols/constant' + cnid + '.png'
-    pnglatex(r"\[" + latex + "\]", ipath)
+    pnglatex(r"[" + latex + "]", ipath)
     image_data = open(ipath, "rb").read()
     return HttpResponse(image_data, mimetype="image/png")
