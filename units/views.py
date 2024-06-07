@@ -1,6 +1,5 @@
 """ views for the units app """
 from django.shortcuts import render, redirect
-from umisconfig.settings import *
 from django.http import JsonResponse
 from units.models import *
 

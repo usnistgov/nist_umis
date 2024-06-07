@@ -6,6 +6,15 @@
     $(document).ready(function() {
         let port = location.port
 
+        $('#both').on('change', function() {
+            let rows = $('.extra')
+            rows.show();
+            if ($('#both').is(":checked"))
+            {
+                rows.not('.both').hide();
+            }
+        });
+
         // redo of crosswalk code
         $('.usystem').on('change', function() {
             let sys1 = $("#sys1");let sys2 = $("#sys2");
@@ -39,7 +48,11 @@
                     let trow = "";
                     $.each(units, function (name, unit) {
                         let [enc1,enc2] = unit.split(':')
-                        trow = "<tr class='trow extra'><td class='from col-4'>" +  enc1 + "</td><td class='unit col-4'>" + name + "</td><td class='to col-4'>" + enc2 + "</td></tr>";
+                        let same = ' '
+                        if (enc1 !== 'no equivalent' && enc2 !=='no equivalent') {
+                            same = ' both'
+                        }
+                        trow = "<tr class='trow extra" + same + "'><td class='from col-4'>" +  enc1 + "</td><td class='unit col-4'>" + name + "</td><td class='to col-4'>" + enc2 + "</td></tr>";
                         tbody.append(trow);
                     });
                     // update form action url
@@ -70,8 +83,8 @@
                         <table id="header" class="table table-sm">
                             <thead>
                             <tr>
-                                <th id="syshdr1" class="col-6">
-                                    <label for="sys1"></label>
+                                <th id="syshdr1" class="col-4">
+                                    <label for="sys1" style="display: none;">Sytem 1</label>
                                     <select id="sys1" name="sys1" class="col-12 fs-6 usystem">
                                         <option value="">Select System 1</option>
                                         {% for id, name in data %}
@@ -79,7 +92,11 @@
                                         {% endfor %}
                                     </select>
                                 </th>
-                                <th id="syshdr2" class="col-6">
+                                <th id="bothbox" class="col-4" style="text-align: center;">
+                                    <input id="both" type="checkbox">
+                                    <label for="both">Show only equivalents</label>
+                                </th>
+                                <th id="syshdr2" class="col-4">
                                     <label for="sys2"></label>
                                     <select id="sys2" name="sys2" class="col-12 fs-6 usystem" dir="rtl">
                                         <option value="">Select System 2</option>
