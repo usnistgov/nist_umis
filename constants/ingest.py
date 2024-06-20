@@ -3,21 +3,24 @@ import os
 import django
 import csv
 import re
+import json
 
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "umisconfig.settings")
 django.setup()
 
 from constants.models import *
-from django.db.models import Count
 from umisconfig.settings import STATIC_URL, BASE_DIR
 from decimal import Decimal
 from os.path import exists
+from units.functions import *
+from math import *
 
 
 def procvalue(val, proc):
     proc.orig_value = val
     valuestr = val.replace(' ', '')
     valuestr = valuestr.replace('…', '')
+    valuestr = valuestr.replace('...', '')
     proc.value_str = valuestr
     if val.find('e') != -1:
         valueacc = valuestr.index('e') - 1
@@ -38,7 +41,8 @@ def procvalue(val, proc):
 
 
 def procuncert(unc, proc):
-    if unc == 'null':
+    # calculate uncertainties and add to proc
+    if unc == 'null' or unc == '(exact)':
         proc.uncert_str = None
         proc.uncert_num = None
         proc.uncert_man = None
@@ -52,34 +56,53 @@ def procuncert(unc, proc):
             tzero = '0'
         else:
             tzero = ''
-        floatval = float(uncertstr)
-        floatstr = str(floatval)
+        if '(exact)' in uncertstr:
+            floatstr = None
+        else:
+            floatval = float(uncertstr)
+            floatstr = str(floatval)
         if tzero == '0':
             uncertnum = floatstr.replace('e', '.0e')
         else:
             uncertnum = floatstr
         proc.uncert_num = uncertnum
 
-        if uncertnum.find('e') != -1:
+        if uncertnum is None:
+            parts = [None, None]
+        elif uncertnum.find('e') != -1:
             parts = uncertnum.split("e")
         elif float(uncertnum) < 1:  # float returns decimal value not value in sci notation
             ulen = len(uncertnum)
-            exp = -1
-            for i in range(2, ulen-1):
-                if uncertnum[i] == '0':
-                    exp = exp - 1
+            expn = -1
+            for j in range(2, ulen-1):
+                if uncertnum[j] == '0':
+                    expn = expn - 1
             acc = len(uncertnum) - 2
-            man = str(float(uncertnum) * pow(10, -1 * exp))[0:acc+1]
-            parts = [man, str(exp)]
+            man = str(float(uncertnum) * pow(10, -1 * expn))[0:acc+1]
+            parts = [man, str(expn)]
         else:
             parts = [uncertnum, 0]
         proc.uncert_man = parts[0]
-        proc.uncert_exp = int(parts[1])
-        proc.uncert_acc = len(parts[0]) - 1  # lose one for decimal point
+        if parts[1]:
+            proc.uncert_exp = int(parts[1])
+        else:
+            proc.uncert_exp = None
+        if parts[0]:
+            proc.uncert_acc = len(parts[0]) - 1  # lose one for decimal point
+        else:
+            proc.uncert_acc = None
+
+        # # calculate the relative uncertainty
+        # reluncert = float(proc.uncert_num)/float(proc.value_num)
+        # relacc = proc.uncert_acc
+        # uparts = str(reluncert).split("e")
+        # proc.reluncert_man = uparts[0][0:relacc+1]
+        # proc.reluncert_exp = int(uparts[1])
+
     return
 
 
-years = ['1998']
+years = ['2022']
 for year in years:
     path = str(BASE_DIR) + '/' + STATIC_URL + 'imports/allascii_' + year + '.txt'
 
@@ -90,12 +113,20 @@ for year in years:
         reader = csv.reader(f, delimiter="\t")
         consts = list(reader)
 
+    ntmp = Constants.objects.all().values_list('allnames', flat=True)
+    names = []
+    for nam in ntmp:
+        nlist = json.loads(nam)
+        for nitem in nlist:
+            names.append(nitem)
+
     for const in consts:
-        print(const)
+        # print(const)
         name = const[0]
         # check if constant has been added
         check = Constantvalues.objects.filter(orig_name=name, year=year)
         if check.count() == 1:
+            print("found " + name)
             continue
         data = {}
         # check if its three columns of data (uncert at end) or four (just process)
@@ -124,8 +155,9 @@ for year in years:
         conval.orig_name = name
         conval.year = year
         # check for ellipsis
-        if const[1].find('…') != -1:
+        if const[1].find('…') != -1 or const[1].find('...') != -1:
             ell = 1
+            const[1] = const[1].replace('…', '').replace('...', '')
         else:
             ell = 0
         conval.ellipsis = ell
@@ -134,14 +166,26 @@ for year in years:
         # process the uncertainty
         procuncert(const[2], conval)
         # add the unit
-        conval.orig_unit = const[3]
+        if const[3] == '':
+            conval.orig_unit = '1'
+        else:
+            conval.orig_unit = const[3]
+
         # find constant and add id
-        con = Constants.objects.filter(allnames__contains=name)[0]
+        if name in names:
+            con = Constants.objects.filter(allnames__contains=name)[0]
+        else:
+            print("new constant - " + name)
+            exit()
         conval.constant_id = con.id
         # save constantvalue
+        conval.updated = getds()
         conval.save()
+
         # update constant for year based version
         match year:
+            case '2022':
+                con.is_2022 = 1
             case '2018':
                 con.is_2018 = 1
             case '2014':
@@ -154,4 +198,8 @@ for year in years:
                 con.is_2002 = 1
             case '1998':
                 con.is_1998 = 1
+
+        # update constant table
+        con.updated = getds()
         con.save()
+        print("added " + name)

@@ -18,6 +18,7 @@ class Constants(models.Model):
     qudt_id = models.CharField(max_length=256, blank=True, null=True)
     is_qudt = models.IntegerField(blank=True, null=True)
     is_codata = models.IntegerField(blank=True, null=True)
+    is_2022 = models.IntegerField(blank=True, null=True)
     is_2018 = models.IntegerField(blank=True, null=True)
     is_2014 = models.IntegerField(blank=True, null=True)
     is_2010 = models.IntegerField(blank=True, null=True)

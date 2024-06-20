@@ -14,7 +14,7 @@ def index(request):
 
 def view(request, cnid):
     constant = Constants.objects.get(id=cnid)
-    values = constant.constantvalues_set.all()
+    values = constant.constantvalues_set.all().order_by('-year')
     allvals, allaccs, allexps = [], [], []
     for i, value in enumerate(values):
         # reformat field value to display correctly
@@ -49,7 +49,7 @@ def view(request, cnid):
 def jsonout(request, cnid):
     constant = dict(Constants.objects.values('identifier', 'name', 'units_si', 'nistpage', 'symbol').get(id=cnid))
     values = Constantvalues.objects.filter(constant_id=cnid).\
-        values('year', 'value_num', 'uncert_num', 'orig_unit', 'reluncert_man', 'reluncert_exp')
+        values('year', 'value_num', 'uncert_num', 'orig_unit', 'reluncert_man', 'reluncert_exp').order_by('year')
     constant.update({'values': []})
     for value in values:
         constant['values'].append(dict(value))
@@ -60,7 +60,7 @@ def jsonout(request, cnid):
 def alldata(request, cnid):
     constant = Constants.objects.get(id=cnid)
     condata = {'datasets': [{'label': constant.name, 'data': []}]}
-    values = constant.constantvalues_set.all()
+    values = constant.constantvalues_set.all().order_by('year')
     data = []
     for value in values:
         xy = {'x': int(value.year), 'y': float(value.value_num)}

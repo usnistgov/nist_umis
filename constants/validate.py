@@ -3,6 +3,7 @@ import os
 import django
 import math
 import requests
+import re
 
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "umisconfig.settings")
 django.setup()
@@ -10,7 +11,7 @@ django.setup()
 from constants.models import *
 from bs4 import BeautifulSoup
 
-run = "calcrel"
+run = "getreluncert"
 
 
 if run == "idsval":
@@ -78,7 +79,7 @@ if run == "scrape":
                 continue  # invalid page
             title = link.string.strip()
             # find constant in DB
-            found = Constants.objects.filter(allnames__contains="'" + title + "'")
+            found = Constants.objects.filter(allnames__contains='"' + title + '"')
             hit = None
             if found.count() == 1:
                 # save page to DB entry
@@ -144,3 +145,53 @@ if run == "calcrel":
         upd.comments = cmt
         upd.save()
         print("Constant '" + val['orig_name'] + ":" + str(val['year']) + "'")
+
+if run == 'getreluncert':
+    path = "https://physics.nist.gov"
+    url = path + "/cgi-bin/cuu/Category?view=html&All+values.x=0"
+    page = requests.get(url)
+    soup = BeautifulSoup(page.content, "html.parser")
+    cnt = 0
+    year = '2022'
+    for link in soup.find_all('a'):
+        if link.get('href').find('/cuu/Value') == -1:
+            continue  # not found
+        else:
+            tmp = link.get('href').split('|')
+            href = path + tmp[0]
+            if href == 'https://physics.nist.gov/cgi-bin/cuu/Value?am':
+                continue  # invalid page
+            title = link.string.strip()
+            found = Constants.objects.filter(allnames__contains='"' + title + '"')
+            if found.count() == 1:
+                con = found[0]
+                # get constant value for constant and year
+                conid = con.id
+                val = Constantvalues.objects.get(constant_id=conid, year=year)
+                if val.reluncert_man is not None:
+                    print(con.name + ' already added')
+                    continue
+                # go to the page and get the relative uncertainty
+                page = requests.get(href)
+                const = BeautifulSoup(page.content, "html.parser")
+                rows = const.findAll("td", attrs={"align": "right", "bgcolor": "#cce2f3"})
+                for row in rows:
+                    if row.text.strip() == 'Relative standard uncertainty':
+                        uncert = row.parent.findAll('b')[0].text.strip()
+                        if uncert == '(exact)':
+                            val.reluncert_exp = None
+                            val.reluncert_man = None
+                        else:
+                            parts = re.split("\xa0x\xa010", uncert)
+                            val.reluncert_man = parts[0]
+                            val.reluncert_exp = parts[1]
+                        val.save()
+                        print('added ' + con.name)
+            elif found.count() > 1:
+                print("multiple hits!")
+                print(found.values('id', 'name'))
+                exit()
+            else:
+                print("not found!")
+                print(title)
+                exit()

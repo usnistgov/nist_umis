@@ -11,6 +11,8 @@
             locale: 'en-EN',
             scales: {
                 x: {
+                    min: {{ 1995 }},
+                    max: {{ 2025 }},
                     type: 'linear',
                     display: 'true',
                     offset: 'true',
@@ -19,22 +21,14 @@
                     grid: { display: false },
                     time: { unit: 'year' },
                     ticks: {
-                        callback: (value) => {
-                            return value;
-                        }
+                        autoSkip: true,
+                        maxTicksLimit: 7
                     }
                 },
                 y: {
                     min: {{ ymin }},
                     max: {{ ymax }},
-                    title: { display: true, text: 'Value' },
-                    ticks: {
-                        callback: (value) => {
-                            return value;
-                            {#return new Intl.NumberFormat('en-EN', {#}
-                            {#    maximumSignificantDigits: {{ acc }} }).format(value)#}
-                        }
-                    }  // removes ',' from year values
+                    title: { display: true, text: 'Value' }
                 }
             },
             plugins: {
@@ -59,15 +53,15 @@
         <div class="card">
             <div class="card-header text-bg-light">
                 <a type="button" href="/constants/json/{{ constant.id }}" class="btn btn-xs btn-info text-white float-end">JSON</a>
-                <h5 class="card-title mb-0">Constant: {{ constant.name }} ({{ constant.symbol }})</h5>
+                <h5 class="card-title mb-0">Fundmental Constant: {{ constant.name }} ({{ constant.symbol }})</h5>
             </div>
             <div class="card-body">
                 <div class="row">
-                    <div id="accordionValues" class="accordion col-12 col-md-6">
+                    <div id="accordionValues" class="accordion col-12 col-lg-5">
                     {% for value in values %}
                         <div class="accordion-item">
                             <div id="heading{{ forloop.counter }}" class="accordion-header">
-                                <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                                <button class="accordion-button p-2" type="button" data-bs-toggle="collapse"
                                         data-bs-target="#collapse{{ forloop.counter }}"
                                         aria-expanded="{% if forloop.first %}true{% else %}false{% endif %}"
                                         aria-controls="collapse{{ forloop.counter }}">
@@ -111,7 +105,7 @@
                         </div>
                     {% endfor %}
                     </div>
-                    <div class="col-12 col-md-6">
+                    <div class="col-12 col-lg-7">
                         <canvas id="chart"></canvas>
                     </div>
                 </div>
