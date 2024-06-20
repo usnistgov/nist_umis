@@ -11,6 +11,8 @@ class Quantitysystems(models.Model):
     class Meta:
         managed = False
         db_table = 'quantitysystems'
+        db_table_comment = 'Table of systems of quanitites (e.g. SI)'
+        app_label = 'quantitysystems'
 
 
 class Dimensionvectors(models.Model):
@@ -115,6 +117,7 @@ class Quantities(models.Model):
     quantitysystem = models.ForeignKey(Quantitysystems, on_delete=models.PROTECT, db_column='quantitysystem_id')
     name = models.CharField(max_length=128)
     altnames = models.CharField(max_length=512)
+    sysnames = models.CharField(max_length=512, blank=True, null=True)
     description = models.CharField(max_length=1024, blank=True, null=True)
     symbol = models.CharField(max_length=128, blank=True, null=True)
     latexsymbol = models.CharField(max_length=512, blank=True, null=True)
@@ -155,6 +158,7 @@ class Repsystems(models.Model):
     fileupdated = models.DateField()
     fileformat = models.CharField(max_length=8, blank=True, null=True)
     checked = models.DateTimeField()
+    rawdata = models.TextField(blank=True, null=True)
     jsondata = models.TextField(blank=True, null=True)
     updated = models.DateTimeField()
 
@@ -291,7 +295,7 @@ class Entities(models.Model):
     source = models.CharField(max_length=32, blank=True, null=True)
     comment = models.CharField(max_length=1024, blank=True, null=True)
     migrated = models.CharField(max_length=3, blank=True, null=True)
-    lastupdate = models.DateField(blank=True, null=True)
+    lastcheck = models.DateField(blank=True, null=True)
     updated = models.DateTimeField()
 
     class Meta:
@@ -302,8 +306,19 @@ class Entities(models.Model):
 class QuantitykindsUnits(models.Model):
     quantitykind = models.ForeignKey(Quantitykinds, on_delete=models.PROTECT, db_column='quantitykind_id')
     unit = models.ForeignKey(Units, on_delete=models.PROTECT, db_column='unit_id')
-    updated = models.DateTimeField()
+    updated = models.DateTimeField(null=True)
 
     class Meta:
         managed = False
         db_table = 'quantitykinds_units'
+
+
+class EntitiesQuantities(models.Model):
+    entity = models.ForeignKey(Entities, on_delete=models.PROTECT, db_column='entity_id')
+    quantity = models.ForeignKey(Units, on_delete=models.PROTECT, db_column='quantity_id')
+    updated = models.DateTimeField()
+
+    class Meta:
+        managed = False
+        db_table = 'entities_quantities'
+        db_table_comment = 'Table of quantities associated to unit entities'
