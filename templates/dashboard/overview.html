@@ -1,0 +1,56 @@
+ {% extends 'base.html' %}
+{% block title %} Dashboard {% endblock %}
+{% block header %} Dashboard {% endblock %}
+{% block content %}
+    <script type="text/javascript">
+    $(document).ready(function() {
+        let port = location.port
+
+        // trigger repsys refresh of data
+        $('.rsys').on('click', function() {
+            let rsid = $(this).data('rsid');
+            let act = 'update';
+            let url = "http://127.0.0.1:" + port + "/dashboard/dashajax";
+            $.ajax({
+                type: 'POST',
+                dataType: "text",
+                context: document.body,
+                url: url,
+                data: { csrfmiddlewaretoken: '{{ csrf_token }}', rsid: rsid, action: act },
+                success: function (data) {
+                    let resp = JSON.parse(data);
+                    alert(resp['data']);
+                    return false;
+                },
+                error: function() {
+                    alert("Error doing update...");
+                    return false;
+                }
+            });
+        });
+    });
+    </script>
+
+<div class="row">
+    <div class="col-8 offset-2">
+        <div class="card card-danger">
+            <div class="card-header">
+                <div class="row">
+                    <div class="col-8">
+                        <h5 class="card-title mb-0">Current Representations Systems ({{ repsyss|length }})</h5>
+                    </div>
+                </div>
+            </div>
+            <div class="list-group list-group-flush card-responsive">
+                {% for repsys in repsyss %}
+                    <li class="list-group-item rsys item item-sm" data-rsid="{{ repsys.id }}">
+                        <a href="/repsystems/view/{{ repsys.id }}">{{ repsys.name }}</a> 
+                        ({{ repsys.representations_set.all.count }})
+                        <span class="btn btn-success btn-xs float-end">Update</span>
+                    </li>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
