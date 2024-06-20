@@ -1,6 +1,9 @@
+from django.http import JsonResponse
 from django.shortcuts import render
+from django.views.decorators.csrf import csrf_exempt
 from units.models import Repsystems
 from umisconfig.settings import *
+from repsystems.scripts import *
 from datetime import datetime
 import requests
 import mimetypes
@@ -51,3 +54,22 @@ def getrepsysunits(request, rsid):
     """
 
 
+def overview(request):
+    """ generate page showing current status of the system """
+    repsyss = Repsystems.objects.filter(status='current').order_by('name')
+    return render(request, "../templates/dashboard/overview.html", {'repsyss': repsyss})
+
+
+@csrf_exempt
+def dashajax(request):
+    # check whether the request is ajax request and whether the method is post
+    if request.headers.get('x-requested-with') == 'XMLHttpRequest':
+        rdata = request.POST
+        out = None
+        if rdata['action'] == 'update':
+            # run the update script for repsys
+            out = runqudt()
+        jresp = {'data': {'bytes': out}, 'status': 'success', 'message': ''}
+        return JsonResponse(jresp)
+
+    return JsonResponse({"error": "Not AJAX request or Wrong request method"}, status=500)

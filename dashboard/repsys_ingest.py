@@ -10,92 +10,74 @@ from qwikidata.sparql import return_sparql_query_results
 from rdflib import Graph
 from urllib import parse
 from datetime import datetime
+from pytz import timezone
 import os
 import requests
 import json
 import yaml
-import pytz
 import re
 
 
 def getrepsystemdata(rsid):
     """ function to get data (as a ...data.json file) for a repsys if it's been generated or not """
-    repsys = Repsystems.objects.values('fileformat', 'url').get(id=rsid)
-    ext = repsys['fileformat']
-    data = []
-    jsn = ''
-    if ext == "ttl":
-        # no need to convert file just read
-        if not os.path.exists(os.path.join(BASE_DIR, STATIC_URL, f'repsys_{rsid}_data.ttl')):
-            rsfile = requests.get(repsys['url'])
-            data = rsfile.text
-            with open(os.path.join(BASE_DIR, STATIC_URL, f'repsys_{rsid}_data.ttl'), 'w') as f:
-                f.write(data)
-                f.close()
-        else:
-            with open(os.path.join(BASE_DIR, STATIC_URL, f'repsys_{rsid}_data.ttl'), 'r') as f:
-                data = f.read()
-                f.close()
-    elif not os.path.exists(os.path.join(BASE_DIR, STATIC_URL, f'repsys_{rsid}_data.json')):
-        # get and send the raw data file for repsys to function to create json data file
-        if ext == 'url':
-            rsfile = requests.get(repsys['url'])
-        else:
-            rawpath = os.path.join(BASE_DIR, STATIC_URL, f'repsys_{rsid}{ext}')
-            if not os.path.exists(rawpath):
-                print('raw file is not present')
-                exit()
-            with open(rawpath, 'r') as f:
-                rsfile = f.read()
-
-        if rsid == 2:
-            # raw file is ready to import directly
-            # this does not get used as the data file always exists...
-            pass
-        elif rsid == 3:
-            data = getgbdata(rsfile)
-        elif rsid == 5:
-            # raw file is ready to import directly
-            # this does not get used as the data file always exists...
-            pass
-        elif rsid == 6:
-            # raw file is ready to import directly
-            # this does not get used as the data file always exists...
-            pass
-        elif rsid == 7:
-            data = getwikidata(rsfile)
-        elif rsid == 8:
-            data = getuo(rsfile)
-        elif rsid == 9:
-            data = getncit(rsfile)
-        elif rsid == 15:
-            data = getiecdata(rsfile)
-        elif rsid == 16:
-            # raw file is ready to import directly
-            # this does not get used as the data file always exists...
-            pass
-        elif rsid == 19:
-            data = getunitsml(rsfile)
-        else:
-            print("write the code!")
-            exit()
-        # convert to json and save
-        if jsn == '':  # checks if jsn has already been populated above...
-            jsn = json.dumps(data)
-            with open(os.path.join(BASE_DIR, STATIC_URL, f'repsys_{rsid}_data.json'), 'w') as f:
-                f.write(jsn)
-                f.close()
+    repsys = Repsystems.objects.get(id=rsid)
+    # get raw data file and store in rawdata field
+    rsfile = None
+    if repsys.fileformat == 'sparql':
+        raw = getwikidata()
     else:
-        # get the json data
-        with open(os.path.join(BASE_DIR, STATIC_URL, f'repsys_{rsid}_data.json'), 'r') as f:
-            jsn = f.read()
-            f.close()
-            data = json.loads(jsn)
+        rsfile = requests.get(repsys.url)
+        raw = rsfile.text
+    # setup timezone aware datetime string
+    jax = timezone("America/New_York")
+    # check jsondata field in DB
+    if repsys.rawdata:
+        if len(raw) != len(repsys.rawdata):
+            # replace content
+            repsys.rawdata = raw
+            repsys.checked = jax.localize(datetime.now())
+            repsys.save()
+        else:
+            raw = repsys.rawdata
+    else:
+        # replace content
+        repsys.rawdata = raw
+        repsys.checked = jax.localize(datetime.now())
+        repsys.save()
 
-    # update repsystems table with current data
-    # repsysobj = Repsystems.objects.get(id=rsid)
-    # repsysobj.jsondata = jsn
-    # repsysobj.save()
+    # if needed process the raw file
+    # get and send the raw data file for repsys to function to create json data file
+    if rsid == 2:
+        data = raw
+    elif rsid == 3:
+        data = getgbdata(rsfile)
+    elif rsid == 5:
+        data = raw
+    elif rsid == 6:
+        data = raw
+    elif rsid == 7:
+        data = raw
+    elif rsid == 8:
+        data = getuo(rsfile)
+    elif rsid == 9:
+        data = getncit(rsfile)
+    elif rsid == 10:
+        data = raw
+    elif rsid == 15:
+        data = getiecdata(rsfile)
+    elif rsid == 16:
+        data = raw
+    elif rsid == 19:
+        data = getunitsml(rsfile)
+    else:
+        print("write the code!")
+        exit()
+
+    # add processed data to db
+    if data != raw:
+        repsys.jsondata = data
+        repsys.save()
+
     return data
 
 
@@ -177,41 +159,58 @@ def getiecdata(rsfile):
         print('file has been updated')
     else:
         print('file unchanged')
-    pyjax = pytz.timezone("America/New_York")
+    pyjax = timezone("America/New_York")
     repsysobj.checked = pyjax.localize(datetime.now())
     repsysobj.save()
     return uout
 
 
-def getwikidata(rsfile):
+def getwikidata():
     """ get unit data from Wikidata via SPARQL query """
     rsid = 7
     # check if the data file has been updated today or not
-    path = os.path.join(BASE_DIR, STATIC_URL, f'repsys_{rsid}_data.json')
-    ts = os.path.getmtime(path)
-    udate = date.fromtimestamp(ts)
-    today = date.today()
-    if udate < today:
-        # get data
-        data = return_sparql_query_results(rsfile)
-        # update file
-        jdata = json.dumps(data)
-        with open(os.path.join(BASE_DIR, STATIC_URL, f'repsys_{rsid}_data.json'), 'w') as f:
-            f.write(jdata)
-            f.close()
-        print("updated")
-    else:
-        print("no update")
-        with open(os.path.join(BASE_DIR, STATIC_URL, f'repsys_{rsid}_data.json'), 'r') as f:
-            jdata = f.read()
-            f.close()
-        data = json.loads(jdata)
-    return data
+    query = """
+    SELECT ?unit ?unitLabel ?subclass1Label ?subclass2Label ?iev ?igb ?ncit ?qudt ?ucum ?unece ?uom2 ?wolf ?wur
+    WHERE 
+    {
+      ?subclass1 wdt:P279 wd:Q47574 .
+      ?subclass2 wdt:P279 ?subclass1 .
+      { ?unit wdt:P31 ?subclass1 . } UNION { ?unit wdt:P31 ?subclass2 . }
+      OPTIONAL { ?unit wdt:P1748 ?ncit }
+      OPTIONAL { ?unit wdt:P2892 ?umls }
+      OPTIONAL { ?unit wdt:P2968 ?qudt }
+      OPTIONAL { ?unit wdt:P3328 ?wur }
+      OPTIONAL { ?unit wdt:P4732 ?igb }
+      OPTIONAL { ?unit wdt:P6512 ?unece }
+      OPTIONAL { ?unit wdt:P7007 ?wolf }
+      OPTIONAL { ?unit wdt:P7825 ?ucum }
+      OPTIONAL { ?unit wdt:P8769 ?uom2 }
+      OPTIONAL { ?unit wdt:P8855 ?iev }
+      FILTER(?subclass1 != wd:Q8142)
+      FILTER(?subclass1 != wd:Q82047057)
+      FILTER(?subclass1 != wd:Q83155724)
+      FILTER(?subclass1 != wd:Q1499468)
+      FILTER(?subclass1 != wd:Q11639620)
+      FILTER(?subclass2 != wd:Q8142)
+      FILTER(?subclass2 != wd:Q82047057)
+      FILTER(?subclass2 != wd:Q83155724)
+      FILTER(?subclass2 != wd:Q28783456)
+      FILTER(?subclass2 != wd:Q3622170)
+      FILTER(?subclass2 != wd:Q28805608)
+      FILTER(strlen(?ncit) != 0 || strlen(?umls) != 0 || strlen(?qudt) != 0 || strlen(?wur) != 0 || strlen(?igb) != 0 ||
+       strlen(?unece) != 0 || strlen(?wolf) != 0 || strlen(?ucum) != 0 || strlen(?uom2) != 0 || strlen(?iev) != 0)
+      SERVICE wikibase:label { bd:serviceParam wikibase:language "[AUTO_LANGUAGE],en". }
+    }
+    ORDER BY ?unitLabel"""
+    # search wikidata sparql query
+    wdjsn = return_sparql_query_results(query)
+    # return data
+    return wdjsn
 
 
 def getuo(rsfile):
     """ get uo units """
-    tmp = rsfile.encode("utf-8")  # required to process correctly
+    tmp = rsfile.encoding("utf-8")  # required to process correctly
     g = Graph()
     g.parse(tmp, format='xml')
     jld = g.serialize(format="json-ld")

@@ -1,28 +1,18 @@
-import json
+# import json
 import os
 import django
-import requests
-import mimetypes
-import re
-import pytz
 
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "umisconfig.settings")
 django.setup()
-from units.models import *
-from umisconfig.settings import *
-from bs4 import BeautifulSoup
 from dashboard.repsys_ingest import *
-from django.utils import timezone
-from datetime import date, datetime
-import time
-import pytz
-
-from rdflib.plugins.sparql.results import jsonresults
+from datetime import date
+from units.functions import *
 
 
-choice = 'runqudt'
+choice = 'runwd'
 
-# checked 1/12/23
+
+# checked 6/17/24 (List of Units not available, falling back to files from 4/25/23)
 if choice == 'runiec':
     # read the units data file and add the units to the entities table
     rsid = 15
@@ -62,12 +52,22 @@ if choice == 'runiec':
             else:
                 print("found '" + str(ent.value) + "' (" + str(ent.id) + ")")
 
-# checked 1/10/23
+# checked 6/17/24
 if choice == 'runwd':
     # load current file
     rsid = 7
     data = getrepsystemdata(rsid)
+
+    # analyze data to remove entries that have SI unit (or equivalent) as quantity
+    hits = []
+    print(len(data['results']['bindings']))
     for hit in data['results']['bindings']:
+        if hit['subclass1Label']['value'].startswith("unit of "):
+            hits.append(hit)
+    print(len(hits))
+    exit()
+
+    for hit in hits:
         # check the hits for any that are not useful
         if "http://www.wikidata.org/entity/Q" not in hit['unit']['value']:
             continue
@@ -77,26 +77,16 @@ if choice == 'runwd':
             print(hit['unit']['value'])
 
         quant = None
-        find1 = hit['subclass1Label']['value'].find("unit of ")
-        find2 = hit['subclass2Label']['value'].find("unit of ")
-        if find1 == 0:
+        # for unitless only
+        if hit['unitLabel']['value'] == "1":
+            quant = "dimensionless"
+
+        if not quant:
             quant = hit['subclass1Label']['value'].replace("unit of ", "")
-        elif find1 > 0:
-            quant = hit['subclass1Label']['value']
 
-        if not quant:
-            if find2 == 0:
+            if hit['subclass2Label']['value'].find("unit of ") != -1:
+                # if this is true it is a more specific quantity (e.g. mass conc., amount of substance conc.)
                 quant = hit['subclass2Label']['value'].replace("unit of ", "")
-            elif find2 > 0:
-                quant = hit['subclass2Label']['value']
-
-        sivals = ["SI unit", "SI base unit", "SI or accepted non-SI unit", "SI-accepted non-SI unit",
-                  "SI derived unit", "SI unit with special name", "coherent SI unit"]
-        if not quant:
-            if hit['subclass1Label']['value'] in sivals:
-                quant = "SI unit"
-            if hit['subclass2Label']['value'] in sivals:
-                quant = "SI unit"
 
         wdid = hit['unit']['value'].replace("http://www.wikidata.org/entity/", "")
         repsyss = []
@@ -129,10 +119,13 @@ if choice == 'runwd':
                     value=hit[repsys['name']]['value'],
                     source='wikidata'
                 )
-                if created:
+                if ent.migrated != 'yes':
                     ent.migrated = 'no'
-                    ent.lastupdate = date.today()
-                    ent.save()
+                ent.lastcheck = date.today()
+                ent.updated = getds()
+                ent.save()
+
+                if created:
                     print("added '" + ent.value + "' (" + str(ent.id) + ")")
                 else:
                     print("found '" + ent.value + "' (" + str(ent.id) + ")")
@@ -145,17 +138,20 @@ if choice == 'runwd':
                 quantity=quant,
                 value=wdid,
                 source='wikidata')
-            if created:
+            if ent.migrated != 'yes':
                 ent.migrated = 'no'
-                ent.lastupdate = date.today()
-                ent.save()
+            ent.lastcheck = date.today()
+            ent.updated = getds()
+            ent.save()
+
+            if created:
                 print("added '" + ent.value + "' (" + str(ent.id) + ")")
             else:
                 print("found '" + ent.value + "' (" + str(ent.id) + ")")
         else:
             continue
 
-# checked 4/7/23
+# checked 6/11/24
 if choice == 'runqudt':
     rsid = 10
     rdf = getrepsystemdata(rsid)
@@ -220,10 +216,13 @@ if choice == 'runqudt':
                 quantity=hit.type,
                 value=hit[repsys['name']].replace(repl, ''),
                 source='qudt')
-            ent.lastupdate = date.today()
-            timezone.now()
-            ts = time.time()
-            ent.updated = datetime.utcfromtimestamp(ts).strftime('%Y-%m-%d %H:%M:%S')
+            if ent.migrated == 'yes':
+                # don't reset migrated to 'no'!
+                print(hit)
+            else:
+                ent.migrated = 'no'
+            ent.lastcheck = date.today()
+            ent.updated = getds()
             ent.save()
             if created:
                 print("added '" + str(ent.value) + "' (" + str(ent.id) + ")")
@@ -242,21 +241,26 @@ if choice == 'runqudt':
             quantity=hit.type,
             value=hit.unit.replace("http://qudt.org/vocab/unit/", ""),
             source='qudt')
-        ent.lastupdate = date.today()
-        timezone.now()
-        ts = time.time()
-        ent.updated = datetime.utcfromtimestamp(ts).strftime('%Y-%m-%d %H:%M:%S')
+        if ent.migrated == 'yes':
+            # don't reset migrated to 'no'!
+            print(hit)
+        else:
+            ent.migrated = 'no'
+        ent.lastcheck = date.today()
+        ent.updated = getds()
         ent.save()
         if created:
             print("added '" + ent.value + "' (" + str(ent.id) + ")")
+        else:
             print("found '" + ent.value + "' (" + str(ent.id) + ")")
 
-# checked 4/7/23
+# checked 6/11/24
 if choice == 'runnerc':
     # raw file is the data file
     rsid = 16
-    terms = getrepsystemdata(rsid)
-    for term in terms["@graph"]:
+    jsn = getrepsystemdata(rsid)
+    units = json.loads(jsn)
+    for term in units["@graph"]:
         if term["@type"] == "skos:Concept":
             quant = None
             if 'broader' in term:
@@ -278,14 +282,22 @@ if choice == 'runnerc':
                 lang=term['prefLabel']['@language'],
                 symbol=term['altLabel'],
                 quantity=quant,
-                value=term['@id'].replace('http://vocab.nerc.ac.uk/collection/P06/current/', '').replace('/', ''),
+                value=term['@id'].replace('https://vocab.nerc.ac.uk/collection/P06/current/', '').replace('/', ''),
                 source='nerc'
             )
+            if ent.migrated == 'yes':
+                # don't reset migrated to 'no'!
+                print(term)
+            else:
+                ent.migrated = 'no'
+            ent.lastcheck = date.today()
+            ent.updated = getds()
             ent.save()
             if created:
                 print("added '" + ent.value + "' (" + str(ent.id) + ")")
             else:
                 print("found '" + ent.value + "' (" + str(ent.id) + ")")
+
             # find related representations
             if 'sameAs' in term:
                 rep = None
@@ -312,6 +324,14 @@ if choice == 'runnerc':
                                 value=rep,
                                 source='nerc'
                             )
+                            if ent.migrated == 'yes':
+                                # don't reset migrated to 'no'!
+                                print(term)
+                            else:
+                                ent.migrated = 'no'
+                            ent.lastcheck = date.today()
+                            ent.updated = getds()
+                            ent.save()
                             if created:
                                 print("added '" + ent.value + "' (" + str(ent.id) + ")")
                             else:
@@ -336,6 +356,14 @@ if choice == 'runnerc':
                             value=rep,
                             source='nerc'
                         )
+                        if ent.migrated == 'yes':
+                            # don't reset migrated to 'no'!
+                            print(term)
+                        else:
+                            ent.migrated = 'no'
+                        ent.lastcheck = date.today()
+                        ent.updated = getds()
+                        ent.save()
                         if created:
                             print("added '" + ent.value + "' (" + str(ent.id) + ")")
                         else:
@@ -372,18 +400,23 @@ if choice == 'rununece':
             print("found '" + ent.value + "' (" + str(ent.id) + ")")
         print(unit)
 
-# checked 1/12/23
+# checked 6/11/24 (ttl file (direct URL) imports as JSON-LD, how?)
 if choice == 'runsweet':
     # raw file is the data file
     rsid = 5
-    units = getrepsystemdata(rsid)
+    jsn = getrepsystemdata(rsid)
+    units = json.loads(jsn)
     for unit in units["@graph"]:
         if 'sameAs' in unit or 'notation' not in unit:
             continue
+
         if isinstance(unit['@type'], list):
             types = ' '.join(unit['@type'])
             if 'Unit' not in types:
                 continue
+
+            # print(json.dumps(unit, indent=4))
+            # exit()
             cmmt = {}
             if 'hasBaseUnit' in unit:
                 cmmt.update({"baseunit": unit['hasBaseUnit']})
@@ -395,12 +428,15 @@ if choice == 'runsweet':
                 name=unit['label']['@value'],
                 lang=unit['label']['@language'],
                 value=unit['notation'],
-                source='sweet',
-                comment=json.dumps(cmmt)
+                source='sweet'
             )
+            ent.comment = json.dumps(cmmt)
+            ent.lastcheck = date.today()
+            ent.updated = getds()
             ent.save()
             if created:
                 print("added '" + str(ent.value) + "' (" + str(ent.id) + ")")
+                exit()
             else:
                 print("found '" + str(ent.value) + "' (" + str(ent.id) + ")")
 
@@ -453,7 +489,7 @@ if choice == 'runncit':
             source='ncit',
             comment=unit['description']
         )
-        ent.lastupdate = date.today()
+        ent.lastcheck = date.today()
         ent.save()
         if created:
             print("added '" + str(ent.value) + "' (" + str(ent.id) + ")")
@@ -477,7 +513,7 @@ if choice == 'rununitsml':
             source='unitsml',
             comment=unit['type']
         )
-        ent.lastupdate = date.today()
+        ent.lastucheck = date.today()
         ent.save()
         if created:
             print("added '" + str(ent.value) + "' (" + str(ent.id) + ")")
@@ -498,7 +534,7 @@ if choice == 'rungb':
             source='igb',
             comment=unit['defn']
         )
-        ent.lastupdate = date.today()
+        ent.lastcheck = date.today()
         ent.save()
         if created:
             print("added '" + str(ent.value) + "' (" + str(ent.id) + ")")
@@ -532,7 +568,7 @@ if choice == 'runucum':
             comment='{"LOINC property": "' + unit[18] + '", "synonyms": "' + unit[16] +
                     '", "category": "' + unit[19] + '", "guidance": "' + unit[20] + '"}'
         )
-        ent.lastupdate = date.today()
+        ent.lastcheck = date.today()
         ent.save()
         if created:
             print("added '" + str(ent.value) + "' (" + str(ent.id) + ")")
@@ -549,7 +585,7 @@ if choice == 'runucum':
             comment='{"LOINC property": "' + unit[18] + '", "synonyms": "' + unit[16] +
                     '", "category": "' + unit[19] + '", "guidance": "' + unit[20] + '"}'
         )
-        ent.lastupdate = date.today()
+        ent.lastcheck = date.today()
         ent.save()
         if created:
             print("added '" + str(ent.value) + "' (" + str(ent.id) + ")")
