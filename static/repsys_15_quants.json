@@ -1,1 +1,1267 @@
-[{"name": "absorbed dose", "code": "0112-2---62720#UAD000", "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/9b8f0d53d937ccc7c125835a00335384?OpenDocument"}, {"name": "absorbed dose rate", "code": "0112-2---62720#UAD001", "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/448ee45f63050b21c125835a00335386?OpenDocument"}, {"name": "acceleration", "code": "0112-2---62720#UAD002", "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/86c371c5ee19e8dfc125835a00335388?OpenDocument"}, {"name": "active power", "code": "0112-2---62720#UAD003", "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/296dfffa70fc41c6c125835a0033538a?OpenDocument"}, {"name": "amount of substance", "code": "0112-2---62720#UAD004", "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/09e8c5214015fd36c125835a00335382?OpenDocument"}, {"name": "amount of substance concentration", "code": "0112-2---62720#UAD005", "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/24c05dfa48d2f158c125835a0033538c?OpenDocument"}, {"name": "angular acceleration", "code": "0112-2---62720#UAD006", "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/5b310b2c3479a19fc125835a0033536b?OpenDocument"}, {"name": "angular cross\u2011section", "code": "0112-2---62720#UAD007", "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/ded6c62046092afbc125835a00335369?OpenDocument"}, {"name": "angular velocity", "code": "0112-2---62720#UAD009", "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/b62fdf81b0fe1e77c125835a0033537e?OpenDocument"}, {"name": "angular wave number", "code": "0112-2---62720#UAD010", "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/a88dadb604be12acc125835a00335380?OpenDocument"}, {"name": "apparent power", "code": "0112-2---62720#UAD011", "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/d0acda7996c9a77ec125835a00335378?OpenDocument"}, {"name": "areic bit density", "code": "0112-2---62720#UAD012", "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/b6bcf062728832e8c125835a0033537c?OpenDocument"}, {"name": "areic charge density", "code": "0112-2---62720#UAD013", "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/4d9ab8c3ef3aedb1c125835a00335376?OpenDocument"}, {"name": "areic mass", "code": "0112-2---62720#UAD014", "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/acb459a5d38a6c67c125835a00335373?OpenDocument"}, {"name": "avogadro constant", "code": "0112-2---62720#UAD015", "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/872f85e494913037c125835a0033537a?OpenDocument"}, {"name": "bandwidth distance product", "code": "0112-2---62720#UAD016", "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/bfc7ff5acc34041cc125835a00335361?OpenDocument"}, {"name": "battery capacity", "code": "0112-2---62720#UAD017", "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/452cc899ac709560c125835a00335359?OpenDocument"}, {"name": "bit rate", "code": "0112-2---62720#UAD018", "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/4e4a51dfb9560d36c125835a00335367?OpenDocument"}, {"name": "burst factor", "code": "0112-2---62720#UAD019", "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/9bda34867ea3a4b5c125835a00335365?OpenDocument"}, {"name": "byte rate", "code": "0112-2---62720#UAD020", "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/605a8482ef97fcd5c125835a0033535f?OpenDocument"}, {"name": "capacitance", "code": "0112-2---62720#UAD021", "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/b17204846029716ec125835a0033535d?OpenDocument"}, {"name": "catalytic activity", "code": "0112-2---62720#UAD022", "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/45870b9611e7e9acc125835a0033535b?OpenDocument"}, {"name": "Celsius temperature", "code": "0112-2---62720#UAD023", "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/f9076e80a9712519c125835a0033536d?OpenDocument"}, {"name": "compressibility", "code": "0112-2---62720#UAD024", "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/f86b9dce87195790c125835a00335371?OpenDocument"}, {"name": "conductivity", "code": "0112-2---62720#UAD025", "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/36c511a0c69f9c78c125835a0033536f?OpenDocument"}, {"name": "cross\u2011section", "code": "0112-2---62720#UAD026", "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/8727cd0d4efa9becc125835a003353a2?OpenDocument"}, {"name": "dataset of bits", "code": "0112-2---62720#UAD027", "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/fae24783dfa37fd0c125835a0033539e?OpenDocument"}, {"name": "dataset of bytes", "code": "0112-2---62720#UAD028", "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/c76d1feb692ee82bc125835a0033539c?OpenDocument"}, {"name": "density", "code": "0112-2---62720#UAD029", "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/9f63f2db6152a109c125835a00335398?OpenDocument"}, {"name": "density of states", "code": "0112-2---62720#UAD030", "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/76d5d4473f4ba5e9c125835a0033539a?OpenDocument"}, {"name": "diffusion constant", "code": "0112-2---62720#UAD031", "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/d368c0a69d4ac944c125835a00335394?OpenDocument"}, {"name": "digit rate", "code": "0112-2---62720#UAD032", "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/7a1cfdf921b2f4cac125835a00335390?OpenDocument"}, {"name": "dose equivalent", "code": "0112-2---62720#UAD033", "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/321c54db60c07913c125835a0033538e?OpenDocument"}, {"name": "dose equivalent rate", "code": "0112-2---62720#UAD034", "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/62297e0447591a7cc125835a00335355?OpenDocument"}, {"name": "dynamic viscosity", "code": "0112-2---62720#UAD035", "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/3188d4528f947d9fc125835a0033534f?OpenDocument"}, {"name": "Einstein coefficients", "code": "0112-2---62720#UAD036", "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/1bea96bf90a83da9c125835a00335353?OpenDocument"}, {"name": "electric charge", "code": "0112-2---62720#UAD037", "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/5a6a9dab2a9ac52ac125835a00335351?OpenDocument"}, {"name": "electrical conductance", "code": "0112-2---62720#UAD038", "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/1a823fa60d4a506ac125835a00335322?OpenDocument"}, {"name": "electric current", "code": "0112-2---62720#UAD039", "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/acd32889dc29d53cc125835a0033534d?OpenDocument"}, {"name": "electric current density", "code": "0112-2---62720#UAD040", "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/e9245059c522e1bec125835a0033534b?OpenDocument"}, {"name": "electric dipole moment", "code": "0112-2---62720#UAD041", "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/21953606e7002bbbc125835a00335357?OpenDocument"}, {"name": "electric field strength", "code": "0112-2---62720#UAD042", "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/40ca36d56177d9e0c125835a00335363?OpenDocument"}, {"name": "electric flux density", "code": "0112-2---62720#UAD043", "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/27b3f023ee7bc259c125835a00335335?OpenDocument"}, {"name": "electric polarization", "code": "0112-2---62720#UAD044", "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/2ddf209e43c96dd0c125835a00335341?OpenDocument"}, {"name": "electric resistance", "code": "0112-2---62720#UAD045", "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/7108b59997eccebec125835a00335349?OpenDocument"}, {"name": "energy content", "code": "0112-2---62720#UAD046", "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/33b9b962eafbfe38c125835a0033533b?OpenDocument"}, {"name": "energy density", "code": "0112-2---62720#UAD047", "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/801a45f0fa4ddff2c125835a00335347?OpenDocument"}, {"name": "equilibrium constant based on concentration", "code": "0112-2---62720#UAD048", "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/d9d68de500f8acafc125835a00335345?OpenDocument"}, {"name": "equilibrium constant based on pressure", "code": "0112-2---62720#UAD049", "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/d7293eee52afc833c125835a0033533f?OpenDocument"}, {"name": "exposure rate", "code": "0112-2---62720#UAD050", "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/0b12d92ab3a6861cc125835a00335343?OpenDocument"}, {"name": "failure rate", "code": "0112-2---62720#UAD051", "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/c636b8ad5db2866cc125835a00335304?OpenDocument"}, {"name": "Faraday constant", "code": "0112-2---62720#UAD052", "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/f6570c1b721a9bdcc125835a0033533d?OpenDocument"}, {"name": "first radiation constant", "code": "0112-2---62720#UAD053", "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/4c9d74f09493af1fc125835a00335326?OpenDocument"}, {"name": "force", "code": "0112-2---62720#UAD054", "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/30793307aa12d5e0c125835a0033532a?OpenDocument"}, {"name": "force constant", "code": "0112-2---62720#UAD055", "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/4e46cc7c0f95ab69c125835a00335331?OpenDocument"}, {"name": "frequency", "code": "0112-2---62720#UAD056", "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/bf93abad2c7a87b6c125835a00335320?OpenDocument"}, {"name": "gas leak rate", "code": "0112-2---62720#UAD057", "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/402d97c064eb0f01c125835a00335333?OpenDocument"}, {"name": "gradient", "code": "0112-2---62720#UAD058", "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/d0adb8b0fd0ac1b0c125835a0033532e?OpenDocument"}, {"name": "gravitational constant", "code": "0112-2---62720#UAD059", "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/3598b3e941244d44c125835a00335337?OpenDocument"}, {"name": "Hall coefficient", "code": "0112-2---62720#UAD060", "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/25371a5c15872853c125835a00335262?OpenDocument"}, {"name": "illumination", "code": "0112-2---62720#UAD062", "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/7d86cab35d6e6c61c125835a00335339?OpenDocument"}, {"name": "impulse", "code": "0112-2---62720#UAD063", "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/3fad1e7d02fd51cbc125835a0033531e?OpenDocument"}, {"name": "incidence", "code": "0112-2---62720#UAD064", "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/cbf012bf06141370c125835a0033531a?OpenDocument"}, {"name": "inductance", "code": "0112-2---62720#UAD065", "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/e5a5adadfd7d3358c125835a0033531c?OpenDocument"}, {"name": "information content", "code": "0112-2---62720#UAD066", "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/33b22798d75e372ec125835a003351e3?OpenDocument"}, {"name": "ionic strength", "code": "0112-2---62720#UAD067", "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/994e73b4b855b437c125835a00335310?OpenDocument"}, {"name": "irradiance", "code": "0112-2---62720#UAD068", "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/af252f9ea24576bdc125835a00335312?OpenDocument"}, {"name": "Josephson constant", "code": "0112-2---62720#UAD069", "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/913a9d185c17adc1c125835a00335328?OpenDocument"}, {"name": "kinematic viscosity", "code": "0112-2---62720#UAD070", "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/51c9878fd2ebffe2c125835a00335324?OpenDocument"}, {"name": "kinetic energy", "code": "0112-2---62720#UAD071", "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/fe606a2526e5c1f9c125835a0033532c?OpenDocument"}, {"name": "length", "code": "0112-2---62720#UAD072", "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/a9015982ffc48e50c125835a0033530a?OpenDocument"}, {"name": "lineic bit density", "code": "0112-2---62720#UAD074", "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/4973a6873691c3d4c125835a00335308?OpenDocument"}, {"name": "lineic electric charge", "code": "0112-2---62720#UAD075", "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/68c78ad2e18c77a7c125835a00335306?OpenDocument"}, {"name": "lineic electric current", "code": "0112-2---62720#UAD076", "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/c11f6cf4596d0810c125835a0033530c?OpenDocument"}, {"name": "lineic force", "code": "0112-2---62720#UAD077", "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/48d5a388145a3a09c125835a0033530e?OpenDocument"}, {"name": "lineic logarithmic ratio", "code": "0112-2---62720#UAD078", "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/4f9e693b824aaf79c125835a00335318?OpenDocument"}, {"name": "lineic mass", "code": "0112-2---62720#UAD079", "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/ab3b378961e9a9e3c125835a00335314?OpenDocument"}, {"name": "lineic power", "code": "0112-2---62720#UAD080", "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/24b2b95066da8ccec125835a00335316?OpenDocument"}, {"name": "lineic resistance", "code": "0112-2---62720#UAD081", "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/c7210d385e692572c125835a003352f5?OpenDocument"}, {"name": "lineic torque", "code": "0112-2---62720#UAD082", "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/1972acdaca923a75c125835a00335302?OpenDocument"}, {"name": "logarithmic frequency interval", "code": "0112-2---62720#UAD083", "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/16ab30a42c4455d9c125835a00335294?OpenDocument"}, {"name": "logarithmic frequency interval to base 10", "code": "0112-2---62720#UAD084", "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/c19945f21ba66256c125835a003352fb?OpenDocument"}, {"name": "logarithmic ratio to base 10", "code": "0112-2---62720#UAD085", "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/cb2cb237e2a720f1c125835a003352fe?OpenDocument"}, {"name": "logarithmic ratio to base e", "code": "0112-2---62720#UAD086", "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/282f52a63a4cac8bc125835a003353c3?OpenDocument"}, {"name": "Lorenz coefficient", "code": "0112-2---62720#UAD087", "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/a9812c9d5148847dc125835a00335300?OpenDocument"}, {"name": "loudness", "code": "0112-2---62720#UAD088", "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/c1f76e085be32641c125835a003351a0?OpenDocument"}, {"name": "loudness level", "code": "0112-2---62720#UAD089", "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/cbad0d314aad58f8c125835a003351a1?OpenDocument"}, {"name": "luminance", "code": "0112-2---62720#UAD090", "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/c1fc3d5d808b3045c125835a003352f9?OpenDocument"}, {"name": "luminous efficacy", "code": "0112-2---62720#UAD091", "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/e4ddeefdd31342f4c125835a003352e5?OpenDocument"}, {"name": "luminous exitance", "code": "0112-2---62720#UAD092", "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/8e5dc96832a610a1c125835a003352e7?OpenDocument"}, {"name": "luminous exposure", "code": "0112-2---62720#UAD093", "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/d2a98cd88fba5ad1c125835a003352e9?OpenDocument"}, {"name": "luminous flux", "code": "0112-2---62720#UAD094", "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/ed7376fa65f643f8c125835a003352ef?OpenDocument"}, {"name": "luminous intensity", "code": "0112-2---62720#UAD095", "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/724a89cdc623cbc1c125835a003352f3?OpenDocument"}, {"name": "magnetic dipole moment", "code": "0112-2---62720#UAD096", "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/eaf61a1ac9a80fd1c125835a003352ed?OpenDocument"}, {"name": "magnetic moment", "code": "0112-2---62720#UAD097", "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/6f0ff151051b6205c125835a003352f1?OpenDocument"}, {"name": "magnetic field strength", "code": "0112-2---62720#UAD098", "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/cbc21e65d59199fec125835a003352f7?OpenDocument"}, {"name": "magnetic flux", "code": "0112-2---62720#UAD099", "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/9f74b3dabbff3842c125835a003353cc?OpenDocument"}, {"name": "magnetic flux density", "code": "0112-2---62720#UAD100", "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/e4d31ee2ac9a7d65c125835a003351e0?OpenDocument"}, {"name": "magnetic moment", "code": "0112-2---62720#UAD101", "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/4f61f2c9030852f7c125835a003352dc?OpenDocument"}, {"name": "magnetic polarization", "code": "0112-2---62720#UAD102", "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/0b32c9b0d5cc28b8c125835a003352d2?OpenDocument"}, {"name": "magnetic vector potential", "code": "0112-2---62720#UAD103", "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/541f2197ac97f3c9c125835a003352d6?OpenDocument"}, {"name": "mass", "code": "0112-2---62720#UAD104", "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/5b7b303380ab518cc125835a003352de?OpenDocument"}, {"name": "mass attenuation coefficient", "code": "0112-2---62720#UAD105", "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/b0dd4717c9e279e1c125835a003352da?OpenDocument"}, {"name": "mass density", "code": "0112-2---62720#UAD106", "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/8d51f8f97828e438c125835a003352e0?OpenDocument"}, {"name": "mass flow rate", "code": "0112-2---62720#UAD107", "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/6157eafe6206b27dc125835a003352e3?OpenDocument"}, {"name": "mass flux density", "code": "0112-2---62720#UAD108", "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/11f8789b2cd06714c125835a003352eb?OpenDocument"}, {"name": "mass ratio", "code": "0112-2---62720#UAD109", "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/6ffd82e8d2a9412dc125835a003351dc?OpenDocument"}, {"name": "massic activity", "code": "0112-2---62720#UAD110", "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/ad2ef08df736c1fcc125835a003352c4?OpenDocument"}, {"name": "massic electric current", "code": "0112-2---62720#UAD111", "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/169af415bef6f690c125835a003352c6?OpenDocument"}, {"name": "massic heat capacity", "code": "0112-2---62720#UAD112", "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/2f0d779d487bd5f2c125835a003352cc?OpenDocument"}, {"name": "massic power", "code": "0112-2---62720#UAD113", "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/c806154533f239b0c125835a003352ce?OpenDocument"}, {"name": "massic torque", "code": "0112-2---62720#UAD114", "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/9692babc5766cef0c125835a003352c8?OpenDocument"}, {"name": "mechanical impedance", "code": "0112-2---62720#UAD115", "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/e70f26e56dee755dc125835a003352d0?OpenDocument"}, {"name": "median information flow (expressed as a binary logarithm)", "code": "0112-2---62720#UAD116", "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/41fdad9bd1435b32c125835a003352ca?OpenDocument"}, {"name": "median information flow (expressed as a common logarithm)", "code": "0112-2---62720#UAD117", "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/209ee291f124b85ac125835a003351d6?OpenDocument"}, {"name": "median information flow (expressed as a natural logarithm)", "code": "0112-2---62720#UAD118", "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/06334aa134c600efc125835a003352d8?OpenDocument"}, {"name": "mobility", "code": "0112-2---62720#UAD119", "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/b755fa790243facfc125835a003352d4?OpenDocument"}, {"name": "molar attenuation coefficient", "code": "0112-2---62720#UAD120", "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/cb91d85ee1973a36c125835a003352b8?OpenDocument"}, {"name": "molar conductivity", "code": "0112-2---62720#UAD121", "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/7a59d9d013e94d08c125835a003352aa?OpenDocument"}, {"name": "molar flow rate", "code": "0112-2---62720#UAD122", "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/593b85b1f9bc4732c125835a003352b2?OpenDocument"}, {"name": "molar heat capacitiy", "code": "0112-2---62720#UAD123", "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/521bd1ebd166a383c125835a003352be?OpenDocument"}, {"name": "molar internal energy", "code": "0112-2---62720#UAD124", "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/637edfd32beba7a6c125835a003352bc?OpenDocument"}, {"name": "molar mass", "code": "0112-2---62720#UAD125", "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/19462331d7935c7bc125835a003352c0?OpenDocument"}, {"name": "molar optical rotatory power", "code": "0112-2---62720#UAD126", "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/9a4f4d24f666ec47c125835a003351ba?OpenDocument"}, {"name": "molar volume", "code": "0112-2---62720#UAD127", "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/5cc10522e0253a93c125835a003352c2?OpenDocument"}, {"name": "moment of inertia", "code": "0112-2---62720#UAD128", "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/276cd5a116b376e8c125835a003352ba?OpenDocument"}, {"name": "motor constant", "code": "0112-2---62720#UAD129", "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/9754b7aca756f69ac125835a003352a0?OpenDocument"}, {"name": "mass stopping power", "code": "0112-2---62720#UAD130", "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/62cf2cf440d69252c125835a0033529e?OpenDocument"}, {"name": "nuclear energy", "code": "0112-2---62720#UAD131", "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/044eab1812d5d200c125835a003352a8?OpenDocument"}, {"name": "particle current density", "code": "0112-2---62720#UAD132", "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/2d450c5b486078e5c125835a003352a4?OpenDocument"}, {"name": "particle fluence", "code": "0112-2---62720#UAD133", "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/a30cfa2aa8e26f1bc125835a003352b4?OpenDocument"}, {"name": "permeability", "code": "0112-2---62720#UAD134", "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/a10a674d72bf2475c125835a003352b0?OpenDocument"}, {"name": "permeance", "code": "0112-2---62720#UAD135", "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/5a8b822444b98dfac125835a003352ac?OpenDocument"}, {"name": "permittivity", "code": "0112-2---62720#UAD136", "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/65196d8a4ff086b4c125835a003351b8?OpenDocument"}, {"name": "photon intensity", "code": "0112-2---62720#UAD137", "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/e86273e8891cf9d6c125835a003352b6?OpenDocument"}, {"name": "photon luminance", "code": "0112-2---62720#UAD138", "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/fabfe1949d3f641cc125835a003352ae?OpenDocument"}, {"name": "Planck's constant", "code": "0112-2---62720#UAD139", "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/7afe6bc1a2893519c125835a0033529a?OpenDocument"}, {"name": "plane angle", "code": "0112-2---62720#UAD140", "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/282e6199813d9ab7c125835a0033527c?OpenDocument"}, {"name": "polarizability", "code": "0112-2---62720#UAD141", "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/1906c4b1da805e70c125835a0033528e?OpenDocument"}, {"name": "pressure", "code": "0112-2---62720#UAD142", "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/593b3a3e91e989e8c125835a00335298?OpenDocument"}, {"name": "pressure coefficient", "code": "0112-2---62720#UAD143", "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/186f531c921f1c58c125835a00335296?OpenDocument"}, {"name": "pressure gradient", "code": "0112-2---62720#UAD144", "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/a28a2f4180e71faac125835a00335290?OpenDocument"}, {"name": "pressure in relation to volume flow rate", "code": "0112-2---62720#UAD145", "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/2c33a7a325cdda3ec125835a003351b2?OpenDocument"}, {"name": "piece", "code": "0112-2---62720#UAD146", "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/bab65706d61449abc125835a0033519f?OpenDocument"}, {"name": "quantity of light", "code": "0112-2---62720#UAD147", "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/5b712c4f5f3a5ce4c125835a003352a2?OpenDocument"}, {"name": "radiance", "code": "0112-2---62720#UAD148", "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/ccf6cedecc65e8e7c125835a003352a6?OpenDocument"}, {"name": "radiant energy exposure", "code": "0112-2---62720#UAD149", "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/eaa0bb7f76794163c125835a00335286?OpenDocument"}, {"name": "radiant exposure", "code": "0112-2---62720#UAD150", "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/4094bd8c83615026c125835a00335284?OpenDocument"}, {"name": "radiant intensity", "code": "0112-2---62720#UAD151", "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/b1d1c08b61245badc125835a00335288?OpenDocument"}, {"name": "radioactive decay", "code": "0112-2---62720#UAD152", "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/774e335576f6c14dc125835a00335282?OpenDocument"}, {"name": "rate of rise of voltage", "code": "0112-2---62720#UAD153", "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/6e7522eaafb899a7c125835a0033528a?OpenDocument"}, {"name": "ratio", "code": "0112-2---62720#UAD154", "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/9b22f355a6d219e9c125835a003351de?OpenDocument"}, {"name": "reactive power", "code": "0112-2---62720#UAD155", "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/1a23558fa7d521c2c125835a0033528c?OpenDocument"}, {"name": "reciprocal energy", "code": "0112-2---62720#UAD156", "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/d6d851f3676b6485c125835a0033529c?OpenDocument"}, {"name": "reciprocal mass", "code": "0112-2---62720#UAD157", "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/f8cff97c1023b079c125835a00335292?OpenDocument"}, {"name": "variation (due to voltage)", "code": "0112-2---62720#UAD158", "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/2d128243c35d4841c125835a003351b4?OpenDocument"}, {"name": "reluctance", "code": "0112-2---62720#UAD159", "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/dbca0bab128b69d8c125835a00335268?OpenDocument"}, {"name": "repetency", "code": "0112-2---62720#UAD160", "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/fdd1f871c5317435c125835a00335274?OpenDocument"}, {"name": "resistivity", "code": "0112-2---62720#UAD161", "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/0bc47a58f11b4a77c125835a00335272?OpenDocument"}, {"name": "Richardson constant", "code": "0112-2---62720#UAD162", "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/2b72ca6a48b86f6cc125835a0033527e?OpenDocument"}, {"name": "rotary-translatory motion conversion", "code": "0112-2---62720#UAD163", "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/d0277a812b8a3319c125835a00335278?OpenDocument"}, {"name": "scalar magnetic potential", "code": "0112-2---62720#UAD164", "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/b8df7189bfc3b36ec125835a003351b0?OpenDocument"}, {"name": "second moment of area (axial)", "code": "0112-2---62720#UAD165", "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/85ec48f8f83d8a7ac125835a00335280?OpenDocument"}, {"name": "second moment of area (polar)", "code": "0112-2---62720#UAD166", "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/83cc2a28bc6e034ac125835a00335276?OpenDocument"}, {"name": "second radiation constant", "code": "0112-2---62720#UAD167", "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/d3b52bc2ca671e58c125835a0033527a?OpenDocument"}, {"name": "Seebeck coefficient", "code": "0112-2---62720#UAD169", "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/bc1657660bc7b466c125835a0033525e?OpenDocument"}, {"name": "slowing\u2011down density", "code": "0112-2---62720#UAD170", "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/ab539b465f85da90c125835a0033525c?OpenDocument"}, {"name": "solid angle", "code": "0112-2---62720#UAD171", "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/e9024c0a23e2def3c125835a0033519e?OpenDocument"}, {"name": "sound exposure", "code": "0112-2---62720#UAD172", "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/64850a8c124e737ec125835a00335264?OpenDocument"}, {"name": "specific (internal) energy", "code": "0112-2---62720#UAD173", "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/edd64a030ddd24dcc125835a00335266?OpenDocument"}, {"name": "specific optical rotational ability", "code": "0112-2---62720#UAD174", "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/21538489856dd726c125835a0033526a?OpenDocument"}, {"name": "specific volume", "code": "0112-2---62720#UAD175", "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/8e1de247d02f4a89c125835a0033526e?OpenDocument"}, {"name": "spectral angular cross\u2011section", "code": "0112-2---62720#UAD176", "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/85c8ec8a7a697063c125835a00335270?OpenDocument"}, {"name": "spectral cross\u2011section", "code": "0112-2---62720#UAD177", "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/9d7567861a4b5a30c125835a003351ac?OpenDocument"}, {"name": "spectral density of vibrational modes", "code": "0112-2---62720#UAD178", "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/764f9da91d5f6a4fc125835a0033526c?OpenDocument"}, {"name": "spectral radiant energy density in terms of wavelength", "code": "0112-2---62720#UAD179", "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/ee670e3842a50df1c125835a0033524e?OpenDocument"}, {"name": "state density as expression of angular frequency)", "code": "0112-2---62720#UAD180", "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/5db808cd57aeeb7ac125835a00335252?OpenDocument"}, {"name": "Stefan\u2011Boltzmann constant", "code": "0112-2---62720#UAD181", "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/5e989f0be2e37bf4c125835a00335256?OpenDocument"}, {"name": "surface", "code": "0112-2---62720#UAD182", "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/7e41cf09acfd9796c125835a003351a4?OpenDocument"}, {"name": "surface\u2011related volume flow rate", "code": "0112-2---62720#UAD183", "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/96d5b6bfda3e2650c125835a00335254?OpenDocument"}, {"name": "surface tension", "code": "0112-2---62720#UAD184", "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/c4358d2483c3c49bc125835a00335250?OpenDocument"}, {"name": "surge impedance of the medium", "code": "0112-2---62720#UAD185", "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/b0b8f828fa34a4d8c125835a00335260?OpenDocument"}, {"name": "temperature change rate", "code": "0112-2---62720#UAD186", "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/8fcce5bf790ac785c125835a0033525a?OpenDocument"}, {"name": "thermal capacitance", "code": "0112-2---62720#UAD187", "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/cee04564c7bda663c125835a003353c8?OpenDocument"}, {"name": "thermal coefficient of linear expansion", "code": "0112-2---62720#UAD188", "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/a48cfa69759eaa6cc125835a003353ca?OpenDocument"}, {"name": "thermal conductance", "code": "0112-2---62720#UAD189", "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/97449f7db11ad0b3c125835a0033524a?OpenDocument"}, {"name": "thermal energy", "code": "0112-2---62720#UAD191", "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/4ce4c56f1435f102c125835a0033524c?OpenDocument"}, {"name": "thermal insulance", "code": "0112-2---62720#UAD192", "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/bc4a1266a91d30d3c125835a00335246?OpenDocument"}, {"name": "thermal resistance", "code": "0112-2---62720#UAD193", "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/d366541a4f77ea4ec125835a00335242?OpenDocument"}, {"name": "thermal resistivity", "code": "0112-2---62720#UAD194", "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/a26e24a4de98c9acc125835a003351a6?OpenDocument"}, {"name": "thermal transmittance", "code": "0112-2---62720#UAD195", "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/c3a8b3a2186aa9c1c125835a00335248?OpenDocument"}, {"name": "thermodynamic temperature", "code": "0112-2---62720#UAD196", "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/4e4f71868090cde8c125835a00335244?OpenDocument"}, {"name": "time", "code": "0112-2---62720#UAD197", "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/19a34e778984e599c125835a00335258?OpenDocument"}, {"name": "time constant (inductance based)", "code": "0112-2---62720#UAD198", "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/0ebe13c1871c9497c125835a00335236?OpenDocument"}, {"name": "real part of complex frequency", "code": "0112-2---62720#UAD199", "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/3b339d3afdd0e97ac125835a0033522a?OpenDocument"}, {"name": "torque", "code": "0112-2---62720#UAD200", "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/19597e7c6daccb7bc125835a0033523c?OpenDocument"}, {"name": "torque constant", "code": "0112-2---62720#UAD201", "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/c8ca0a711442443cc125835a00335238?OpenDocument"}, {"name": "torsional rigidy", "code": "0112-2---62720#UAD202", "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/cfb603256ca73e84c125835a0033523a?OpenDocument"}, {"name": "total linear stopping power", "code": "0112-2---62720#UAD203", "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/6e069a95b86ba3f2c125835a0033523e?OpenDocument"}, {"name": "total mass stopping power", "code": "0112-2---62720#UAD204", "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/ef20e9b7c5d2e326c125835a00335240?OpenDocument"}, {"name": "traffic intensity", "code": "0112-2---62720#UAD205", "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/f1e627757eeaa3c5c125835a003351aa?OpenDocument"}, {"name": "unbalance", "code": "0112-2---62720#UAD206", "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/72663c585c4f227ac125835a00335210?OpenDocument"}, {"name": "variation (due to modified position)", "code": "0112-2---62720#UAD207", "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/43481cc258ab551ec125835a003351d9?OpenDocument"}, {"name": "variation (due to output load)", "code": "0112-2---62720#UAD208", "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/faeaf8bdd0f3b371c125835a0033521c?OpenDocument"}, {"name": "variation of density (due to pressure)", "code": "0112-2---62720#UAD209", "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/2bbcd5eb52434085c125835a0033522c?OpenDocument"}, {"name": "variation of dynamic viscosity (due to pressure)", "code": "0112-2---62720#UAD210", "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/7ca6ed764c4242c5c125835a00335228?OpenDocument"}, {"name": "variation of dynamic viscosity (due to temperature)", "code": "0112-2---62720#UAD211", "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/f4594ae977b98309c125835a00335226?OpenDocument"}, {"name": "variation of electric current (due to pressure)", "code": "0112-2---62720#UAD212", "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/505bd2a7bb61d038c125835a00335234?OpenDocument"}, {"name": "variation of kinematic viscosity (due to pressure)", "code": "0112-2---62720#UAD213", "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/6a614c3031483ff2c125835a00335230?OpenDocument"}, {"name": "variation of kinematic viscosity (due to temperature)", "code": "0112-2---62720#UAD214", "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/209d3c0428367bd8c125835a0033522e?OpenDocument"}, {"name": "variation of level (due to pressure)", "code": "0112-2---62720#UAD215", "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/13f4efde30cb2647c125835a00335232?OpenDocument"}, {"name": "variation of level (due to temperature)", "code": "0112-2---62720#UAD216", "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/298dcb92af7e49cac125835a003353ce?OpenDocument"}, {"name": "variation of mass (due to pressure)", "code": "0112-2---62720#UAD217", "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/69e0ab22f302dfcac125835a00335216?OpenDocument"}, {"name": "variation of mass (due to temperature)", "code": "0112-2---62720#UAD218", "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/3f2dd5b6ddc94d09c125835a00335222?OpenDocument"}, {"name": "variation of mass density (due to temperature)", "code": "0112-2---62720#UAD219", "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/32bfdf5166236b55c125835a00335218?OpenDocument"}, {"name": "variation of mass flow rate (due to pressure)", "code": "0112-2---62720#UAD220", "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/aa5e93e66e8bc1f3c125835a0033521e?OpenDocument"}, {"name": "variation of mass flow rate (due to temperature)", "code": "0112-2---62720#UAD221", "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/30534e38f7c84aefc125835a0033521a?OpenDocument"}, {"name": "variation of molar mass (due to pressure)", "code": "0112-2---62720#UAD222", "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/b4a7005a8f38a29ec125835a00335220?OpenDocument"}, {"name": "variation of molality (due to temperature)", "code": "0112-2---62720#UAD223", "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/e946a355081f0dcdc125835a003351a8?OpenDocument"}, {"name": "variation of molar concentration (due to temperature)", "code": "0112-2---62720#UAD225", "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/cc0d48c90dade17ac125835a00335224?OpenDocument"}, {"name": "variation of pressure", "code": "0112-2---62720#UAD226", "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/1bdd52bda138bf1ec125835a00335207?OpenDocument"}, {"name": "variation of temperature (due to pressure)", "code": "0112-2---62720#UAD227", "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/33b092f30784f809c125835a00335201?OpenDocument"}, {"name": "variation of temperature (due to temperature)", "code": "0112-2---62720#UAD228", "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/8720fd91373cf930c125835a00335203?OpenDocument"}, {"name": "variation of velocity(due to pressure)", "code": "0112-2---62720#UAD229", "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/839c7c8caa9088e3c125835a00335214?OpenDocument"}, {"name": "variation of velocity (due to temperature)", "code": "0112-2---62720#UAD230", "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/5cd9fc6d96825048c125835a0033520b?OpenDocument"}, {"name": "variation of voltage (due to pressure)", "code": "0112-2---62720#UAD231", "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/856709fab945d567c125835a0033520e?OpenDocument"}, {"name": "variation of volume (due to pressure)", "code": "0112-2---62720#UAD232", "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/17c703a82e52dd5fc125835a00335209?OpenDocument"}, {"name": "variation of volume (due to temperature)", "code": "0112-2---62720#UAD233", "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/defb2b8ac5b8af1fc125835a00335212?OpenDocument"}, {"name": "variation of volume flow rate (due to pressure)", "code": "0112-2---62720#UAD234", "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/08445f7c8f94caabc125835a003351ae?OpenDocument"}, {"name": "variation of volume flow rate (due to temperature)", "code": "0112-2---62720#UAD235", "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/824914ac5d7f4e7fc125835a003351f5?OpenDocument"}, {"name": "velocity", "code": "0112-2---62720#UAD236", "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/efd2244fdd852ebfc125835a003351fb?OpenDocument"}, {"name": "voltage", "code": "0112-2---62720#UAD237", "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/0841476fb9704d42c125835a003351f7?OpenDocument"}, {"name": "volume", "code": "0112-2---62720#UAD238", "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/57ff554794d0c241c125835a003351a2?OpenDocument"}, {"name": "volume flow rate", "code": "0112-2---62720#UAD239", "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/acd658b8b0814f5ec125835a00335205?OpenDocument"}, {"name": "volume fraction", "code": "0112-2---62720#UAD240", "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/d7dd430ba316096bc125835a003351ff?OpenDocument"}, {"name": "volumic bit density", "code": "0112-2---62720#UAD241", "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/e970b1741c862fb1c125835a003351fd?OpenDocument"}, {"name": "volumic electric charge", "code": "0112-2---62720#UAD242", "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/c2a7aa5932c23cbec125835a003351ef?OpenDocument"}, {"name": "volumic output power", "code": "0112-2---62720#UAD243", "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/269e2b310e19aee0c125835a003351f1?OpenDocument"}, {"name": "water vapour permeability", "code": "0112-2---62720#UAD244", "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/26b52621de5bed27c125835a003351eb?OpenDocument"}, {"name": "dots per inch", "code": "0112-2---62720#UAD255", "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/ae1966b747e78398c125835a003351ed?OpenDocument"}, {"name": "Fahrenheit temperature", "code": "0112-2---62720#UAD263", "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/cd5758b2e8c206bac125835a003351e9?OpenDocument"}, {"name": "fluidity", "code": "0112-2---62720#UAD264", "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/ab720c2be90607a4c125835a003353c1?OpenDocument"}, {"name": "mass stopping power", "code": "0112-2---62720#UAD290", "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/c9751c138d9d8c58c125835a003351f9?OpenDocument"}, {"name": "picture element", "code": "0112-2---62720#UAD299", "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/0e529eb93c1e5068c125835a003351ce?OpenDocument"}, {"name": "Rankine temperature", "code": "0112-2---62720#UAD308", "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/61ac0e68f1d34f89c125835a003351f3?OpenDocument"}, {"name": "floating point calculation capability", "code": "0112-2---62720#UAD363", "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/004161ae67bf6311c125835a003353c7?OpenDocument"}, {"name": "Mach number", "code": "0112-2---62720#UAD364", "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/ab25f84ada7e42f4c125835a0033519b?OpenDocument"}, {"name": "earthquake magnitude", "code": "0112-2---62720#UAD365", "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/10000cb3f8465dacc125835a0033519c?OpenDocument"}, {"name": "sun protection factor of a product", "code": "0112-2---62720#UAD366", "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/37a7ac484b6da99ec125835a003353bc?OpenDocument"}, {"name": "catalytic activity", "code": "0112-2---62720#UAD367", "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/e9c48509eb83dca2c125835a0033519d?OpenDocument"}, {"name": "amount of biologically active substance", "code": "0112-2---62720#UAD370", "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/d2c48b057173ede5c125835a003351e5?OpenDocument"}, {"name": "spin quantum number", "code": "0112-2---62720#UAD371", "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/1f978a2336d38c8dc125835a003353bf?OpenDocument"}, {"name": "absolute typographic measurement", "code": "0112-2---62720#UAD372", "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/2bcfb3f68b0b763ec125835a003351e7?OpenDocument"}]
+[
+    {
+        "name": "absorbed dose",
+        "code": "0112-2---62720#UAD000",
+        "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/9b8f0d53d937ccc7c125835a00335384?OpenDocument"
+    },
+    {
+        "name": "absorbed dose rate",
+        "code": "0112-2---62720#UAD001",
+        "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/448ee45f63050b21c125835a00335386?OpenDocument"
+    },
+    {
+        "name": "acceleration",
+        "code": "0112-2---62720#UAD002",
+        "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/86c371c5ee19e8dfc125835a00335388?OpenDocument"
+    },
+    {
+        "name": "active power",
+        "code": "0112-2---62720#UAD003",
+        "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/296dfffa70fc41c6c125835a0033538a?OpenDocument"
+    },
+    {
+        "name": "amount of substance",
+        "code": "0112-2---62720#UAD004",
+        "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/09e8c5214015fd36c125835a00335382?OpenDocument"
+    },
+    {
+        "name": "amount of substance concentration",
+        "code": "0112-2---62720#UAD005",
+        "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/24c05dfa48d2f158c125835a0033538c?OpenDocument"
+    },
+    {
+        "name": "angular acceleration",
+        "code": "0112-2---62720#UAD006",
+        "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/5b310b2c3479a19fc125835a0033536b?OpenDocument"
+    },
+    {
+        "name": "angular cross\u2011section",
+        "code": "0112-2---62720#UAD007",
+        "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/ded6c62046092afbc125835a00335369?OpenDocument"
+    },
+    {
+        "name": "angular velocity",
+        "code": "0112-2---62720#UAD009",
+        "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/b62fdf81b0fe1e77c125835a0033537e?OpenDocument"
+    },
+    {
+        "name": "angular wave number",
+        "code": "0112-2---62720#UAD010",
+        "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/a88dadb604be12acc125835a00335380?OpenDocument"
+    },
+    {
+        "name": "apparent power",
+        "code": "0112-2---62720#UAD011",
+        "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/d0acda7996c9a77ec125835a00335378?OpenDocument"
+    },
+    {
+        "name": "areic bit density",
+        "code": "0112-2---62720#UAD012",
+        "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/b6bcf062728832e8c125835a0033537c?OpenDocument"
+    },
+    {
+        "name": "areic charge density",
+        "code": "0112-2---62720#UAD013",
+        "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/4d9ab8c3ef3aedb1c125835a00335376?OpenDocument"
+    },
+    {
+        "name": "areic mass",
+        "code": "0112-2---62720#UAD014",
+        "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/acb459a5d38a6c67c125835a00335373?OpenDocument"
+    },
+    {
+        "name": "avogadro constant",
+        "code": "0112-2---62720#UAD015",
+        "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/872f85e494913037c125835a0033537a?OpenDocument"
+    },
+    {
+        "name": "bandwidth distance product",
+        "code": "0112-2---62720#UAD016",
+        "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/bfc7ff5acc34041cc125835a00335361?OpenDocument"
+    },
+    {
+        "name": "battery capacity",
+        "code": "0112-2---62720#UAD017",
+        "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/452cc899ac709560c125835a00335359?OpenDocument"
+    },
+    {
+        "name": "bit rate",
+        "code": "0112-2---62720#UAD018",
+        "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/4e4a51dfb9560d36c125835a00335367?OpenDocument"
+    },
+    {
+        "name": "burst factor",
+        "code": "0112-2---62720#UAD019",
+        "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/9bda34867ea3a4b5c125835a00335365?OpenDocument"
+    },
+    {
+        "name": "byte rate",
+        "code": "0112-2---62720#UAD020",
+        "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/605a8482ef97fcd5c125835a0033535f?OpenDocument"
+    },
+    {
+        "name": "capacitance",
+        "code": "0112-2---62720#UAD021",
+        "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/b17204846029716ec125835a0033535d?OpenDocument"
+    },
+    {
+        "name": "catalytic activity",
+        "code": "0112-2---62720#UAD022",
+        "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/45870b9611e7e9acc125835a0033535b?OpenDocument"
+    },
+    {
+        "name": "Celsius temperature",
+        "code": "0112-2---62720#UAD023",
+        "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/f9076e80a9712519c125835a0033536d?OpenDocument"
+    },
+    {
+        "name": "compressibility",
+        "code": "0112-2---62720#UAD024",
+        "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/f86b9dce87195790c125835a00335371?OpenDocument"
+    },
+    {
+        "name": "conductivity",
+        "code": "0112-2---62720#UAD025",
+        "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/36c511a0c69f9c78c125835a0033536f?OpenDocument"
+    },
+    {
+        "name": "cross\u2011section",
+        "code": "0112-2---62720#UAD026",
+        "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/8727cd0d4efa9becc125835a003353a2?OpenDocument"
+    },
+    {
+        "name": "dataset of bits",
+        "code": "0112-2---62720#UAD027",
+        "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/fae24783dfa37fd0c125835a0033539e?OpenDocument"
+    },
+    {
+        "name": "dataset of bytes",
+        "code": "0112-2---62720#UAD028",
+        "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/c76d1feb692ee82bc125835a0033539c?OpenDocument"
+    },
+    {
+        "name": "density",
+        "code": "0112-2---62720#UAD029",
+        "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/9f63f2db6152a109c125835a00335398?OpenDocument"
+    },
+    {
+        "name": "density of states",
+        "code": "0112-2---62720#UAD030",
+        "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/76d5d4473f4ba5e9c125835a0033539a?OpenDocument"
+    },
+    {
+        "name": "diffusion constant",
+        "code": "0112-2---62720#UAD031",
+        "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/d368c0a69d4ac944c125835a00335394?OpenDocument"
+    },
+    {
+        "name": "digit rate",
+        "code": "0112-2---62720#UAD032",
+        "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/7a1cfdf921b2f4cac125835a00335390?OpenDocument"
+    },
+    {
+        "name": "dose equivalent",
+        "code": "0112-2---62720#UAD033",
+        "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/321c54db60c07913c125835a0033538e?OpenDocument"
+    },
+    {
+        "name": "dose equivalent rate",
+        "code": "0112-2---62720#UAD034",
+        "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/62297e0447591a7cc125835a00335355?OpenDocument"
+    },
+    {
+        "name": "dynamic viscosity",
+        "code": "0112-2---62720#UAD035",
+        "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/3188d4528f947d9fc125835a0033534f?OpenDocument"
+    },
+    {
+        "name": "Einstein coefficients",
+        "code": "0112-2---62720#UAD036",
+        "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/1bea96bf90a83da9c125835a00335353?OpenDocument"
+    },
+    {
+        "name": "electric charge",
+        "code": "0112-2---62720#UAD037",
+        "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/5a6a9dab2a9ac52ac125835a00335351?OpenDocument"
+    },
+    {
+        "name": "electrical conductance",
+        "code": "0112-2---62720#UAD038",
+        "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/1a823fa60d4a506ac125835a00335322?OpenDocument"
+    },
+    {
+        "name": "electric current",
+        "code": "0112-2---62720#UAD039",
+        "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/acd32889dc29d53cc125835a0033534d?OpenDocument"
+    },
+    {
+        "name": "electric current density",
+        "code": "0112-2---62720#UAD040",
+        "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/e9245059c522e1bec125835a0033534b?OpenDocument"
+    },
+    {
+        "name": "electric dipole moment",
+        "code": "0112-2---62720#UAD041",
+        "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/21953606e7002bbbc125835a00335357?OpenDocument"
+    },
+    {
+        "name": "electric field strength",
+        "code": "0112-2---62720#UAD042",
+        "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/40ca36d56177d9e0c125835a00335363?OpenDocument"
+    },
+    {
+        "name": "electric flux density",
+        "code": "0112-2---62720#UAD043",
+        "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/27b3f023ee7bc259c125835a00335335?OpenDocument"
+    },
+    {
+        "name": "electric polarization",
+        "code": "0112-2---62720#UAD044",
+        "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/2ddf209e43c96dd0c125835a00335341?OpenDocument"
+    },
+    {
+        "name": "electric resistance",
+        "code": "0112-2---62720#UAD045",
+        "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/7108b59997eccebec125835a00335349?OpenDocument"
+    },
+    {
+        "name": "energy content",
+        "code": "0112-2---62720#UAD046",
+        "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/33b9b962eafbfe38c125835a0033533b?OpenDocument"
+    },
+    {
+        "name": "energy density",
+        "code": "0112-2---62720#UAD047",
+        "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/801a45f0fa4ddff2c125835a00335347?OpenDocument"
+    },
+    {
+        "name": "equilibrium constant based on concentration",
+        "code": "0112-2---62720#UAD048",
+        "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/d9d68de500f8acafc125835a00335345?OpenDocument"
+    },
+    {
+        "name": "equilibrium constant based on pressure",
+        "code": "0112-2---62720#UAD049",
+        "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/d7293eee52afc833c125835a0033533f?OpenDocument"
+    },
+    {
+        "name": "exposure rate",
+        "code": "0112-2---62720#UAD050",
+        "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/0b12d92ab3a6861cc125835a00335343?OpenDocument"
+    },
+    {
+        "name": "failure rate",
+        "code": "0112-2---62720#UAD051",
+        "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/c636b8ad5db2866cc125835a00335304?OpenDocument"
+    },
+    {
+        "name": "Faraday constant",
+        "code": "0112-2---62720#UAD052",
+        "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/f6570c1b721a9bdcc125835a0033533d?OpenDocument"
+    },
+    {
+        "name": "first radiation constant",
+        "code": "0112-2---62720#UAD053",
+        "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/4c9d74f09493af1fc125835a00335326?OpenDocument"
+    },
+    {
+        "name": "force",
+        "code": "0112-2---62720#UAD054",
+        "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/30793307aa12d5e0c125835a0033532a?OpenDocument"
+    },
+    {
+        "name": "force constant",
+        "code": "0112-2---62720#UAD055",
+        "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/4e46cc7c0f95ab69c125835a00335331?OpenDocument"
+    },
+    {
+        "name": "frequency",
+        "code": "0112-2---62720#UAD056",
+        "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/bf93abad2c7a87b6c125835a00335320?OpenDocument"
+    },
+    {
+        "name": "gas leak rate",
+        "code": "0112-2---62720#UAD057",
+        "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/402d97c064eb0f01c125835a00335333?OpenDocument"
+    },
+    {
+        "name": "gradient",
+        "code": "0112-2---62720#UAD058",
+        "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/d0adb8b0fd0ac1b0c125835a0033532e?OpenDocument"
+    },
+    {
+        "name": "gravitational constant",
+        "code": "0112-2---62720#UAD059",
+        "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/3598b3e941244d44c125835a00335337?OpenDocument"
+    },
+    {
+        "name": "Hall coefficient",
+        "code": "0112-2---62720#UAD060",
+        "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/25371a5c15872853c125835a00335262?OpenDocument"
+    },
+    {
+        "name": "illumination",
+        "code": "0112-2---62720#UAD062",
+        "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/7d86cab35d6e6c61c125835a00335339?OpenDocument"
+    },
+    {
+        "name": "impulse",
+        "code": "0112-2---62720#UAD063",
+        "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/3fad1e7d02fd51cbc125835a0033531e?OpenDocument"
+    },
+    {
+        "name": "incidence",
+        "code": "0112-2---62720#UAD064",
+        "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/cbf012bf06141370c125835a0033531a?OpenDocument"
+    },
+    {
+        "name": "inductance",
+        "code": "0112-2---62720#UAD065",
+        "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/e5a5adadfd7d3358c125835a0033531c?OpenDocument"
+    },
+    {
+        "name": "information content",
+        "code": "0112-2---62720#UAD066",
+        "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/33b22798d75e372ec125835a003351e3?OpenDocument"
+    },
+    {
+        "name": "ionic strength",
+        "code": "0112-2---62720#UAD067",
+        "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/994e73b4b855b437c125835a00335310?OpenDocument"
+    },
+    {
+        "name": "irradiance",
+        "code": "0112-2---62720#UAD068",
+        "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/af252f9ea24576bdc125835a00335312?OpenDocument"
+    },
+    {
+        "name": "Josephson constant",
+        "code": "0112-2---62720#UAD069",
+        "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/913a9d185c17adc1c125835a00335328?OpenDocument"
+    },
+    {
+        "name": "kinematic viscosity",
+        "code": "0112-2---62720#UAD070",
+        "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/51c9878fd2ebffe2c125835a00335324?OpenDocument"
+    },
+    {
+        "name": "kinetic energy",
+        "code": "0112-2---62720#UAD071",
+        "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/fe606a2526e5c1f9c125835a0033532c?OpenDocument"
+    },
+    {
+        "name": "length",
+        "code": "0112-2---62720#UAD072",
+        "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/a9015982ffc48e50c125835a0033530a?OpenDocument"
+    },
+    {
+        "name": "lineic bit density",
+        "code": "0112-2---62720#UAD074",
+        "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/4973a6873691c3d4c125835a00335308?OpenDocument"
+    },
+    {
+        "name": "lineic electric charge",
+        "code": "0112-2---62720#UAD075",
+        "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/68c78ad2e18c77a7c125835a00335306?OpenDocument"
+    },
+    {
+        "name": "lineic electric current",
+        "code": "0112-2---62720#UAD076",
+        "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/c11f6cf4596d0810c125835a0033530c?OpenDocument"
+    },
+    {
+        "name": "lineic force",
+        "code": "0112-2---62720#UAD077",
+        "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/48d5a388145a3a09c125835a0033530e?OpenDocument"
+    },
+    {
+        "name": "lineic logarithmic ratio",
+        "code": "0112-2---62720#UAD078",
+        "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/4f9e693b824aaf79c125835a00335318?OpenDocument"
+    },
+    {
+        "name": "lineic mass",
+        "code": "0112-2---62720#UAD079",
+        "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/ab3b378961e9a9e3c125835a00335314?OpenDocument"
+    },
+    {
+        "name": "lineic power",
+        "code": "0112-2---62720#UAD080",
+        "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/24b2b95066da8ccec125835a00335316?OpenDocument"
+    },
+    {
+        "name": "lineic resistance",
+        "code": "0112-2---62720#UAD081",
+        "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/c7210d385e692572c125835a003352f5?OpenDocument"
+    },
+    {
+        "name": "lineic torque",
+        "code": "0112-2---62720#UAD082",
+        "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/1972acdaca923a75c125835a00335302?OpenDocument"
+    },
+    {
+        "name": "logarithmic frequency interval",
+        "code": "0112-2---62720#UAD083",
+        "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/16ab30a42c4455d9c125835a00335294?OpenDocument"
+    },
+    {
+        "name": "logarithmic frequency interval to base 10",
+        "code": "0112-2---62720#UAD084",
+        "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/c19945f21ba66256c125835a003352fb?OpenDocument"
+    },
+    {
+        "name": "logarithmic ratio to base 10",
+        "code": "0112-2---62720#UAD085",
+        "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/cb2cb237e2a720f1c125835a003352fe?OpenDocument"
+    },
+    {
+        "name": "logarithmic ratio to base e",
+        "code": "0112-2---62720#UAD086",
+        "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/282f52a63a4cac8bc125835a003353c3?OpenDocument"
+    },
+    {
+        "name": "Lorenz coefficient",
+        "code": "0112-2---62720#UAD087",
+        "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/a9812c9d5148847dc125835a00335300?OpenDocument"
+    },
+    {
+        "name": "loudness",
+        "code": "0112-2---62720#UAD088",
+        "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/c1f76e085be32641c125835a003351a0?OpenDocument"
+    },
+    {
+        "name": "loudness level",
+        "code": "0112-2---62720#UAD089",
+        "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/cbad0d314aad58f8c125835a003351a1?OpenDocument"
+    },
+    {
+        "name": "luminance",
+        "code": "0112-2---62720#UAD090",
+        "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/c1fc3d5d808b3045c125835a003352f9?OpenDocument"
+    },
+    {
+        "name": "luminous efficacy",
+        "code": "0112-2---62720#UAD091",
+        "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/e4ddeefdd31342f4c125835a003352e5?OpenDocument"
+    },
+    {
+        "name": "luminous exitance",
+        "code": "0112-2---62720#UAD092",
+        "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/8e5dc96832a610a1c125835a003352e7?OpenDocument"
+    },
+    {
+        "name": "luminous exposure",
+        "code": "0112-2---62720#UAD093",
+        "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/d2a98cd88fba5ad1c125835a003352e9?OpenDocument"
+    },
+    {
+        "name": "luminous flux",
+        "code": "0112-2---62720#UAD094",
+        "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/ed7376fa65f643f8c125835a003352ef?OpenDocument"
+    },
+    {
+        "name": "luminous intensity",
+        "code": "0112-2---62720#UAD095",
+        "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/724a89cdc623cbc1c125835a003352f3?OpenDocument"
+    },
+    {
+        "name": "magnetic dipole moment",
+        "code": "0112-2---62720#UAD096",
+        "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/eaf61a1ac9a80fd1c125835a003352ed?OpenDocument"
+    },
+    {
+        "name": "magnetic moment",
+        "code": "0112-2---62720#UAD097",
+        "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/6f0ff151051b6205c125835a003352f1?OpenDocument"
+    },
+    {
+        "name": "magnetic field strength",
+        "code": "0112-2---62720#UAD098",
+        "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/cbc21e65d59199fec125835a003352f7?OpenDocument"
+    },
+    {
+        "name": "magnetic flux",
+        "code": "0112-2---62720#UAD099",
+        "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/9f74b3dabbff3842c125835a003353cc?OpenDocument"
+    },
+    {
+        "name": "magnetic flux density",
+        "code": "0112-2---62720#UAD100",
+        "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/e4d31ee2ac9a7d65c125835a003351e0?OpenDocument"
+    },
+    {
+        "name": "magnetic moment",
+        "code": "0112-2---62720#UAD101",
+        "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/4f61f2c9030852f7c125835a003352dc?OpenDocument"
+    },
+    {
+        "name": "magnetic polarization",
+        "code": "0112-2---62720#UAD102",
+        "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/0b32c9b0d5cc28b8c125835a003352d2?OpenDocument"
+    },
+    {
+        "name": "magnetic vector potential",
+        "code": "0112-2---62720#UAD103",
+        "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/541f2197ac97f3c9c125835a003352d6?OpenDocument"
+    },
+    {
+        "name": "mass",
+        "code": "0112-2---62720#UAD104",
+        "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/5b7b303380ab518cc125835a003352de?OpenDocument"
+    },
+    {
+        "name": "mass attenuation coefficient",
+        "code": "0112-2---62720#UAD105",
+        "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/b0dd4717c9e279e1c125835a003352da?OpenDocument"
+    },
+    {
+        "name": "mass density",
+        "code": "0112-2---62720#UAD106",
+        "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/8d51f8f97828e438c125835a003352e0?OpenDocument"
+    },
+    {
+        "name": "mass flow rate",
+        "code": "0112-2---62720#UAD107",
+        "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/6157eafe6206b27dc125835a003352e3?OpenDocument"
+    },
+    {
+        "name": "mass flux density",
+        "code": "0112-2---62720#UAD108",
+        "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/11f8789b2cd06714c125835a003352eb?OpenDocument"
+    },
+    {
+        "name": "mass ratio",
+        "code": "0112-2---62720#UAD109",
+        "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/6ffd82e8d2a9412dc125835a003351dc?OpenDocument"
+    },
+    {
+        "name": "massic activity",
+        "code": "0112-2---62720#UAD110",
+        "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/ad2ef08df736c1fcc125835a003352c4?OpenDocument"
+    },
+    {
+        "name": "massic electric current",
+        "code": "0112-2---62720#UAD111",
+        "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/169af415bef6f690c125835a003352c6?OpenDocument"
+    },
+    {
+        "name": "massic heat capacity",
+        "code": "0112-2---62720#UAD112",
+        "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/2f0d779d487bd5f2c125835a003352cc?OpenDocument"
+    },
+    {
+        "name": "massic power",
+        "code": "0112-2---62720#UAD113",
+        "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/c806154533f239b0c125835a003352ce?OpenDocument"
+    },
+    {
+        "name": "massic torque",
+        "code": "0112-2---62720#UAD114",
+        "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/9692babc5766cef0c125835a003352c8?OpenDocument"
+    },
+    {
+        "name": "mechanical impedance",
+        "code": "0112-2---62720#UAD115",
+        "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/e70f26e56dee755dc125835a003352d0?OpenDocument"
+    },
+    {
+        "name": "median information flow (expressed as a binary logarithm)",
+        "code": "0112-2---62720#UAD116",
+        "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/41fdad9bd1435b32c125835a003352ca?OpenDocument"
+    },
+    {
+        "name": "median information flow (expressed as a common logarithm)",
+        "code": "0112-2---62720#UAD117",
+        "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/209ee291f124b85ac125835a003351d6?OpenDocument"
+    },
+    {
+        "name": "median information flow (expressed as a natural logarithm)",
+        "code": "0112-2---62720#UAD118",
+        "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/06334aa134c600efc125835a003352d8?OpenDocument"
+    },
+    {
+        "name": "mobility",
+        "code": "0112-2---62720#UAD119",
+        "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/b755fa790243facfc125835a003352d4?OpenDocument"
+    },
+    {
+        "name": "molar attenuation coefficient",
+        "code": "0112-2---62720#UAD120",
+        "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/cb91d85ee1973a36c125835a003352b8?OpenDocument"
+    },
+    {
+        "name": "molar conductivity",
+        "code": "0112-2---62720#UAD121",
+        "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/7a59d9d013e94d08c125835a003352aa?OpenDocument"
+    },
+    {
+        "name": "molar flow rate",
+        "code": "0112-2---62720#UAD122",
+        "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/593b85b1f9bc4732c125835a003352b2?OpenDocument"
+    },
+    {
+        "name": "molar heat capacitiy",
+        "code": "0112-2---62720#UAD123",
+        "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/521bd1ebd166a383c125835a003352be?OpenDocument"
+    },
+    {
+        "name": "molar internal energy",
+        "code": "0112-2---62720#UAD124",
+        "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/637edfd32beba7a6c125835a003352bc?OpenDocument"
+    },
+    {
+        "name": "molar mass",
+        "code": "0112-2---62720#UAD125",
+        "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/19462331d7935c7bc125835a003352c0?OpenDocument"
+    },
+    {
+        "name": "molar optical rotatory power",
+        "code": "0112-2---62720#UAD126",
+        "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/9a4f4d24f666ec47c125835a003351ba?OpenDocument"
+    },
+    {
+        "name": "molar volume",
+        "code": "0112-2---62720#UAD127",
+        "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/5cc10522e0253a93c125835a003352c2?OpenDocument"
+    },
+    {
+        "name": "moment of inertia",
+        "code": "0112-2---62720#UAD128",
+        "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/276cd5a116b376e8c125835a003352ba?OpenDocument"
+    },
+    {
+        "name": "motor constant",
+        "code": "0112-2---62720#UAD129",
+        "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/9754b7aca756f69ac125835a003352a0?OpenDocument"
+    },
+    {
+        "name": "mass stopping power",
+        "code": "0112-2---62720#UAD130",
+        "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/62cf2cf440d69252c125835a0033529e?OpenDocument"
+    },
+    {
+        "name": "nuclear energy",
+        "code": "0112-2---62720#UAD131",
+        "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/044eab1812d5d200c125835a003352a8?OpenDocument"
+    },
+    {
+        "name": "particle current density",
+        "code": "0112-2---62720#UAD132",
+        "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/2d450c5b486078e5c125835a003352a4?OpenDocument"
+    },
+    {
+        "name": "particle fluence",
+        "code": "0112-2---62720#UAD133",
+        "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/a30cfa2aa8e26f1bc125835a003352b4?OpenDocument"
+    },
+    {
+        "name": "permeability",
+        "code": "0112-2---62720#UAD134",
+        "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/a10a674d72bf2475c125835a003352b0?OpenDocument"
+    },
+    {
+        "name": "permeance",
+        "code": "0112-2---62720#UAD135",
+        "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/5a8b822444b98dfac125835a003352ac?OpenDocument"
+    },
+    {
+        "name": "permittivity",
+        "code": "0112-2---62720#UAD136",
+        "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/65196d8a4ff086b4c125835a003351b8?OpenDocument"
+    },
+    {
+        "name": "photon intensity",
+        "code": "0112-2---62720#UAD137",
+        "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/e86273e8891cf9d6c125835a003352b6?OpenDocument"
+    },
+    {
+        "name": "photon luminance",
+        "code": "0112-2---62720#UAD138",
+        "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/fabfe1949d3f641cc125835a003352ae?OpenDocument"
+    },
+    {
+        "name": "Planck's constant",
+        "code": "0112-2---62720#UAD139",
+        "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/7afe6bc1a2893519c125835a0033529a?OpenDocument"
+    },
+    {
+        "name": "plane angle",
+        "code": "0112-2---62720#UAD140",
+        "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/282e6199813d9ab7c125835a0033527c?OpenDocument"
+    },
+    {
+        "name": "polarizability",
+        "code": "0112-2---62720#UAD141",
+        "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/1906c4b1da805e70c125835a0033528e?OpenDocument"
+    },
+    {
+        "name": "pressure",
+        "code": "0112-2---62720#UAD142",
+        "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/593b3a3e91e989e8c125835a00335298?OpenDocument"
+    },
+    {
+        "name": "pressure coefficient",
+        "code": "0112-2---62720#UAD143",
+        "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/186f531c921f1c58c125835a00335296?OpenDocument"
+    },
+    {
+        "name": "pressure gradient",
+        "code": "0112-2---62720#UAD144",
+        "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/a28a2f4180e71faac125835a00335290?OpenDocument"
+    },
+    {
+        "name": "pressure in relation to volume flow rate",
+        "code": "0112-2---62720#UAD145",
+        "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/2c33a7a325cdda3ec125835a003351b2?OpenDocument"
+    },
+    {
+        "name": "piece",
+        "code": "0112-2---62720#UAD146",
+        "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/bab65706d61449abc125835a0033519f?OpenDocument"
+    },
+    {
+        "name": "quantity of light",
+        "code": "0112-2---62720#UAD147",
+        "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/5b712c4f5f3a5ce4c125835a003352a2?OpenDocument"
+    },
+    {
+        "name": "radiance",
+        "code": "0112-2---62720#UAD148",
+        "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/ccf6cedecc65e8e7c125835a003352a6?OpenDocument"
+    },
+    {
+        "name": "radiant energy exposure",
+        "code": "0112-2---62720#UAD149",
+        "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/eaa0bb7f76794163c125835a00335286?OpenDocument"
+    },
+    {
+        "name": "radiant exposure",
+        "code": "0112-2---62720#UAD150",
+        "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/4094bd8c83615026c125835a00335284?OpenDocument"
+    },
+    {
+        "name": "radiant intensity",
+        "code": "0112-2---62720#UAD151",
+        "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/b1d1c08b61245badc125835a00335288?OpenDocument"
+    },
+    {
+        "name": "radioactive decay",
+        "code": "0112-2---62720#UAD152",
+        "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/774e335576f6c14dc125835a00335282?OpenDocument"
+    },
+    {
+        "name": "rate of rise of voltage",
+        "code": "0112-2---62720#UAD153",
+        "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/6e7522eaafb899a7c125835a0033528a?OpenDocument"
+    },
+    {
+        "name": "ratio",
+        "code": "0112-2---62720#UAD154",
+        "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/9b22f355a6d219e9c125835a003351de?OpenDocument"
+    },
+    {
+        "name": "reactive power",
+        "code": "0112-2---62720#UAD155",
+        "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/1a23558fa7d521c2c125835a0033528c?OpenDocument"
+    },
+    {
+        "name": "reciprocal energy",
+        "code": "0112-2---62720#UAD156",
+        "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/d6d851f3676b6485c125835a0033529c?OpenDocument"
+    },
+    {
+        "name": "reciprocal mass",
+        "code": "0112-2---62720#UAD157",
+        "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/f8cff97c1023b079c125835a00335292?OpenDocument"
+    },
+    {
+        "name": "variation (due to voltage)",
+        "code": "0112-2---62720#UAD158",
+        "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/2d128243c35d4841c125835a003351b4?OpenDocument"
+    },
+    {
+        "name": "reluctance",
+        "code": "0112-2---62720#UAD159",
+        "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/dbca0bab128b69d8c125835a00335268?OpenDocument"
+    },
+    {
+        "name": "repetency",
+        "code": "0112-2---62720#UAD160",
+        "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/fdd1f871c5317435c125835a00335274?OpenDocument"
+    },
+    {
+        "name": "resistivity",
+        "code": "0112-2---62720#UAD161",
+        "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/0bc47a58f11b4a77c125835a00335272?OpenDocument"
+    },
+    {
+        "name": "Richardson constant",
+        "code": "0112-2---62720#UAD162",
+        "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/2b72ca6a48b86f6cc125835a0033527e?OpenDocument"
+    },
+    {
+        "name": "rotary-translatory motion conversion",
+        "code": "0112-2---62720#UAD163",
+        "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/d0277a812b8a3319c125835a00335278?OpenDocument"
+    },
+    {
+        "name": "scalar magnetic potential",
+        "code": "0112-2---62720#UAD164",
+        "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/b8df7189bfc3b36ec125835a003351b0?OpenDocument"
+    },
+    {
+        "name": "second moment of area (axial)",
+        "code": "0112-2---62720#UAD165",
+        "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/85ec48f8f83d8a7ac125835a00335280?OpenDocument"
+    },
+    {
+        "name": "second moment of area (polar)",
+        "code": "0112-2---62720#UAD166",
+        "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/83cc2a28bc6e034ac125835a00335276?OpenDocument"
+    },
+    {
+        "name": "second radiation constant",
+        "code": "0112-2---62720#UAD167",
+        "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/d3b52bc2ca671e58c125835a0033527a?OpenDocument"
+    },
+    {
+        "name": "Seebeck coefficient",
+        "code": "0112-2---62720#UAD169",
+        "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/bc1657660bc7b466c125835a0033525e?OpenDocument"
+    },
+    {
+        "name": "slowing\u2011down density",
+        "code": "0112-2---62720#UAD170",
+        "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/ab539b465f85da90c125835a0033525c?OpenDocument"
+    },
+    {
+        "name": "solid angle",
+        "code": "0112-2---62720#UAD171",
+        "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/e9024c0a23e2def3c125835a0033519e?OpenDocument"
+    },
+    {
+        "name": "sound exposure",
+        "code": "0112-2---62720#UAD172",
+        "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/64850a8c124e737ec125835a00335264?OpenDocument"
+    },
+    {
+        "name": "specific (internal) energy",
+        "code": "0112-2---62720#UAD173",
+        "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/edd64a030ddd24dcc125835a00335266?OpenDocument"
+    },
+    {
+        "name": "specific optical rotational ability",
+        "code": "0112-2---62720#UAD174",
+        "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/21538489856dd726c125835a0033526a?OpenDocument"
+    },
+    {
+        "name": "specific volume",
+        "code": "0112-2---62720#UAD175",
+        "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/8e1de247d02f4a89c125835a0033526e?OpenDocument"
+    },
+    {
+        "name": "spectral angular cross\u2011section",
+        "code": "0112-2---62720#UAD176",
+        "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/85c8ec8a7a697063c125835a00335270?OpenDocument"
+    },
+    {
+        "name": "spectral cross\u2011section",
+        "code": "0112-2---62720#UAD177",
+        "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/9d7567861a4b5a30c125835a003351ac?OpenDocument"
+    },
+    {
+        "name": "spectral density of vibrational modes",
+        "code": "0112-2---62720#UAD178",
+        "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/764f9da91d5f6a4fc125835a0033526c?OpenDocument"
+    },
+    {
+        "name": "spectral radiant energy density in terms of wavelength",
+        "code": "0112-2---62720#UAD179",
+        "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/ee670e3842a50df1c125835a0033524e?OpenDocument"
+    },
+    {
+        "name": "state density as expression of angular frequency)",
+        "code": "0112-2---62720#UAD180",
+        "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/5db808cd57aeeb7ac125835a00335252?OpenDocument"
+    },
+    {
+        "name": "Stefan\u2011Boltzmann constant",
+        "code": "0112-2---62720#UAD181",
+        "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/5e989f0be2e37bf4c125835a00335256?OpenDocument"
+    },
+    {
+        "name": "surface",
+        "code": "0112-2---62720#UAD182",
+        "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/7e41cf09acfd9796c125835a003351a4?OpenDocument"
+    },
+    {
+        "name": "surface\u2011related volume flow rate",
+        "code": "0112-2---62720#UAD183",
+        "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/96d5b6bfda3e2650c125835a00335254?OpenDocument"
+    },
+    {
+        "name": "surface tension",
+        "code": "0112-2---62720#UAD184",
+        "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/c4358d2483c3c49bc125835a00335250?OpenDocument"
+    },
+    {
+        "name": "surge impedance of the medium",
+        "code": "0112-2---62720#UAD185",
+        "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/b0b8f828fa34a4d8c125835a00335260?OpenDocument"
+    },
+    {
+        "name": "temperature change rate",
+        "code": "0112-2---62720#UAD186",
+        "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/8fcce5bf790ac785c125835a0033525a?OpenDocument"
+    },
+    {
+        "name": "thermal capacitance",
+        "code": "0112-2---62720#UAD187",
+        "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/cee04564c7bda663c125835a003353c8?OpenDocument"
+    },
+    {
+        "name": "thermal coefficient of linear expansion",
+        "code": "0112-2---62720#UAD188",
+        "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/a48cfa69759eaa6cc125835a003353ca?OpenDocument"
+    },
+    {
+        "name": "thermal conductance",
+        "code": "0112-2---62720#UAD189",
+        "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/97449f7db11ad0b3c125835a0033524a?OpenDocument"
+    },
+    {
+        "name": "thermal energy",
+        "code": "0112-2---62720#UAD191",
+        "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/4ce4c56f1435f102c125835a0033524c?OpenDocument"
+    },
+    {
+        "name": "thermal insulance",
+        "code": "0112-2---62720#UAD192",
+        "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/bc4a1266a91d30d3c125835a00335246?OpenDocument"
+    },
+    {
+        "name": "thermal resistance",
+        "code": "0112-2---62720#UAD193",
+        "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/d366541a4f77ea4ec125835a00335242?OpenDocument"
+    },
+    {
+        "name": "thermal resistivity",
+        "code": "0112-2---62720#UAD194",
+        "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/a26e24a4de98c9acc125835a003351a6?OpenDocument"
+    },
+    {
+        "name": "thermal transmittance",
+        "code": "0112-2---62720#UAD195",
+        "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/c3a8b3a2186aa9c1c125835a00335248?OpenDocument"
+    },
+    {
+        "name": "thermodynamic temperature",
+        "code": "0112-2---62720#UAD196",
+        "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/4e4f71868090cde8c125835a00335244?OpenDocument"
+    },
+    {
+        "name": "time",
+        "code": "0112-2---62720#UAD197",
+        "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/19a34e778984e599c125835a00335258?OpenDocument"
+    },
+    {
+        "name": "time constant (inductance based)",
+        "code": "0112-2---62720#UAD198",
+        "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/0ebe13c1871c9497c125835a00335236?OpenDocument"
+    },
+    {
+        "name": "real part of complex frequency",
+        "code": "0112-2---62720#UAD199",
+        "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/3b339d3afdd0e97ac125835a0033522a?OpenDocument"
+    },
+    {
+        "name": "torque",
+        "code": "0112-2---62720#UAD200",
+        "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/19597e7c6daccb7bc125835a0033523c?OpenDocument"
+    },
+    {
+        "name": "torque constant",
+        "code": "0112-2---62720#UAD201",
+        "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/c8ca0a711442443cc125835a00335238?OpenDocument"
+    },
+    {
+        "name": "torsional rigidy",
+        "code": "0112-2---62720#UAD202",
+        "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/cfb603256ca73e84c125835a0033523a?OpenDocument"
+    },
+    {
+        "name": "total linear stopping power",
+        "code": "0112-2---62720#UAD203",
+        "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/6e069a95b86ba3f2c125835a0033523e?OpenDocument"
+    },
+    {
+        "name": "total mass stopping power",
+        "code": "0112-2---62720#UAD204",
+        "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/ef20e9b7c5d2e326c125835a00335240?OpenDocument"
+    },
+    {
+        "name": "traffic intensity",
+        "code": "0112-2---62720#UAD205",
+        "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/f1e627757eeaa3c5c125835a003351aa?OpenDocument"
+    },
+    {
+        "name": "unbalance",
+        "code": "0112-2---62720#UAD206",
+        "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/72663c585c4f227ac125835a00335210?OpenDocument"
+    },
+    {
+        "name": "variation (due to modified position)",
+        "code": "0112-2---62720#UAD207",
+        "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/43481cc258ab551ec125835a003351d9?OpenDocument"
+    },
+    {
+        "name": "variation (due to output load)",
+        "code": "0112-2---62720#UAD208",
+        "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/faeaf8bdd0f3b371c125835a0033521c?OpenDocument"
+    },
+    {
+        "name": "variation of density (due to pressure)",
+        "code": "0112-2---62720#UAD209",
+        "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/2bbcd5eb52434085c125835a0033522c?OpenDocument"
+    },
+    {
+        "name": "variation of dynamic viscosity (due to pressure)",
+        "code": "0112-2---62720#UAD210",
+        "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/7ca6ed764c4242c5c125835a00335228?OpenDocument"
+    },
+    {
+        "name": "variation of dynamic viscosity (due to temperature)",
+        "code": "0112-2---62720#UAD211",
+        "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/f4594ae977b98309c125835a00335226?OpenDocument"
+    },
+    {
+        "name": "variation of electric current (due to pressure)",
+        "code": "0112-2---62720#UAD212",
+        "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/505bd2a7bb61d038c125835a00335234?OpenDocument"
+    },
+    {
+        "name": "variation of kinematic viscosity (due to pressure)",
+        "code": "0112-2---62720#UAD213",
+        "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/6a614c3031483ff2c125835a00335230?OpenDocument"
+    },
+    {
+        "name": "variation of kinematic viscosity (due to temperature)",
+        "code": "0112-2---62720#UAD214",
+        "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/209d3c0428367bd8c125835a0033522e?OpenDocument"
+    },
+    {
+        "name": "variation of level (due to pressure)",
+        "code": "0112-2---62720#UAD215",
+        "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/13f4efde30cb2647c125835a00335232?OpenDocument"
+    },
+    {
+        "name": "variation of level (due to temperature)",
+        "code": "0112-2---62720#UAD216",
+        "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/298dcb92af7e49cac125835a003353ce?OpenDocument"
+    },
+    {
+        "name": "variation of mass (due to pressure)",
+        "code": "0112-2---62720#UAD217",
+        "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/69e0ab22f302dfcac125835a00335216?OpenDocument"
+    },
+    {
+        "name": "variation of mass (due to temperature)",
+        "code": "0112-2---62720#UAD218",
+        "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/3f2dd5b6ddc94d09c125835a00335222?OpenDocument"
+    },
+    {
+        "name": "variation of mass density (due to temperature)",
+        "code": "0112-2---62720#UAD219",
+        "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/32bfdf5166236b55c125835a00335218?OpenDocument"
+    },
+    {
+        "name": "variation of mass flow rate (due to pressure)",
+        "code": "0112-2---62720#UAD220",
+        "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/aa5e93e66e8bc1f3c125835a0033521e?OpenDocument"
+    },
+    {
+        "name": "variation of mass flow rate (due to temperature)",
+        "code": "0112-2---62720#UAD221",
+        "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/30534e38f7c84aefc125835a0033521a?OpenDocument"
+    },
+    {
+        "name": "variation of molar mass (due to pressure)",
+        "code": "0112-2---62720#UAD222",
+        "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/b4a7005a8f38a29ec125835a00335220?OpenDocument"
+    },
+    {
+        "name": "variation of molality (due to temperature)",
+        "code": "0112-2---62720#UAD223",
+        "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/e946a355081f0dcdc125835a003351a8?OpenDocument"
+    },
+    {
+        "name": "variation of molar concentration (due to temperature)",
+        "code": "0112-2---62720#UAD225",
+        "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/cc0d48c90dade17ac125835a00335224?OpenDocument"
+    },
+    {
+        "name": "variation of pressure",
+        "code": "0112-2---62720#UAD226",
+        "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/1bdd52bda138bf1ec125835a00335207?OpenDocument"
+    },
+    {
+        "name": "variation of temperature (due to pressure)",
+        "code": "0112-2---62720#UAD227",
+        "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/33b092f30784f809c125835a00335201?OpenDocument"
+    },
+    {
+        "name": "variation of temperature (due to temperature)",
+        "code": "0112-2---62720#UAD228",
+        "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/8720fd91373cf930c125835a00335203?OpenDocument"
+    },
+    {
+        "name": "variation of velocity(due to pressure)",
+        "code": "0112-2---62720#UAD229",
+        "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/839c7c8caa9088e3c125835a00335214?OpenDocument"
+    },
+    {
+        "name": "variation of velocity (due to temperature)",
+        "code": "0112-2---62720#UAD230",
+        "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/5cd9fc6d96825048c125835a0033520b?OpenDocument"
+    },
+    {
+        "name": "variation of voltage (due to pressure)",
+        "code": "0112-2---62720#UAD231",
+        "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/856709fab945d567c125835a0033520e?OpenDocument"
+    },
+    {
+        "name": "variation of volume (due to pressure)",
+        "code": "0112-2---62720#UAD232",
+        "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/17c703a82e52dd5fc125835a00335209?OpenDocument"
+    },
+    {
+        "name": "variation of volume (due to temperature)",
+        "code": "0112-2---62720#UAD233",
+        "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/defb2b8ac5b8af1fc125835a00335212?OpenDocument"
+    },
+    {
+        "name": "variation of volume flow rate (due to pressure)",
+        "code": "0112-2---62720#UAD234",
+        "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/08445f7c8f94caabc125835a003351ae?OpenDocument"
+    },
+    {
+        "name": "variation of volume flow rate (due to temperature)",
+        "code": "0112-2---62720#UAD235",
+        "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/824914ac5d7f4e7fc125835a003351f5?OpenDocument"
+    },
+    {
+        "name": "velocity",
+        "code": "0112-2---62720#UAD236",
+        "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/efd2244fdd852ebfc125835a003351fb?OpenDocument"
+    },
+    {
+        "name": "voltage",
+        "code": "0112-2---62720#UAD237",
+        "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/0841476fb9704d42c125835a003351f7?OpenDocument"
+    },
+    {
+        "name": "volume",
+        "code": "0112-2---62720#UAD238",
+        "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/57ff554794d0c241c125835a003351a2?OpenDocument"
+    },
+    {
+        "name": "volume flow rate",
+        "code": "0112-2---62720#UAD239",
+        "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/acd658b8b0814f5ec125835a00335205?OpenDocument"
+    },
+    {
+        "name": "volume fraction",
+        "code": "0112-2---62720#UAD240",
+        "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/d7dd430ba316096bc125835a003351ff?OpenDocument"
+    },
+    {
+        "name": "volumic bit density",
+        "code": "0112-2---62720#UAD241",
+        "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/e970b1741c862fb1c125835a003351fd?OpenDocument"
+    },
+    {
+        "name": "volumic electric charge",
+        "code": "0112-2---62720#UAD242",
+        "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/c2a7aa5932c23cbec125835a003351ef?OpenDocument"
+    },
+    {
+        "name": "volumic output power",
+        "code": "0112-2---62720#UAD243",
+        "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/269e2b310e19aee0c125835a003351f1?OpenDocument"
+    },
+    {
+        "name": "water vapour permeability",
+        "code": "0112-2---62720#UAD244",
+        "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/26b52621de5bed27c125835a003351eb?OpenDocument"
+    },
+    {
+        "name": "dots per inch",
+        "code": "0112-2---62720#UAD255",
+        "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/ae1966b747e78398c125835a003351ed?OpenDocument"
+    },
+    {
+        "name": "Fahrenheit temperature",
+        "code": "0112-2---62720#UAD263",
+        "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/cd5758b2e8c206bac125835a003351e9?OpenDocument"
+    },
+    {
+        "name": "fluidity",
+        "code": "0112-2---62720#UAD264",
+        "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/ab720c2be90607a4c125835a003353c1?OpenDocument"
+    },
+    {
+        "name": "mass stopping power",
+        "code": "0112-2---62720#UAD290",
+        "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/c9751c138d9d8c58c125835a003351f9?OpenDocument"
+    },
+    {
+        "name": "picture element",
+        "code": "0112-2---62720#UAD299",
+        "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/0e529eb93c1e5068c125835a003351ce?OpenDocument"
+    },
+    {
+        "name": "Rankine temperature",
+        "code": "0112-2---62720#UAD308",
+        "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/61ac0e68f1d34f89c125835a003351f3?OpenDocument"
+    },
+    {
+        "name": "floating point calculation capability",
+        "code": "0112-2---62720#UAD363",
+        "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/004161ae67bf6311c125835a003353c7?OpenDocument"
+    },
+    {
+        "name": "Mach number",
+        "code": "0112-2---62720#UAD364",
+        "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/ab25f84ada7e42f4c125835a0033519b?OpenDocument"
+    },
+    {
+        "name": "earthquake magnitude",
+        "code": "0112-2---62720#UAD365",
+        "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/10000cb3f8465dacc125835a0033519c?OpenDocument"
+    },
+    {
+        "name": "sun protection factor of a product",
+        "code": "0112-2---62720#UAD366",
+        "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/37a7ac484b6da99ec125835a003353bc?OpenDocument"
+    },
+    {
+        "name": "catalytic activity",
+        "code": "0112-2---62720#UAD367",
+        "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/e9c48509eb83dca2c125835a0033519d?OpenDocument"
+    },
+    {
+        "name": "amount of biologically active substance",
+        "code": "0112-2---62720#UAD370",
+        "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/d2c48b057173ede5c125835a003351e5?OpenDocument"
+    },
+    {
+        "name": "spin quantum number",
+        "code": "0112-2---62720#UAD371",
+        "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/1f978a2336d38c8dc125835a003353bf?OpenDocument"
+    },
+    {
+        "name": "absolute typographic measurement",
+        "code": "0112-2---62720#UAD372",
+        "url": "/cdd/iec61360/iec61360.nsf/d8529e90921d5a2fc12579d40042db82/2bcfb3f68b0b763ec125835a003351e7?OpenDocument"
+    }
+]

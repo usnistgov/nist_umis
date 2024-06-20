@@ -78,3 +78,7 @@ a:active {text-decoration: none;}
 .to {
     text-align: right;
 }
+
+.item-sm {
+    padding: 2px 16px;
+}
