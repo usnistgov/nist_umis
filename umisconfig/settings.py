@@ -10,7 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.1/ref/settings/
 """
 import os
-#from .localsettings import *
+from .localsettings import *
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'constants',
     'umisconfig',
     'charts',
+    'quantitysystems',
 ]
 
 MIDDLEWARE = [
@@ -84,26 +85,26 @@ WSGI_APPLICATION = 'umisconfig.wsgi.application'
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
 DATABASES = {
+    # 'default': {
+    #     'ENGINE': 'django.db.backends.mysql',
+    #     'NAME': os.environ.get('MYSQL_DATABASE'),
+    #     'USER': os.environ.get('MYSQL_USER'),
+    #     'PASSWORD': os.environ.get('MYSQL_PASSWORD'),
+    #     'HOST': os.environ.get('MYSQL_DATABASE_HOST'),
+    #     'PORT': os.environ.get('MYSQL_DATABASE_PORT'),
+    #     'OPTIONS': {
+    #         'init_command': "SET sql_mode='STRICT_TRANS_TABLES'"
+    #     }
+    # },
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': os.environ.get('MYSQL_DATABASE'),
-        'USER': os.environ.get('MYSQL_USER'),
-        'PASSWORD': os.environ.get('MYSQL_PASSWORD'),
-        'HOST': os.environ.get('MYSQL_DATABASE_HOST'),
-        'PORT': os.environ.get('MYSQL_DATABASE_PORT'),
+        'NAME': mysqltabl,
+        'USER': mysqluser,
+        'PASSWORD': mysqlpass,
+        'HOST': mysqlhost,
+        'PORT': mysqlport,
         'OPTIONS': {
-            'init_command': "SET sql_mode='STRICT_TRANS_TABLES'"
-        }
-    },
-    'domains':{
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': os.environ.get('MYSQL_DATABASE'),
-        'USER': os.environ.get('MYSQL_USER'),
-        'PASSWORD': os.environ.get('MYSQL_PASSWORD'),
-        'HOST': os.environ.get('MYSQL_DATABASE_HOST'),
-        'PORT': os.environ.get('MYSQL_DATABASE_PORT'),
-        'OPTIONS': {
-            'init_command': "SET sql_mode='STRICT_TRANS_TABLES'"
+            'charset': "utf8mb4",
         }
     }
 }
