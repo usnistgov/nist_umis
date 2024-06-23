@@ -24,7 +24,7 @@ def getrepsystemdata(rsid):
     # get raw data file and store in rawdata field
     rsfile = None
     if repsys.fileformat == 'sparql':
-        raw = getwikidata()
+        raw = getwikidata()  # json returned
     else:
         rsfile = requests.get(repsys.url)
         raw = rsfile.text
@@ -170,12 +170,13 @@ def getwikidata():
     rsid = 7
     # check if the data file has been updated today or not
     query = """
-    SELECT ?unit ?unitLabel ?subclass1Label ?subclass2Label ?iev ?igb ?ncit ?qudt ?ucum ?unece ?uom2 ?wolf ?wur
+    SELECT ?unit ?uname ?quant ?qname ?iev ?igb ?ncit ?qudt ?ucum ?unece ?uom2 ?wolf ?wur
     WHERE 
     {
-      ?subclass1 wdt:P279 wd:Q47574 .
-      ?subclass2 wdt:P279 ?subclass1 .
-      { ?unit wdt:P31 ?subclass1 . } UNION { ?unit wdt:P31 ?subclass2 . }
+      ?quant wdt:P279+ wd:Q47574 ;
+             rdfs:label ?qname .
+      ?unit wdt:P31 ?quant ;
+            rdfs:label ?uname
       OPTIONAL { ?unit wdt:P1748 ?ncit }
       OPTIONAL { ?unit wdt:P2892 ?umls }
       OPTIONAL { ?unit wdt:P2968 ?qudt }
@@ -186,25 +187,23 @@ def getwikidata():
       OPTIONAL { ?unit wdt:P7825 ?ucum }
       OPTIONAL { ?unit wdt:P8769 ?uom2 }
       OPTIONAL { ?unit wdt:P8855 ?iev }
-      FILTER(?subclass1 != wd:Q8142)
-      FILTER(?subclass1 != wd:Q82047057)
-      FILTER(?subclass1 != wd:Q83155724)
-      FILTER(?subclass1 != wd:Q1499468)
-      FILTER(?subclass1 != wd:Q11639620)
-      FILTER(?subclass2 != wd:Q8142)
-      FILTER(?subclass2 != wd:Q82047057)
-      FILTER(?subclass2 != wd:Q83155724)
-      FILTER(?subclass2 != wd:Q28783456)
-      FILTER(?subclass2 != wd:Q3622170)
-      FILTER(?subclass2 != wd:Q28805608)
-      FILTER(strlen(?ncit) != 0 || strlen(?umls) != 0 || strlen(?qudt) != 0 || strlen(?wur) != 0 || strlen(?igb) != 0 ||
-       strlen(?unece) != 0 || strlen(?wolf) != 0 || strlen(?ucum) != 0 || strlen(?uom2) != 0 || strlen(?iev) != 0)
-      SERVICE wikibase:label { bd:serviceParam wikibase:language "[AUTO_LANGUAGE],en". }
+      FILTER(?quant != wd:Q8142)
+      FILTER(?quant != wd:Q82047057)
+      FILTER(?quant != wd:Q83155724)
+      FILTER(?quant != wd:Q1499468)
+      FILTER(?quant != wd:Q11639620)
+      FILTER(?quant != wd:Q28783456)
+      FILTER(?quant != wd:Q3622170)
+      FILTER(?quant != wd:Q28805608)
+      FILTER(STRSTARTS(?qname, "unit of ")) 
+      FILTER(!REGEX(?uname, "Q[0-9]+", "i"))
+      FILTER(LANG(?uname) = "en")
     }
-    ORDER BY ?unitLabel"""
+    ORDER BY ?uname"""
     # search wikidata sparql query
-    wdjsn = return_sparql_query_results(query)
+    wd = return_sparql_query_results(query)
     # return data
+    wdjsn = json.dumps(wd)
     return wdjsn
 
 
