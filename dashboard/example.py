@@ -57,24 +57,11 @@ if choice == 'runwd':
     # load current file
     rsid = 7
     data = getrepsystemdata(rsid)
-
+    hits = json.loads(data)
     # analyze data to remove entries that have SI unit (or equivalent) as quantity
-    hits = []
-    print(len(data['results']['bindings']))
-    for hit in data['results']['bindings']:
-        if hit['subclass1Label']['value'].startswith("unit of "):
-            hits.append(hit)
-    print(len(hits))
-    exit()
-
-    for hit in hits:
+    for hit in hits['results']['bindings']:
         # check the hits for any that are not useful
-        if "http://www.wikidata.org/entity/Q" not in hit['unit']['value']:
-            continue
-        elif hit['unitLabel']['value'].startswith('Q'):
-            continue
-        else:
-            print(hit['unit']['value'])
+        print(hit['unit']['value'])
 
         quant = None
         # for unitless only
