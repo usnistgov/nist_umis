@@ -3,7 +3,7 @@ from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
 from units.models import Repsystems
 from umisconfig.settings import *
-from repsystems.scripts import *
+# from repsystems.scripts import *
 from datetime import datetime
 import requests
 import mimetypes
@@ -52,6 +52,14 @@ def getrepsysunits(request, rsid):
     scrape the data for this repsystem and store it (as json) in the jsondata field in the repsystems table
     format of data for each unit should be
     """
+    print(rsid)  # needed?
+    exit()
+
+
+def view(request):
+    # get data about the different repsystems
+    reps = Repsystems.objects.all()
+    return render(request, "../templates/dashboard/view.html", {'reps': reps})
 
 
 def overview(request):

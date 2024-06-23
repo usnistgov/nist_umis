@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% block title %} UMIS Dashboard {% endblock %}
+{% block header %} UMIS Dashboard {% endblock %}
+{% block content %}
+    <h4>UMIS Dashboard</h4>
+    <div class="row">
+        <div class="col-12 col-md-10 offset-1">
+            <div class="card card-success">
+                <div class="card-header">
+                    <h5 class="card-title mb-0">Representation Systems</h5>
+                </div>
+                <div class="list-group card-responsive">
+                    {% for rep in reps %}
+                        <li class="list-group-item item">{{ rep.name }} - Units: {{ rep.representations.count }}</li>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
