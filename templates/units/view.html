@@ -34,9 +34,9 @@
                     {% for strng, data in reps.items %}
                         {% for sys in data.systems %}
                             {% if sys.id == 25 and sys.url_ep == 'yes' %} <!-- 25 is the reference point -->
-                                <div class="alert alert-danger col-12 mt-3" role="alert">
+                                <div class="alert alert-success col-8 offset-2 mt-3" role="alert">
                                     <h5>Definitive Reference</h5>
-                                    The BIPM SI Reference Point URL for this SI Unit of Measurement is:
+                                    The BIPM SI Reference Point definition of this SI Unit is at:
                                         <a href="{{ sys.path }}{{ strng }}" target="_blank">{{ sys.path }}{{ unit.name }}</a><span class='bi bi-link-45deg'></span>
                                 </div>
                             {% endif %}
