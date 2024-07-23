@@ -72,10 +72,11 @@ def alldata(request, cnid):
 
 
 # TODO: create image file from latex string on the fly
-def symbol(request, cnid):
-    sym = Constants.objects.filter(id=cnid).values('symbol')[0]
-    latex = sym['symbol'].replace('$', '')
-    ipath = STATIC_URL + 'symbols/constant' + cnid + '.png'
-    pnglatex(r"[" + latex + "]", ipath)
-    image_data = open(ipath, "rb").read()
-    return HttpResponse(image_data, mimetype="image/png")
+# TODO: this is a secrutoy risk as is
+# def symbol(request, cnid):
+#     sym = Constants.objects.filter(id=cnid).values('symbol')[0]
+#     latex = sym['symbol'].replace('$', '')
+#     ipath = STATIC_URL + 'symbols/constant' + cnid + '.png'
+#     pnglatex(r"[" + latex + "]", ipath)
+#     image_data = open(ipath, "rb").read()
+#     return HttpResponse(image_data, mimetype="image/png")
