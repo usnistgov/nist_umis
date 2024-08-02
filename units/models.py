@@ -322,3 +322,51 @@ class EntitiesQuantities(models.Model):
         managed = False
         db_table = 'entities_quantities'
         db_table_comment = 'Table of quantities associated to unit entities'
+
+
+class Wdclasses(models.Model):
+    name = models.CharField(max_length=128, blank=True, null=True)
+    url = models.CharField(max_length=128, blank=True, null=True)
+    isq = models.CharField(max_length=128, blank=True, null=True)
+    source = models.CharField(max_length=128, blank=True, null=True)
+    section = models.CharField(max_length=16, blank=True, null=True)
+    quant = models.CharField(max_length=128, blank=True, null=True)
+    quantity = models.ForeignKey(Units, on_delete=models.PROTECT, db_column='quantity_id')
+    updated = models.DateTimeField(blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'wdclasses'
+        db_table_comment = 'Table of Wikidata Unit Classes'
+
+
+class Wdunits(models.Model):
+    wdclass = models.ForeignKey(Wdclasses, on_delete=models.PROTECT, db_column='wdclass_id')
+    cls = models.CharField(db_column='class', max_length=64, blank=True, null=True)  # Field renamed reserved word.
+    unit = models.CharField(max_length=64, blank=True, null=True)
+    quant = models.CharField(max_length=32, blank=True, null=True)
+    factor = models.CharField(max_length=256, blank=True, null=True)
+    curl = models.CharField(max_length=128, blank=True, null=True)
+    uurl = models.CharField(max_length=128, blank=True, null=True)
+    qurl = models.CharField(max_length=128, blank=True, null=True)
+    iev = models.CharField(max_length=128, blank=True, null=True)
+    igb = models.CharField(max_length=128, blank=True, null=True)
+    ncit = models.CharField(max_length=128, blank=True, null=True)
+    qudt = models.CharField(max_length=128, blank=True, null=True)
+    siux = models.CharField(max_length=128, blank=True, null=True)
+    sirp = models.CharField(max_length=128, blank=True, null=True)
+    ucum = models.CharField(max_length=128, blank=True, null=True)
+    unece = models.CharField(max_length=128, blank=True, null=True)
+    uom = models.CharField(max_length=128, blank=True, null=True)
+    wolf = models.CharField(max_length=128, blank=True, null=True)
+    wur = models.CharField(max_length=128, blank=True, null=True)
+    status = models.CharField(max_length=7, blank=True, null=True)
+    found = models.CharField(max_length=3, blank=True, null=True)
+    added = models.DateField(blank=True, null=True)
+    comment = models.CharField(max_length=256, blank=True, null=True)
+    updated = models.DateTimeField(blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'wdunits'
+        db_table_comment = 'Table of unit representations on Wikidata'

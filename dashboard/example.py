@@ -1,16 +1,20 @@
 # import json
+import json
 import os
 import django
+import re
 
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "umisconfig.settings")
 django.setup()
 from dashboard.repsys_ingest import *
-from datetime import date
+from datetime import date, datetime
 from units.functions import *
+from wdfunctions import *
 
 
-choice = 'runwd'
+choice = 'wdc'
 
+local = timezone("America/New_York")
 
 # checked 6/17/24 (List of Units not available, falling back to files from 4/25/23)
 if choice == 'runiec':
@@ -58,85 +62,55 @@ if choice == 'runwd':
     rsid = 7
     data = getrepsystemdata(rsid)
     hits = json.loads(data)
+    flds = ['iev', 'igb', 'ncit', 'qudt', 'ucum', 'unece', 'uom', 'wolf', 'wur']
     # analyze data to remove entries that have SI unit (or equivalent) as quantity
+    cnt = 0
     for hit in hits['results']['bindings']:
-        # check the hits for any that are not useful
-        print(hit['unit']['value'])
-
-        quant = None
-        # for unitless only
-        if hit['unitLabel']['value'] == "1":
-            quant = "dimensionless"
-
-        if not quant:
-            quant = hit['subclass1Label']['value'].replace("unit of ", "")
-
-            if hit['subclass2Label']['value'].find("unit of ") != -1:
-                # if this is true it is a more specific quantity (e.g. mass conc., amount of substance conc.)
-                quant = hit['subclass2Label']['value'].replace("unit of ", "")
-
-        wdid = hit['unit']['value'].replace("http://www.wikidata.org/entity/", "")
-        repsyss = []
-        if 'qudt' in hit:
-            repsyss.append({'name': "qudt", 'rsid': 10})
-        if 'ncit' in hit:
-            repsyss.append({'name': "ncit", 'rsid': 9})
-        if 'ucum' in hit:
-            repsyss.append({'name': "ucum", 'rsid': 2})
-        if 'unece' in hit:
-            repsyss.append({'name': "unece", 'rsid': 6})
-        if 'uom2' in hit:
-            repsyss.append({'name': "uom2", 'rsid': 13})
-        if 'wolf' in hit:
-            repsyss.append({'name': "wolf", 'rsid': 20})
-        if 'iev' in hit:
-            repsyss.append({'name': "iev", 'rsid': 21})
-        if 'wur' in hit:
-            repsyss.append({'name': "wur", 'rsid': 23})
-        if 'igb' in hit:
-            repsyss.append({'name': "igb", 'rsid': 3})
-
-        if repsyss:
-            for repsys in repsyss:
-                ent, created = Entities.objects.get_or_create(
-                    name=hit['unitLabel']['value'],
-                    repsys=repsys['name'],
-                    repsystem_id=repsys['rsid'],
-                    quantity=quant,
-                    value=hit[repsys['name']]['value'],
-                    source='wikidata'
-                )
-                if ent.migrated != 'yes':
-                    ent.migrated = 'no'
-                ent.lastcheck = date.today()
-                ent.updated = getds()
-                ent.save()
-
-                if created:
-                    print("added '" + ent.value + "' (" + str(ent.id) + ")")
-                else:
-                    print("found '" + ent.value + "' (" + str(ent.id) + ")")
-
-            # add wikidata entry
-            ent, created = Entities.objects.get_or_create(
-                name=hit['unitLabel']['value'],
-                repsys='wikidata',
-                repsystem_id=7,
-                quantity=quant,
-                value=wdid,
-                source='wikidata')
-            if ent.migrated != 'yes':
-                ent.migrated = 'no'
-            ent.lastcheck = date.today()
-            ent.updated = getds()
-            ent.save()
-
-            if created:
-                print("added '" + ent.value + "' (" + str(ent.id) + ")")
-            else:
-                print("found '" + ent.value + "' (" + str(ent.id) + ")")
+        # print(hit)
+        # exit()
+        # add wikidata entry
+        found = Wdunits.objects.filter(uurl__exact=hit['u']['value'])
+        if not found:
+            keys = hit.keys()
+            # print(keys)
+            for fld in flds:
+                if fld not in keys:
+                    hit.update({fld: {"value": None}})
+            wu = Wdunits(
+                cls=hit['cls']['value'],
+                unit=hit['unit']['value'],
+                quantity=hit['quant']['value'],
+                curl=hit['c']['value'],
+                uurl=hit['u']['value'],
+                qurl=hit['q']['value'],
+                iev=hit['iev']['value'],
+                igb=hit['igb']['value'],
+                ncit=hit['ncit']['value'],
+                qudt=hit['qudt']['value'],
+                ucum=hit['ucum']['value'],
+                unece=hit['unece']['value'],
+                uom=hit['uom2']['value'],
+                wolf=hit['wolf']['value'],
+                wur=hit['wur']['value'],
+                added=date.today(),
+                updated=local.localize(datetime.now())
+            )
+            wu.save()
+            print("added '" + wu.unit + "' (" + str(wu.id) + ")")
+            cnt += 1
+            if cnt == 10:
+                exit()
         else:
-            continue
+            # check for data and add if the field is empty
+            f = found[0]
+            for fld in flds:
+                if fld in hit.keys() and getattr(f, fld) is None:
+                    setattr(f, fld, hit.get(fld)['value'])
+                    f.save()
+                    print("field " + fld + " updated for unit " + f.unit)
+                    exit()
+            print("found unit '" + f.unit + "'")
+        continue
 
 # checked 6/11/24
 if choice == 'runqudt':
@@ -578,3 +552,161 @@ if choice == 'runucum':
             print("added '" + str(ent.value) + "' (" + str(ent.id) + ")")
         else:
             print("found '" + str(ent.value) + "' (" + str(ent.id) + ")")
+
+
+# get list of unit of measurement subclasses on Wikidata
+if choice == 'wdc':
+    classes = wdclasses()  # call class to update if working on wikidata OR download from wd and parse below
+
+    # classes = None
+    # file = f'umis_quants_query_072524.json'
+    # if os.path.exists(os.path.join(BASE_DIR, STATIC_URL, file)):
+    #     # read in the file
+    #     with open(os.path.join(BASE_DIR, STATIC_URL, file), 'r') as f:
+    #         tmp = f.read()
+    #         classes = json.loads(tmp)
+    #         f.close()
+
+    for cls in classes:
+        if not isinstance(cls['class'], str):
+            cls['class'] = cls['class']['value']
+        if not isinstance(cls['c'], str):
+            cls['c'] = cls['c']['value']
+        if not isinstance(cls['isq'], str):
+            cls['isq'] = cls['isq']['value']
+        if not isinstance(cls['src'], str):
+            cls['src'] = cls['src']['value']
+        if not isinstance(cls['sect'], str):
+            cls['sect'] = cls['sect']['value']
+        if not isinstance(cls['quant'], str):
+            cls['quant'] = cls['quant']['value']
+
+        tmp = re.findall(r'alttext="\{(.+?)}"', cls['isq'])
+        isq = (tmp[0].replace("\\displaystyle", '').replace("\\mathsf", '').replace(' ', '').
+               replace('{{', '').replace('}}', ''))
+        cls['isq'] = isq
+        # ignore classes that have multiple related quantities
+        if cls['class'] in ['unit of molar energy']:
+            continue
+        # get quantity ID
+        quant = Quantities.objects.filter(iso_item=cls['sect'])
+        qid = None
+        if quant:
+            q = quant[0]
+            qid = q.id
+        else:
+            print("can't find quantity with section " + cls['sect]'])
+            exit()
+        # add or update Wdclasses table
+        c, created = Wdclasses.objects.get_or_create(
+            name=cls['class'],
+            url=cls['c'],
+            isq=cls['isq'],
+            source=cls['src'],
+            section=cls['sect'],
+            quant=cls['quant'],
+            quantity_id=qid
+        )
+        c.save()
+        if created:
+            c.updated = local.localize(datetime.now())
+            c.save()
+            print("added class '" + str(c.name) + "'")
+        else:
+            if not c.quantity_id:
+                quant = Quantities.objects.filter(iso_item=cls['sect'])
+                if quant:
+                    q = quant[0]
+                    c.quantity_id = q.id
+                    c.save()
+                else:
+                    print("can't find quantity with section " + cls['sect]'])
+                    exit()
+                print("updated class '" + str(c.name) + "'")
+            else:
+                print("found class '" + str(c.name) + "'")
+    exit()
+
+# get list of unit of measurement subclasses on Wikidata
+if choice == 'wdu':
+    # units = wdunits()  # call class to update wdunits if working on wikidata OR download from wd and parse below
+
+    units = None
+    file = f'umis_sparql_query_073024.json'
+    if os.path.exists(os.path.join(BASE_DIR, STATIC_URL, file)):
+        # read in the file
+        with open(os.path.join(BASE_DIR, STATIC_URL, file), 'r') as f:
+            tmp = f.read()
+            units = json.loads(tmp)
+            f.close()
+
+    cnt = 0
+    for unit in units:
+        # print(unit)
+        # exit()
+        # add/update wikidata entry
+        flds = ['curl', 'cls', 'uurl', 'unit', 'qurl', 'quant', 'factor', 'iev', 'igb', 'ncit',
+                'qudt', 'ucum', 'unece', 'uom', 'wolf', 'wur']
+        if not isinstance(unit['uurl'], str):
+            found = Wdunits.objects.filter(uurl__exact=unit['uurl']['value'])
+        else:
+            found = Wdunits.objects.filter(uurl__exact=unit['uurl'])
+        if not found:
+            # convert fields to be consistent across sources
+            keys = unit.keys()
+            for fld in flds:
+                if fld not in keys:
+                    # only via qwikidata are fields not set
+                    unit.update({fld:  None})
+                if not isinstance(fld, str):
+                    setattr(unit, fld, getattr(unit, fld))
+            # print(unit)
+            # exit()
+
+            wu = Wdunits(
+                cls=unit['cls'],
+                unit=unit['unit'],
+                quant=unit['quant'],
+                factor=unit['factor'],
+                curl=unit['curl'],
+                uurl=unit['uurl'],
+                qurl=unit['qurl'],
+                iev=unit['iev'],
+                igb=unit['igb'],
+                ncit=unit['ncit'],
+                qudt=unit['qudt'],
+                ucum=unit['ucum'],
+                unece=unit['unece'],
+                uom=unit['uom'],
+                wolf=unit['wolf'],
+                wur=unit['wur'],
+                added=date.today(),
+                updated=local.localize(datetime.now())
+            )
+            cls = Wdclasses.objects.filter(url__exact=unit['curl'])
+            if cls:
+                wu.wdclass_id = cls[0].id
+            wu.save()
+            print("added '" + wu.unit + "' (" + str(wu.id) + ")")
+            cnt += 1
+            if cnt == 300:
+                exit()
+        else:
+            # check for unit representation data and add if the field is empty
+            f = found[0]
+            # print(unit.keys())
+            # print(f.__dict__)
+            # exit()
+            for fld in flds:
+                if fld in unit.keys() and getattr(f, fld) is None:
+                    setattr(f, fld, unit.get(fld))
+                    f.save()
+                    print("field " + fld + " updated for unit " + f.unit)
+            # check for unit class being set
+            if f.wdclass_id is None:
+                cls = Wdclasses.objects.filter(url__exact=unit['curl'])
+                if cls:
+                    f.wdclass_id = cls[0].id
+                    f.save()
+                    print("added class '" + str(f.wdclass_id) + "'")
+            print("found unit '" + f.unit + "'")

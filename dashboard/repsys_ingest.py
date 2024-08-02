@@ -170,36 +170,37 @@ def getwikidata():
     rsid = 7
     # check if the data file has been updated today or not
     query = """
-    SELECT ?unit ?uname ?quant ?qname ?iev ?igb ?ncit ?qudt ?ucum ?unece ?uom2 ?wolf ?wur
-    WHERE 
-    {
-      ?quant wdt:P279+ wd:Q47574 ;
-             rdfs:label ?qname .
-      ?unit wdt:P31 ?quant ;
-            rdfs:label ?uname
-      OPTIONAL { ?unit wdt:P1748 ?ncit }
-      OPTIONAL { ?unit wdt:P2892 ?umls }
-      OPTIONAL { ?unit wdt:P2968 ?qudt }
-      OPTIONAL { ?unit wdt:P3328 ?wur }
-      OPTIONAL { ?unit wdt:P4732 ?igb }
-      OPTIONAL { ?unit wdt:P6512 ?unece }
-      OPTIONAL { ?unit wdt:P7007 ?wolf }
-      OPTIONAL { ?unit wdt:P7825 ?ucum }
-      OPTIONAL { ?unit wdt:P8769 ?uom2 }
-      OPTIONAL { ?unit wdt:P8855 ?iev }
-      FILTER(?quant != wd:Q8142)
-      FILTER(?quant != wd:Q82047057)
-      FILTER(?quant != wd:Q83155724)
-      FILTER(?quant != wd:Q1499468)
-      FILTER(?quant != wd:Q11639620)
-      FILTER(?quant != wd:Q28783456)
-      FILTER(?quant != wd:Q3622170)
-      FILTER(?quant != wd:Q28805608)
-      FILTER(STRSTARTS(?qname, "unit of ")) 
-      FILTER(!REGEX(?uname, "Q[0-9]+", "i"))
-      FILTER(LANG(?uname) = "en")
+    SELECT ?c ?cls ?u ?unit ?q ?quant ?factor ?iev ?igb ?ncit ?qudt ?ucum ?unece ?uom2 ?wolf ?wur WHERE  { 
+      ?c wdt:P279* wd:Q47574 ;
+             rdfs:label ?cls .
+      ?u wdt:P31 ?c ;
+            rdfs:label ?unit .
+      OPTIONAL { ?u wdt:P111 ?q . ?q rdfs:label ?quant . }
+      OPTIONAL {
+        ?u p:P2370 ?node .
+        ?node psv:P2370 ?f .
+        ?f wikibase:quantityAmount ?fstr .  # conversion factor
+        BIND(SUBSTR(?fstr, 1, 50) as ?factor)
+      }
+      OPTIONAL { ?u wdt:P1748 ?ncit }  # unit representations
+      OPTIONAL { ?u wdt:P2892 ?umls }
+      OPTIONAL { ?u wdt:P2968 ?qudt }
+      OPTIONAL { ?u wdt:P3328 ?wur }
+      OPTIONAL { ?u wdt:P4732 ?igb }
+      OPTIONAL { ?u wdt:P6512 ?unece }
+      OPTIONAL { ?u wdt:P7007 ?wolf }
+      OPTIONAL { ?u wdt:P7825 ?ucum }
+      OPTIONAL { ?u wdt:P8769 ?uom2 }
+      OPTIONAL { ?u wdt:P8855 ?iev }
+      FILTER(?q NOT IN (wd:Q8142, wd:Q82047057, wd:Q83155724, wd:Q1499468, wd:Q11639620, wd:Q28783456, wd:Q3622170, wd:Q28805608))  # removes currency units
+      FILTER(STRSTARTS(?cls, "unit of ")) 
+      FILTER(!REGEX(?unit, "Q[0-9]+", "i"))
+      FILTER(LANG(?cls) = "en")
+      FILTER(LANG(?unit) = "en")
+      FILTER(LANG(?quant) = "en")
     }
-    ORDER BY ?uname"""
+    ORDER BY ?quant
+    """
     # search wikidata sparql query
     wd = return_sparql_query_results(query)
     # return data
