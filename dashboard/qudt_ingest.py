@@ -13,7 +13,7 @@ from pytz import timezone
 jax = timezone("America/New_York")
 
 
-def qudtingest():
+def ingestunits():
     """ download the latest qudt ttl file and load into the database """
     url = 'https://raw.githubusercontent.com/qudt/qudt-public-repo/main/vocab/unit/VOCAB_QUDT-UNITS-ALL-v2.1.ttl'
     resp = requests.get(url)
@@ -120,11 +120,14 @@ def qudtingest():
                     # update join table
                     joinusqu(found, syss, usyss, ucnt, ns, abbs)
                     # check for joins that need to be removed
-                    if ucnt == 0:
+                    if ucnt == 0 and abbs:
                         slist = []
                         for sys in syss:
                             slist.append(sys.replace(ns, ''))
                         diffs = list(set(syss) - set(slist))
+                        print(diffs)
+                        print("write code!")
+                        exit()
             # check other fields
             if not found.siexact and hit.siex:
                 # siExactMatch 43
@@ -271,9 +274,55 @@ def qudtingest():
             exit()
 
 
+def ingestkinds():
+    url = ('https://raw.githubusercontent.com/qudt/qudt-public-repo/main/vocab/quantitykinds/VOCAB_QUDT-QUANTITY-KINDS'
+           '-ALL-v2.1.ttl')
+    resp = requests.get(url)
+    rdf = resp.text
+    g = Graph()
+    g.parse(rdf.encode("utf-8")).serialize(format="json-ld")
+    qudtkind = """
+    PREFIX qk: <http://qudt.org/vocab/quantitykind/>
+    PREFIX qudt: <http://qudt.org/schema/qudt/>
+    PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+    PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+    PREFIX qudt: <http://qudt.org/schema/qudt/>
+    PREFIX qk: <http://qudt.org/vocab/quantitykind/>
+    PREFIX dcterms: <http://purl.org/dc/terms/>
+    PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+    PREFIX qkdv: <http://qudt.org/vocab/dimensionvector/>
+
+    SELECT  ?name ?vec ?abbr ?cgsd ?impd ?isod ?siud ?uscd ?dep ?xact ?texd ?texs 
+            (group_concat(DISTINCT ?unit) as ?units)
+                    WHERE {
+                    ?kind   rdf:type qudt:QuantityKind;
+                            rdfs:label ?name .
+                    OPTIONAL { ?kind qudt:abbreviation ?abbr . }
+                    OPTIONAL { ?kind qudt:applicableUnit|qudt:applicableSIUnit ?unit . }
+                    OPTIONAL { ?kind qudt:baseCGSUnitDimensions ?cgsd . }
+                    OPTIONAL { ?kind qudt:baseImperialUnitDimensions ?impd . }
+                    OPTIONAL { ?kind qudt:baseISOUnitDimensions ?isod . }
+                    OPTIONAL { ?kind qudt:baseSIUnitDimensions ?siud . }
+                    OPTIONAL { ?kind qudt:baseUSCustomaryUnitDimensions ?uscd . }
+                    OPTIONAL { ?kind qudt:deprecated ?dep . }
+                    OPTIONAL { ?kind qudt:exactMatch ?xact . }
+                    OPTIONAL { ?kind qudt:hasDimensionVector ?vec . }
+                    OPTIONAL { ?kind qudt:latexDefinition ?texd . }
+                    OPTIONAL { ?kind qudt:latexSymbol ?texs . }
+                    FILTER(LANG(?name) = "en")
+                }
+                GROUP BY ?name ?vec ?abbr ?cgsd ?impd ?isod ?siud ?uscd ?dep ?xact ?texd ?texs
+    """
+    kinds = g.query(qudtkind)
+    for hit in kinds:
+        print(hit)
+        exit()
+
+
 def joinusqu(unit, syss, usyss, cnt, ns, abbs):
     for sys in syss:
         abb = sys.replace(ns, '')
+        print(abbs)
         if abbs:
             if abb in abbs:  # skip if present
                 continue
@@ -296,4 +345,4 @@ def joinqkqu(unit, kinds, qkinds, cnt, ns, codes):
     return
 
 
-qudtingest()
+ingestkinds()
