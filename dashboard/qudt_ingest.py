@@ -292,26 +292,38 @@ def ingestkinds():
     PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
     PREFIX qkdv: <http://qudt.org/vocab/dimensionvector/>
 
-    SELECT  ?name ?vec ?abbr ?cgsd ?impd ?isod ?siud ?uscd ?dep ?xact ?texd ?texs 
-            (group_concat(DISTINCT ?unit) as ?units)
-                    WHERE {
-                    ?kind   rdf:type qudt:QuantityKind;
-                            rdfs:label ?name .
-                    OPTIONAL { ?kind qudt:abbreviation ?abbr . }
-                    OPTIONAL { ?kind qudt:applicableUnit|qudt:applicableSIUnit ?unit . }
-                    OPTIONAL { ?kind qudt:baseCGSUnitDimensions ?cgsd . }
-                    OPTIONAL { ?kind qudt:baseImperialUnitDimensions ?impd . }
-                    OPTIONAL { ?kind qudt:baseISOUnitDimensions ?isod . }
-                    OPTIONAL { ?kind qudt:baseSIUnitDimensions ?siud . }
-                    OPTIONAL { ?kind qudt:baseUSCustomaryUnitDimensions ?uscd . }
-                    OPTIONAL { ?kind qudt:deprecated ?dep . }
-                    OPTIONAL { ?kind qudt:exactMatch ?xact . }
-                    OPTIONAL { ?kind qudt:hasDimensionVector ?vec . }
-                    OPTIONAL { ?kind qudt:latexDefinition ?texd . }
-                    OPTIONAL { ?kind qudt:latexSymbol ?texs . }
-                    FILTER(LANG(?name) = "en")
-                }
-                GROUP BY ?name ?vec ?abbr ?cgsd ?impd ?isod ?siud ?uscd ?dep ?xact ?texd ?texs
+    SELECT  ?name ?vec ?abbr ?cgsd ?impd ?isod ?siud ?uscd ?dep ?xact ?texd ?texs ?text ?siem ?sym ?cmmt ?brdr
+            (group_concat(DISTINCT(?unt)) as ?unts)
+            (IF(?nrm = Null ) as ?nrms)
+            WHERE {
+                ?kind   rdf:type qudt:QuantityKind;
+                        rdfs:label ?name ;
+                        qudt:applicableUnit|qudt:applicableSIUnit ?unt .
+                OPTIONAL { ?kind qudt:abbreviation ?abbr . }
+                OPTIONAL { ?kind qudt:baseCGSUnitDimensions ?cgsd . }
+                OPTIONAL { ?kind qudt:baseImperialUnitDimensions ?impd . }
+                OPTIONAL { ?kind qudt:baseISOUnitDimensions ?isod . }
+                OPTIONAL { ?kind qudt:baseSIUnitDimensions ?siud . }
+                OPTIONAL { ?kind qudt:baseUSCustomaryUnitDimensions ?uscd . }
+                OPTIONAL { ?kind qudt:deprecated ?dep . }
+                OPTIONAL { ?kind qudt:exactMatch ?xact . }
+                OPTIONAL { ?kind qudt:hasDimensionVector ?vec . }
+                OPTIONAL { ?kind qudt:latexDefinition ?texd . }
+                OPTIONAL { ?kind qudt:latexSymbol ?texs . }
+                OPTIONAL { ?kind qudt:normativeReference ?nrm . }
+                OPTIONAL { ?kind qudt:plainTextDescription ?text . }
+                OPTIONAL { ?kind qudt:qkdvDenominator ?dvec . }
+                OPTIONAL { ?kind qudt:qkdvNumerator ?nvec . }
+                OPTIONAL { ?kind qudt:siExactMatch ?siem . }
+                OPTIONAL { ?kind qudt:symbol ?sym . }
+                OPTIONAL { ?kind rdfs:seeAlso ?see . }
+                OPTIONAL { ?kind rdfs:comment ?cmmt . }
+                OPTIONAL { ?kind skos:broader ?brdr . }
+                OPTIONAL { ?kind skos:closeMatch ?cls . }
+                OPTIONAL { ?kind skos:altLabel ?alt . }
+                FILTER(LANG(?name) = "en")
+            }
+            GROUP BY ?name ?vec ?abbr ?cgsd ?impd ?isod ?siud ?uscd ?dep ?xact ?texd ?texs ?text ?siem ?sym ?cmmt ?brdr
     """
     kinds = g.query(qudtkind)
     for hit in kinds:
