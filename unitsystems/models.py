@@ -33,14 +33,15 @@ class Qudtunits(models.Model):
 
 
 class Qudtqkinds(models.Model):
+    name = models.CharField(max_length=32, blank=True, null=True)
     code = models.CharField(max_length=64, blank=True, null=True)
+    deprecated = models.CharField(max_length=3)
     units = models.CharField(max_length=512, blank=True, null=True)
     description = models.TextField(blank=True, null=True)
     text = models.TextField(blank=True, null=True)
     dimvector = models.CharField(max_length=64, blank=True, null=True)
     ddimvector = models.CharField(max_length=64, blank=True, null=True)
     ndimvector = models.CharField(max_length=64, blank=True, null=True)
-    basedims = models.CharField(max_length=256, blank=True, null=True)
     basecgsdims = models.CharField(max_length=256, blank=True, null=True)
     baseimpdims = models.CharField(max_length=256, blank=True, null=True)
     baseisodims = models.CharField(max_length=256, blank=True, null=True)

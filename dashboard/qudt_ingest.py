@@ -292,43 +292,218 @@ def ingestkinds():
     PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
     PREFIX qkdv: <http://qudt.org/vocab/dimensionvector/>
 
-    SELECT  ?name ?vec ?abbr ?cgsd ?impd ?isod ?siud ?uscd ?dep ?xact ?texd ?texs ?text ?siem ?sym ?cmmt ?brdr
-            (group_concat(DISTINCT(?unt)) as ?unts)
-            (IF(?nrm = Null ) as ?nrms)
+    SELECT  ?qkind ?kind ?vec ?abbr ?cgsd ?impd ?isod ?siud ?uscd ?dep ?desc ?xact ?texd
+            ?texs ?iref ?iso ?nrm ?text ?dvec ?nvec ?siem ?sym ?see ?cmmt ?brdr ?cls ?alt
+            (group_concat(DISTINCT(?unit)) as ?units)
             WHERE {
-                ?kind   rdf:type qudt:QuantityKind;
-                        rdfs:label ?name ;
-                        qudt:applicableUnit|qudt:applicableSIUnit ?unt .
-                OPTIONAL { ?kind qudt:abbreviation ?abbr . }
-                OPTIONAL { ?kind qudt:baseCGSUnitDimensions ?cgsd . }
-                OPTIONAL { ?kind qudt:baseImperialUnitDimensions ?impd . }
-                OPTIONAL { ?kind qudt:baseISOUnitDimensions ?isod . }
-                OPTIONAL { ?kind qudt:baseSIUnitDimensions ?siud . }
-                OPTIONAL { ?kind qudt:baseUSCustomaryUnitDimensions ?uscd . }
-                OPTIONAL { ?kind qudt:deprecated ?dep . }
-                OPTIONAL { ?kind qudt:exactMatch ?xact . }
-                OPTIONAL { ?kind qudt:hasDimensionVector ?vec . }
-                OPTIONAL { ?kind qudt:latexDefinition ?texd . }
-                OPTIONAL { ?kind qudt:latexSymbol ?texs . }
-                OPTIONAL { ?kind qudt:normativeReference ?nrm . }
-                OPTIONAL { ?kind qudt:plainTextDescription ?text . }
-                OPTIONAL { ?kind qudt:qkdvDenominator ?dvec . }
-                OPTIONAL { ?kind qudt:qkdvNumerator ?nvec . }
-                OPTIONAL { ?kind qudt:siExactMatch ?siem . }
-                OPTIONAL { ?kind qudt:symbol ?sym . }
-                OPTIONAL { ?kind rdfs:seeAlso ?see . }
-                OPTIONAL { ?kind rdfs:comment ?cmmt . }
-                OPTIONAL { ?kind skos:broader ?brdr . }
-                OPTIONAL { ?kind skos:closeMatch ?cls . }
-                OPTIONAL { ?kind skos:altLabel ?alt . }
-                FILTER(LANG(?name) = "en")
+                ?qkind  rdf:type qudt:QuantityKind;
+                        rdfs:label ?kind ;
+                        qudt:applicableUnit|qudt:applicableSIUnit ?unit .
+                OPTIONAL { ?qkind qudt:abbreviation ?abbr . }
+                OPTIONAL { ?qkind qudt:baseCGSUnitDimensions ?cgsd . }
+                OPTIONAL { ?qkind qudt:baseImperialUnitDimensions ?impd . }
+                OPTIONAL { ?qkind qudt:baseISOUnitDimensions ?isod . }
+                OPTIONAL { ?qkind qudt:baseSIUnitDimensions ?siud . }
+                OPTIONAL { ?qkind qudt:baseUSCustomaryUnitDimensions ?uscd . }
+                OPTIONAL { ?qkind qudt:deprecated ?dep . }
+                OPTIONAL { ?qkind dcterms:description ?desc . }
+                OPTIONAL { ?qkind qudt:hasDimensionVector ?vec . }
+                OPTIONAL { ?qkind qudt:latexDefinition ?texd . }
+                OPTIONAL { ?qkind qudt:latexSymbol ?texs . }
+                OPTIONAL { ?qkind qudt:informativeReference ?iref . }
+                OPTIONAL { ?qkind qudt:isoNormativeReference ?iso . }
+                OPTIONAL { ?qkind qudt:normativeReference ?nrm . }
+                OPTIONAL { ?qkind qudt:plainTextDescription ?text . }
+                OPTIONAL { ?qkind qudt:qkdvDenominator ?dvec . }
+                OPTIONAL { ?qkind qudt:qkdvNumerator ?nvec . }
+                OPTIONAL { ?qkind qudt:siExactMatch ?siem . }
+                OPTIONAL { ?qkind qudt:symbol ?sym . }
+                OPTIONAL { ?qkind rdfs:seeAlso ?see . }
+                OPTIONAL { ?qkind rdfs:comment ?cmmt . }
+                OPTIONAL { ?qkind skos:broader ?brdr . }
+                OPTIONAL { ?qkind skos:exactMatch ?xact . }
+                OPTIONAL { ?qkind skos:closeMatch ?cls . }
+                OPTIONAL { ?qkind skos:altLabel ?alt . }
+                FILTER(LANG(?kind) = "en")
             }
-            GROUP BY ?name ?vec ?abbr ?cgsd ?impd ?isod ?siud ?uscd ?dep ?xact ?texd ?texs ?text ?siem ?sym ?cmmt ?brdr
+            GROUP BY ?qkind ?kind ?vec ?abbr ?cgsd ?impd ?isod ?siud ?uscd ?dep ?xact ?texd
+                    ?texs ?iref ?iso ?nrm ?text ?dvec ?nvec ?siem ?sym ?see ?cmmt ?brdr ?cls ?alt
+            ORDER BY ?kind
     """
     kinds = g.query(qudtkind)
     for hit in kinds:
-        print(hit)
-        exit()
+        code = hit.qkind.replace('http://qudt.org/vocab/quantitykind/', '')
+        print("**starting " + code + "**")
+        foundall = Qudtqkinds.objects.filter(code=code)
+        if foundall:
+            found = foundall[0]
+            if found.name:
+                print("quantity kind " + found.name + " already updated")
+                continue
+            if not found.name and hit.qkind:
+                # name
+                found.name = hit.kind
+                print("added name " + found.name)
+            if not found.dimvector and hit.vec:
+                # hasDimensionVector
+                found.dimvector = hit.vec.replace('http://qudt.org/vocab/dimensionvector/', '')
+                print("added dimension vector " + found.dimvector)
+            if not found.deprecated and hit.dep:
+                # deprecated
+                found.deprecated = hit.dep
+                print("added deprecated " + found.deprecated)
+            if not found.units and hit.units:
+                # QUDT codes as a comma delimited list
+                units = list(set(hit.units.split(' ')))  # not sure why there are duplicates sometimes
+                uarr = []
+                for unit in units:
+                    uarr.append(unit.replace('http://qudt.org/vocab/unit/', ''))
+                found.units = ",".join(uarr)
+                print("added units " + found.units)
+            if not found.description and hit.desc:
+                # latex based description
+                found.description = hit.desc.replace('http://purl.org/dc/terms/', '')
+                print("added description")
+            if not found.text and hit.text:
+                # plain text description
+                found.text = hit.text
+                print("added plain text description")
+            if not found.ddimvector and hit.dvec:
+                # denominator dimension vector
+                found.ddimvector = hit.dvec.replace('http://qudt.org/vocab/dimensionvector/', '')
+                print("added denominator dimension vector " + found.ddimvector)
+            if not found.ndimvector and hit.nvec:
+                # numerator dimension vector
+                found.ndimvector = hit.nvec.replace('http://qudt.org/vocab/dimensionvector/', '')
+                print("added numerator dimension vector " + found.ddimvector)
+            if not found.basecgsdims and hit.cgsd:
+                # CGS dimensions
+                found.basecgsdims = hit.cgsd.replace('$', '')
+                print("added CGS dimensions " + found.basecgsdims)
+            if not found.baseimpdims and hit.impd:
+                # Imperial dimensions
+                found.baseimpdims = hit.impd.replace('$', '')
+                print("added Imperial dimensions " + found.baseimpdims)
+            if not found.baseisodims and hit.isod:
+                # ISO dimensions
+                found.baseisodims = hit.isod.replace('$', '')
+                print("added ISO dimensions " + found.baseisodims)
+            if not found.basesidims and hit.siud:
+                # SI dimensions
+                found.basesidims = hit.siud.replace('$', '')
+                print("added SI dimensions " + found.basesidims)
+            if not found.altlabels and hit.alt:
+                # plain text description
+                found.altlabels = hit.alt
+                print("added alt label " + found.altlabels)
+            if not found.nrefs and hit.nrm:
+                # normative reference
+                found.nrefs = hit.nrm
+                print("added normative ref " + found.nrefs)
+            if not found.infrefs and hit.iref:
+                # informative reference
+                found.infrefs = hit.iref
+                print("added informative ref " + found.infrefs)
+            if not found.isorefs and hit.iso:
+                # ISO reference
+                found.isorefs = hit.iso
+                print("added ISO ref " + found.isorefs)
+            if not found.latexdefn and hit.texd:
+                # latex definition
+                found.latexdefn = hit.texd
+                print("added LaTeX definition " + found.latexdefn)
+            if not found.latexsymb and hit.texs:
+                # latex symbol
+                found.latexsymb = hit.texs
+                print("added LaTeX symbol " + found.latexsymb)
+            if not found.symbols and hit.sym:
+                # latex symbol
+                found.symbols = hit.sym
+                print("added symbol(s) " + found.symbols)
+            if not found.matches and hit.siem:
+                # SI exact match
+                found.matches = hit.siem.replace('https://si-digital-framework.org/SI/quantities/', '')
+                print("added SI exact match " + found.matches)
+            if not found.cmatches and hit.cls:
+                # SKOS close match
+                found.cmatches = hit.cls.replace('http://www.w3.org/2004/02/skos/core#', '')
+                print("added SKOS close match " + found.cmatches)
+            if not found.ematches and hit.xact:
+                # SKOS exact match
+                found.ematches = hit.xact.replace('http://www.w3.org/2004/02/skos/core#', '')
+                print("added SKOS exact match " + found.ematches)
+            if not found.broader and hit.brdr:
+                # SKOS broader
+                found.broader = hit.brdr.replace('http://www.w3.org/2004/02/skos/core#', '')
+                print("added SKOS broader " + found.broader)
+            if not found.seealso and hit.see:
+                # RDFS see also
+                found.seealso = hit.see.replace('http://www.w3.org/2000/01/rdf-schema#', '')
+                print("added RDFS see also " + found.seealso)
+            if not found.abbrevs and hit.abbr:
+                # abbreviation
+                found.abbrevs = hit.abbr.replace('http://www.w3.org/2000/01/rdf-schema#', '')
+                print("added abbreviation " + found.abbr)
+            if not found.comments and hit.cmmt:
+                # comment
+                found.comments = hit.cmmt
+                print("added comment " + found.comments)
+            found.save()
+            print("updated unit " + found.name)
+        else:
+            # add new unit
+            newkind = Qudtqkinds(name=hit.qkind)
+            newkind.name = hit.kind.replace('http://qudt.org/vocab/unit/', '')
+            newkind.code = hit.qkind.replace('http://qudt.org/vocab/unit/', '')
+            units = hit.units.split(" ")
+            uarr = []
+            for unit in units:
+                uarr.append(unit.replace('http://qudt.org/vocab/unit/', ''))
+            newkind.units = " ".join(uarr)
+            newkind.dimvector = hit.vec.replace('http://qudt.org/vocab/dimensionvector/', '')
+            if hit.dvec:
+                newkind.ddimvector = hit.dvec
+            if hit.nvec:
+                newkind.ndimvector = hit.nvec
+            print(newkind.__dict__)
+            exit()
+
+            if hit.defs:
+                newkind.derunitsystems = hit.defs
+            if hit.mult:
+                newkind.multiplier = hit.mult
+            if hit.uom2:
+                newkind.omunit = hit.uom2
+            if hit.iecs:
+                iecs = list(set(hit.iecs.split(' ')))
+                newkind.ieccodes = "'" + "', '".join(iecs) + "'"
+            if hit.ucums:
+                ucs = list(set(hit.ucums.split(' ')))
+                newkind.ucumcodes = "'" + "', '".join(ucs) + "'"
+            if hit.unecs:
+                uns = list(set(hit.unecs.split(' ')))
+                newkind.unececodes = "'" + "', '".join(uns) + "'"
+            if hit.sym:
+                newkind.symbol = hit.sym
+            if hit.iso:
+                newkind.normrefs = hit.iso
+            if hit.infs:
+                infs = list(set(hit.infs.split(' ')))
+                newkind.infrefs = "'" + "', '".join(infs) + "'"
+            if hit.desc:
+                newkind.description = LatexNodes2Text().latex_to_text(hit.desc)
+            if hit.alt:
+                newkind.altlabel = hit.alt
+            if hit.dbp:
+                newkind.dbpedia = hit.dbp
+            if hit.tex:
+                newkind.latexsymbol = hit.tex
+            # save new unit
+            newkind.updated = jax.localize(datetime.now())
+            # newkind.save()
+            print(newkind.__dict__)
+            print("add new quantity code")
+            exit()
 
 
 def joinusqu(unit, syss, usyss, cnt, ns, abbs):
