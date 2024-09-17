@@ -1,3 +1,4 @@
+"""ingest of units and quantities from wikidata"""
 from rdflib import Graph
 import os
 import django
@@ -182,8 +183,9 @@ def ingestunits():
                 print("added symbol " + hit.sym)
             if not found.normrefs and hit.iso:
                 # isoNormativeReference
+                nrms = list(set(hit.iso.split(' ')))
+                found.normrefs = "'" + "', '".join(nrms) + "'"
                 print("add code - normrefs")
-                exit()
             if not found.infrefs and hit.infs:
                 # informativeReference
                 infs = list(set(hit.infs.split(' ')))
@@ -260,18 +262,17 @@ def ingestunits():
             print(newunit.__dict__)
             # add the join table entries
             # unitsystems_qudtunits
-            syss = list(set(hit.syss.split(' ')))  # not sure why there are duplicates sometimes
-            ns = 'http://qudt.org/vocab/quantitykind/'
-            abbs = (UnitsystemsQudtunits.objects.filter(qudtunit_id=newunit.id).
-                    values_list('unitsystem__abbrev', flat=True))
-            joinusqu(newunit, syss, usyss, 0, ns, abbs)
+            if hit.syss:
+                print('unit systems: ' + hit.syss)
+                syss = list(set(hit.syss.split(' ')))  # not sure why there are duplicates sometimes
+                ns = 'http://qudt.org/vocab/sou/'
+                joinusqu(newunit, syss, usyss, 0, ns, [])
             # quantitysystems_qudtunits
-            kinds = list(set(hit.kinds.split(' ')))  # not sure why there are duplicates sometimes
-            codes = (QudtqkindsQudtunits.objects.filter(qudtunit_id=newunit.id).
-                     values_list('qudtqkind__code', flat=True))
-            ns = 'http://qudt.org/vocab/quantitykind/'
-            joinqkqu(newunit, kinds, qkinds, 0, ns, codes)
-            exit()
+            if hit.kinds != '':
+                kinds = list(set(hit.kinds.split(' ')))  # not sure why there are duplicates sometimes
+                ns = 'http://qudt.org/vocab/quantitykind/'
+                joinqkqu(newunit, kinds, qkinds, 0, ns, [])
+            # exit()
 
 
 def ingestkinds():
@@ -321,16 +322,18 @@ def ingestkinds():
                 OPTIONAL { ?qkind rdfs:seeAlso ?see . }
                 OPTIONAL { ?qkind rdfs:comment ?cmmt . }
                 OPTIONAL { ?qkind skos:broader ?brdr . }
-                OPTIONAL { ?qkind skos:exactMatch ?xact . }
+                OPTIONAL { ?qkind qudt:exactMatch ?xact . }
                 OPTIONAL { ?qkind skos:closeMatch ?cls . }
-                OPTIONAL { ?qkind skos:altLabel ?alt . }
+                OPTIONAL { ?qkind skos:altLabel ?alt . FILTER(LANG(?alt) = "en") }
                 FILTER(LANG(?kind) = "en")
             }
-            GROUP BY ?qkind ?kind ?vec ?abbr ?cgsd ?impd ?isod ?siud ?uscd ?dep ?xact ?texd
+            GROUP BY ?qkind ?kind ?vec ?abbr ?cgsd ?impd ?isod ?siud ?uscd ?dep ?desc ?xact ?texd
                     ?texs ?iref ?iso ?nrm ?text ?dvec ?nvec ?siem ?sym ?see ?cmmt ?brdr ?cls ?alt
             ORDER BY ?kind
     """
     kinds = g.query(qudtkind)
+    # print(len(kinds))
+    # exit()
     for hit in kinds:
         code = hit.qkind.replace('http://qudt.org/vocab/quantitykind/', '')
         print("**starting " + code + "**")
@@ -426,7 +429,7 @@ def ingestkinds():
                 print("added SI exact match " + found.matches)
             if not found.cmatches and hit.cls:
                 # SKOS close match
-                found.cmatches = hit.cls.replace('http://www.w3.org/2004/02/skos/core#', '')
+                found.cmatches = hit.cls.replace('http://qudt.org/vocab/quantitykind/', '')
                 print("added SKOS close match " + found.cmatches)
             if not found.ematches and hit.xact:
                 # SKOS exact match
@@ -443,7 +446,7 @@ def ingestkinds():
             if not found.abbrevs and hit.abbr:
                 # abbreviation
                 found.abbrevs = hit.abbr.replace('http://www.w3.org/2000/01/rdf-schema#', '')
-                print("added abbreviation " + found.abbr)
+                print("added abbreviation " + found.abbrevs)
             if not found.comments and hit.cmmt:
                 # comment
                 found.comments = hit.cmmt
@@ -452,71 +455,81 @@ def ingestkinds():
             print("updated unit " + found.name)
         else:
             # add new unit
-            newkind = Qudtqkinds(name=hit.qkind)
-            newkind.name = hit.kind.replace('http://qudt.org/vocab/unit/', '')
-            newkind.code = hit.qkind.replace('http://qudt.org/vocab/unit/', '')
+            newkind = Qudtqkinds(name=hit.kind)
+            newkind.code = hit.qkind.replace('http://qudt.org/vocab/quantitykind/', '')
             units = hit.units.split(" ")
             uarr = []
             for unit in units:
                 uarr.append(unit.replace('http://qudt.org/vocab/unit/', ''))
             newkind.units = " ".join(uarr)
             newkind.dimvector = hit.vec.replace('http://qudt.org/vocab/dimensionvector/', '')
+            if hit.dep:
+                newkind.deprecated = 'yes'
+            else:
+                newkind.deprecated = 'no'
+            if hit.desc:
+                temp = hit.desc.replace('\n', '').replace('  ', ' ').strip()
+                newkind.description = temp.replace('  ', ' ')
+            if hit.text:
+                temp = hit.text.replace('\n', '').replace('  ', ' ').strip()
+                newkind.text = temp.replace('  ', ' ')
             if hit.dvec:
                 newkind.ddimvector = hit.dvec
             if hit.nvec:
                 newkind.ndimvector = hit.nvec
-            print(newkind.__dict__)
-            exit()
-
-            if hit.defs:
-                newkind.derunitsystems = hit.defs
-            if hit.mult:
-                newkind.multiplier = hit.mult
-            if hit.uom2:
-                newkind.omunit = hit.uom2
-            if hit.iecs:
-                iecs = list(set(hit.iecs.split(' ')))
-                newkind.ieccodes = "'" + "', '".join(iecs) + "'"
-            if hit.ucums:
-                ucs = list(set(hit.ucums.split(' ')))
-                newkind.ucumcodes = "'" + "', '".join(ucs) + "'"
-            if hit.unecs:
-                uns = list(set(hit.unecs.split(' ')))
-                newkind.unececodes = "'" + "', '".join(uns) + "'"
-            if hit.sym:
-                newkind.symbol = hit.sym
-            if hit.iso:
-                newkind.normrefs = hit.iso
-            if hit.infs:
-                infs = list(set(hit.infs.split(' ')))
-                newkind.infrefs = "'" + "', '".join(infs) + "'"
-            if hit.desc:
-                newkind.description = LatexNodes2Text().latex_to_text(hit.desc)
+            if hit.cgsd:
+                newkind.basecgsdims = hit.cgsd
+            if hit.impd:
+                newkind.baseimpdims = hit.impd
+            if hit.isod:
+                newkind.baseisodims = hit.isod
+            if hit.siud:
+                newkind.basesidims = hit.siud
             if hit.alt:
-                newkind.altlabel = hit.alt
-            if hit.dbp:
-                newkind.dbpedia = hit.dbp
-            if hit.tex:
-                newkind.latexsymbol = hit.tex
-            # save new unit
+                newkind.altlabels = hit.alt
+            if hit.nrm:
+                newkind.nrefs = hit.nrm
+            if hit.iref:
+                newkind.infrefs = hit.iref
+            if hit.nrm:
+                newkind.isorefs = hit.iso
+            if hit.texd:
+                newkind.latexdefn = hit.texd
+            if hit.texs:
+                newkind.latexsymb = hit.texs
+            if hit.sym:
+                newkind.symbols = hit.sym
+            if hit.siem:
+                newkind.matches = hit.siem.replace('https://si-digital-framework.org/SI/quantities/', '')
+            if hit.cls:
+                newkind.cmatches = hit.cls.replace('http://qudt.org/vocab/quantitykind/', '')
+            if hit.xact:
+                newkind.ematches = hit.xact.replace('http://www.w3.org/2004/02/skos/core#', '')
+            if hit.brdr:
+                newkind.broader = hit.brdr.replace('http://www.w3.org/2004/02/skos/core#', '')
+            if hit.see:
+                newkind.seealso = hit.see.replace('http://qudt.org/vocab/quantitykind/', '')
+            if hit.abbr:
+                newkind.abbrevs = hit.abbr.replace('http://www.w3.org/2000/01/rdf-schema#', '')
+            if hit.cmmt:
+                newkind.comments = hit.cmmt
             newkind.updated = jax.localize(datetime.now())
-            # newkind.save()
-            print(newkind.__dict__)
-            print("add new quantity code")
-            exit()
+            # save new quantitykind
+            newkind.save()
+            print("add new quantity code " + newkind.code)
+            # exit()
 
 
 def joinusqu(unit, syss, usyss, cnt, ns, abbs):
     for sys in syss:
-        abb = sys.replace(ns, '')
-        print(abbs)
+        abbr = sys.replace(ns, '')
         if abbs:
-            if abb in abbs:  # skip if present
+            if abbr in abbs:  # skip if present
                 continue
         cnt += 1
-        usu = UnitsystemsQudtunits(unitsystem_id=usyss[abb], qudtunit_id=unit.id, updated=jax.localize(datetime.now()))
+        usu = UnitsystemsQudtunits(unitsystem_id=usyss[abbr], qudtunit_id=unit.id, updated=jax.localize(datetime.now()))
         usu.save()
-        print('added unitsystem ' + abb)
+        print('added unitsystem ' + abbr)
     return
 
 
@@ -532,4 +545,4 @@ def joinqkqu(unit, kinds, qkinds, cnt, ns, codes):
     return
 
 
-ingestkinds()
+ingestunits()

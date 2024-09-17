@@ -37,6 +37,11 @@ a:active {text-decoration: none;}
     overflow-y: auto;
 }
 
+.table-responsive-rs-view {
+    max-height: calc(100vh - 500px);
+    -webkit-overflow-scrolling: touch;
+    overflow-y: auto;
+}
 .table-responsive-qs-view {
     max-height: calc(100vh - 650px);
     -webkit-overflow-scrolling: touch;
