@@ -70,3 +70,34 @@ def wdunits():
     # return data
     wdjsn = json.loads(json.dumps(wd['results']['bindings']))
     return wdjsn
+
+
+def wdquants():
+    """ get list of units of measurement instances under 'unit of' subclasses """
+    query = """
+    SELECT DISTINCT ?qntid ?quant ?isq ?source
+    WHERE
+    {
+        ?untid wdt:P111 ?qntid .
+        ?qntid rdfs:label ?quant .
+        OPTIONAL {?qntid wdt:P4020 ?isq }
+        OPTIONAL { 
+            ?qntid wdt:P1343 ?srcid .
+            ?srcid rdfs:label ?source .
+            FILTER(CONTAINS(?source, ":2019")||CONTAINS(?source, ":2020")||CONTAINS(?source, ":2022"))
+            FILTER(LANG(?source) = "en") .
+        }
+        OPTIONAL {
+            ?qntid wdt:P8111 ?untid .
+            ?untid rdfs:label ?unit .
+            FILTER(LANG(?unit) = "en") .
+        }
+        FILTER(LANG(?quant) = "en") .
+    }
+    ORDER BY ASC(?quant)
+    """
+    # search wikidata sparql query
+    wd = return_sparql_query_results(query)
+    # return data
+    wdjsn = json.loads(json.dumps(wd['results']['bindings']))
+    return wdjsn

@@ -12,7 +12,7 @@ from units.functions import *
 from wdfunctions import *
 
 
-choice = 'wdc'
+choice = 'wdq'
 
 local = timezone("America/New_York")
 
@@ -557,15 +557,18 @@ if choice == 'runucum':
 # get list of unit of measurement subclasses on Wikidata
 if choice == 'wdc':
     classes = wdclasses()  # call class to update if working on wikidata OR download from wd and parse below
+    # print(classes)
+    # exit()
 
     # classes = None
-    # file = f'umis_quants_query_072524.json'
+    # file = f'umis_quants_query_111424.json'
     # if os.path.exists(os.path.join(BASE_DIR, STATIC_URL, file)):
     #     # read in the file
     #     with open(os.path.join(BASE_DIR, STATIC_URL, file), 'r') as f:
     #         tmp = f.read()
     #         classes = json.loads(tmp)
     #         f.close()
+    # exit()
 
     for cls in classes:
         if not isinstance(cls['class'], str):
@@ -627,12 +630,13 @@ if choice == 'wdc':
                 print("found class '" + str(c.name) + "'")
     exit()
 
-# get list of unit of measurement subclasses on Wikidata
+# get list of units on Wikidata
 if choice == 'wdu':
     # units = wdunits()  # call class to update wdunits if working on wikidata OR download from wd and parse below
+    # query to server not working currently (11/14/24)
 
     units = None
-    file = f'umis_sparql_query_073024.json'
+    file = f'umis_units_query_111524.json'
     if os.path.exists(os.path.join(BASE_DIR, STATIC_URL, file)):
         # read in the file
         with open(os.path.join(BASE_DIR, STATIC_URL, file), 'r') as f:
@@ -710,3 +714,12 @@ if choice == 'wdu':
                     f.save()
                     print("added class '" + str(f.wdclass_id) + "'")
             print("found unit '" + f.unit + "'")
+
+# get a list of quantities on wikidata
+if choice == 'wdq':
+    quants = wdquants()  # call class to update wdquants if working on wikidata OR download from wd and parse below
+
+    cnt = 0
+    for quant in quants:
+        print(quant)
+        exit()

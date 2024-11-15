@@ -31,6 +31,19 @@ def index(request):
     return render(request, "../templates/units/index.html", {'data': data})
 
 
+def newindex(request):
+    raw = Wdunits.objects.all().order_by('wdclass__quant', 'unit')
+    data = {}
+    for u in raw:
+        # print(u.wdclass.__dict__)
+        quant = u.quant
+        if quant not in data.keys():
+            data.update({quant: []})
+        unit = {'id': u.id, 'name': u.unit}
+        data[quant].append(unit)
+    return render(request, "../templates/units/newindex.html", {'data': data})
+
+
 def view(request, uid):
     """ view the different representations of a unit"""
     if uid.isnumeric():
