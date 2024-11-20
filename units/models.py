@@ -370,3 +370,20 @@ class Wdunits(models.Model):
         managed = False
         db_table = 'wdunits'
         db_table_comment = 'Table of unit representations on Wikidata'
+
+
+class Wdquants(models.Model):
+    id = models.SmallAutoField(primary_key=True)
+    quant = models.ForeignKey(Quantities, on_delete=models.PROTECT, db_column='quantity_id')
+    # quantity_id = models.SmallIntegerField(blank=True, null=True)
+    qurl = models.CharField(max_length=64, blank=True, null=True)
+    name = models.CharField(max_length=128, blank=True, null=True)
+    isq = models.CharField(max_length=32, blank=True, null=True)
+    source = models.CharField(max_length=128, blank=True, null=True)
+    sect = models.CharField(max_length=16, blank=True, null=True)
+    updated = models.DateTimeField()
+
+    class Meta:
+        managed = False
+        db_table = 'wdquants'
+        db_table_comment = 'Table of wikidata quantities'

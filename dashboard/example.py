@@ -602,13 +602,8 @@ if choice == 'wdc':
             exit()
         # add or update Wdclasses table
         c, created = Wdclasses.objects.get_or_create(
-            name=cls['class'],
-            url=cls['c'],
-            isq=cls['isq'],
-            source=cls['src'],
-            section=cls['sect'],
-            quant=cls['quant'],
-            quantity_id=qid
+            name=cls['class'], url=cls['c'], isq=cls['isq'], source=cls['src'], section=cls['sect'],
+            quant=cls['quant'], quantity_id=qid
         )
         c.save()
         if created:
@@ -720,6 +715,60 @@ if choice == 'wdq':
     quants = wdquants()  # call class to update wdquants if working on wikidata OR download from wd and parse below
 
     cnt = 0
-    for quant in quants:
-        print(quant)
-        exit()
+    for q in quants:
+        quant = {}
+        keys = q.keys()
+        if not isinstance(q['qntid'], str):
+            quant['qurl'] = q['qntid']['value']
+        if not isinstance(q['quant'], str):
+            quant['name'] = q['quant']['value']
+        if 'source' in keys and not isinstance(q['source'], str):
+            quant['source'] = q['source']['value']
+        else:
+            quant['source'] = None
+        if 'sect' in keys and not isinstance(q['sect'], str):
+            quant['sect'] = q['sect']['value']
+        else:
+            quant['sect'] = None
+        if 'isq' in keys:
+            isq = q['isq']['value']
+            tmp = re.findall(r'alttext="\{(.+?)}"', isq)
+            isq = (tmp[0].replace("\\displaystyle", '').replace("\\mathsf", '').replace(' ', '').
+                   replace('{{', '').replace('}}', ''))
+            quant['isq'] = isq
+        else:
+            quant['isq'] = None
+        qnt = None
+        if quant['source'] and quant['sect']:
+            num = re.findall(r'([A-Z]{3}) 80000-(\d+?):', str(quant['source']))
+            isocode = num[0][0] + '-80000-' + num[0][1]
+            print(isocode)
+
+            # search the quantities table for quantity based on the source and section
+            found = Quantities.objects.filter(iso_source=isocode, iso_item=quant['sect'])
+            if found:
+                qnt = found[0]
+            else:
+                # search by quantity name
+                found = Quantities.objects.filter(name=quant['name'])
+                if found:
+                    qnt = found[0]
+
+        # check if quantity already added
+        add, created = Wdquants.objects.get_or_create(
+            quant=qnt,
+            qurl=quant['qurl'],
+            name=quant['name'],
+            source=quant['source'],
+            sect=quant['sect'],
+            isq=quant['isq']
+        )
+        add.save()
+
+        if created:
+            add.updated = local.localize(datetime.now())
+            add.save()
+            print("added '" + add.name + "' (" + str(add.id) + ")")
+            # print(quant)
+        else:
+            print("already added " + quant['name'])

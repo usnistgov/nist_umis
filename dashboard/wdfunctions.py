@@ -75,7 +75,7 @@ def wdunits():
 def wdquants():
     """ get list of units of measurement instances under 'unit of' subclasses """
     query = """
-    SELECT DISTINCT ?qntid ?quant ?isq ?source
+    SELECT DISTINCT ?qntid ?quant ?isq ?source ?sect
     WHERE
     {
         ?untid wdt:P111 ?qntid .
@@ -91,6 +91,10 @@ def wdquants():
             ?qntid wdt:P8111 ?untid .
             ?untid rdfs:label ?unit .
             FILTER(LANG(?unit) = "en") .
+        }
+        OPTIONAL {
+            ?qntid p:P1343 ?qual .
+            ?qual pq:P958 ?sect .  # this is an attribute (a qualifier) 
         }
         FILTER(LANG(?quant) = "en") .
     }
