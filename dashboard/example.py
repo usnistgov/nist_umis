@@ -732,18 +732,19 @@ if choice == 'wdq':
             quant['sect'] = None
         if 'isq' in keys:
             isq = q['isq']['value']
-            tmp = re.findall(r'alttext="\{(.+?)}"', isq)
-            isq = (tmp[0].replace("\\displaystyle", '').replace("\\mathsf", '').replace(' ', '').
-                   replace('{{', '').replace('}}', ''))
-            quant['isq'] = isq
+            if 'merror' in isq:
+                quant['isq'] = None
+            else:
+                tmp = re.findall(r'alttext="\{(.+?)\}"', isq)
+                isq = (tmp[0].replace("\\displaystyle", '').replace("\\mathsf", '').replace(' ', '').
+                    replace('{{', '').replace('}}', ''))
+                quant['isq'] = isq
         else:
             quant['isq'] = None
         qnt = None
         if quant['source'] and quant['sect']:
             num = re.findall(r'([A-Z]{3}) 80000-(\d+?):', str(quant['source']))
             isocode = num[0][0] + '-80000-' + num[0][1]
-            print(isocode)
-
             # search the quantities table for quantity based on the source and section
             found = Quantities.objects.filter(iso_source=isocode, iso_item=quant['sect'])
             if found:
