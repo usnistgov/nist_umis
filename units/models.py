@@ -195,21 +195,6 @@ class Encodings(models.Model):
         db_table = 'encodings'
 
 
-class Representations(models.Model):
-    unit = models.ForeignKey(Units, on_delete=models.PROTECT, db_column='unit_id')
-    repsystem = models.ForeignKey(Repsystems, on_delete=models.PROTECT, db_column='repsystem_id')
-    strng = models.ForeignKey(Strngs, on_delete=models.PROTECT, db_column='strng_id')
-    url_endpoint = models.CharField(max_length=3, blank=True, null=True)
-    status = models.CharField(max_length=7, blank=True, null=True)
-    checked = models.CharField(max_length=3)
-    updated = models.DateTimeField()
-
-    class Meta:
-        managed = False
-        db_table = 'representations'
-        unique_together = (('unit_id', 'repsystem_id', 'strng_id'),)
-
-
 class Prefixes(models.Model):
     name = models.CharField(max_length=32, db_collation='utf8_unicode_ci')
     symbol = models.CharField(max_length=64, db_collation='utf8_unicode_ci')
@@ -387,3 +372,19 @@ class Wdquants(models.Model):
         managed = False
         db_table = 'wdquants'
         db_table_comment = 'Table of wikidata quantities'
+
+
+class Representations(models.Model):
+    unit = models.ForeignKey(Units, on_delete=models.PROTECT, db_column='unit_id')
+    wdunit = models.ForeignKey(Wdunits, on_delete=models.PROTECT, db_column='wdunit_id')
+    repsystem = models.ForeignKey(Repsystems, on_delete=models.PROTECT, db_column='repsystem_id')
+    strng = models.ForeignKey(Strngs, on_delete=models.PROTECT, db_column='strng_id')
+    url_endpoint = models.CharField(max_length=3, blank=True, null=True)
+    status = models.CharField(max_length=7, blank=True, null=True)
+    checked = models.CharField(max_length=3)
+    updated = models.DateTimeField()
+
+    class Meta:
+        managed = False
+        db_table = 'representations'
+        unique_together = (('unit_id', 'repsystem_id', 'strng_id'),)

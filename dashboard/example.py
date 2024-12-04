@@ -12,7 +12,7 @@ from units.functions import *
 from wdfunctions import *
 
 
-choice = 'wdq'
+choice = 'wdc'
 
 local = timezone("America/New_York")
 
@@ -773,3 +773,13 @@ if choice == 'wdq':
             # print(quant)
         else:
             print("already added " + quant['name'])
+
+# check wdquants data against the quantities data
+if choice == 'wdqchk':
+    qs = Wdquants.objects.all().values('quant', 'sect')
+    for q in qs:
+        if q['quant'] and q['sect']:
+            found = Quantities.objects.filter(id=q['quant'], iso_item=q['sect'])
+            if not found:
+                print(q)
+                exit()
