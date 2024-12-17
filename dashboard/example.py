@@ -11,7 +11,6 @@ from datetime import date, datetime
 from units.functions import *
 from wdfunctions import *
 
-
 choice = 'wdc'
 
 local = timezone("America/New_York")
@@ -553,7 +552,6 @@ if choice == 'runucum':
         else:
             print("found '" + str(ent.value) + "' (" + str(ent.id) + ")")
 
-
 # get list of unit of measurement subclasses on Wikidata
 if choice == 'wdc':
     classes = wdclasses()  # call class to update if working on wikidata OR download from wd and parse below
@@ -630,6 +628,9 @@ if choice == 'wdu':
     # units = wdunits()  # call class to update wdunits if working on wikidata OR download from wd and parse below
     # query to server not working currently (11/14/24)
 
+    # define variables
+    repsysids = {"qudt": 10, "iev": 21, "igb": 3, "ncit": 9, "ucum": 2, "unece": 6, "uom": 13, "wolf": 20, "wur": 23}
+
     units = None
     file = f'umis_units_query_111524.json'
     if os.path.exists(os.path.join(BASE_DIR, STATIC_URL, file)):
@@ -641,74 +642,73 @@ if choice == 'wdu':
 
     cnt = 0
     for unit in units:
-        # print(unit)
-        # exit()
         # add/update wikidata entry
         flds = ['curl', 'cls', 'uurl', 'unit', 'qurl', 'quant', 'factor', 'iev', 'igb', 'ncit',
                 'qudt', 'ucum', 'unece', 'uom', 'wolf', 'wur']
+        uflds = ['iev', 'igb', 'ncit', 'qudt', 'ucum', 'unece', 'uom', 'wolf', 'wur']
+        dt = local.localize(datetime.now())
         if not isinstance(unit['uurl'], str):
             found = Wdunits.objects.filter(uurl__exact=unit['uurl']['value'])
         else:
             found = Wdunits.objects.filter(uurl__exact=unit['uurl'])
+
+        # add unit if not found
         if not found:
             # convert fields to be consistent across sources
             keys = unit.keys()
             for fld in flds:
                 if fld not in keys:
                     # only via qwikidata are fields not set
-                    unit.update({fld:  None})
+                    unit.update({fld: None})
                 if not isinstance(fld, str):
                     setattr(unit, fld, getattr(unit, fld))
-            # print(unit)
-            # exit()
 
-            wu = Wdunits(
-                cls=unit['cls'],
-                unit=unit['unit'],
-                quant=unit['quant'],
-                factor=unit['factor'],
-                curl=unit['curl'],
-                uurl=unit['uurl'],
-                qurl=unit['qurl'],
-                iev=unit['iev'],
-                igb=unit['igb'],
-                ncit=unit['ncit'],
-                qudt=unit['qudt'],
-                ucum=unit['ucum'],
-                unece=unit['unece'],
-                uom=unit['uom'],
-                wolf=unit['wolf'],
-                wur=unit['wur'],
-                added=date.today(),
-                updated=local.localize(datetime.now())
-            )
-            cls = Wdclasses.objects.filter(url__exact=unit['curl'])
-            if cls:
-                wu.wdclass_id = cls[0].id
-            wu.save()
-            print("added '" + wu.unit + "' (" + str(wu.id) + ")")
-            cnt += 1
-            if cnt == 300:
-                exit()
+            # add unit
+            wu = Wdunits(cls=unit['cls'], unit=unit['unit'], quant=unit['quant'], factor=unit['factor'],
+                         curl=unit['curl'], uurl=unit['uurl'], qurl=unit['qurl'], added=date.today(), updated=dt
+                         )
         else:
             # check for unit representation data and add if the field is empty
-            f = found[0]
-            # print(unit.keys())
-            # print(f.__dict__)
-            # exit()
-            for fld in flds:
-                if fld in unit.keys() and getattr(f, fld) is None:
-                    setattr(f, fld, unit.get(fld))
-                    f.save()
-                    print("field " + fld + " updated for unit " + f.unit)
-            # check for unit class being set
-            if f.wdclass_id is None:
-                cls = Wdclasses.objects.filter(url__exact=unit['curl'])
-                if cls:
-                    f.wdclass_id = cls[0].id
-                    f.save()
-                    print("added class '" + str(f.wdclass_id) + "'")
-            print("found unit '" + f.unit + "'")
+            wu = found[0]
+
+        # get and add wd unit class if available
+        cls = Wdclasses.objects.filter(url__exact=unit['curl'])
+        if cls:
+            wu.wdclass_id = cls[0].id
+        # save to wdunits table
+        wu.save()
+
+        # add any unit reps to the representations table
+        for ufld in uflds:
+            repsysid, strng = None, None
+            if unit[ufld]:
+                # find unit string in the strng table
+                strng = Strngs.objects.get(string=unit[ufld])
+                if not strng:
+                    # add new unit string
+                    strng = Strngs(string=unit[ufld], status='current', autoadded='yes', updated=dt)
+
+                repsysid = repsysids[ufld]
+                rep = Representations.objects.get(repsystem__id=repsysid, strng_id=strng.id)
+                if rep:
+                    # update representation entry with wdunit_id
+                    rep.wdunit_id = wu.id
+                    rep.onwd = 'yes'
+                    rep.save()
+                else:
+                    # add representation entry
+                    urlep = 'no'
+                    if ufld in ["qudt", "iev", "igb", "ncit", "uom"]:
+                        urlep = 'yes'
+                    newrep = Representations(wdunit_id=wu.id, repsystem_id=repsysid, strng_id=strng.id,
+                                             url_endpoint=urlep, status='current', onwd='yes', checked='no', updated=dt)
+                    newrep.save()
+
+        print("added '" + wu.unit + "' (" + str(wu.id) + ")")
+        cnt += 1
+        if cnt > 0:
+            exit()
+
 
 # get a list of quantities on wikidata
 if choice == 'wdq':
@@ -737,7 +737,7 @@ if choice == 'wdq':
             else:
                 tmp = re.findall(r'alttext="\{(.+?)\}"', isq)
                 isq = (tmp[0].replace("\\displaystyle", '').replace("\\mathsf", '').replace(' ', '').
-                    replace('{{', '').replace('}}', ''))
+                       replace('{{', '').replace('}}', ''))
                 quant['isq'] = isq
         else:
             quant['isq'] = None

@@ -10,10 +10,14 @@ from units.functions import *
 local = timezone("America/New_York")
 
 
+# move reps from wdunits table to the representations table as links
 def movereps(sys):
-    repsysids = {"qudt": 10}
+    repsysids = {"qudt": 10, "iev": 21, "igb": 3, "ncit": 9, "ucum": 2, "unece": 6, "uom": 13, "wolf": 20, "wur": 23}
     repsysid = repsysids[sys]
-    wtmp = Wdunits.objects.filter(qudt__isnull=False).order_by('qudt').values_list('id', 'qudt')
+    wtmp = None
+    fn__isnull = sys + "__isnull"
+    # search for varible as field name uses ** construct below
+    wtmp = Wdunits.objects.filter(**{fn__isnull: False}).order_by(sys).values_list('id', sys)
     wunts = {}
     for w in wtmp:
         wunts.update({w[0]: w[1]})
@@ -33,35 +37,47 @@ def movereps(sys):
             strid = rs[0]['strng_id']
             rep = Representations.objects.get(repsystem__id=repsysid, strng_id=strid)
             rep.wdunit_id = wdid
+            rep.onwd = 'yes'
             rep.save()
-            print("linked wdunit " + wunt)
-            # remove entry (clean) from the wdunits table
-            w = Wdunits.objects.get(id=wdid)
-            if sys == "qudt":
-                w.qudt = None
-            w.save()
+            print(str(count) + " linked wdunit " + wunt)
         else:
-            print("no matches: " + str(wunt))
+            # check if the string is already in the strngs table but associated with another repsystem
+            strngs = Strngs.objects.filter(string=wunt)
             dt = local.localize(datetime.now())
-            # add to strngs table
-            strng = Strngs(string=wunt, status='current', autoadded='yes', updated=dt)
-            strng.save()
+            if not strngs:
+                print("no matches: " + wunt)
+                # add to strngs table
+                strng = Strngs(string=wunt, status='current', autoadded='yes', updated=dt)
+                strng.save()
+                if strng.id:
+                    print("added string: " + wunt)
+                else:
+                    print(wunt + " not added as string!")
+                    exit()
+            else:
+                strng = strngs[0]
             # add to representations table
-            urlep = None
-            if sys == "qudt":
+            urlep = 'no'
+            if sys in ["qudt", "iev", "igb", "ncit", "uom"]:
                 urlep = 'yes'
             newrep = Representations(wdunit_id=wdid, repsystem_id=repsysid, strng_id=strng.id,
-                                     url_endpoint=urlep, status='current', checked='no', updated=dt)
+                                     url_endpoint=urlep, status='current', onwd='yes', checked='no', updated=dt)
             newrep.save()
-            print("added wdunit " + wunt)
-            # remove entry (clean) from the wdunits table
-            w = Wdunits.objects.get(id=wdid)
-            if sys == "qudt":
-                w.qudt = None
-            w.save()
-        if count > 4:
+            if newrep.id:
+                print(str(count) + " added wdunit: " + wunt)
+            else:
+                print(wunt + " not added as representation!")
+                exit()
+
+        # remove entry (clean) from the wdunits table
+        w = Wdunits.objects.get(id=wdid)
+        # update field based on variable for field name uses setattr function
+        setattr(w, sys, None)
+        w.save()
+
+        if count > 299:
             exit()
     exit()
 
 
-movereps("qudt")
+movereps("wur")

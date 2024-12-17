@@ -382,6 +382,7 @@ class Representations(models.Model):
     url_endpoint = models.CharField(max_length=3, blank=True, null=True)
     status = models.CharField(max_length=7, blank=True, null=True)
     checked = models.CharField(max_length=3)
+    onwd = models.CharField(max_length=3)
     updated = models.DateTimeField()
 
     class Meta:
