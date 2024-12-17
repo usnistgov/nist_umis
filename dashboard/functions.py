@@ -12,6 +12,7 @@ local = timezone("America/New_York")
 
 # move reps from wdunits table to the representations table as links
 def movereps(sys):
+    """ move reps from wdunits table to the representations table as links """
     repsysids = {"qudt": 10, "iev": 21, "igb": 3, "ncit": 9, "ucum": 2, "unece": 6, "uom": 13, "wolf": 20, "wur": 23}
     repsysid = repsysids[sys]
     wtmp = None

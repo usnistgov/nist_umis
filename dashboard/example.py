@@ -624,6 +624,7 @@ if choice == 'wdc':
     exit()
 
 # get list of units on Wikidata
+# get list of units on Wikidata
 if choice == 'wdu':
     # units = wdunits()  # call class to update wdunits if working on wikidata OR download from wd and parse below
     # query to server not working currently (11/14/24)
@@ -632,10 +633,10 @@ if choice == 'wdu':
     repsysids = {"qudt": 10, "iev": 21, "igb": 3, "ncit": 9, "ucum": 2, "unece": 6, "uom": 13, "wolf": 20, "wur": 23}
 
     units = None
-    file = f'umis_units_query_111524.json'
+    file = f'umis_units_query_121724.json'
     if os.path.exists(os.path.join(BASE_DIR, STATIC_URL, file)):
-        # read in the file
-        with open(os.path.join(BASE_DIR, STATIC_URL, file), 'r') as f:
+        # read in the file (open function has read as default so not added)
+        with open(os.path.join(BASE_DIR, STATIC_URL, file)) as f:
             tmp = f.read()
             units = json.loads(tmp)
             f.close()
@@ -667,22 +668,26 @@ if choice == 'wdu':
             wu = Wdunits(cls=unit['cls'], unit=unit['unit'], quant=unit['quant'], factor=unit['factor'],
                          curl=unit['curl'], uurl=unit['uurl'], qurl=unit['qurl'], added=date.today(), updated=dt
                          )
+            print("added")
         else:
             # check for unit representation data and add if the field is empty
             wu = found[0]
+            print("found")
 
-        # get and add wd unit class if available
-        cls = Wdclasses.objects.filter(url__exact=unit['curl'])
-        if cls:
-            wu.wdclass_id = cls[0].id
+        # if missing add wd unit class if available
+        if not wu.wdclass_id:
+            cls = Wdclasses.objects.filter(url__exact=unit['curl'])
+            if cls:
+                wu.wdclass_id = cls[0].id
+
         # save to wdunits table
         wu.save()
 
         # add any unit reps to the representations table
         for ufld in uflds:
             repsysid, strng = None, None
-            if unit[ufld]:
-                # find unit string in the strng table
+            if ufld in unit.keys():
+                # find (or add) unit string in the strng table
                 strng = Strngs.objects.get(string=unit[ufld])
                 if not strng:
                     # add new unit string
@@ -691,6 +696,13 @@ if choice == 'wdu':
                 repsysid = repsysids[ufld]
                 rep = Representations.objects.get(repsystem__id=repsysid, strng_id=strng.id)
                 if rep:
+                    if rep.wdunit_id and rep.onwd == "yes":
+                        print("representation " + unit[ufld] + " already added")
+                        continue
+                    print(rep.__dict__)
+                    print(unit)
+                    exit()
+
                     # update representation entry with wdunit_id
                     rep.wdunit_id = wu.id
                     rep.onwd = 'yes'
@@ -706,7 +718,7 @@ if choice == 'wdu':
 
         print("added '" + wu.unit + "' (" + str(wu.id) + ")")
         cnt += 1
-        if cnt > 0:
+        if cnt > 4:
             exit()
 
 
