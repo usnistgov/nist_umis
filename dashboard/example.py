@@ -1,13 +1,11 @@
 # import json
-import json
 import os
 import django
-import re
 
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "umisconfig.settings")
 django.setup()
 from dashboard.repsys_ingest import *
-from datetime import date, datetime
+from datetime import date
 from units.functions import *
 from wdfunctions import *
 
@@ -747,7 +745,7 @@ if choice == 'wdq':
             if 'merror' in isq:
                 quant['isq'] = None
             else:
-                tmp = re.findall(r'alttext="\{(.+?)\}"', isq)
+                tmp = re.findall(r'alttext="\{(.+?)}"', isq)
                 isq = (tmp[0].replace("\\displaystyle", '').replace("\\mathsf", '').replace(' ', '').
                        replace('{{', '').replace('}}', ''))
                 quant['isq'] = isq
