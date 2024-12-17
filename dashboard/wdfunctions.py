@@ -33,7 +33,7 @@ def wdclasses():
 def wdunits():
     """ get list of units of measurement instances under 'unit of' subclasses """
     query = """
-    SELECT ?curl ?cls ?uurl ?unit ?qurl ?quant ?factor ?iev ?igb ?ncit ?qudt ?ucum ?unece ?uom2 ?wolf ?wur WHERE  { 
+    SELECT ?curl ?cls ?uurl ?unit ?qurl ?quant ?factor ?facunit ?iev ?igb ?ncit ?qudt ?ucum ?unece ?uom2 ?wolf ?wur WHERE  { 
       ?curl wdt:P279* wd:Q47574 ;
              rdfs:label ?cls .
       ?uurl wdt:P31 ?curl ;
@@ -43,6 +43,7 @@ def wdunits():
         ?uurl p:P2370 ?node .
         ?node psv:P2370 ?f .
         ?f wikibase:quantityAmount ?fstr .
+        ?f wikibase:quantityUnit ?facunit .
         BIND(SUBSTR(?fstr, 1, 50) as ?factor)
       }
       OPTIONAL { ?uurl wdt:P1748 ?ncit }

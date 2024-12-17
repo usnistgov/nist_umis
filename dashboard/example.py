@@ -9,7 +9,7 @@ from datetime import date
 from units.functions import *
 from wdfunctions import *
 
-choice = 'wdc'
+choice = 'wdu'
 
 local = timezone("America/New_York")
 
@@ -552,10 +552,10 @@ if choice == 'runucum':
 
 # get list of unit of measurement subclasses on Wikidata
 if choice == 'wdc':
+    # working as 12/17/24
     classes = wdclasses()  # call class to update if working on wikidata OR download from wd and parse below
-    # print(classes)
-    # exit()
 
+    # if wdclasses is not working then manual download and ingest
     # classes = None
     # file = f'umis_quants_query_111424.json'
     # if os.path.exists(os.path.join(BASE_DIR, STATIC_URL, file)):
@@ -606,6 +606,7 @@ if choice == 'wdc':
             c.updated = local.localize(datetime.now())
             c.save()
             print("added class '" + str(c.name) + "'")
+            exit()
         else:
             if not c.quantity_id:
                 quant = Quantities.objects.filter(iso_item=cls['sect'])
@@ -619,33 +620,33 @@ if choice == 'wdc':
                 print("updated class '" + str(c.name) + "'")
             else:
                 print("found class '" + str(c.name) + "'")
+
     exit()
 
 # get list of units on Wikidata
-# get list of units on Wikidata
 if choice == 'wdu':
-    # units = wdunits()  # call class to update wdunits if working on wikidata OR download from wd and parse below
-    # query to server not working currently (11/14/24)
+    units = wdunits()  # call class to update wdunits if working on wikidata OR download from wd and parse below
+    # query to server not working currently (11/14/24), but working (12/17/24)
+
+    # units = None
+    # file = f'umis_units_query_121724.json'
+    # if os.path.exists(os.path.join(BASE_DIR, STATIC_URL, file)):
+    #     # read in the file (open function has read as default so not added)
+    #     with open(os.path.join(BASE_DIR, STATIC_URL, file)) as f:
+    #         tmp = f.read()
+    #         units = json.loads(tmp)
+    #         f.close()
 
     # define variables
     repsysids = {"qudt": 10, "iev": 21, "igb": 3, "ncit": 9, "ucum": 2, "unece": 6, "uom": 13, "wolf": 20, "wur": 23}
-
-    units = None
-    file = f'umis_units_query_121724.json'
-    if os.path.exists(os.path.join(BASE_DIR, STATIC_URL, file)):
-        # read in the file (open function has read as default so not added)
-        with open(os.path.join(BASE_DIR, STATIC_URL, file)) as f:
-            tmp = f.read()
-            units = json.loads(tmp)
-            f.close()
-
+    flds = ['curl', 'cls', 'uurl', 'unit', 'qurl', 'quant', 'factor', 'facunit']
+    uflds = ['iev', 'igb', 'ncit', 'qudt', 'ucum', 'unece', 'uom', 'wolf', 'wur']
+    dt = local.localize(datetime.now())
     cnt = 0
+
+    # iterater over units
     for unit in units:
         # add/update wikidata entry
-        flds = ['curl', 'cls', 'uurl', 'unit', 'qurl', 'quant', 'factor', 'iev', 'igb', 'ncit',
-                'qudt', 'ucum', 'unece', 'uom', 'wolf', 'wur']
-        uflds = ['iev', 'igb', 'ncit', 'qudt', 'ucum', 'unece', 'uom', 'wolf', 'wur']
-        dt = local.localize(datetime.now())
         if not isinstance(unit['uurl'], str):
             found = Wdunits.objects.filter(uurl__exact=unit['uurl']['value'])
         else:
@@ -663,14 +664,40 @@ if choice == 'wdu':
                     setattr(unit, fld, getattr(unit, fld))
 
             # add unit
+            for fld in flds:
+                if isinstance(unit[fld], dict):  # when units are retrieved in code (not from download file)
+                    unit[fld] = unit[fld]['value']  # data is in this format {'type': '???', 'value': '???'}
+
             wu = Wdunits(cls=unit['cls'], unit=unit['unit'], quant=unit['quant'], factor=unit['factor'],
-                         curl=unit['curl'], uurl=unit['uurl'], qurl=unit['qurl'], added=date.today(), updated=dt
-                         )
-            print("added")
+                         wdfacunit_id=unit['facunit'], curl=unit['curl'], uurl=unit['uurl'], qurl=unit['qurl'],
+                         added=date.today(), updated=dt)
+            action = "added"
         else:
-            # check for unit representation data and add if the field is empty
+            # get found unit
             wu = found[0]
-            print("found")
+            # add missing factor
+            if wu.factor is None and 'factor' in unit.keys():
+                if isinstance(unit['factor'], dict):
+                    unit['factor'] = unit['factor']['value']
+                wu.factor = unit['factor']
+                wu.save()
+            # add missing factor units
+            if wu.factor and 'facunit' in unit.keys() and wu.wdfacunit_id is None:
+                # facunit from SPARQL query is uurl (Wikidata unit URL)
+                if isinstance(unit['facunit'], dict):
+                    unit['facunit'] = unit['facunit']['value']
+                facu = Wdunits.objects.filter(uurl=unit['facunit'])
+                if not facu:
+                    if isinstance(unit['unit'], dict):
+                        unit['unit'] = unit['unit']['value']
+                    if unit['unit'] == 'degree Celsius':
+                        continue  # it's an equation, not a factor...
+                    print('factor unit not in DB')
+                    print(unit['unit'])
+                    exit()
+                wu.wdfacunit_id = facu[0].id
+                wu.save()
+            action = "found"
 
         # if missing add wd unit class if available
         if not wu.wdclass_id:
@@ -685,26 +712,30 @@ if choice == 'wdu':
         for ufld in uflds:
             repsysid, strng = None, None
             if ufld in unit.keys():
+                if isinstance(unit[ufld], dict):  # when units are retrieved in code (not from download file)
+                    unit[ufld] = unit[ufld]['value']  # data is in this format {'type': '???', 'value': '???'}
                 # find (or add) unit string in the strng table
-                strng = Strngs.objects.get(string=unit[ufld])
-                if not strng:
+                strngs = Strngs.objects.filter(string=unit[ufld])
+                if not strngs:
                     # add new unit string
                     strng = Strngs(string=unit[ufld], status='current', autoadded='yes', updated=dt)
+                    strng.save()
+                else:
+                    strng = strngs[0]
 
                 repsysid = repsysids[ufld]
-                rep = Representations.objects.get(repsystem__id=repsysid, strng_id=strng.id)
-                if rep:
+                reps = Representations.objects.filter(repsystem__id=repsysid, strng_id=strng.id)
+                if reps:
+                    rep = reps[0]
                     if rep.wdunit_id and rep.onwd == "yes":
                         print("representation " + unit[ufld] + " already added")
                         continue
-                    print(rep.__dict__)
-                    print(unit)
-                    exit()
-
-                    # update representation entry with wdunit_id
-                    rep.wdunit_id = wu.id
-                    rep.onwd = 'yes'
-                    rep.save()
+                    else:
+                        # update representation entry with wdunit_id
+                        print("representation " + unit[ufld] + " updated")
+                        rep.wdunit_id = wu.id
+                        rep.onwd = 'yes'
+                        rep.save()
                 else:
                     # add representation entry
                     urlep = 'no'
@@ -714,11 +745,10 @@ if choice == 'wdu':
                                              url_endpoint=urlep, status='current', onwd='yes', checked='no', updated=dt)
                     newrep.save()
 
-        print("added '" + wu.unit + "' (" + str(wu.id) + ")")
+        print(action + " '" + wu.unit + "' (" + str(wu.id) + ")")
         cnt += 1
-        if cnt > 4:
+        if cnt > 999:
             exit()
-
 
 # get a list of quantities on wikidata
 if choice == 'wdq':
@@ -756,14 +786,13 @@ if choice == 'wdq':
             num = re.findall(r'([A-Z]{3}) 80000-(\d+?):', str(quant['source']))
             isocode = num[0][0] + '-80000-' + num[0][1]
             # search the quantities table for quantity based on the source and section
-            found = Quantities.objects.filter(iso_source=isocode, iso_item=quant['sect'])
+            found = Quantities.objects.filter(name=quant['name'], iso_item=quant['sect'])
             if found:
                 qnt = found[0]
             else:
-                # search by quantity name
-                found = Quantities.objects.filter(name=quant['name'])
-                if found:
-                    qnt = found[0]
+                # no quant found -> likely to be a bad SPARQL hit
+                print("ignoring " + quant['name'] + ":" + str(quant['sect']))  # not sure why str() wrapper is needed
+                continue
 
         # check if quantity already added
         add, created = Wdquants.objects.get_or_create(
@@ -780,7 +809,6 @@ if choice == 'wdq':
             add.updated = local.localize(datetime.now())
             add.save()
             print("added '" + add.name + "' (" + str(add.id) + ")")
-            # print(quant)
         else:
             print("already added " + quant['name'])
 
