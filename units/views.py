@@ -36,11 +36,13 @@ def newindex(request):
     data = {}
     for u in raw:
         # print(u.wdclass.__dict__)
-        quant = u.quant
-        if quant not in data.keys():
-            data.update({quant: []})
-        unit = {'id': u.id, 'name': u.unit}
-        data[quant].append(unit)
+        qujoins = u.wdquantswdunits_set.all()
+        for qujoin in qujoins:
+            quant = qujoin.wdquant.name
+            if quant not in data.keys():
+                data.update({quant: []})
+            unit = {'id': u.id, 'name': u.unit}
+            data[quant].append(unit)
     return render(request, "../templates/units/newindex.html", {'data': data})
 
 
@@ -100,6 +102,52 @@ def view(request, uid):
 
     return render(request, "../templates/units/view.html",
                   {'unit': unit, 'reps': reps, 'qkinds': qkinds, 'usys': usys, 'equsf': equsf, 'equst': equst,
+                   'dv': dv, 'corsf': corsf, 'corst': corst, 'qsys': qsys, 'quants': quants, 'type': typ})
+
+
+def newview(request, uid):
+    """ view the different representations of a unit"""
+    if uid.isnumeric():
+        try:
+            uid = Wdunits.objects.get(id=uid).id
+        except Wdunits.DoesNotExist:
+            return redirect('/')
+    elif isinstance(uid, str):
+        try:
+            uid = Wdunits.objects.get(name=uid.lower()).id
+        except Wdunits.DoesNotExist:
+            return redirect('/')
+    wdunit = Wdunits.objects.get(id=uid)
+    quants = wdunit.wdquantswdunits_set.all()
+    data = wdunit.representations_set.all()
+    usyss = wdunit.unitsystemswdunits_set.all()
+    qkinds = None
+    equsf = None
+    equst = None
+    dv = None
+    corsf = None
+    corst = None
+    qsys = None
+    typ = None
+    reps = {}
+    for rep in data:
+        sg = rep.strng.string
+        if rep.repsystem_id == 15:
+            sg = sg.replace('/', '-').replace('#', '%23')  # needed for IEC codes
+        st = rep.strng.status
+        if sg not in reps.keys():
+            reps.update({sg: {'status': st, 'enccount': 0, 'strng_id': 0, 'systems': []}})
+        sys = rep.repsystem
+        encs = rep.strng.encodings_set.all()
+        reps[sg]['enccount'] = encs.count()
+        if encs.count() > 0:
+            reps[sg]['strng_id'] = rep.strng.id
+        tmp = {'id': sys.id, 'name': sys.name, 'abbrev': sys.abbrev, 'path': sys.path, 'encs': encs,
+               'url_ep': rep.url_endpoint}
+        reps[sg]['systems'].append(tmp)
+
+    return render(request, "../templates/units/view.html",
+                  {'unit': wdunit, 'reps': reps, 'qkinds': qkinds, 'usyss': usyss, 'equsf': equsf, 'equst': equst,
                    'dv': dv, 'corsf': corsf, 'corst': corst, 'qsys': qsys, 'quants': quants, 'type': typ})
 
 

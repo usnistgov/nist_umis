@@ -61,6 +61,7 @@ class Unitsystems(models.Model):
     name = models.CharField(max_length=128)
     description = models.CharField(max_length=1024)
     abbrev = models.CharField(max_length=16)
+    wdurl = models.CharField(max_length=128, blank=True, null=True)
     quantitysystem = models.ForeignKey(Quantitysystems, on_delete=models.PROTECT, db_column='quantitysystem_id')
     url = models.CharField(max_length=256)
     updated = models.DateTimeField()
@@ -316,7 +317,7 @@ class Wdclasses(models.Model):
     source = models.CharField(max_length=128, blank=True, null=True)
     section = models.CharField(max_length=16, blank=True, null=True)
     quant = models.CharField(max_length=128, blank=True, null=True)
-    quantity = models.ForeignKey(Units, on_delete=models.PROTECT, db_column='quantity_id')
+    quantity = models.ForeignKey(Quantities, on_delete=models.PROTECT, db_column='quantity_id')
     updated = models.DateTimeField(blank=True, null=True)
 
     class Meta:
@@ -325,10 +326,23 @@ class Wdclasses(models.Model):
         db_table_comment = 'Table of Wikidata Unit Classes'
 
 
+class Wdsiclasses(models.Model):
+    curl = models.CharField(max_length=128)
+    label = models.CharField(max_length=32)
+    silabel = models.CharField(max_length=32, blank=True, null=True)
+    updated = models.DateTimeField()
+
+    class Meta:
+        managed = False
+        db_table = 'wdsiclasses'
+        db_table_comment = 'Table of wikidata SI related classes'
+
+
 class Wdunits(models.Model):
+    unit = models.CharField(max_length=64, blank=True, null=True)
+    sitype = models.ForeignKey(Wdsiclasses, models.DO_NOTHING, db_column='sitype', blank=True, null=True)
     wdclass = models.ForeignKey(Wdclasses, on_delete=models.PROTECT, db_column='wdclass_id')
     cls = models.CharField(db_column='class', max_length=64, blank=True, null=True)  # Field renamed reserved word.
-    unit = models.CharField(max_length=64, blank=True, null=True)
     quant = models.CharField(max_length=32, blank=True, null=True)
     factor = models.CharField(max_length=256, blank=True, null=True)
     wdfacunit = models.ForeignKey('self', on_delete=models.PROTECT, db_column='wdfacunit_id')
@@ -379,3 +393,26 @@ class Representations(models.Model):
         managed = False
         db_table = 'representations'
         unique_together = (('unit_id', 'repsystem_id', 'strng_id'),)
+
+
+class WdquantsWdunits(models.Model):
+    wdquant = models.ForeignKey(Wdquants, models.DO_NOTHING)
+    wdunit = models.ForeignKey(Wdunits, models.DO_NOTHING)
+    updated = models.DateTimeField(blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'wdquants_wdunits'
+        unique_together = (('id', 'wdquant'),)
+        db_table_comment = 'Join table between wikidata quantities and units'
+
+
+class UnitsystemsWdunits(models.Model):
+    unitsystem = models.ForeignKey(Unitsystems, models.DO_NOTHING, blank=True, null=True)
+    wdunit = models.ForeignKey(Wdunits, models.DO_NOTHING)
+    updated = models.DateTimeField()
+
+    class Meta:
+        managed = False
+        db_table = 'unitsystems_wdunits'
+        db_table_comment = 'Join table for wdunits and unitsystems'

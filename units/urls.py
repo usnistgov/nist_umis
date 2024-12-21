@@ -9,6 +9,7 @@ urlpatterns = [
     path("units", views.index, name='index'),
     path("units/index", views.index, name='index'),
     path("units/newindex", views.newindex, name='new index'),
+    path("units/newview/<uid>", views.newview, name='new view'),
     path("units/unitimport/", views.unitimport, name='import'),
     path("units/crosswalk/", views.crosswalk, name='crosswalk'),
     path("units/crosswalk/<sys1id>/<sys2id>", views.crosswalk, name='crosswalk'),

@@ -9,7 +9,7 @@ from datetime import date
 from units.functions import *
 from wdfunctions import *
 
-choice = 'wdu'
+choice = 'wdsic'
 
 local = timezone("America/New_York")
 
@@ -667,9 +667,20 @@ if choice == 'wdu':
             for fld in flds:
                 if isinstance(unit[fld], dict):  # when units are retrieved in code (not from download file)
                     unit[fld] = unit[fld]['value']  # data is in this format {'type': '???', 'value': '???'}
+            if isinstance(unit['facunit'], dict):
+                unit['facunit'] = unit['facunit']['value']
+            facu = Wdunits.objects.filter(uurl=unit['facunit'])
+            if not facu:
+                if isinstance(unit['unit'], dict):
+                    unit['unit'] = unit['unit']['value']
+                if unit['unit'] == 'degree Celsius':
+                    continue  # it's an equation, not a factor...
+                print('factor unit not in DB yet')
+                continue
 
+            # add unit
             wu = Wdunits(cls=unit['cls'], unit=unit['unit'], quant=unit['quant'], factor=unit['factor'],
-                         wdfacunit_id=unit['facunit'], curl=unit['curl'], uurl=unit['uurl'], qurl=unit['qurl'],
+                         wdfacunit_id=facu[0].id, curl=unit['curl'], uurl=unit['uurl'], qurl=unit['qurl'],
                          added=date.today(), updated=dt)
             action = "added"
         else:
@@ -692,9 +703,8 @@ if choice == 'wdu':
                         unit['unit'] = unit['unit']['value']
                     if unit['unit'] == 'degree Celsius':
                         continue  # it's an equation, not a factor...
-                    print('factor unit not in DB')
-                    print(unit['unit'])
-                    exit()
+                    print('factor unit not in DB yet')
+                    continue
                 wu.wdfacunit_id = facu[0].id
                 wu.save()
             action = "found"
@@ -704,8 +714,10 @@ if choice == 'wdu':
             cls = Wdclasses.objects.filter(url__exact=unit['curl'])
             if cls:
                 wu.wdclass_id = cls[0].id
+                print(wu.__dict__)
 
         # save to wdunits table
+
         wu.save()
 
         # add any unit reps to the representations table
@@ -747,7 +759,7 @@ if choice == 'wdu':
 
         print(action + " '" + wu.unit + "' (" + str(wu.id) + ")")
         cnt += 1
-        if cnt > 999:
+        if cnt > 3999:
             exit()
 
 # get a list of quantities on wikidata
@@ -812,6 +824,13 @@ if choice == 'wdq':
         else:
             print("already added " + quant['name'])
 
+# get a list of quantities part of SI related classes
+if choice == 'wdsic':
+    siclss = wdsiclss()
+    for sicls in siclss:
+        print(sicls)
+        exit()
+
 # check wdquants data against the quantities data
 if choice == 'wdqchk':
     qs = Wdquants.objects.all().values('quant', 'sect')
@@ -821,3 +840,112 @@ if choice == 'wdqchk':
             if not found:
                 print(q)
                 exit()
+
+# check how to get all data out for witidata units (for newview template)
+if choice == 'wdudata':
+    wdunit = Wdunits.objects.get(id=35)
+    quants = wdunit.wdquantswdunits_set.all()
+    reps = wdunit.representations_set.all()
+
+    print(wdunit.__dict__)
+    print(quants[0].__dict__)
+    print(reps[0].__dict__)
+
+    # qkinds = wdunit.wdclasses_set.all()
+
+# populate the wdquants_wdunits table (run once)
+if choice == 'wduqks':
+    dt = local.localize(datetime.now())
+    # get list of quantity id and names
+    utmp = Wdunits.objects.all().values('id', 'unit').order_by('unit')
+    qtmp = Wdquants.objects.all().values('id', 'name').order_by('name')
+    unts, qnts = {}, {}
+    for q in qtmp:
+        qnts.update({q['name']: q['id']})
+    for u in utmp:
+        unts.update({u['unit']: u['id']})
+
+    units = None
+    file = f'umis_units_query_121724.json'
+    if os.path.exists(os.path.join(BASE_DIR, STATIC_URL, file)):
+        # read in the file (open function has read as default so not added)
+        with open(os.path.join(BASE_DIR, STATIC_URL, file)) as f:
+            tmp = f.read()
+            units = json.loads(tmp)
+            f.close()
+
+    for unt in units:
+        if unt['unit'] not in unts.keys() or unt['quant'] not in qnts.keys():
+            print(unt['quant'] + ":" + unt['unit'] + " not found")
+            continue
+
+        uq, created = WdquantsWdunits.objects.get_or_create(wdquant_id=qnts[unt['quant']], wdunit_id=unts[unt['unit']])
+        if created:
+            print("added '" + unt['quant'] + ":" + unt['unit'])
+            uq.updated = dt
+            uq.save()
+        else:
+            print("already added " + unt['quant'] + ":" + unt['unit'])
+
+if choice == 'wduidx':
+    raw = Wdunits.objects.all().order_by('wdclass__quant', 'unit')
+    data = {}
+    for u in raw:
+        # print(u.wdclass.__dict__)
+        qujoins = u.wdquantswdunits_set.all()
+        for qujoin in qujoins:
+            quant = qujoin.wdquant.name
+            if quant not in data.keys():
+                data.update({quant: []})
+            unit = {'id': u.id, 'name': u.unit}
+            data[quant].append(unit)
+
+# link the units systems to  wdunits (not many <10% are identified), also add the ISQ if wdclass is defined
+if choice == 'wdusyss':
+    dt = local.localize(datetime.now())
+    # get list of quantity id and names
+    utmp = Wdunits.objects.all().values('id', 'unit').order_by('unit')
+    stmp = Unitsystems.objects.filter(wdurl__isnull=False).values('id', 'wdurl').order_by('id')
+    ctmp = Wdunits.objects.filter(wdclass_id__isnull=False).values('unit', 'id').order_by('unit')
+    syss, unts, ucls = {}, {}, {}
+    for u in utmp:
+        unts.update({u['unit']: u['id']})
+    for s in stmp:
+        syss.update({s['wdurl'].replace('https://www.wikidata.org/wiki/', ''): s['id']})
+    for c in ctmp:
+        ucls.update({c['unit']: c['id']})
+
+    units = None
+    file = f'umis_units_query_121924.json'
+    if os.path.exists(os.path.join(BASE_DIR, STATIC_URL, file)):
+        # read in the file (open function has read as default so not added)
+        with open(os.path.join(BASE_DIR, STATIC_URL, file)) as f:
+            tmp = f.read()
+            units = json.loads(tmp)
+            f.close()
+
+    print(syss)
+    for unt in units:
+        uw, created = None, None
+        if 'usys' in unt.keys():
+            usys = unt['usys'].replace('http://www.wikidata.org/entity/', '')
+            if usys in syss.keys() and unt['unit'] in unts.keys():
+                uw, created = UnitsystemsWdunits.objects.get_or_create(
+                        unitsystem_id=syss[usys], wdunit_id=unts[unt['unit']])
+            else:
+                usys = 1
+                if unt['unit'] in ucls.keys():
+                    uw, created = UnitsystemsWdunits.objects.get_or_create(
+                        unitsystem_id=usys, wdunit_id=ucls[unt['unit']])
+        else:
+            usys = 1
+            if unt['unit'] in ucls.keys():
+                uw, created = UnitsystemsWdunits.objects.get_or_create(
+                    unitsystem_id=usys, wdunit_id=ucls[unt['unit']])
+        if created:
+            print("added " + str(usys) + ":" + unt['unit'])
+            uw.updated = dt
+            uw.save()
+        else:
+            print("already added " + str(usys) + ":" + unt['unit'])
+

@@ -75,6 +75,9 @@ def wdunits():
 
 def wdquants():
     """ get list of units of measurement instances under 'unit of' subclasses """
+    # filtering based on ISO sources (incomplete) for example (currently limits responses severely)
+    # FILTER(?srcid IN(wd:Q109490582,wd:Q90137277,wd:Q73391977,wd:Q92157468,wd:Q117847945,
+    # wd:Q80232369,wd:Q99839315,wd:Q86976044,wd:Q85490171,wd:Q100957475))
     query = """
     SELECT DISTINCT ?qntid ?quant ?isq ?source ?sect
     WHERE
@@ -100,6 +103,28 @@ def wdquants():
         FILTER(LANG(?quant) = "en") .
     }
     ORDER BY ASC(?quant)
+    """
+    # search wikidata sparql query
+    wd = return_sparql_query_results(query)
+    # return data
+    wdjsn = json.loads(json.dumps(wd['results']['bindings']))
+    return wdjsn
+
+
+def wdsiclss():
+    """ get list of unit of measurement subclasses starting with 'unit of'"""
+    query = """
+    SELECT ?curl ?cls ?uurl ?unit WHERE  { 
+      ?curl wdt:P279* wd:Q47574 ;
+             rdfs:label ?cls .
+      ?uurl wdt:P31 ?curl ;
+            rdfs:label ?unit .
+      FILTER(?curl IN (wd:Q223662, wd:Q208469, wd:Q61610698, wd:Q87252761, wd:Q68618328, wd:Q1618549, wd:Q21684377,
+                       wd:Q69197847, wd:Q99734981, wd:Q26240, wd:Q106839753, wd:Q3268848, wd:Q106839917))
+      FILTER(LANG(?cls) = "en")
+      FILTER(LANG(?unit) = "en")
+    }
+    ORDER BY ?cls
     """
     # search wikidata sparql query
     wd = return_sparql_query_results(query)

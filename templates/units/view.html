@@ -7,12 +7,20 @@
         <div class="card card-success">
             <div class="card-header">
                 <a type="button" href="/api/units/view/{{ unit.id }}" class="btn btn-lightgrn btn-xs float-end">API</a>
-                <h4 class="card-title mb-0">Unit: {{ unit.name }}</h4>
+                <h4 class="card-title mb-0">Unit: {{ unit.name }} {{ unit.unit }}</h4>
             </div>
             <div class="card-body">
                 <div class="row">
                     <div class="col-5">
-                        <b>Unit System</b>: <a href="/unitsystems/view/{{ usys.id }}">{{ usys.name }}</a><br/>
+                        <b>Unit System</b>:
+                        {% if usyss %}
+                            {% for usys in usyss %}
+                                {% if forloop.counter > 1 %}, {% endif %} <a href="/unitsystems/view/{{ usys.unitsystem.id }}">{{ usys.unitsystem.name }}</a>
+                            {% endfor %}
+                        {% elif usys %}
+                            <a href="/unitsystems/view/{{ usys.id }}">{{ usys.name }}</a>
+                        {% endif %}
+                        <br/>
                         <b>Unit Type</b>: {{ unit.type }}<br/>
                         {% if qsys %}<b>Quantity System</b>: <a href="/quantitysystems/view/{{ qsys.id }}">{{ qsys.name }}</a><br/>{% endif %}
                         <b>Quantity Kind(s)</b>:
@@ -26,7 +34,7 @@
                         {% if quants|length > 0 %}
                             <b><em>Quantities that are measured in this unit</em></b><br/>
                             {% for quant in quants %}
-                                <a href="/quantities/view/{{ quant.id }}" class="btn btn-xs btn-success m-1">{{ quant.name }}</a>
+                                <a href="/quantities/view/{{ quant.id }}{{ quant.quant.id }}" class="btn btn-xs btn-success m-1">{{ quant.name }}{{ quant.wdquant.name }}</a>
                             {% endfor %}
                         {% endif %}
                     </div>
