@@ -9,7 +9,7 @@ from datetime import date
 from units.functions import *
 from wdfunctions import *
 
-choice = 'wdsic'
+choice = 'wdu'
 
 local = timezone("America/New_York")
 
@@ -566,6 +566,7 @@ if choice == 'wdc':
     #         f.close()
     # exit()
 
+    print(len(classes))
     for cls in classes:
         if not isinstance(cls['class'], str):
             cls['class'] = cls['class']['value']
@@ -645,7 +646,13 @@ if choice == 'wdu':
     cnt = 0
 
     # iterater over units
+    print(len(units))
     for unit in units:
+        # if unit['unit']['value'] != 'square metre per joule':
+        #     continue
+        # else:
+        #     print(unit)
+
         # add/update wikidata entry
         if not isinstance(unit['uurl'], str):
             found = Wdunits.objects.filter(uurl__exact=unit['uurl']['value'])
@@ -673,14 +680,21 @@ if choice == 'wdu':
             if not facu:
                 if isinstance(unit['unit'], dict):
                     unit['unit'] = unit['unit']['value']
+                    unit['uurl'] = unit['uurl']['value']
+                    unit['facunit'] = unit['facunit']['value']
                 if unit['unit'] == 'degree Celsius':
                     continue  # it's an equation, not a factor...
-                print('factor unit not in DB yet')
-                continue
+                if unit['uurl'] == unit['facunit']:
+                    facunit = None  # first time around it is empty...
+                else:
+                    print('factor unit not in DB yet')
+                    continue
+            else:
+                facunit = facu[0].id
 
             # add unit
             wu = Wdunits(cls=unit['cls'], unit=unit['unit'], quant=unit['quant'], factor=unit['factor'],
-                         wdfacunit_id=facu[0].id, curl=unit['curl'], uurl=unit['uurl'], qurl=unit['qurl'],
+                         wdfacunit_id=facunit, curl=unit['curl'], uurl=unit['uurl'], qurl=unit['qurl'],
                          added=date.today(), updated=dt)
             action = "added"
         else:
@@ -717,7 +731,6 @@ if choice == 'wdu':
                 print(wu.__dict__)
 
         # save to wdunits table
-
         wu.save()
 
         # add any unit reps to the representations table
