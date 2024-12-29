@@ -128,7 +128,6 @@ def newview(request, uid):
     corsf = None
     corst = None
     qsys = None
-    typ = None
     reps = {}
     for rep in data:
         sg = rep.strng.string
@@ -148,7 +147,7 @@ def newview(request, uid):
 
     return render(request, "../templates/units/view.html",
                   {'unit': wdunit, 'reps': reps, 'qkinds': qkinds, 'usyss': usyss, 'equsf': equsf, 'equst': equst,
-                   'dv': dv, 'corsf': corsf, 'corst': corst, 'qsys': qsys, 'quants': quants, 'type': typ})
+                   'dv': dv, 'corsf': corsf, 'corst': corst, 'qsys': qsys, 'quants': quants})
 
 
 def search(request):

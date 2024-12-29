@@ -640,137 +640,130 @@ if choice == 'wdu':
 
     # define variables
     repsysids = {"qudt": 10, "iev": 21, "igb": 3, "ncit": 9, "ucum": 2, "unece": 6, "uom": 13, "wolf": 20, "wur": 23}
-    flds = ['curl', 'cls', 'uurl', 'unit', 'qurl', 'quant', 'factor', 'facunit']
+    flds = ['curl', 'cls', 'uurl', 'unit', 'qurl', 'quant', 'factor', 'facunit','iev', 'igb', 'ncit', 'qudt', 'ucum', 'unece', 'uom', 'wolf', 'wur']
     uflds = ['iev', 'igb', 'ncit', 'qudt', 'ucum', 'unece', 'uom', 'wolf', 'wur']
     dt = local.localize(datetime.now())
     cnt = 0
+    wduqs = Wdunits.objects.all()  # one DB query gets all rows in memory
+    # repqs = Representations.objects.all()  # one DB query gets all rows in memory
+    # strqs = Strngs.objects.all()  # one DB query gets all rows in memory
+    unts = Wdunits.objects.all().values('uurl', 'id')
+    wdunts = {}
+    for unt in unts:
+        wdunts.update({unt['uurl']: unt['id']})
+    clss = Wdclasses.objects.all().values('url', 'id')
+    wdclss = {}
+    for cls in clss:
+        wdclss.update({cls['url']: cls['id']})
+    reps = Representations.objects.filter(wdunit__isnull=False).values('wdunit__uurl','strng__string')
+    wdreps = {}
+    for rep in reps:
+        if rep['wdunit__uurl'] not in wdreps.keys():
+            wdreps.update({rep['wdunit__uurl']: []})
+        wdreps[rep['wdunit__uurl']].append(rep['strng__string'])
+    strs = Strngs.objects.all().values('string','id')
+    wdstrs = {}
+    for stng in strs:
+        wdstrs.update({stng['string']: stng['id']})
+    action = None
 
-    # iterater over units
+    # iterate over units
     print(len(units))
     for unit in units:
-        # if unit['unit']['value'] != 'square metre per joule':
-        #     continue
-        # else:
-        #     print(unit)
+        # convert fields to be consistent across sources
+        # when units are retrieved in code (not from download file)
+        # field data is in this format {'type': '???', 'value': '???'}
+        for fld in flds:
+            if fld not in unit.keys():
+                # only via qwikidata are fields not set
+                unit.update({fld: None})
+            if isinstance(unit[fld], dict):
+                unit[fld] = unit[fld]['value']
 
         # add/update wikidata entry
-        if not isinstance(unit['uurl'], str):
-            found = Wdunits.objects.filter(uurl__exact=unit['uurl']['value'])
-        else:
-            found = Wdunits.objects.filter(uurl__exact=unit['uurl'])
+        # print("checking unit " + unit['unit'])
 
-        # add unit if not found
-        if not found:
-            # convert fields to be consistent across sources
-            keys = unit.keys()
-            for fld in flds:
-                if fld not in keys:
-                    # only via qwikidata are fields not set
-                    unit.update({fld: None})
-                if not isinstance(fld, str):
-                    setattr(unit, fld, getattr(unit, fld))
-
-            # add unit
-            for fld in flds:
-                if isinstance(unit[fld], dict):  # when units are retrieved in code (not from download file)
-                    unit[fld] = unit[fld]['value']  # data is in this format {'type': '???', 'value': '???'}
-            if isinstance(unit['facunit'], dict):
-                unit['facunit'] = unit['facunit']['value']
-            facu = Wdunits.objects.filter(uurl=unit['facunit'])
-            if not facu:
-                if isinstance(unit['unit'], dict):
-                    unit['unit'] = unit['unit']['value']
-                    unit['uurl'] = unit['uurl']['value']
-                    unit['facunit'] = unit['facunit']['value']
-                if unit['unit'] == 'degree Celsius':
-                    continue  # it's an equation, not a factor...
-                if unit['uurl'] == unit['facunit']:
-                    facunit = None  # first time around it is empty...
-                else:
-                    print('factor unit not in DB yet')
-                    continue
-            else:
-                facunit = facu[0].id
-
+        # check for unit already present
+        if unit['uurl'] not in wdunts.keys(): # unit is not in the table so add
             # add unit
             wu = Wdunits(cls=unit['cls'], unit=unit['unit'], quant=unit['quant'], factor=unit['factor'],
-                         wdfacunit_id=facunit, curl=unit['curl'], uurl=unit['uurl'], qurl=unit['qurl'],
-                         added=date.today(), updated=dt)
+                         curl=unit['curl'], uurl=unit['uurl'], qurl=unit['qurl'], added=date.today(), updated=dt)
+            wu.save()
             action = "added"
+
+            # add unit to wdunts
+            wdunts.update({wu.uurl: wu.id})  # this is for same facunit
         else:
-            # get found unit
-            wu = found[0]
-            # add missing factor
-            if wu.factor is None and 'factor' in unit.keys():
-                if isinstance(unit['factor'], dict):
-                    unit['factor'] = unit['factor']['value']
-                wu.factor = unit['factor']
-                wu.save()
-            # add missing factor units
-            if wu.factor and 'facunit' in unit.keys() and wu.wdfacunit_id is None:
-                # facunit from SPARQL query is uurl (Wikidata unit URL)
-                if isinstance(unit['facunit'], dict):
-                    unit['facunit'] = unit['facunit']['value']
-                facu = Wdunits.objects.filter(uurl=unit['facunit'])
-                if not facu:
-                    if isinstance(unit['unit'], dict):
-                        unit['unit'] = unit['unit']['value']
-                    if unit['unit'] == 'degree Celsius':
-                        continue  # it's an equation, not a factor...
-                    print('factor unit not in DB yet')
-                    continue
-                wu.wdfacunit_id = facu[0].id
-                wu.save()
+            # get found unit id
+            wu = wduqs.get(id = wdunts[unit['uurl']])
             action = "found"
 
-        # if missing add wd unit class if available
-        if not wu.wdclass_id:
-            cls = Wdclasses.objects.filter(url__exact=unit['curl'])
-            if cls:
-                wu.wdclass_id = cls[0].id
-                print(wu.__dict__)
+        print(action + " unit " + unit['unit'])
 
-        # save to wdunits table
-        wu.save()
+        # add missing factor
+        if wu.factor is None and unit['factor']:
+            wu.factor = unit['factor']
+            wu.save()
+            print("factor added for " + wu.unit)
+
+        # add missing factor units
+        if wu.wdfacunit_id is None and unit['facunit']:
+            if unit['facunit'] in wdunts.keys():
+                wu.wdfacunit_id = wdunts[unit['facunit']]
+                wu.save()
+                print("factor unit added for " + wu.unit)
+
+        # if missing add wd unit class if available
+        if wu.wdclass_id is None and 'curl' in wdclss.keys():
+            wu.wdclass_id = wdclss[unit['curl']]
+            wu.save()
+            print("class added for " + wu.unit)
 
         # add any unit reps to the representations table
         for ufld in uflds:
             repsysid, strng = None, None
             if ufld in unit.keys():
-                if isinstance(unit[ufld], dict):  # when units are retrieved in code (not from download file)
-                    unit[ufld] = unit[ufld]['value']  # data is in this format {'type': '???', 'value': '???'}
-                # find (or add) unit string in the strng table
-                strngs = Strngs.objects.filter(string=unit[ufld])
-                if not strngs:
-                    # add new unit string
-                    strng = Strngs(string=unit[ufld], status='current', autoadded='yes', updated=dt)
-                    strng.save()
-                else:
-                    strng = strngs[0]
-
+                # representation system id
                 repsysid = repsysids[ufld]
-                reps = Representations.objects.filter(repsystem__id=repsysid, strng_id=strng.id)
-                if reps:
-                    rep = reps[0]
-                    if rep.wdunit_id and rep.onwd == "yes":
-                        print("representation " + unit[ufld] + " already added")
-                        continue
+
+                # check for representation already present
+                if not unit[ufld]:
+                    continue
+                if unit['uurl'] not in wdreps.keys(): # no reps of this unit added
+                    wdreps.update({unit['uurl']: []})
+                if unit[ufld] not in wdreps[unit['uurl']]:
+                    # create representation
+                    # print(unit[ufld])
+                    # print(wdreps)
+                    # exit()
+
+                    # check if string is already in the strngs DB
+                    if unit[ufld] not in wdstrs.keys():
+                        # add string
+                        strng = Strngs(string=unit[ufld], status='current', autoadded='yes', updated=dt)
+                        strng.save()
+                        strid = strng.id
+                        # update wdstrs variable
+                        wdstrs.update({unit[ufld]: strid})
                     else:
-                        # update representation entry with wdunit_id
-                        print("representation " + unit[ufld] + " updated")
-                        rep.wdunit_id = wu.id
-                        rep.onwd = 'yes'
-                        rep.save()
-                else:
-                    # add representation entry
+                        strid = wdstrs[unit[ufld]]
+
+                    # add representation
+                    rep = Representations(wdunit_id=wu.id, repsystem_id=repsysid, strng_id=strid,
+                                             status='current', onwd='yes', checked='no', updated=dt)
+                    rep.save()
+
+                    # add URL endpoint
                     urlep = 'no'
                     if ufld in ["qudt", "iev", "igb", "ncit", "uom"]:
                         urlep = 'yes'
-                    newrep = Representations(wdunit_id=wu.id, repsystem_id=repsysid, strng_id=strng.id,
-                                             url_endpoint=urlep, status='current', onwd='yes', checked='no', updated=dt)
-                    newrep.save()
+                    rep.url_endpoint = urlep
+                    rep.save()
 
-        print(action + " '" + wu.unit + "' (" + str(wu.id) + ")")
+                    print("representation " + unit[ufld] + " added")
+                else:
+                    print("representation " + unit[ufld] + " present")
+                    continue
         cnt += 1
         if cnt > 3999:
             exit()
@@ -842,7 +835,7 @@ if choice == 'wdsic':
     siclss = wdsiclss()
     for sicls in siclss:
         print(sicls)
-        exit()
+
 
 # check wdquants data against the quantities data
 if choice == 'wdqchk':
@@ -961,4 +954,3 @@ if choice == 'wdusyss':
             uw.save()
         else:
             print("already added " + str(usys) + ":" + unt['unit'])
-
