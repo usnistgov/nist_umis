@@ -2,25 +2,59 @@
 {% block title %} UMIS Search {% endblock %}
 {% block header %} UMIS Search {% endblock %}
 {% block content %}
-<h2>Search Results for '{{ term }}'</h2>
-<div class="row mt-2">
-    <div class="col-12">
-        {% if hits.units %}
-            <h3>Units</h3>
-            <ol>
-                {% for k, v in hits.units.items %}
-                    <li><a href="/units/view/{{ k }}">{{ v }}</a></li>
-                {% endfor %}
-            </ol>
-        {% endif %}
-        {% if hits.quants %}
-            <h3>Quantities</h3>
-            <ol>
-                {% for k, v in hits.quants.items %}
-                    <li><a href="/quantities/view/{{ k }}">{{ v }}</a></li>
-                {% endfor %}
-            </ol>
-        {% endif %}
-    </div>
-</div>
+    <h2>Search Results for '{{ term }}'</h2>
+    {% if hits.units %}
+        <div class="col-12 mb-3">
+            <div class="card card-success">
+                <div class="card-header">
+                    <h4 class="card-title mb-0">Units of Measure ({{ hits.units|length }})</h4>
+                </div>
+                <div class="card-body" style="max-height: 300px; overflow-y: scroll;">
+                    <div class="row">
+                        <div class="col-12">
+                            {% for k, v in hits.units.items %}
+                                <a class="btn btn-sm btn-outline-primary my-1" href="/units/view/{{ k }}">{{ v }}</a>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+    {% if hits.quants %}
+        <div class="col-12 mb-3">
+            <div class="card card-success">
+                <div class="card-header">
+                    <h4 class="card-title mb-0">Quantities ({{ hits.quants|length }})</h4>
+                </div>
+                <div class="card-body" style="max-height: 300px; overflow-y: scroll;">
+                    <div class="row">
+                        <div class="col-12">
+                            {% for k, v in hits.quants.items %}
+                                <a class="btn btn-sm btn-outline-success my-1" href="/quantities/view/{{ k }}">{{ v }}</a>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+    {% if hits.reps %}
+        <div class="col-12">
+            <div class="card card-success">
+                <div class="card-header">
+                    <h4 class="card-title mb-0">Unit Representations ({{ hits.reps|length }})</h4>
+                </div>
+                <div class="card-body" style="max-height: 300px; overflow-y: scroll;">
+                    <div class="row">
+                        <div class="col-12">
+                            {% for k, v in hits.reps.items %}
+                                <a class="btn btn-sm btn-outline-danger my-1" href="/units/view/{{ k }}">{{ v }}</a>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endif %}
 {% endblock %}

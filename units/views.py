@@ -3,13 +3,12 @@ from django.shortcuts import render, redirect
 from django.http import JsonResponse
 from units.models import *
 
-
 def home(request):
     """ return the homepage """
     return render(request, "../templates/home.html")
 
 
-def index(request):
+def oldindex(request):
     """ present an overview page about the system in the sds """
     data = Units.objects.all().order_by('quantitykindsunits__quantitykind__name', 'name')
     byq = {}
@@ -28,10 +27,11 @@ def index(request):
     tmp2 = list(byq.keys())
     tmp2.sort()
     data = {i: byq[i] for i in tmp2}
-    return render(request, "../templates/units/index.html", {'data': data})
+    return render(request, "../templates/units/oldindex.html", {'data': data})
 
 
-def newindex(request):
+def index(request):
+    """ new index function getting data from wikidata tables"""
     raw = Wdunits.objects.all().order_by('wdclass__quant', 'unit')
     data = {}
     for u in raw:
@@ -43,10 +43,10 @@ def newindex(request):
                 data.update({quant: []})
             unit = {'id': u.id, 'name': u.unit}
             data[quant].append(unit)
-    return render(request, "../templates/units/newindex.html", {'data': data})
+    return render(request, "../templates/units/index.html", {'data': data})
 
 
-def view(request, uid):
+def oldview(request, uid):
     """ view the different representations of a unit"""
     if uid.isnumeric():
         try:
@@ -65,7 +65,7 @@ def view(request, uid):
     quants = []
     types = []
     for qkind in qkinds:
-        dvs.append(qkind.quantitykind.dimensionvector)
+        dvs.append(qkind.quantitykind.dimensionvector.symbol)
         types.append(qkind.quantitykind.type)
         for quant in qkind.quantitykind.quantities_set.all():
             quants.append(quant)
@@ -105,7 +105,7 @@ def view(request, uid):
                    'dv': dv, 'corsf': corsf, 'corst': corst, 'qsys': qsys, 'quants': quants, 'type': typ})
 
 
-def newview(request, uid):
+def view(request, uid):
     """ view the different representations of a unit"""
     if uid.isnumeric():
         try:
@@ -118,13 +118,17 @@ def newview(request, uid):
         except Wdunits.DoesNotExist:
             return redirect('/')
     wdunit = Wdunits.objects.get(id=uid)
-    quants = wdunit.wdquantswdunits_set.all()
+    qids = wdunit.wdquantswdunits_set.all().values_list('wdquant__quant__id', flat=True)
+    dvs = wdunit.wdquantswdunits_set.all().values_list('wdquant__isq', flat=True)
+    dvs = list(set(dvs))
+    dv = dvs[0]
+    dv = dv.replace('^', '').replace('{', '<sup>').replace('}', '</sup>').replace('\Theta', 'Θ')
+    quants = Quantities.objects.filter(id__in=qids)
     data = wdunit.representations_set.all()
     usyss = wdunit.unitsystemswdunits_set.all()
     qkinds = None
     equsf = None
     equst = None
-    dv = None
     corsf = None
     corst = None
     qsys = None
@@ -154,35 +158,36 @@ def search(request):
     """ search of the unit strings """
     term = request.GET.get("q")
     if term:
-        hits = {}
-
-        # find units with term in string representation
-        strngs = Strngs.objects.filter(string__icontains=term).values_list('id', flat=True)
-        if strngs:
-            units = Units.objects.filter(representations__strng_id__in=strngs).distinct()
-            for unit in units:
-                if 'units' not in hits.keys():
-                    hits.update({'units': {}})
-                hits['units'].update({unit.id: unit.name + " (in representation)"})
+        hits = {'units': {}, 'quants': {}, 'reps': {}}
 
         # find units with term in unit name
-        units = Units.objects.filter(name__icontains=term)
-        for unit in units:
-            if 'units' not in hits.keys():
-                hits.update({'units': {}})
-            hits['units'].update({unit.id: unit.name})
+        units = Wdunits.objects.filter(unit__icontains=term)
+        if units:
+            for unit in units:
+                hits['units'].update({unit.id: unit.unit})
 
         # find quantities with the term in the name
         quants = Quantities.objects.filter(name__icontains=term)
         if quants:
             for quant in quants:
-                if 'quants' not in hits.keys():
-                    hits.update({'quants': {}})
                 hits['quants'].update({quant.id: quant.name})
 
+        # find representations with the term
+        if len(term) > 2:  # if long string then search as substring
+            reps = Representations.objects.filter(strng__string__icontains=term)
+        else:  ## ...otherwise search as exact
+            reps = Representations.objects.filter(strng__string__exact=term)
+        if reps:
+            for rep in reps:
+                hits['reps'].update({rep.wdunit_id: rep.strng.string})
+
         if hits:
-            hits['units'] = dict(sorted(hits['units'].items(), key=lambda item: item[1]))
-            hits['quants'] = dict(sorted(hits['quants'].items(), key=lambda item: item[1]))
+            # if hits['units']:
+            #     hits['units'] = dict(sorted(hits['units'].items(), key=lambda item: item[1]))
+            # if hits['quants']:
+            #     hits['quants'] = dict(sorted(hits['quants'].items(), key=lambda item: item[1]))
+            # if hits['reps']:
+            #     hits['reps'] = dict(sorted(hits['reps'].items(), key=lambda item: item[1]))
             return render(request, "../templates/search.html", {'hits': hits, 'term': term})
         else:
             return redirect('/')
@@ -254,8 +259,8 @@ def crosswalk(request, sys1id=None, sys2id=None):
         data = Repsystems.objects.all().values_list('id', 'name').order_by('name')
         return render(request, "../templates/units/crosswalk.html", {'data': data})
 
-
 def unitimport(request):
+    """ what does this do? """
     units = Units.objects.filter(representations__repsystem__id=10)
     output = {}
     output.update({'system': 'qudt'})

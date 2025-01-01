@@ -1,4 +1,4 @@
-# import json
+""" code snippets to migrate/ingest data """
 import os
 import django
 
@@ -9,7 +9,7 @@ from datetime import date
 from units.functions import *
 from wdfunctions import *
 
-choice = 'wdu'
+choice = 'wduqks'
 
 local = timezone("America/New_York")
 
@@ -836,7 +836,6 @@ if choice == 'wdsic':
     for sicls in siclss:
         print(sicls)
 
-
 # check wdquants data against the quantities data
 if choice == 'wdqchk':
     qs = Wdquants.objects.all().values('quant', 'sect')
@@ -872,7 +871,7 @@ if choice == 'wduqks':
         unts.update({u['unit']: u['id']})
 
     units = None
-    file = f'umis_units_query_121724.json'
+    file = f'umis_units_query.json'
     if os.path.exists(os.path.join(BASE_DIR, STATIC_URL, file)):
         # read in the file (open function has read as default so not added)
         with open(os.path.join(BASE_DIR, STATIC_URL, file)) as f:

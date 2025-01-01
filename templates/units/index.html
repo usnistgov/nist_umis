@@ -23,7 +23,8 @@
                                         <td><b>{{ key }}</b>:
                                             <span class="units">
                                                 {% for unit in units %}
-                                                    <a class="unit item" data-content="{{ unit.name|lower }}" href="/units/view/{{ unit.id }}"> {{ unit.name }} </a>
+                                                    <a class="unit item" data-content="{{ unit.name|lower }}" href="/units/newview/{{ unit.id }}">
+                                                        {% if forloop.counter > 1 %}•{% endif %} {{ unit.name }}</a>
                                                 {% endfor %}
                                             </span>
                                         </td>

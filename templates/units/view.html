@@ -12,8 +12,8 @@
             <div class="card-body">
                 <div class="row">
                     <div class="col-5">
-                        <b>Unit System</b>:
                         {% if usyss %}
+                            <b>Unit System</b>:
                             {% for usys in usyss %}
                                 {% if forloop.counter > 1 %}, {% endif %} <a href="/unitsystems/view/{{ usys.unitsystem.id }}">{{ usys.unitsystem.name }}</a>
                             {% endfor %}
@@ -22,13 +22,17 @@
                         {% endif %}
                         <br/>
                         <b>Unit Type</b>: {{ unit.type }}{{ unit.sitype.silabel }}<br/>
-                        {% if qsys %}<b>Quantity System</b>: <a href="/quantitysystems/view/{{ qsys.id }}">{{ qsys.name }}</a><br/>{% endif %}
-                        <b>Quantity Kind(s)</b>:
+                        {% if qsys %}
+                            <b>Quantity System</b>: <a href="/quantitysystems/view/{{ qsys.id }}">{{ qsys.name }}</a><br/>
+                        {% endif %}
+                        {% if qkinds %}
+                            <b>Quantity Kind(s)</b>:
                             {% for qkind in qkinds %}
                                 <a href="/quantitykinds/view/{{ qkind.quantitykind.id }}">{{ qkind.quantitykind.name }}</a>{% if not forloop.last %}, {% endif %}
                             {% endfor %}
                         <br/>
-                        <b>Dimension</b>: {{ dv.symbol|safe }}<br/>
+                        {% endif %}
+                        <b>Dimension</b>: {{ dv|safe }}<br/>
                     </div>
                     <div class="col-7 text-end">
                         {% if quants|length > 0 %}
