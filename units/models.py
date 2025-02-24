@@ -56,6 +56,9 @@ class Quantitykinds(models.Model):
         managed = False
         db_table = 'quantitykinds'
 
+    def __str__(self):
+        return f'{self.name}'
+
 
 class Unitsystems(models.Model):
     name = models.CharField(max_length=128)
@@ -69,6 +72,9 @@ class Unitsystems(models.Model):
     class Meta:
         managed = False
         db_table = 'unitsystems'
+
+    def __str__(self):
+        return f'{self.name}'
 
 
 class Units(models.Model):
@@ -183,6 +189,9 @@ class Strngs(models.Model):
     class Meta:
         managed = False
         db_table = 'strngs'
+
+    def __str__(self):
+        return f'{self.string}'
 
 
 class Encodings(models.Model):
@@ -393,6 +402,10 @@ class Representations(models.Model):
         managed = False
         db_table = 'representations'
         unique_together = (('unit_id', 'repsystem_id', 'strng_id'),)
+        verbose_name_plural = "representations"
+
+    def __str__(self):
+        return f'{self.strng.string}'
 
 
 class WdquantsWdunits(models.Model):

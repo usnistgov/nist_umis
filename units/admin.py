@@ -1,22 +1,24 @@
 from django.contrib import admin
+from django.forms import TextInput
+
 from units.models import *
 
 
-# Register your models here.
-@admin.register(Units)
+class RepresentationsInline(admin.TabularInline):
+    model = Representations
+    fields = ('repsystem', 'status', 'checked')
+    formfield_overrides = {
+        models.CharField: {'widget': TextInput(attrs={'size': '7'})},
+    }
+
 class UnitsAdmin(admin.ModelAdmin):
     """ systems table admin config """
-    list_display = ('id', 'name', 'qkindname', 'unitsystem')
+    list_display = ('name', 'description', 'updated')
     ordering = ('name',)
     search_fields = ('name',)
+    list_filter = ('unitsystem__name',)
+    inlines = [RepresentationsInline,]
 
-    def qkindname(self, obj):
-        return obj.quantities_units.quantities.name
 
-
-@admin.register(Domains)
-class DomainsAdmin(admin.ModelAdmin):
-    """ systems table admin config """
-    list_display = ('id', 'title', 'type')
-    ordering = ('title',)
-    search_fields = ('title',)
+admin.site.register(Units, UnitsAdmin)
+admin.site.register(Representations)

@@ -9,7 +9,7 @@ from datetime import date
 from units.functions import *
 from wdfunctions import *
 
-choice = 'wduqks'
+choice = 'wdq'
 
 local = timezone("America/New_York")
 
@@ -771,7 +771,7 @@ if choice == 'wdu':
 # get a list of quantities on wikidata
 if choice == 'wdq':
     quants = wdquants()  # call class to update wdquants if working on wikidata OR download from wd and parse below
-
+    print(len(quants))
     cnt = 0
     for q in quants:
         quant = {}
@@ -828,7 +828,7 @@ if choice == 'wdq':
             add.save()
             print("added '" + add.name + "' (" + str(add.id) + ")")
         else:
-            print("already added " + quant['name'])
+            print("found " + quant['name'])
 
 # get a list of quantities part of SI related classes
 if choice == 'wdsic':
@@ -892,6 +892,7 @@ if choice == 'wduqks':
         else:
             print("already added " + unt['quant'] + ":" + unt['unit'])
 
+# get a list of the wdquants_wdunits joins (as needed) (working?)
 if choice == 'wduidx':
     raw = Wdunits.objects.all().order_by('wdclass__quant', 'unit')
     data = {}
@@ -904,6 +905,7 @@ if choice == 'wduidx':
                 data.update({quant: []})
             unit = {'id': u.id, 'name': u.unit}
             data[quant].append(unit)
+    print(data)
 
 # link the units systems to  wdunits (not many <10% are identified), also add the ISQ if wdclass is defined
 if choice == 'wdusyss':
