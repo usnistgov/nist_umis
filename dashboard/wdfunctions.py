@@ -131,3 +131,35 @@ def wdsiclss():
     # return data
     wdjsn = json.loads(json.dumps(wd['results']['bindings']))
     return wdjsn
+
+
+def wdunit(wdid):
+    query = """
+    SELECT DISTINCT ?unit ?factor ?facunit ?iev ?igb ?ncit ?qudt ?ucum ?unece ?uom2 ?wolf ?wur WHERE  { 
+      ?wdid wdt:P31 ?curl ;
+            rdfs:label ?unit .
+      OPTIONAL {
+        ?wdid p:P2370 ?node .
+        ?node psv:P2370 ?f .
+        ?f wikibase:quantityAmount ?factor .
+        ?f wikibase:quantityUnit ?facunit .
+      }
+      OPTIONAL { ?wdid wdt:P1748 ?ncit }
+      OPTIONAL { ?wdid wdt:P2892 ?umls }
+      OPTIONAL { ?wdid wdt:P2968 ?qudt }
+      OPTIONAL { ?wdid wdt:P3328 ?wur }
+      OPTIONAL { ?wdid wdt:P4732 ?igb }
+      OPTIONAL { ?wdid wdt:P6512 ?unece }
+      OPTIONAL { ?wdid wdt:P7007 ?wolf }
+      OPTIONAL { ?wdid wdt:P7825 ?ucum }
+      OPTIONAL { ?wdid wdt:P8769 ?uom2 }
+      OPTIONAL { ?wdid wdt:P8855 ?iev }
+      FILTER(LANG(?unit) = "en")
+    }
+    """
+    query = query.replace("?wdid", "wd:" + wdid)
+    # search wikidata sparql query
+    wd = return_sparql_query_results(query)
+    # return data
+    wdjsn = json.loads(json.dumps(wd['results']['bindings']))
+    return wdjsn

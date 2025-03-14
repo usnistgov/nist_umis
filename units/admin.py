@@ -1,7 +1,14 @@
 from django.contrib import admin
 from django.forms import TextInput
-
 from units.models import *
+from django.contrib.auth.models import Group, User
+from django.contrib.sites.models import Site
+
+
+# Remove Groups
+admin.site.unregister(Group)
+admin.site.unregister(User)
+admin.site.unregister(Site)
 
 
 class RepresentationsInline(admin.TabularInline):
@@ -10,6 +17,7 @@ class RepresentationsInline(admin.TabularInline):
     formfield_overrides = {
         models.CharField: {'widget': TextInput(attrs={'size': '7'})},
     }
+
 
 class UnitsAdmin(admin.ModelAdmin):
     """ systems table admin config """
@@ -21,4 +29,4 @@ class UnitsAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Units, UnitsAdmin)
-admin.site.register(Representations)
+# admin.site.register(Representations)

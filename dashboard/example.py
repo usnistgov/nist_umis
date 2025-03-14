@@ -8,8 +8,11 @@ from dashboard.repsys_ingest import *
 from datetime import date
 from units.functions import *
 from wdfunctions import *
+import pywikibot
+# from qwikidata.linked_data_interface import get_entity_dict_from_api
+# from qwikidata.entity import WikidataItem
 
-choice = 'wdq'
+choice = ''
 
 local = timezone("America/New_York")
 
@@ -640,7 +643,8 @@ if choice == 'wdu':
 
     # define variables
     repsysids = {"qudt": 10, "iev": 21, "igb": 3, "ncit": 9, "ucum": 2, "unece": 6, "uom": 13, "wolf": 20, "wur": 23}
-    flds = ['curl', 'cls', 'uurl', 'unit', 'qurl', 'quant', 'factor', 'facunit','iev', 'igb', 'ncit', 'qudt', 'ucum', 'unece', 'uom', 'wolf', 'wur']
+    flds = ['curl', 'cls', 'uurl', 'unit', 'qurl', 'quant', 'factor', 'facunit', 'iev', 'igb', 'ncit', 'qudt', 'ucum',
+            'unece', 'uom', 'wolf', 'wur']
     uflds = ['iev', 'igb', 'ncit', 'qudt', 'ucum', 'unece', 'uom', 'wolf', 'wur']
     dt = local.localize(datetime.now())
     cnt = 0
@@ -655,13 +659,13 @@ if choice == 'wdu':
     wdclss = {}
     for cls in clss:
         wdclss.update({cls['url']: cls['id']})
-    reps = Representations.objects.filter(wdunit__isnull=False).values('wdunit__uurl','strng__string')
+    reps = Representations.objects.filter(wdunit__isnull=False).values('wdunit__uurl', 'strng__string')
     wdreps = {}
     for rep in reps:
         if rep['wdunit__uurl'] not in wdreps.keys():
             wdreps.update({rep['wdunit__uurl']: []})
         wdreps[rep['wdunit__uurl']].append(rep['strng__string'])
-    strs = Strngs.objects.all().values('string','id')
+    strs = Strngs.objects.all().values('string', 'id')
     wdstrs = {}
     for stng in strs:
         wdstrs.update({stng['string']: stng['id']})
@@ -684,7 +688,7 @@ if choice == 'wdu':
         # print("checking unit " + unit['unit'])
 
         # check for unit already present
-        if unit['uurl'] not in wdunts.keys(): # unit is not in the table so add
+        if unit['uurl'] not in wdunts.keys():  # unit is not in the table so add
             # add unit
             wu = Wdunits(cls=unit['cls'], unit=unit['unit'], quant=unit['quant'], factor=unit['factor'],
                          curl=unit['curl'], uurl=unit['uurl'], qurl=unit['qurl'], added=date.today(), updated=dt)
@@ -695,7 +699,7 @@ if choice == 'wdu':
             wdunts.update({wu.uurl: wu.id})  # this is for same facunit
         else:
             # get found unit id
-            wu = wduqs.get(id = wdunts[unit['uurl']])
+            wu = wduqs.get(id=wdunts[unit['uurl']])
             action = "found"
 
         print(action + " unit " + unit['unit'])
@@ -729,7 +733,7 @@ if choice == 'wdu':
                 # check for representation already present
                 if not unit[ufld]:
                     continue
-                if unit['uurl'] not in wdreps.keys(): # no reps of this unit added
+                if unit['uurl'] not in wdreps.keys():  # no reps of this unit added
                     wdreps.update({unit['uurl']: []})
                 if unit[ufld] not in wdreps[unit['uurl']]:
                     # create representation
@@ -750,7 +754,7 @@ if choice == 'wdu':
 
                     # add representation
                     rep = Representations(wdunit_id=wu.id, repsystem_id=repsysid, strng_id=strid,
-                                             status='current', onwd='yes', checked='no', updated=dt)
+                                          status='current', onwd='yes', checked='no', updated=dt)
                     rep.save()
 
                     # add URL endpoint
@@ -938,7 +942,7 @@ if choice == 'wdusyss':
             usys = unt['usys'].replace('http://www.wikidata.org/entity/', '')
             if usys in syss.keys() and unt['unit'] in unts.keys():
                 uw, created = UnitsystemsWdunits.objects.get_or_create(
-                        unitsystem_id=syss[usys], wdunit_id=unts[unt['unit']])
+                    unitsystem_id=syss[usys], wdunit_id=unts[unt['unit']])
             else:
                 usys = 1
                 if unt['unit'] in ucls.keys():
@@ -955,3 +959,117 @@ if choice == 'wdusyss':
             uw.save()
         else:
             print("already added " + str(usys) + ":" + unt['unit'])
+
+
+# check a unit and make sure it is connected through to wd entry
+def chkunit(uid):
+    dt = local.localize(datetime.now())
+    unt = Units.objects.get(id=uid)
+    ents = unt.entities_set.all()
+    # is the unit in wikidata?
+    wdid = None
+    repsyslst = []
+    for e in ents:
+        if e.repsystem_id == 7:
+            wfnd = Wdunits.objects.filter(uurl__contains=e.value)
+            if wfnd:
+                wdid = "yes"
+            # OK if unit is on wikidata what representations are there?
+            if wdid:
+                wduntreps = wdunit(e.value)
+                wduntreps = wduntreps[0]
+                if 'qudt' in wduntreps.keys():
+                    repsyslst.append('qudt')
+                if 'unece' in wduntreps.keys():
+                    repsyslst.append('unece')
+                if 'wolf' in wduntreps.keys():
+                    repsyslst.append('wolf')
+                if 'ucum' in wduntreps.keys():
+                    repsyslst.append('ucum')
+                if 'ncit' in wduntreps.keys():
+                    repsyslst.append('ncit')
+                if 'iev' in wduntreps.keys():
+                    repsyslst.append('iev')
+                if 'igb' in wduntreps.keys():
+                    repsyslst.append('igb')
+                if 'wur' in wduntreps.keys():
+                    repsyslst.append('wur')
+                if 'umls' in wduntreps.keys():
+                    repsyslst.append('umls')
+                if 'uom2' in wduntreps.keys():
+                    repsyslst.append('uom2')
+    reps = []
+    for ent in ents:
+        # has a string been added?
+        fnd1 = Strngs.objects.filter(string=ent.value)
+        if fnd1:
+            hit = fnd1[0]
+            fnd2 = Representations.objects.filter(strng=hit.id)
+            if fnd2:
+                rep = fnd2[0]
+                if not rep.unit_id:
+                    rep.unit_id = unt.id
+                rep.checked = 'yes'
+                rep.save()
+                reps.append(rep.repsystem.abbrev.lower())
+            else:
+                # add rep to representations table
+                onwd = 'no'
+                if wdid:
+                    onwd = 'yes'
+                urlep = 'no'
+                if ufld in ["qudt", "iev", "iec", "igb", "ncit", "uom"]:
+                    urlep = 'yes'
+                rep = Representations(
+                    unit_id=unt.id,
+                    wdunit_id=wdid,
+                    repsystem_id=ent.repsystem.id,
+                    strng_id=hit.id,
+                    url_endpoint=urlep,
+                    status='current',
+                    checked='yes',
+                    onwd=onwd,
+                    updated=dt,
+                )
+                rep.save()
+                print('added ' + ent.value + ' to representations')
+        else:
+            # add string to strngs table
+            str = Strngs(string=ent.value, status='current', autoadded='yes', updated=dt)
+            str.save()
+            # add rep to representations table
+            rep = Representations(
+                unit_id=unt.id,
+                wdunit_id=wdid,
+                repsystem_id=ent.repsystem.id,
+                strng_id=str.id,
+                status='current',
+                checked='yes',
+                updated=dt,
+            )
+            rep.save()
+            print('added ' + ent.value + ' to representations')
+
+    # OK what representations are missing from wikidata that can be added
+    wdprops = {'ncit': "P1748", 'umls': "P2892", 'qudt': "P2968", 'wur': "P3328", 'igb': "P4732",
+               'unece': "P6512", 'wolf': "P7007", 'ucum': "P7825", 'uom2': "P8769", 'iev': "P8855"}
+    missing = []
+    for rep in reps:
+        if rep in wdprops and rep not in repsyslst:
+            missing.append(rep)
+    # for miss in missing:
+    # add entry to wikidata
+    print(reps)
+    print(repsyslst)
+    print(missing)
+
+# chkunit(28)
+
+
+def testwdupdate(teststr):
+    site = pywikibot.Site()
+    print(site.username())
+    # page = pywikibot.Page(site, 'User:stuchalk')
+
+
+testwdupdate('This is a test...')

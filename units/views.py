@@ -122,7 +122,7 @@ def view(request, uid):
     dvs = wdunit.wdquantswdunits_set.all().values_list('wdquant__isq', flat=True)
     dvs = list(set(dvs))
     dv = dvs[0]
-    dv = dv.replace('^', '').replace('{', '<sup>').replace('}', '</sup>').replace('\Theta', 'Θ')
+    dv = dv.replace('^', '').replace('{', '<sup>').replace('}', '</sup>').replace('\\Theta', 'Θ')
     quants = Quantities.objects.filter(id__in=qids)
     data = wdunit.representations_set.all()
     usyss = wdunit.unitsystemswdunits_set.all()
@@ -258,6 +258,7 @@ def crosswalk(request, sys1id=None, sys2id=None):
     else:
         data = Repsystems.objects.all().values_list('id', 'name').order_by('name')
         return render(request, "../templates/units/crosswalk.html", {'data': data})
+
 
 def unitimport(request):
     """ what does this do? """

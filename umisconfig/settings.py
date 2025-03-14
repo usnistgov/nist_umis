@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.sites',
+    'admin_extra_buttons',
     'calculations',
     'dashboard',
     'units',
@@ -50,6 +51,7 @@ INSTALLED_APPS = [
     'umisconfig',
     'charts',
     'quantitysystems',
+    'representations',
 ]
 
 MIDDLEWARE = [
