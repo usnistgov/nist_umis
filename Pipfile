@@ -12,7 +12,7 @@ requests = ">=2.32.4"
 
 [dev-packages]
 qwikidata = ">=0.4.2"
-rdflib = ">=7.1.4"
+rdflib = ">=7.2.1"
 selenium = ">=4.34.2"
 
 [requires]
