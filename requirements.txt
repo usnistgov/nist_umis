@@ -4,5 +4,5 @@ pnglatex==1.1
 PyMySQL==1.1.2
 pytz==2025.2
 qwikidata==0.4.2
-rdflib==7.2.1
+rdflib==7.3.0
 selenium==4.35
