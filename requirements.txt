@@ -1,4 +1,4 @@
-Django==5.2.7
+Django==5.2.8
 GTC==1.5.1
 pnglatex==1.1
 PyMySQL==1.1.2
