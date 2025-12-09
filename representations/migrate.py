@@ -6,10 +6,10 @@ import mimetypes
 import re
 import pytz
 
-os.environ.setdefault("DJANGO_SETTINGS_MODULE", "umisconfig.settings")
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "config.settings")
 django.setup()
 from units.models import *
-from umisconfig.settings import *
+from config.settings import *
 from bs4 import BeautifulSoup
 from dashboard.repsys_ingest import *
 from datetime import date

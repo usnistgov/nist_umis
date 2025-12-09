@@ -3,7 +3,7 @@ functions to access the repsystem data where it is published
 this means one function per system :(
 """
 from units.models import *
-from umisconfig.settings import *
+from config.settings import *
 from bs4 import BeautifulSoup
 from datetime import date
 from qwikidata.sparql import return_sparql_query_results

@@ -3,7 +3,7 @@ import os
 import django
 import json
 
-os.environ.setdefault("DJANGO_SETTINGS_MODULE", "umisconfig.settings")
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "config.settings")
 django.setup()
 
 from units.models import *

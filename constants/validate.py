@@ -5,7 +5,7 @@ import math
 import requests
 import re
 
-os.environ.setdefault("DJANGO_SETTINGS_MODULE", "umisconfig.settings")
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "config.settings")
 django.setup()
 
 from constants.models import *

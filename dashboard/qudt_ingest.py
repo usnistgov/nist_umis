@@ -4,7 +4,7 @@ import os
 import django
 import requests
 
-os.environ.setdefault("DJANGO_SETTINGS_MODULE", "umisconfig.settings")
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "config.settings")
 django.setup()
 from unitsystems.models import *
 from datetime import datetime

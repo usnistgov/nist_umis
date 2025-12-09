@@ -2,7 +2,7 @@ from django.http import JsonResponse
 from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
 from units.models import Repsystems
-from umisconfig.settings import *
+from config.settings import *
 # from repsystems.scripts import *
 from datetime import datetime
 import requests

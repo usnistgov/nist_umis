@@ -4,12 +4,12 @@ import json
 import os
 import re
 
-os.environ.setdefault("DJANGO_SETTINGS_MODULE", "umisconfig.settings")
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "config.settings")
 django.setup()
 
 from units.models import *
 from django.db.models import Count
-from umisconfig.settings import STATIC_URL, BASE_DIR
+from config.settings import STATIC_URL, BASE_DIR
 
 # get the ISO Quantities from SysML files
 

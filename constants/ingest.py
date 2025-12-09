@@ -5,11 +5,11 @@ import csv
 import re
 import json
 
-os.environ.setdefault("DJANGO_SETTINGS_MODULE", "umisconfig.settings")
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "config.settings")
 django.setup()
 
 from constants.models import *
-from umisconfig.settings import STATIC_URL, BASE_DIR
+from config.settings import STATIC_URL, BASE_DIR
 from decimal import Decimal
 from os.path import exists
 from units.functions import *

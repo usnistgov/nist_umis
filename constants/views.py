@@ -2,7 +2,7 @@ from django.shortcuts import render
 from constants.models import *
 from django.http import HttpResponse
 from pnglatex import pnglatex
-from umisconfig.settings import *
+from config.settings import *
 import json
 
 

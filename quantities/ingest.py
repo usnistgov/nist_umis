@@ -7,7 +7,7 @@ import requests
 from bs4 import BeautifulSoup
 from selenium import webdriver
 
-os.environ.setdefault("DJANGO_SETTINGS_MODULE", "umisconfig.settings")
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "config.settings")
 django.setup()
 
 from quantities.models import *
