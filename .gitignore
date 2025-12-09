@@ -3,3 +3,4 @@
 config/localsettings.py
 .env
 Pipfile.lock
+notes.txt
