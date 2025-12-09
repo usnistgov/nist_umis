@@ -1,5 +1,5 @@
 .idea
 .DS_Store
-umisconfig/localsettings.py
+config/localsettings.py
 .env
 Pipfile.lock
