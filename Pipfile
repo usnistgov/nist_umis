@@ -4,11 +4,19 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
-django = ">=5.2.9"
 GTC = ">=1.5.1"
 pymysql = "==1.1.2"
 pytz = ">=2025.2"
 requests = ">=2.32.4"
+django = "==5.2.9"
+pnglatex = "*"
+urllib3 = "==2.6.2"
+pyyaml = "*"
+bs4 = "*"
+pylatexenc = "*"
+numpy = "==2.4.0"
+sqlparse = "==0.5.5"
+pyparsing = "==3.3.0"
 
 [dev-packages]
 qwikidata = ">=0.4.2"
