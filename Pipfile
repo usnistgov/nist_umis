@@ -16,7 +16,7 @@ bs4 = "*"
 pylatexenc = "*"
 numpy = "==2.4.0"
 sqlparse = "==0.5.5"
-pyparsing = "==3.3.0"
+pyparsing = "==3.3.1"
 
 [dev-packages]
 qwikidata = ">=0.4.2"
