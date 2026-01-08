@@ -42,7 +42,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django.contrib.sites',
     'calculations',
-    'dashboard',
     'units',
     'unitsystems',
     'repsystems',
@@ -89,17 +88,6 @@ WSGI_APPLICATION = 'config.wsgi.application'
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
 DATABASES = {
-    # 'default': {
-    #     'ENGINE': 'django.db.backends.mysql',
-    #     'NAME': os.environ.get('MYSQL_DATABASE'),
-    #     'USER': os.environ.get('MYSQL_USER'),
-    #     'PASSWORD': os.environ.get('MYSQL_PASSWORD'),
-    #     'HOST': os.environ.get('MYSQL_DATABASE_HOST'),
-    #     'PORT': os.environ.get('MYSQL_DATABASE_PORT'),
-    #     'OPTIONS': {
-    #         'init_command': "SET sql_mode='STRICT_TRANS_TABLES'"
-    #     }
-    # },
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': mysqltabl,

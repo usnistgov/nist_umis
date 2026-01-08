@@ -22,7 +22,6 @@ urlpatterns = [
     path('api/', include('api.urls')),
     path('calculations/', include('calculations.urls')),
     path('domains/', include('domains.urls')),
-    path('dashboard/', include('dashboard.urls')),
     path('unitsystems/', include('unitsystems.urls')),
     path('quantitysystems/', include('quantitysystems.urls')),
     path('quantitykinds/', include('quantitykinds.urls')),
