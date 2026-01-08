@@ -15,7 +15,7 @@ bs4 = "*"
 pylatexenc = "*"
 soupsieve = "==2.8.1"
 numpy = "==2.4.0"
-urllib3 = "==2.6.2"
+urllib3 = "==2.6.3"
 sqlparse = "==0.5.5"
 pyparsing = "==3.3.1"
 
