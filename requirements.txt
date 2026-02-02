@@ -7,3 +7,4 @@ qwikidata==0.4.2
 rdflib==7.5.0
 selenium==4.40.0
 beautifulsoup4==4.14.3
+pymysql==1.1.2
