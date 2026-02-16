@@ -8,11 +8,12 @@ GTC = ">=1.5.1"
 pymysql = "==1.1.2"
 pytz = ">=2025.2"
 bs4 = "*"
-django = "==5.2.10"
+django = "==5.2.11"
+rdflib = "==7.6.0"
 
 [dev-packages]
 qwikidata = ">=0.4.2"
-rdflib = ">=7.5.0"
+rdflib = ">=7.6.0"
 selenium = ">=4.40.0"
 
 [requires]
