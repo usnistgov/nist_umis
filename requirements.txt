@@ -2,7 +2,7 @@ Django==5.2.11
 GTC==1.5.1
 pnglatex==1.1
 PyMySQL==1.1.2
-pytz==2025.2
+pytz==2026.1.post1
 qwikidata==0.4.2
 rdflib==7.6.0
 selenium==4.40.0
