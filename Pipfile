@@ -8,7 +8,7 @@ GTC = ">=1.5.1"
 pymysql = "==1.1.2"
 pytz = ">=2025.2"
 bs4 = "*"
-django = "==5.2.11"
+django = "==6.0.3"
 rdflib = "==7.6.0"
 
 [dev-packages]
