@@ -17,12 +17,12 @@
                         {% if rsys.domain %}
                             <b>Domain</b>: {{ rsys.domain.title }}<br/>
                         {% endif %}
-                        <b>Links</b>: <a href="{{ rsys.path }}" target="_blank">Website</a>, 
+                        <b>Links</b>: <a href="{{ rsys.url }}" target="_blank">Website</a>,
                         <a href="{{ rsys.repository }}" target="_blank">Repository</a>, 
-                        <a href="{{ rsys.url }}" target="_blank">Source</a><br/>
+                        <a href="{{ rsys.path }}" target="_blank">Source</a><br/>
                         <b>Version</b>: {{ rsys.version }}<br/>
                         <b>Status</b>: {{ rsys.status }} {% if rsys.status == 'legacy' %} (no longer maintained) {% endif %}<br/>
-                        <b>Permalink</b>: <a href="/repsystems/view/{{ rsys.abbrev }}">http://127.0.0.1:{{ port }}/repsystems/view/{{ rsys.abbrev }}</a><br/>
+                        <b>Permalink</b>: <a href="/repsystems/view/{{ rsys.abbrev }}">https://umis.caco3consulting.com/repsystems/view/{{ rsys.abbrev }}</a><br/>
                     </div>
                     <div class="col-12 mt-3">
                         <h5>Representations (scrollable)</h5>

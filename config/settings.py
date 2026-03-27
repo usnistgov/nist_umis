@@ -132,9 +132,11 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
+# STATIC_ROOT is used for production (DEBUG = False !!!)
+# the static folder is outside the django apps folders, under the root of the project
+STATIC_ROOT = '/home5/cacocons/projects/umis/static'
+# STATIC_URL is used to know where stat files are in each app
 STATIC_URL = 'static/'
-STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
-# SITE_ID = 1
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
