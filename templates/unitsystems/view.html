@@ -16,7 +16,9 @@
                     </div>
                     <div class="col-6">
                         <b>Abbreviation</b>: {{ sys.abbrev }}<br/>
-                        <b>Quantity System</b>: <a href="quantitysystem/view/{{ sys.quantitysystem.id }}">{{ sys.quantitysystem.name }}</a><br/>
+                        {% if sys.quantitysystem %}
+                            <b>Quantity System</b>: <a href="quantitysystem/view/{{ sys.quantitysystem.id }}">{{ sys.quantitysystem.name }}</a><br/>
+                        {% endif %}
                         <b>Source</b>: <a href="{{ sys.url }}" target="_blank">{{ sys.url }}</a><br/>
                     </div>
                     <div class="col-12 mt-3">

@@ -42,7 +42,14 @@ def unitslist(request):
 
 
 def unitview(request, uid=None):
-    site = 'http://127.0.0.1:' + request.META['SERVER_PORT']
+    host = request.get_host()
+    port = request.get_port()
+    host = host.replace(':' + port, '')
+    proto = 'http://'
+    if port == '443':
+        proto = 'https://'
+    site = proto + host + ':' + port + '/'
+
     """ API endpoint for individual unit by id or name """
     if not uid:
         # redirect to the API home page if no unit identifier given
@@ -75,10 +82,11 @@ def unitview(request, uid=None):
     output.update({"retrieved": datetime.datetime.now()})
     rs = []
     for rep in reps:
-        r = {"id": rep.repsystem_id}
+        r = {}
+        r.update({"id": rep.id})
         r.update({"string": rep.strng.string})
         r.update({"repsystem": rep.repsystem.name})
-        if rep.url_endpoint == 'yes':
+        if rep.url_endpoint == 'yes' and rep.repsystem.path is not None:
             r.update({"repsystemurl": rep.repsystem.path + rep.strng.string})
         rs.append(r)
     output.update({"representations": rs})
@@ -111,3 +119,5 @@ def search(request):
             # redirect to the API home page if no unit identifier given
             messages.add_message(request, messages.INFO, 'Invalid term!')
             return redirect('/api/')
+    else:
+        return None

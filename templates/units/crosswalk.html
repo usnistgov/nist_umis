@@ -4,15 +4,10 @@
 {% block content %}
     <script type="text/javascript">
     $(document).ready(function() {
-        let port = location.port
-
         $('#both').on('change', function() {
             let rows = $('.extra')
             rows.show();
-            if ($('#both').is(":checked"))
-            {
-                rows.not('.both').hide();
-            }
+            if ($('#both').is(":checked")) { rows.not('.both').hide(); }
         });
 
         // redo of crosswalk code
@@ -31,7 +26,7 @@
                 return false;
             }
             // both have a selected option so send the ajax request
-            let url = "https://umis.caco3consulting.com/repsystems/cross/" + sid1 + "/" + sid2 ;
+            let url = "{{ proto }}{{ host }}:{{ port }}/repsystems/cross/" + sid1 + "/" + sid2 ;
             $.ajax({
                 type: 'POST',
                 dataType: "text",
@@ -57,11 +52,12 @@
                         tbody.append(trow);
                     });
                     // update form action url
-                    $.find(form).attr('action', "/units/crosswalk/" + sid1 + "/" + sid2);
-                    $("#getcw").show();
+                    $("#crossform").attr('action', "/units/crosswalk/" + sid1 + "/" + sid2);
+                    $("#getcw").prop('disabled', false);
+                    return false;
                 },
                 error: function() {
-                    alert("Error saving the new version...");
+                    alert("Error showing crosswalk... ({{ host }}:{{ port }})");
                     return false;
                 }
             });
@@ -75,12 +71,17 @@
                     <h2 class="card-title">UNIT SYSTEM CROSSWALK</h2>
                 </div>
                 <div class="card-body table-responsive-u-view">
-                    <div class="col-xs-12">
-                        Pick the two unit systems that you would like to crosswalk between from the dropdown menus.
-                        Then click the export button to download the crosswalked units.
-                    </div>
-                    <form id="crossform" class="form col-12" action="{% url 'crosswalk' %}" method="post">
+                    <form id="crossform" class="form col-12" action="" method="post">
                         {% csrf_token %}
+                        <div class="row">
+                            <div class="col-9">
+                            Pick two unit systems that you would like to crosswalk from the dropdown menus.
+                            Then click the export button to download the crosswalked units.
+                            </div>
+                            <div class="col-3">
+                                <button id="getcw" type="Submit" class="btn btn-success float-end" disabled>Get Crosswalk</button>
+                            </div>
+                        </div>
                         <table id="header" class="table table-sm">
                             <thead>
                             <tr>
@@ -113,9 +114,6 @@
                             <tbody id="tbody">
                             </tbody>
                         </table>
-                        <div id="getcw" class="col-12" style="display: none;">
-                            <button type="submit" class="btn btn-default float-end">Get Crosswalk</button>
-                        </div>
                     </form>
                 </div>
             </div>

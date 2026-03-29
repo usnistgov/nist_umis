@@ -12,7 +12,7 @@ class Quantitysystems(models.Model):
         managed = False
         db_table = 'quantitysystems'
         db_table_comment = 'Table of systems of quanitites (e.g. SI)'
-        app_label = 'quantitysystems'
+        app_label = 'units'
 
 
 class Dimensionvectors(models.Model):
@@ -37,6 +37,11 @@ class Dimensionvectors(models.Model):
     class Meta:
         managed = False
         db_table = 'dimensionvectors'
+        db_table_comment = 'Table of dimension vectors'
+        app_label = 'units'
+
+    def __str__(self):
+        return f'{self.shortcode}'
 
 
 class Quantitykinds(models.Model):
@@ -55,6 +60,8 @@ class Quantitykinds(models.Model):
     class Meta:
         managed = False
         db_table = 'quantitykinds'
+        db_table_comment = 'Table of quantity kinds'
+        app_label = 'units'
 
     def __str__(self):
         return f'{self.name}'
@@ -72,6 +79,8 @@ class Unitsystems(models.Model):
     class Meta:
         managed = False
         db_table = 'unitsystems'
+        db_table_comment = 'Table of unit systems'
+        app_label = 'units'
 
     def __str__(self):
         return f'{self.name}'
@@ -96,6 +105,7 @@ class Units(models.Model):
     class Meta:
         managed = False
         db_table = 'units'
+        db_table_comment = 'Table of units'
         app_label = 'units'
         verbose_name_plural = "units"
 
@@ -112,7 +122,9 @@ class Domains(models.Model):
     class Meta:
         managed = False
         db_table = 'domains'
+        db_table_comment = 'Table of disciplinary domains'
         verbose_name_plural = "domains"
+        app_label = 'units'
 
     def __str__(self):
         return f'{self.title}'
@@ -149,6 +161,8 @@ class Quantities(models.Model):
     class Meta:
         managed = False
         db_table = 'quantities'
+        db_table_comment = 'Table of quantities'
+        app_label = 'units'
 
 
 class Repsystems(models.Model):
@@ -158,8 +172,9 @@ class Repsystems(models.Model):
     version = models.CharField(max_length=32, blank=True, null=True)
     type = models.CharField(max_length=13, blank=True, null=True)
     status = models.CharField(max_length=7, blank=True, null=True)
-    url = models.CharField(max_length=256, blank=True, null=True)
-    repository = models.CharField(max_length=256, blank=True, null=True)
+    site = models.CharField(max_length=256, blank=True, null=True)
+    repo = models.CharField(max_length=256, blank=True, null=True)
+    src = models.CharField(max_length=256, blank=True, null=True)
     path = models.CharField(max_length=256, blank=True, null=True)
     domain = models.ForeignKey(Domains, on_delete=models.PROTECT, db_column='domain_id')
     fileupdated = models.DateField()
@@ -172,7 +187,9 @@ class Repsystems(models.Model):
     class Meta:
         managed = False
         db_table = 'repsystems'
+        db_table_comment = 'Table of representation systems'
         verbose_name_plural = "repsystems"
+        app_label = 'units'
 
     def __str__(self):
         return f'{self.name}'
@@ -189,6 +206,8 @@ class Strngs(models.Model):
     class Meta:
         managed = False
         db_table = 'strngs'
+        db_table_comment = 'Table of text strings'
+        app_label = 'units'
 
     def __str__(self):
         return f'{self.string}'
@@ -203,6 +222,8 @@ class Encodings(models.Model):
     class Meta:
         managed = False
         db_table = 'encodings'
+        db_table_comment = 'Table of encodings'
+        app_label = 'units'
 
 
 class Prefixes(models.Model):
@@ -216,6 +237,8 @@ class Prefixes(models.Model):
     class Meta:
         managed = False
         db_table = 'prefixes'
+        db_table_comment = 'Table of prefixes'
+        app_label = 'units'
 
 
 class Equivalents(models.Model):
@@ -230,6 +253,8 @@ class Equivalents(models.Model):
     class Meta:
         managed = False
         db_table = 'equivalents'
+        db_table_comment = 'Table of equivalents'
+        app_label = 'units'
 
 
 class Factors(models.Model):
@@ -246,6 +271,8 @@ class Factors(models.Model):
     class Meta:
         managed = False
         db_table = 'factors'
+        db_table_comment = 'Table of factors'
+        app_label = 'units'
 
 
 class Correspondents(models.Model):
@@ -261,6 +288,8 @@ class Correspondents(models.Model):
     class Meta:
         managed = False
         db_table = 'correspondents'
+        db_table_comment = 'Table of correspondents'
+        app_label = 'units'
 
 
 class Dimensions(models.Model):
@@ -275,6 +304,8 @@ class Dimensions(models.Model):
     class Meta:
         managed = False
         db_table = 'dimensions'
+        db_table_comment = 'Table of dimensions'
+        app_label = 'units'
 
 
 class Entities(models.Model):
@@ -296,6 +327,8 @@ class Entities(models.Model):
     class Meta:
         managed = False
         db_table = 'entities'
+        db_table_comment = 'Table of entities'
+        app_label = 'units'
 
 
 class QuantitykindsUnits(models.Model):
@@ -306,6 +339,8 @@ class QuantitykindsUnits(models.Model):
     class Meta:
         managed = False
         db_table = 'quantitykinds_units'
+        db_table_comment = 'Join table of quantitykinds and units'
+        app_label = 'units'
 
 
 class EntitiesQuantities(models.Model):
@@ -317,6 +352,7 @@ class EntitiesQuantities(models.Model):
         managed = False
         db_table = 'entities_quantities'
         db_table_comment = 'Table of quantities associated to unit entities'
+        app_label = 'units'
 
 
 class Wdclasses(models.Model):
@@ -333,6 +369,7 @@ class Wdclasses(models.Model):
         managed = False
         db_table = 'wdclasses'
         db_table_comment = 'Table of Wikidata Unit Classes'
+        app_label = 'units'
 
 
 class Wdsiclasses(models.Model):
@@ -345,6 +382,7 @@ class Wdsiclasses(models.Model):
         managed = False
         db_table = 'wdsiclasses'
         db_table_comment = 'Table of wikidata SI related classes'
+        app_label = 'units'
 
 
 class Wdunits(models.Model):
@@ -368,6 +406,7 @@ class Wdunits(models.Model):
         managed = False
         db_table = 'wdunits'
         db_table_comment = 'Table of unit representations on Wikidata'
+        app_label = 'units'
 
 
 class Wdquants(models.Model):
@@ -385,6 +424,7 @@ class Wdquants(models.Model):
         managed = False
         db_table = 'wdquants'
         db_table_comment = 'Table of wikidata quantities'
+        app_label = 'units'
 
 
 class Representations(models.Model):
@@ -401,8 +441,10 @@ class Representations(models.Model):
     class Meta:
         managed = False
         db_table = 'representations'
+        db_table_comment = 'Table of unit representations'
         unique_together = (('unit_id', 'repsystem_id', 'strng_id'),)
         verbose_name_plural = "representations"
+        app_label = 'units'
 
     def __str__(self):
         return f'{self.strng.string}'
@@ -418,6 +460,7 @@ class WdquantsWdunits(models.Model):
         db_table = 'wdquants_wdunits'
         unique_together = (('id', 'wdquant'),)
         db_table_comment = 'Join table between wikidata quantities and units'
+        app_label = 'units'
 
 
 class UnitsystemsWdunits(models.Model):
@@ -429,3 +472,4 @@ class UnitsystemsWdunits(models.Model):
         managed = False
         db_table = 'unitsystems_wdunits'
         db_table_comment = 'Join table for wdunits and unitsystems'
+        app_label = 'units'

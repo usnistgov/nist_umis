@@ -20,7 +20,6 @@ urlpatterns = [
     path('', include('units.urls')),
     path('admin/', admin.site.urls),
     path('api/', include('api.urls')),
-    path('calculations/', include('calculations.urls')),
     path('domains/', include('domains.urls')),
     path('unitsystems/', include('unitsystems.urls')),
     path('quantitysystems/', include('quantitysystems.urls')),
@@ -29,5 +28,4 @@ urlpatterns = [
     path('quantities/', include('quantities.urls')),
     path('representations/', include('representations.urls')),
     path('vectors/', include('vectors.urls')),
-    path('constants/', include('constants.urls')),
 ]

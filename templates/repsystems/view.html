@@ -17,9 +17,9 @@
                         {% if rsys.domain %}
                             <b>Domain</b>: {{ rsys.domain.title }}<br/>
                         {% endif %}
-                        <b>Links</b>: <a href="{{ rsys.url }}" target="_blank">Website</a>,
-                        <a href="{{ rsys.repository }}" target="_blank">Repository</a>, 
-                        <a href="{{ rsys.path }}" target="_blank">Source</a><br/>
+                        <b>Links</b>: <a href="{{ rsys.site }}" target="_blank">Website</a>,
+                        <a href="{{ rsys.repo }}" target="_blank">Repository</a>,
+                        <a href="{{ rsys.src }}" target="_blank">Source</a><br/>
                         <b>Version</b>: {{ rsys.version }}<br/>
                         <b>Status</b>: {{ rsys.status }} {% if rsys.status == 'legacy' %} (no longer maintained) {% endif %}<br/>
                         <b>Permalink</b>: <a href="/repsystems/view/{{ rsys.abbrev }}">https://umis.caco3consulting.com/repsystems/view/{{ rsys.abbrev }}</a><br/>

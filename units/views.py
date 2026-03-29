@@ -1,7 +1,10 @@
 """ views for the units app """
+import json
+
 from django.shortcuts import render, redirect
 from django.http import JsonResponse
 from units.models import *
+
 
 def home(request):
     """ return the homepage """
@@ -30,7 +33,7 @@ def oldindex(request):
     return render(request, "../templates/units/oldindex.html", {'data': data})
 
 
-def index(request):
+def newindex(request):
     """ new index function getting data from wikidata tables"""
     raw = Wdunits.objects.all().order_by('wdclass__quant', 'unit')
     data = {}
@@ -105,7 +108,7 @@ def oldview(request, uid):
                    'dv': dv, 'corsf': corsf, 'corst': corst, 'qsys': qsys, 'quants': quants, 'type': typ})
 
 
-def view(request, uid):
+def newview(request, uid):
     """ view the different representations of a unit"""
     if uid.isnumeric():
         try:
@@ -175,7 +178,7 @@ def search(request):
         # find representations with the term
         if len(term) > 2:  # if long string then search as substring
             reps = Representations.objects.filter(strng__string__icontains=term)
-        else:  ## ...otherwise search as exact
+        else:  # ...otherwise search as exact
             reps = Representations.objects.filter(strng__string__exact=term)
         if reps:
             for rep in reps:
@@ -197,6 +200,12 @@ def search(request):
 
 def crosswalk(request, sys1id=None, sys2id=None):
     """ the crosswalk endpoint for units """
+    host = request.get_host()
+    port = request.get_port()
+    host = host.replace(':' + port, '')
+    proto = 'http://'
+    if port == '443':
+        proto = 'https://'
     if request.method == 'POST' or (sys1id and sys2id):
         if request.method == 'POST':
             data = request.POST
@@ -206,7 +215,8 @@ def crosswalk(request, sys1id=None, sys2id=None):
             return redirect('/')
         if sys1id == sys2id:
             return redirect('/repsystems/view/' + str(sys1id))
-        site = "http://127.0.0.1/"
+        site = proto + host + ':' + port + '/'
+
         # generate output dictionary
         output = {}
         # data for system 1
@@ -221,8 +231,9 @@ def crosswalk(request, sys1id=None, sys2id=None):
         sys2.update({'url': site + 'repsystems/view/' + str(sys2id)})
         # add system data
         output.update({'systems': [sys1, sys2]})
+
         # get a list of all units
-        units = Units.objects.values('id', 'name').all()
+        units = Units.objects.all().values('id', 'name').order_by('id')
         # get list of units in system 1
         units1 = Units.objects.filter(representations__repsystem=sys1id, representations__url_endpoint='yes'). \
             values_list('id', 'representations__strng__string')
@@ -256,8 +267,9 @@ def crosswalk(request, sys1id=None, sys2id=None):
 
         return JsonResponse(output, safe=False)
     else:
-        data = Repsystems.objects.all().values_list('id', 'name').order_by('name')
-        return render(request, "../templates/units/crosswalk.html", {'data': data})
+        data = Repsystems.objects.filter(status='current').values_list('id', 'name').order_by('name')
+        return render(request, "../templates/units/crosswalk.html", {'data': data, 'proto': proto,
+                                                                     'host': host, 'port': port})
 
 
 def unitimport(request):
@@ -278,8 +290,8 @@ def unitimport(request):
             quants = qk.quantitykind.quantities_set.all()
             for quant in quants:
                 qs.append(quant.name)
-        sortd = qs.sort()
-        u.update({'quantities': sortd})
+        qs.sort()
+        u.update({'quantities': qs})
         u.update({'status': 'current'})
         u.update({'updates': []})
         output['units'].append(u)

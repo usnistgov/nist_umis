@@ -29,8 +29,11 @@ DEBUG = True
 ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
 
 # cors setup
-CORS_ORIGIN_ALLOW_ALL = False
-CORS_ORIGIN_WHITELIST = ['http://127.0.0.1:8000', 'http://localhost:8000']
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:8000",
+    "http://127.0.0.1:8000",
+    "https://umis.caco3consulting.com",
+]
 
 # Application definition
 INSTALLED_APPS = [
@@ -41,19 +44,17 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.sites',
-    'calculations',
     'units',
     'unitsystems',
     'repsystems',
-    'constants',
-    'config',
-    'charts',
     'quantitysystems',
     'representations',
+    'corsheaders',
 ]
 # 'admin_extra_buttons'?
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -134,7 +135,7 @@ USE_TZ = True
 
 # STATIC_ROOT is used for production (DEBUG = False !!!)
 # the static folder is outside the django apps folders, under the root of the project
-STATIC_ROOT = '/home5/cacocons/projects/umis/static'
+# STATIC_ROOT = '/home5/cacocons/projects/umis/static'
 # STATIC_URL is used to know where stat files are in each app
 STATIC_URL = 'static/'
 
