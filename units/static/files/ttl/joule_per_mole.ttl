@@ -1,0 +1,20 @@
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+@prefix si: <https://si-digital-framework.org/SI#> .
+@prefix units: <https://si-digital-framework.org/SI/units/> .
+@prefix quantities: <https://si-digital-framework.org/quantities/> .
+@prefix prefixes: <https://si-digital-framework.org/SI/prefixes/> .
+
+# Unit joule/mole using the SI ontology
+
+@prefix umis: <https://umis.nist.gov/> .
+
+umis:joulePerMole a si:UnitProduct ;
+                  si:isUnitOfQtyKind quantities:MOEG ;
+                  si:hasLeftUnitTerm units:joule ;
+                  si:hasRightUnitTerm [ a si:UnitPower ;
+                                        si:hasNumericExponent "-1"^^xsd:short ;
+                                        si:hasUnitBase units:mole ;
+    ] .
