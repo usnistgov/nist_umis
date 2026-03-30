@@ -44,14 +44,8 @@
                                             <td class="col-3"><a href="/units/view/{{ rep.unit_id }}">{{ rep.unit.name }}</a></td>
                                             <td class="col-3">{{ rep.unit.type }}</td>
                                             <td class="col-3">{{ rep.strng.string }}
-                                                {% if rsys.id == 25 or rsys.id == 21 or rsys.id == 16 or rsys.id == 14 or rsys.id == 3 %}
-                                                    {% if rep.url_endpoint == 'yes' %}
-                                                        (<a href="{{ rsys.path }}{{ rep.strng.string }}" target="_blank">definition</a><span class='bi bi-link-45deg'></span>)
-                                                    {% endif %}
-                                                {% else %}
-                                                    {% if rep.url_endpoint == 'yes' %}
-                                                        (<a href="{{ rsys.path }}{{ rep.unit.name }}" target="_blank">definition</a><span class='bi bi-link-45deg'></span>)
-                                                    {% endif %}
+                                                {% if rep.url_endpoint == 'yes' %}
+                                                    (<a href="{{ rsys.path }}{{ rep.strng.string }}" target="_blank">definition</a><span class='bi bi-link-45deg'></span>)
                                                 {% endif %}
                                             </td>
                                             <td class="col-3">{{ rep.status }}</td>

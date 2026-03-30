@@ -54,23 +54,26 @@ def unitview(request, uid=None):
     if not uid:
         # redirect to the API home page if no unit identifier given
         return redirect('/api/home')
-    # check for value unit by name or id
-    opts = Units.objects.all().values_list('name', flat=True)
-    if uid not in opts:
-        if uid.isnumeric():
-            try:
-                uid = Units.objects.get(id=uid).name
-                return redirect('/api/units/view/' + uid)
-            except Prefixes.DoesNotExist:
-                return redirect('/')
-        elif isinstance(uid, str):
-            try:
-                uid = Units.objects.get(name=uid.lower()).name
-                return redirect('/api/units/view/' + uid)
-            except Prefixes.DoesNotExist:
-                return redirect('/')
+    # check for value unit by name or id (name disabled for now)
+    # opts = Units.objects.all().values_list('name', flat=True)
+    # if uid not in opts:
+    #     if uid.isnumeric():
+    #         try:
+    #             uid = Units.objects.get(id=uid).name
+    #             return redirect('/api/units/view/' + uid)
+    #         except Prefixes.DoesNotExist:
+    #             return redirect('/')
+    #     elif isinstance(uid, str):
+    #         try:
+    #             uid = Units.objects.get(name=uid.lower()).name
+    #             return redirect('/api/units/view/' + uid)
+    #         except Prefixes.DoesNotExist:
+    #             return redirect('/')
 
-    unit = Units.objects.filter(name=uid)[0]
+    hits = Units.objects.filter(id=uid)
+    if not hits:
+        return redirect('/api/')
+    unit = hits[0]
     reps = Representations.objects.filter(unit_id=unit.id, repsystem_id__isnull=False, repsystem__status='current')
     output = {}
     output.update({"name": unit.name})
