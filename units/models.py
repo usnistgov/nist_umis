@@ -428,9 +428,9 @@ class Wdquants(models.Model):
 
 
 class Representations(models.Model):
-    unit = models.ForeignKey(Units, on_delete=models.PROTECT, db_column='unit_id')
-    wdunit = models.ForeignKey(Wdunits, on_delete=models.PROTECT, db_column='wdunit_id')
-    repsystem = models.ForeignKey(Repsystems, on_delete=models.PROTECT, db_column='repsystem_id')
+    unit = models.ForeignKey(Units, on_delete=models.PROTECT, db_column='unit_id', blank=True, null=True)
+    wdunit = models.ForeignKey(Wdunits, on_delete=models.PROTECT, db_column='wdunit_id', blank=True, null=True)
+    repsystem = models.ForeignKey(Repsystems, on_delete=models.PROTECT, db_column='repsystem_id', blank=True, null=True)
     strng = models.ForeignKey(Strngs, on_delete=models.PROTECT, db_column='strng_id')
     url_endpoint = models.CharField(max_length=3, blank=True, null=True)
     status = models.CharField(max_length=7, blank=True, null=True)

@@ -21,7 +21,7 @@ def view(request, rsid):
     if rsys is None:
         return render(request, '/')
     port = request.META['SERVER_PORT']
-    reps = rsys.representations_set.all().order_by('unit__name')
+    reps = rsys.representations_set.filter(checked='yes').order_by('unit__name')
     return render(request, "../templates/repsystems/view.html", {'rsys': rsys, 'reps': reps, 'port': port})
 
 
