@@ -89,7 +89,7 @@ def unitview(request, uid=None):
         r.update({"id": rep.id})
         r.update({"string": rep.strng.string})
         r.update({"repsystem": rep.repsystem.name})
-        if rep.url_endpoint == 'yes' and rep.repsystem.path is not None:
+        if rep.repsystem.path is not None:
             r.update({"repsystemurl": rep.repsystem.path + rep.strng.string})
         rs.append(r)
     output.update({"representations": rs})

@@ -45,7 +45,7 @@
                     <!-- show SI reference point if available -->
                     {% for strng, data in reps.items %}
                         {% for sys in data.systems %}
-                            {% if sys.id == 25 and sys.url_ep == 'yes' %} <!-- 25 is the reference point -->
+                            {% if sys.id == 25 %} <!-- 25 is the reference point -->
                                 <div class="alert alert-success col-8 offset-2 mt-3" role="alert">
                                     <h5>Definitive Reference</h5>
                                     The BIPM SI Reference Point definition of this SI Unit is at:
@@ -74,7 +74,7 @@
                                     <td>
                                         {% for sys in data.systems %}
                                             <a href="/repsystems/view/{{ sys.id }}">{{ sys.name }} ({{ sys.abbrev }})</a>
-                                            {% if sys.path and sys.url_ep == 'yes' and sys.id != 25 %}
+                                            {% if sys.path and sys.id != 25 %}
                                                 (<a href="{{ sys.path }}{{ strng }}" target="_blank">definition</a><span class='bi bi-link-45deg'></span>)
                                             {% endif %}
                                             <br/>

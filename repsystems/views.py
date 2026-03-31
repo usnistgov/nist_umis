@@ -27,7 +27,7 @@ def view(request, rsid):
 
 def units(request, rsid):
     """ get a list of representations unit system to send to a browser via ajax """
-    reps = Representations.objects.filter(repsystem_id=rsid, url_endpoint='yes').order_by('unit__name')
+    reps = Representations.objects.filter(repsystem_id=rsid, checked='yes').order_by('unit__name')
     data = {}
     for rep in reps:
         name = rep.unit.name
@@ -39,8 +39,8 @@ def units(request, rsid):
 
 def cross(request, rsid1, rsid2):
     """ get a list of representations unit system to send to a browser via ajax """
-    reps1 = Representations.objects.filter(repsystem_id=rsid1, url_endpoint='yes').order_by('unit__name')
-    reps2 = Representations.objects.filter(repsystem_id=rsid2, url_endpoint='yes').order_by('unit__name')
+    reps1 = Representations.objects.filter(repsystem_id=rsid1, checked='yes', unit_id__isnull=False).order_by('unit__name')
+    reps2 = Representations.objects.filter(repsystem_id=rsid2, checked='yes', unit_id__isnull=False).order_by('unit__name')
     rep2list = {}
     for rep2 in reps2:
         rep2list.update({rep2.unit.id: rep2.strng.string})

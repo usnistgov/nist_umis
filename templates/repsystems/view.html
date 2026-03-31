@@ -44,7 +44,7 @@
                                             <td class="col-3"><a href="/units/view/{{ rep.unit_id }}">{{ rep.unit.name }}</a></td>
                                             <td class="col-3">{{ rep.unit.type }}</td>
                                             <td class="col-3">{{ rep.strng.string }}
-                                                {% if rep.url_endpoint == 'yes' %}
+                                                {% if rsys.path %}
                                                     (<a href="{{ rsys.path }}{{ rep.strng.string }}" target="_blank">definition</a><span class='bi bi-link-45deg'></span>)
                                                 {% endif %}
                                             </td>

@@ -1,6 +1,4 @@
 """ views for the units app """
-import json
-
 from django.shortcuts import render, redirect
 from django.http import JsonResponse
 from units.models import *
@@ -99,8 +97,7 @@ def oldview(request, uid):
         reps[sg]['enccount'] = encs.count()
         if encs.count() > 0:
             reps[sg]['strng_id'] = rep.strng.id
-        tmp = {'id': sys.id, 'name': sys.name, 'abbrev': sys.abbrev, 'path': sys.path, 'encs': encs,
-               'url_ep': rep.url_endpoint}
+        tmp = {'id': sys.id, 'name': sys.name, 'abbrev': sys.abbrev, 'path': sys.path, 'encs': encs}
         reps[sg]['systems'].append(tmp)
 
     return render(request, "../templates/units/view.html",
@@ -148,8 +145,7 @@ def newview(request, uid):
         reps[sg]['enccount'] = encs.count()
         if encs.count() > 0:
             reps[sg]['strng_id'] = rep.strng.id
-        tmp = {'id': sys.id, 'name': sys.name, 'abbrev': sys.abbrev, 'path': sys.path, 'encs': encs,
-               'url_ep': rep.url_endpoint}
+        tmp = {'id': sys.id, 'name': sys.name, 'abbrev': sys.abbrev, 'path': sys.path, 'encs': encs}
         reps[sg]['systems'].append(tmp)
 
     return render(request, "../templates/units/view.html",
@@ -235,14 +231,16 @@ def crosswalk(request, sys1id=None, sys2id=None):
         # get a list of all units
         units = Units.objects.all().values('id', 'name').order_by('id')
         # get list of units in system 1
-        units1 = Units.objects.filter(representations__repsystem=sys1id, representations__url_endpoint='yes'). \
-            values_list('id', 'representations__strng__string')
+        units1 = (Units.objects.filter(representations__repsystem=sys1id,
+                                       representations__repsystem__path__isnull=False)
+                  .values_list('id', 'representations__strng__string'))
         u1 = {}
         for uid, ustr in units1:
             u1.update({uid: ustr})
         # get list of units in system 2
-        units2 = Units.objects.filter(representations__repsystem=sys2id, representations__url_endpoint='yes'). \
-            values_list('id', 'representations__strng__string')
+        units2 = (Units.objects.filter(representations__repsystem=sys2id,
+                                       representations__repsystem__path__isnull=False)
+                  .values_list('id', 'representations__strng__string'))
         u2 = {}
         for uid, ustr in units2:
             u2.update({uid: ustr})

@@ -6,7 +6,7 @@ class Quantitysystems(models.Model):
     description = models.CharField(max_length=1024)
     abbrev = models.CharField(max_length=16)
     url = models.CharField(max_length=256)
-    updated = models.DateTimeField()
+    updated = models.DateTimeField(auto_now=True)
 
     class Meta:
         managed = False
@@ -32,7 +32,7 @@ class Dimensionvectors(models.Model):
     basesi_shortcode = models.CharField(max_length=512, blank=True, null=True)
     basesi_longcode = models.CharField(max_length=512, blank=True, null=True)
     quantitysystem = models.ForeignKey(Quantitysystems, on_delete=models.PROTECT, db_column='quantitysystem_id')
-    updated = models.DateTimeField()
+    updated = models.DateTimeField(auto_now=True)
 
     class Meta:
         managed = False
@@ -53,9 +53,11 @@ class Quantitykinds(models.Model):
     symbol = models.CharField(max_length=64)
     shortcode = models.CharField(max_length=128, blank=True, null=True)
     baseunit_id = models.IntegerField(blank=True, null=True)
-    quantitysystem = models.ForeignKey(Quantitysystems, on_delete=models.PROTECT, db_column='quantitysystem_id')
-    dimensionvector = models.ForeignKey(Dimensionvectors, on_delete=models.PROTECT, db_column='dimensionvector_id')
-    updated = models.DateTimeField()
+    quantitysystem = models.ForeignKey(Quantitysystems, on_delete=models.PROTECT, db_column='quantitysystem_id',
+                                       blank=True, null=True)
+    dimensionvector = models.ForeignKey(Dimensionvectors, on_delete=models.PROTECT, db_column='dimensionvector_id',
+                                        blank=True, null=True)
+    updated = models.DateTimeField(auto_now=True)
 
     class Meta:
         managed = False
@@ -74,7 +76,7 @@ class Unitsystems(models.Model):
     wdurl = models.CharField(max_length=128, blank=True, null=True)
     quantitysystem = models.ForeignKey(Quantitysystems, on_delete=models.PROTECT, db_column='quantitysystem_id')
     url = models.CharField(max_length=256)
-    updated = models.DateTimeField()
+    updated = models.DateTimeField(auto_now=True)
 
     class Meta:
         managed = False
@@ -87,20 +89,31 @@ class Unitsystems(models.Model):
 
 
 class Units(models.Model):
+    class UnitTypes(models.TextChoices):
+        """ choice for status field """
+        ACCEPTEDNONSI = 'Accepted Non-SI', 'Accepted Non-SI'
+        CGSBASE = 'CGS Base', 'CGS Base'
+        OTHER = 'Other', 'Other'
+        SIBASE = 'SI Base', 'SI Base'
+        SICOHDERIVED = 'SI Coherent Derived', 'SI Coherent Derived'
+        SIDERIVED = 'SI Derived', 'SI Derived'
+        SISPECIALNAME = 'SI Special Named', 'SI Special Named'
+        USCUSTOMARY = 'US Customary', 'US Customary'
+
     name = models.CharField(max_length=128)
     unitsystem = models.ForeignKey(Unitsystems, on_delete=models.PROTECT, db_column='unitsystem_id')
     description = models.CharField(max_length=1024, blank=True, null=True)
-    prefix_id = models.IntegerField(blank=True, null=True)
+    prefix = models.ForeignKey('Prefixes', on_delete=models.PROTECT, blank=True, null=True, db_column='prefix_id')
     factor_id = models.SmallIntegerField(blank=True, null=True)
     url = models.CharField(max_length=256, blank=True, null=True)
-    type = models.CharField(max_length=19, blank=True, null=True)
+    type = models.CharField(max_length=19, choices=UnitTypes, default=UnitTypes.SIDERIVED, blank=True, null=True)
     shortcode = models.CharField(max_length=512, blank=True, null=True)
     alt_shortcode = models.CharField(max_length=512, blank=True, null=True)
     ivoa = models.CharField(max_length=512, blank=True, null=True)
     html = models.CharField(max_length=256, blank=True, null=True)
     text = models.CharField(max_length=128, blank=True, null=True)
     text_si = models.CharField(db_column='text_SI', max_length=128, blank=True, null=True)  # Field name made lowercase.
-    updated = models.DateTimeField()
+    updated = models.DateTimeField(auto_now=True)
 
     class Meta:
         managed = False
@@ -117,7 +130,7 @@ class Domains(models.Model):
     title = models.CharField(max_length=64)
     type = models.CharField(max_length=32)
     description = models.CharField(max_length=512)
-    updated = models.DateTimeField()
+    updated = models.DateTimeField(auto_now=True)
 
     class Meta:
         managed = False
@@ -143,7 +156,7 @@ class Quantities(models.Model):
     latexdefn = models.CharField(max_length=512, blank=True, null=True)
     url = models.CharField(max_length=256, blank=True, null=True)
     domain_id = models.IntegerField(blank=True, null=True)
-    updated = models.DateTimeField()
+    updated = models.DateTimeField(auto_now=True)
     sysml_name = models.CharField(max_length=128, blank=True, null=True)
     sysml_domain = models.CharField(max_length=32, blank=True, null=True)
     sysml_defn = models.CharField(max_length=512, blank=True, null=True)
@@ -160,9 +173,13 @@ class Quantities(models.Model):
 
     class Meta:
         managed = False
+        ordering = ('name',)
         db_table = 'quantities'
         db_table_comment = 'Table of quantities'
         app_label = 'units'
+
+    def __str__(self):
+        return f'{self.name}'
 
 
 class Repsystems(models.Model):
@@ -182,7 +199,7 @@ class Repsystems(models.Model):
     checked = models.DateTimeField()
     rawdata = models.TextField(blank=True, null=True)
     jsondata = models.TextField(blank=True, null=True)
-    updated = models.DateTimeField()
+    updated = models.DateTimeField(auto_now=True)
 
     class Meta:
         managed = False
@@ -201,11 +218,13 @@ class Strngs(models.Model):
     status = models.CharField(max_length=11, blank=True, null=True)
     reason = models.CharField(max_length=128, blank=True, null=True)
     autoadded = models.CharField(max_length=3)
-    updated = models.DateTimeField()
+    updated = models.DateTimeField(auto_now=True)
 
     class Meta:
         managed = False
         db_table = 'strngs'
+        verbose_name_plural = "Strings"
+        ordering = ('string',)
         db_table_comment = 'Table of text strings'
         app_label = 'units'
 
@@ -217,7 +236,7 @@ class Encodings(models.Model):
     strng = models.ForeignKey(Strngs, on_delete=models.PROTECT, db_column='strng_id')
     string = models.CharField(max_length=512)
     format = models.CharField(max_length=7)
-    updated = models.DateTimeField()
+    updated = models.DateTimeField(auto_now=True)
 
     class Meta:
         managed = False
@@ -232,13 +251,16 @@ class Prefixes(models.Model):
     value = models.CharField(max_length=32, db_collation='utf8_unicode_ci')
     inverse = models.CharField(max_length=32, db_collation='utf8_unicode_ci', blank=True, null=True)
     quantitysystem = models.ForeignKey(Quantitysystems, on_delete=models.PROTECT, db_column='quantitysystem_id')
-    updated = models.DateTimeField()
+    updated = models.DateTimeField(auto_now=True)
 
     class Meta:
         managed = False
         db_table = 'prefixes'
         db_table_comment = 'Table of prefixes'
         app_label = 'units'
+
+    def __str__(self):
+        return f'{self.name}'
 
 
 class Equivalents(models.Model):
@@ -247,8 +269,7 @@ class Equivalents(models.Model):
     tounit = models.ForeignKey(Units, on_delete=models.PROTECT, db_column='to_unit', related_name="equ_tounit_related")
     factor = models.FloatField(blank=True, null=True)
     prefix = models.ForeignKey(Prefixes, on_delete=models.PROTECT, db_column='prefix_id')
-    # constant = models.ForeignKey(Constants, on_delete=models.PROTECT, db_column='constant_id')
-    updated = models.DateTimeField()
+    updated = models.DateTimeField(auto_now=True)
 
     class Meta:
         managed = False
@@ -266,7 +287,7 @@ class Factors(models.Model):
     dfactor = models.CharField(max_length=16)
     exact = models.CharField(max_length=3)
     sf = models.IntegerField(blank=True, null=True)
-    updated = models.DateTimeField()
+    updated = models.DateTimeField(auto_now=True)
 
     class Meta:
         managed = False
@@ -282,8 +303,7 @@ class Correspondents(models.Model):
     factor = models.FloatField(blank=True, null=True)
     factoreqn = models.CharField(max_length=64, blank=True, null=True)
     prefix = models.ForeignKey(Prefixes, on_delete=models.PROTECT, db_column='prefix_id')
-    # constant = models.ForeignKey(Constants, on_delete=models.PROTECT, db_column='constant_id')
-    updated = models.DateTimeField()
+    updated = models.DateTimeField(auto_now=True)
 
     class Meta:
         managed = False
@@ -299,7 +319,7 @@ class Dimensions(models.Model):
     type = models.CharField(max_length=64)
     symbol = models.CharField(max_length=256)
     qudtstring = models.CharField(max_length=128)
-    updated = models.DateTimeField()
+    updated = models.DateTimeField(auto_now=True)
 
     class Meta:
         managed = False
@@ -309,9 +329,9 @@ class Dimensions(models.Model):
 
 
 class Entities(models.Model):
-    unit = models.ForeignKey('Units', models.DO_NOTHING, blank=True, null=True, db_column='unit_id')
+    unit = models.ForeignKey('Units', on_delete=models.PROTECT, blank=True, null=True, db_column='unit_id')
     repsys = models.CharField(max_length=16)
-    repsystem = models.ForeignKey(Repsystems, on_delete=models.PROTECT, db_column='repsystem_id')
+    repsystem = models.ForeignKey(Repsystems, on_delete=models.PROTECT, db_column='repsystem_id', blank=True, null=True)
     name = models.CharField(max_length=64, blank=True, null=True)
     lang = models.CharField(max_length=16, blank=True, null=True)
     symbol = models.CharField(max_length=128, blank=True, null=True)
@@ -322,7 +342,7 @@ class Entities(models.Model):
     comment = models.CharField(max_length=1024, blank=True, null=True)
     migrated = models.CharField(max_length=3, blank=True, null=True)
     lastcheck = models.DateField(blank=True, null=True)
-    updated = models.DateTimeField()
+    updated = models.DateTimeField(auto_now=True)
 
     class Meta:
         managed = False
@@ -334,7 +354,7 @@ class Entities(models.Model):
 class QuantitykindsUnits(models.Model):
     quantitykind = models.ForeignKey(Quantitykinds, on_delete=models.PROTECT, db_column='quantitykind_id')
     unit = models.ForeignKey(Units, on_delete=models.PROTECT, db_column='unit_id')
-    updated = models.DateTimeField(null=True)
+    updated = models.DateTimeField(auto_now=True)
 
     class Meta:
         managed = False
@@ -346,7 +366,7 @@ class QuantitykindsUnits(models.Model):
 class EntitiesQuantities(models.Model):
     entity = models.ForeignKey(Entities, on_delete=models.PROTECT, db_column='entity_id')
     quantity = models.ForeignKey(Units, on_delete=models.PROTECT, db_column='quantity_id')
-    updated = models.DateTimeField()
+    updated = models.DateTimeField(auto_now=True)
 
     class Meta:
         managed = False
@@ -362,81 +382,110 @@ class Wdclasses(models.Model):
     source = models.CharField(max_length=128, blank=True, null=True)
     section = models.CharField(max_length=16, blank=True, null=True)
     quant = models.CharField(max_length=128, blank=True, null=True)
-    quantity = models.ForeignKey(Quantities, on_delete=models.PROTECT, db_column='quantity_id')
-    updated = models.DateTimeField(blank=True, null=True)
+    quantity = models.ForeignKey(Quantities, on_delete=models.PROTECT, db_column='quantity_id', blank=True, null=True)
+    updated = models.DateTimeField(auto_now=True)
 
     class Meta:
         managed = False
         db_table = 'wdclasses'
+        verbose_name_plural = "Wikidata Unit Classes"
+        ordering = ('name',)
         db_table_comment = 'Table of Wikidata Unit Classes'
         app_label = 'units'
+
+    def __str__(self):
+        return f'{self.name}'
 
 
 class Wdsiclasses(models.Model):
     curl = models.CharField(max_length=128)
     label = models.CharField(max_length=32)
     silabel = models.CharField(max_length=32, blank=True, null=True)
-    updated = models.DateTimeField()
+    updated = models.DateTimeField(auto_now=True)
 
     class Meta:
         managed = False
         db_table = 'wdsiclasses'
+        verbose_name_plural = "Wikidata SI Unit Classes"
         db_table_comment = 'Table of wikidata SI related classes'
         app_label = 'units'
+
+    def __str__(self):
+        return f'{self.label}'
 
 
 class Wdunits(models.Model):
     unit = models.CharField(max_length=64, blank=True, null=True)
-    sitype = models.ForeignKey(Wdsiclasses, models.DO_NOTHING, db_column='sitype', blank=True, null=True)
-    wdclass = models.ForeignKey(Wdclasses, on_delete=models.PROTECT, db_column='wdclass_id')
+    sitype = models.ForeignKey(Wdsiclasses, on_delete=models.PROTECT, db_column='sitype', blank=True, null=True)
+    wdclass = models.ForeignKey(Wdclasses, on_delete=models.PROTECT, db_column='wdclass_id', blank=True, null=True)
     cls = models.CharField(db_column='class', max_length=64, blank=True, null=True)  # Field renamed reserved word.
     quant = models.CharField(max_length=32, blank=True, null=True)
     factor = models.CharField(max_length=256, blank=True, null=True)
-    wdfacunit = models.ForeignKey('self', on_delete=models.PROTECT, db_column='wdfacunit_id')
+    wdfacunit = models.ForeignKey('self', on_delete=models.PROTECT, db_column='wdfacunit_id', blank=True, null=True)
     curl = models.CharField(max_length=128, blank=True, null=True)
     uurl = models.CharField(max_length=128, blank=True, null=True)
     qurl = models.CharField(max_length=128, blank=True, null=True)
     status = models.CharField(max_length=7, blank=True, null=True)
     found = models.CharField(max_length=3, blank=True, null=True)
-    added = models.DateField(blank=True, null=True)
+    added = models.DateField(auto_now_add=True)
     comment = models.CharField(max_length=256, blank=True, null=True)
-    updated = models.DateTimeField(blank=True, null=True)
+    updated = models.DateTimeField(auto_now=True)
 
     class Meta:
         managed = False
+        ordering = ['unit']
+        verbose_name_plural = "Wikidata Units"
         db_table = 'wdunits'
         db_table_comment = 'Table of unit representations on Wikidata'
         app_label = 'units'
 
+    def __str__(self):
+        return f'{self.unit}'
+
 
 class Wdquants(models.Model):
     id = models.SmallAutoField(primary_key=True)
-    quant = models.ForeignKey(Quantities, on_delete=models.PROTECT, db_column='quantity_id')
+    quant = models.ForeignKey(Quantities, on_delete=models.PROTECT, db_column='quantity_id', blank=True, null=True)
     # quantity_id = models.SmallIntegerField(blank=True, null=True)
     qurl = models.CharField(max_length=64, blank=True, null=True)
     name = models.CharField(max_length=128, blank=True, null=True)
     isq = models.CharField(max_length=32, blank=True, null=True)
     source = models.CharField(max_length=128, blank=True, null=True)
     sect = models.CharField(max_length=16, blank=True, null=True)
-    updated = models.DateTimeField()
+    updated = models.DateTimeField(auto_now=True)
 
     class Meta:
         managed = False
         db_table = 'wdquants'
+        verbose_name_plural = "Wikidata Quantities"
         db_table_comment = 'Table of wikidata quantities'
         app_label = 'units'
 
 
 class Representations(models.Model):
+    class Checked(models.TextChoices):
+        """ choice for checked field """
+        YES = 'yes', 'Yes'
+        NO = 'no', 'No'
+
+    class Status(models.TextChoices):
+        """ choice for status field """
+        ALTERNATE = 'alternate', 'Alternate'
+        CURRENT = 'current', 'Current'
+        DEFINITIVE = 'definitive', 'Definitive'
+        DELETED = 'deleted', 'Deleted'
+        DISCOURAGED = 'discouraged', 'Discouraged'
+        LEGACY = 'legacy', 'Legacy'
+        PREFERRED = 'preferred', 'Preferred'
+        UNKNOWN = 'unknown', 'Unknown'
+
     unit = models.ForeignKey(Units, on_delete=models.PROTECT, db_column='unit_id', blank=True, null=True)
     wdunit = models.ForeignKey(Wdunits, on_delete=models.PROTECT, db_column='wdunit_id', blank=True, null=True)
     repsystem = models.ForeignKey(Repsystems, on_delete=models.PROTECT, db_column='repsystem_id', blank=True, null=True)
-    strng = models.ForeignKey(Strngs, on_delete=models.PROTECT, db_column='strng_id')
-    url_endpoint = models.CharField(max_length=3, blank=True, null=True)
-    status = models.CharField(max_length=7, blank=True, null=True)
-    checked = models.CharField(max_length=3)
-    onwd = models.CharField(max_length=3)
-    updated = models.DateTimeField()
+    strng = models.ForeignKey(Strngs, on_delete=models.PROTECT, db_column='strng_id', blank=True, null=True)
+    status = models.CharField(max_length=16, choices=Status, default=Status.UNKNOWN)
+    checked = models.CharField(max_length=3, choices=Checked, default=Checked.NO)
+    updated = models.DateTimeField(auto_now=True)
 
     class Meta:
         managed = False
@@ -451,9 +500,9 @@ class Representations(models.Model):
 
 
 class WdquantsWdunits(models.Model):
-    wdquant = models.ForeignKey(Wdquants, models.DO_NOTHING)
-    wdunit = models.ForeignKey(Wdunits, models.DO_NOTHING)
-    updated = models.DateTimeField(blank=True, null=True)
+    wdquant = models.ForeignKey(Wdquants, on_delete=models.PROTECT)
+    wdunit = models.ForeignKey(Wdunits, on_delete=models.PROTECT)
+    updated = models.DateTimeField(auto_now=True)
 
     class Meta:
         managed = False
@@ -464,9 +513,9 @@ class WdquantsWdunits(models.Model):
 
 
 class UnitsystemsWdunits(models.Model):
-    unitsystem = models.ForeignKey(Unitsystems, models.DO_NOTHING, blank=True, null=True)
-    wdunit = models.ForeignKey(Wdunits, models.DO_NOTHING)
-    updated = models.DateTimeField()
+    unitsystem = models.ForeignKey(Unitsystems, on_delete=models.PROTECT)
+    wdunit = models.ForeignKey(Wdunits, on_delete=models.PROTECT)
+    updated = models.DateTimeField(auto_now=True)
 
     class Meta:
         managed = False
