@@ -27,28 +27,38 @@
                             <b>Status</b>: {{ rsys.status }} {% if rsys.status == 'legacy' %} (no longer maintained) {% endif %}<br/>
                             <b>Permalink</b>: <a href="/repsystems/view/{{ rsys.abbrev }}">https://umis.caco3consulting.com/repsystems/view/{{ rsys.abbrev }}</a><br/>
                         </div>
-                        <div class="col-12 mt-3">
-                            <h5>Representations (scrollable)</h5>
+                        <div class="col-9 mt-3">
+                            <h5 class="float-start">Representations ({{ reps|length }})</h5>
+                        </div>
+                        <div class="col-3 mt-3">
+                            <label for="listsrc" aria-description="Search for units in the table"></label>
+                            <input id="listsrc" placeholder="Search units (or scroll)" class="form-control form-control-sm float-end col-3" data-search-override="true" type="text"/>
+                        </div>
+                        <div class="col-12 mt-1">
                             <table class="table table-sm table-striped mb-0">
                                 <tr>
                                     <th class="col-3">Unit</th>
                                     <th class="col-3">Type</th>
-                                    <th class="col-3">Representation</th>
-                                    <th class="col-3">Status</th>
+                                    <th class="col-4">Representation</th>
+                                    <th class="col-2">Status</th>
                                 </tr>
                             </table>
                             <div class="table-responsive-rs-view">
                                 <table class="table table-sm table-striped mb-0">
                                     {% for rep in reps %}
-                                        <tr class="fs-7">
+                                        <tr class="fs-7 units item" data-content="{{ rep.unit.name|lower }}">
                                             <td class="col-3"><a href="/units/view/{{ rep.unit_id }}">{{ rep.unit.name }}</a></td>
                                             <td class="col-3">{{ rep.unit.type }}</td>
-                                            <td class="col-3">{{ rep.strng.string }}
+                                            <td class="col-4">{{ rep.strng.string|safe }}
                                                 {% if rsys.path %}
-                                                    (<a href="{{ rsys.path }}{{ rep.strng.string }}" target="_blank">definition</a><span class='bi bi-link-45deg'></span>)
+                                                    {% if rsys.id == 15 %}
+                                                        (<a href="{{ rsys.path }}{{ rep.iecuid }}" target="_blank">definition</a><span class='bi bi-link-45deg'></span>)
+                                                    {% else %}
+                                                        (<a href="{{ rsys.path }}{{ rep.strng.string }}" target="_blank">definition</a><span class='bi bi-link-45deg'></span>)
+                                                    {% endif %}
                                                 {% endif %}
                                             </td>
-                                            <td class="col-3">{{ rep.status }}</td>
+                                            <td class="col-2">{{ rep.status }}</td>
                                         </tr>
                                     {% endfor %}
                                 </table>

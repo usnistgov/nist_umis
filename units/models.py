@@ -495,6 +495,14 @@ class Representations(models.Model):
         verbose_name_plural = "representations"
         app_label = 'units'
 
+    @property
+    def iecuid(self):
+        # Return IEC code to replace string
+        if self.repsystem.id == 15:
+            return f"{self.strng.string.replace('/', '-').replace('#', '%23')}"
+        else:
+            return f""
+
     def __str__(self):
         return f'{self.strng.string}'
 
