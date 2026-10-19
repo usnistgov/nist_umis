@@ -12,23 +12,23 @@
             <div class="card-body">
                 <div class="row">
                     <div class="col-5">
-                        {% if usyss %}
-                            <b>Unit System</b>:
-                            {% for usys in usyss %}
-                                {% if forloop.counter > 1 %}, {% endif %} <a href="/unitsystems/view/{{ usys.unitsystem.id }}">{{ usys.unitsystem.name }}</a>
+                        {% if unit.usysts.all %}
+                            <b>Unit System{% if unit.usysts.all|length > 1 %}s{% endif %}</b>:
+                            {% for usys in unit.usysts.all %}
+                                <a href="{% url 'unit view' usys.id %}">{{ usys.name }}</a> {% if not forloop.last %}, {% endif %}
                             {% endfor %}
                         {% elif usys %}
-                            <a href="/unitsystems/view/{{ usys.id }}">{{ usys.name }}</a>
+                            <a href="{% url 'unit view' usys.id %}">{{ usys.name }}</a>
                         {% endif %}
                         <br/>
                         <b>Unit Type</b>: {{ unit.type }}{{ unit.sitype.silabel }}<br/>
                         {% if qsys %}
-                            <b>Quantity System</b>: <a href="/quantitysystems/view/{{ qsys.id }}">{{ qsys.name }}</a><br/>
+                            <b>Quantity System</b>: <a href="{% url 'quantity system view' qsys.id %}">{{ qsys.name }}</a><br/>
                         {% endif %}
-                        {% if qkinds %}
-                            <b>Quantity Kind(s)</b>:
-                            {% for qkind in qkinds %}
-                                <a href="/quantitykinds/view/{{ qkind.quantitykind.id }}">{{ qkind.quantitykind.name }}</a>{% if not forloop.last %}, {% endif %}
+                        {% if unit.qkinds.all %}
+                            <b>Quantity Kind{% if unit.qkinds.all|length > 1 %}s{% endif %}</b>:
+                            {% for qkind in unit.qkinds.all %}
+                                <a href="{% url 'quantity kind view' qkind.id %}">{{ qkind.name }}</a>{% if not forloop.last %}, {% endif %}
                             {% endfor %}
                         <br/>
                         {% endif %}
@@ -38,7 +38,7 @@
                         {% if quants|length > 0 %}
                             <b><em>Quantities that are measured in this unit</em></b><br/>
                             {% for quant in quants %}
-                                <a href="/quantities/view/{{ quant.id }}{{ quant.quant.id }}" class="btn btn-xs btn-success m-1">{{ quant.name }}{{ quant.wdquant.name }}</a>
+                                <a href="{% url 'quantity view' quant.id %}" class="btn btn-xs btn-success m-1">{{ quant.name }}</a>
                             {% endfor %}
                         {% endif %}
                     </div>

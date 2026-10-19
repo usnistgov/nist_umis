@@ -24,7 +24,7 @@ class UnitsAdmin(admin.ModelAdmin):
     list_display = ('name', 'description', 'updated')
     ordering = ('name',)
     search_fields = ('name',)
-    list_filter = ('unitsystem__name',)
+    list_filter = ('usysts__name',)
     inlines = [RepresentationsInline,]
 
 

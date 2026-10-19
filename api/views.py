@@ -21,7 +21,15 @@ def spec(request):
 
 
 def unitslist(request):
-    site = 'http://127.0.0.1:' + request.META['SERVER_PORT'] + '/'
+    host = request.get_host()
+    port = request.get_port()
+    host = host.replace(':' + port, '')
+    if port == '443':
+        site = 'https://' + host + '/'
+    else:
+        site = 'http://' + host + ':' + port + '/'
+
+
     """ API endpoint for the list of units """
     data = Units.objects.all()
     output = {}
@@ -32,10 +40,14 @@ def unitslist(request):
     output.update({"apiversion": "1.1.0"})
     units = []
     for datum in data:
+        qudt = datum.representations_set.filter(repsystem_id=10)
+        if qudt:
+            code = qudt[0].strng.string
+        else:
+            code = str(datum.id)
         u = {}
-        u.update({"id": datum.id})
         u.update({"name": datum.name})
-        u.update({"url": site + "units/view/" + str(datum.id)})
+        u.update({"url": site + "units/view/" + code})
         units.append(u)
     output.update({'units': units})
     return JsonResponse(output, safe=False)
@@ -54,21 +66,6 @@ def unitview(request, uid=None):
     if not uid:
         # redirect to the API home page if no unit identifier given
         return redirect('/api/home')
-    # check for value unit by name or id (name disabled for now)
-    # opts = Units.objects.all().values_list('name', flat=True)
-    # if uid not in opts:
-    #     if uid.isnumeric():
-    #         try:
-    #             uid = Units.objects.get(id=uid).name
-    #             return redirect('/api/units/view/' + uid)
-    #         except Prefixes.DoesNotExist:
-    #             return redirect('/')
-    #     elif isinstance(uid, str):
-    #         try:
-    #             uid = Units.objects.get(name=uid.lower()).name
-    #             return redirect('/api/units/view/' + uid)
-    #         except Prefixes.DoesNotExist:
-    #             return redirect('/')
 
     hits = Units.objects.filter(id=uid)
     if not hits:
@@ -86,7 +83,6 @@ def unitview(request, uid=None):
     rs = []
     for rep in reps:
         r = {}
-        r.update({"id": rep.id})
         r.update({"string": rep.strng.string})
         r.update({"repsystem": rep.repsystem.name})
         if rep.repsystem.path is not None:

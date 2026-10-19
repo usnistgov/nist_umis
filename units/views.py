@@ -59,9 +59,11 @@ def oldview(request, uid):
             uid = Units.objects.get(name=uid.lower()).id
         except Units.DoesNotExist:
             return redirect('/')
+    else:
+        return redirect('/')
+
     unit = Units.objects.get(id=uid)
     qkinds = unit.quantitykindsunits_set.all()
-    usys = unit.unitsystem
     dvs = []
     quants = []
     types = []
@@ -70,20 +72,19 @@ def oldview(request, uid):
         types.append(qkind.quantitykind.type)
         for quant in qkind.quantitykind.quantities_set.all():
             quants.append(quant)
+    quants = list(set(quants))
     qsys = None
-    if usys.id == 1:  # if the unit system is the SI then make the quantity system the ISQ. Otherwise empty
-        qsys = Quantitysystems.objects.get(id=1)
+    usyss = unit.usysts.all()
+    for usys in usyss:
+        if usys.id == 1:  # if the unit system is the SI then make the quantity system the ISQ. Otherwise empty
+            qsys = Quantitysystems.objects.get(id=1)
+            break
     dvs = list(set(dvs))
     dv = dvs[0]
     types = list(set(dvs))
     typ = types[0]
-    quants = list(set(quants))
     data = unit.representations_set.all().filter(repsystem_id__isnull=False). \
         order_by('strng__string').exclude(repsystem__status='legacy')
-    equsf = unit.equ_fromunit_related.all()
-    equst = unit.equ_tounit_related.all()
-    corsf = unit.cor_fromunit_related.all()
-    corst = unit.cor_tounit_related.all()
     reps = {}
     for rep in data:
         sg = rep.strng.string
@@ -101,8 +102,7 @@ def oldview(request, uid):
         reps[sg]['systems'].append(tmp)
 
     return render(request, "../templates/units/view.html",
-                  {'unit': unit, 'reps': reps, 'qkinds': qkinds, 'usys': usys, 'equsf': equsf, 'equst': equst,
-                   'dv': dv, 'corsf': corsf, 'corst': corst, 'qsys': qsys, 'quants': quants, 'type': typ})
+                  {'unit': unit, 'reps': reps, 'qkinds': qkinds, 'dv': dv, 'qsys': qsys, 'quants': quants, 'type': typ})
 
 
 def newview(request, uid):
