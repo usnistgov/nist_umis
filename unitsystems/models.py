@@ -1,5 +1,5 @@
-""" models for unitsystem specific tables"""
-from units.models import *
+""" models for unitsystem specific tables (needed?)"""
+from django.db import models
 
 
 class Qudtunits(models.Model):
@@ -22,18 +22,18 @@ class Qudtunits(models.Model):
     altlabel = models.CharField(max_length=64, blank=True, null=True)
     dbpedia = models.CharField(max_length=256, blank=True, null=True)
     latexsymbol = models.CharField(max_length=128, blank=True, null=True)
-    unit = models.ForeignKey(Units, models.DO_NOTHING, db_column='unit_id')
+    unit = models.ForeignKey('units.Units', models.DO_NOTHING, db_column='unit_id')
     updated = models.DateTimeField()
 
     class Meta:
         managed = False
         db_table = 'qudtunits'
         db_table_comment = 'Table of QUDT unit entries'
-        app_label = 'qudtunits'
+        app_label = 'qudt'
 
 
 class Qudtqkinds(models.Model):
-    name = models.CharField(max_length=32, blank=True, null=True)
+    name = models.CharField(max_length=32)
     code = models.CharField(max_length=64, blank=True, null=True)
     deprecated = models.CharField(max_length=3)
     units = models.CharField(max_length=512, blank=True, null=True)
@@ -70,28 +70,28 @@ class Qudtqkinds(models.Model):
         managed = False
         db_table = 'qudtqkinds'
         db_table_comment = 'Table of QUDT unit entries'
-        app_label = 'qudtqkinds'
+        app_label = 'qudt'
 
 
 class QudtqkindsQudtunits(models.Model):
-    qudtqkind = models.ForeignKey(Qudtqkinds, models.DO_NOTHING)
-    qudtunit = models.ForeignKey(Qudtunits, models.DO_NOTHING)
+    qudtqkind = models.ForeignKey(Qudtqkinds, models.DO_NOTHING, null=True)
+    qudtunit = models.ForeignKey(Qudtunits, models.DO_NOTHING, null=True)
     updated = models.DateTimeField()
 
     class Meta:
         managed = False
         db_table = 'qudtqkinds_qudtunits'
         db_table_comment = 'Join table for qudt units a qkinds'
-        app_label = 'qudtqkinds_qudtunits'
+        app_label = 'qudt'
 
 
 class UnitsystemsQudtunits(models.Model):
-    unitsystem = models.ForeignKey(Unitsystems, models.DO_NOTHING, blank=True, null=True)
-    qudtunit = models.ForeignKey(Qudtunits, models.DO_NOTHING)
+    unitsystem = models.ForeignKey('units.Unitsystems', models.DO_NOTHING, null=True)
+    qudtunit = models.ForeignKey(Qudtunits, models.DO_NOTHING, null=True)
     updated = models.DateTimeField()
 
     class Meta:
         managed = False
         db_table = 'unitsystems_qudtunits'
         db_table_comment = 'Join table for qudt units a quantity systems'
-        app_label = 'unitsystems_qudtunits'
+        app_label = 'qudt'
