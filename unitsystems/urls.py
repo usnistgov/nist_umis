@@ -4,6 +4,6 @@ from unitsystems import views
 
 
 urlpatterns = [
-    path("", views.index, name='index'),
-    path("view/<usid>", views.view, name='view'),
+    path("", views.index, name='unit system index'),
+    path("view/<usid>", views.view, name='unit system view'),
 ]

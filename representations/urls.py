@@ -4,6 +4,6 @@ from representations import views
 
 
 urlpatterns = [
-    path("", views.index, name='index'),
-    path("view/<rid>", views.view, name='view'),
+    path("", views.index, name='representation index'),
+    path("view/<rid>", views.view, name='representation view'),
 ]

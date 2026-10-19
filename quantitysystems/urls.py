@@ -4,6 +4,6 @@ from quantitysystems import views
 
 
 urlpatterns = [
-    path("", views.index, name='index'),
-    path("view/<qsid>", views.view, name='view'),
+    path("", views.index, name='quantity system index'),
+    path("view/<qsid>", views.view, name='quantity system view'),
 ]

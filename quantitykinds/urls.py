@@ -4,6 +4,6 @@ from quantitykinds import views
 
 
 urlpatterns = [
-    path("", views.index, name='index'),
-    path("view/<qkid>", views.view, name='view'),
+    path("", views.index, name='quantity kind index'),
+    path("view/<qkid>", views.view, name='quantity kind view'),
 ]
