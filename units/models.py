@@ -458,7 +458,7 @@ class Wdunits(models.Model):
         app_label = 'units'
 
     def __str__(self):
-        return f'{self.unit}'
+        return f'{self.name}'
 
 
 class Wdquants(models.Model):
