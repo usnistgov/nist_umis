@@ -451,7 +451,7 @@ class Wdunits(models.Model):
 
     class Meta:
         managed = False
-        ordering = ['unit']
+        ordering = ['name']
         verbose_name_plural = "Wikidata Units"
         db_table = 'wdunits'
         db_table_comment = 'Table of unit representations on Wikidata'
