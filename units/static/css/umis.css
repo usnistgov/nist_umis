@@ -2,6 +2,10 @@
     background-color: #d6e9c6;
 }
 
+.bg-lightred, .btn-lightred {
+    background-color: #fcb0af;
+}
+
 .redtext {
     color: #ff0000;
 }

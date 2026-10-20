@@ -59,11 +59,9 @@ def oldview(request, uid):
             uid = Units.objects.get(name=uid.lower()).id
         except Units.DoesNotExist:
             return redirect('/')
-    else:
-        return redirect('/')
-
     unit = Units.objects.get(id=uid)
     qkinds = unit.quantitykindsunits_set.all()
+    usyss = unit.unitsunitsystems_set.all()
     dvs = []
     quants = []
     types = []
@@ -85,6 +83,10 @@ def oldview(request, uid):
     typ = types[0]
     data = unit.representations_set.all().filter(repsystem_id__isnull=False). \
         order_by('strng__string').exclude(repsystem__status='legacy')
+    equsf = unit.equ_fromunit_related.all()
+    equst = unit.equ_tounit_related.all()
+    corsf = unit.cor_fromunit_related.all()
+    corst = unit.cor_tounit_related.all()
     reps = {}
     for rep in data:
         sg = rep.strng.string

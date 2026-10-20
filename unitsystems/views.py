@@ -12,10 +12,9 @@ def index(request):
 
 def view(request, usid):
     """ view data about a specific unit """
-    sys, units = None, None
     try:
         sys = Unitsystems.objects.get(id=usid)
-        units = sys.units_set.all().order_by('unitsystem__units__name')
+        units = sys.units_set.all()  # ordering causes duplication of rows, use ordering in 'meta' section of the model
+        return render(request, "../templates/unitsystems/view.html", {'sys': sys, 'units': units})
     except ObjectDoesNotExist:
         return redirect('/')
-    return render(request, "../templates/unitsystems/view.html", {'sys': sys, 'units': units})
